@@ -1,9 +1,20 @@
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+import './App.css';
+import Login from "./login/Login";
+
 function App() {
-  return (
-      <>
-        <p>Hello, World</p>
-      </>
-  );
+    return (
+        <div className="App">
+            <div className="appDiv">
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={<Login/>}></Route>
+                        {/* 상단에 위치하는 라우트들의 규칙을 모두 확인, 일치하는 라우트가 없는경우 처리 */}
+                    </Routes>
+                </BrowserRouter>
+            </div>
+        </div>
+    );
 }
 
 export default App;
