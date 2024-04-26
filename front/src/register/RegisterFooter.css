@@ -1,0 +1,21 @@
+.RegisterFooter button{
+    width: 393px;
+    height: 78px;
+    border: none;
+    background-color: #EB604A;
+    color: #FFF;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    cursor: pointer;
+}
+
+.RegisterNav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #333;
+}

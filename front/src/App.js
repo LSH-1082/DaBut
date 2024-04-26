@@ -1,25 +1,25 @@
-import logo from './logo.svg';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import './App.css';
+import Login from "./login/Login";
+import Main from "./main/Main";
+import Register from "./register/Register";
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div className="App">
+            <div className="appDiv">
+                <BrowserRouter>
+                    <Routes>
+                        <Route path="/" element={<Login/>}></Route>
+                        <Route path="/main" element={<Main/>}></Route>
+                        <Route path="/register" element={<Register/>}></Route>
+                        {/* 상단에 위치하는 라우트들의 규칙을 모두 확인, 일치하는 라우트가 없는경우 처리 */}
+                    </Routes>
+                </BrowserRouter>
+            </div>
+        </div>
+    );
 }
 
 export default App;

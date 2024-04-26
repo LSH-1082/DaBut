@@ -1,0 +1,65 @@
+.Login{
+    width: 100%;
+    height: 100%;
+    color: #E8EE7F;
+    background: #EB604A;
+}
+
+.titleDiv{
+    margin-left: 49px;
+    padding-top: 50px;
+}
+
+.loginTitle{
+    margin: 0;
+    color: #FFF;
+    font-family: "Pretendard";
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 38px; /* 135.714% */
+    letter-spacing: -0.31px;
+}
+
+.appTitle {
+    margin-top: 5px;
+    margin-bottom: 0;
+    font-family: "NanumSquare Neo variable";
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 900;
+    line-height: 38px; /* 105.556% */
+    letter-spacing: -0.31px;
+}
+
+.appTitleDiv{
+    margin-left: 49px;
+}
+
+.halfCircle {
+    margin-top: -40px;
+    margin-left: 100px;
+}
+
+
+.kakaoLogin{
+    margin-top: 10%;
+    display: flex;
+    justify-content: center;
+
+}
+
+.kakao{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #F9E000;
+    border-radius: 10px;
+    height: 50px;
+    width: 353px;
+}
+
+.kakao p {
+    margin: 0;
+    color: black;
+}
