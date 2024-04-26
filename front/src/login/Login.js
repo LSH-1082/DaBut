@@ -2,7 +2,7 @@ import "./Login.css";
 
 const Login = () => {
     return (
-        <div className="appLogin">
+        <div className="Login">
             <div className="titleDiv">
                 <p className="loginTitle">내 옆의</p>
                 <p className="loginTitle">다양한 친구</p>

@@ -1,0 +1,147 @@
+.RegisterPage1 {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.registerContent {
+    width: 100%;
+    overflow-y: auto; /* 세로 스크롤바를 표시합니다. */
+}
+
+.registerTextDiv {
+    margin-left: 33px;
+    margin-top: 102px;
+}
+
+
+.registerText {
+    margin: 0;
+    color: #000;
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.48px;
+}
+
+.registerSmallText {
+    margin-top: 5px;
+    color: #C2C2C2;
+    font-family: Pretendard;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.registerSelect1 {
+    width: 327px;
+    margin-left: 32px;
+}
+
+.gender, .name, .age, .height, .smoke{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+
+
+.gender p, .name p, .age p, .height p, .smoke p{
+    color: #A0A0A0;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.genderButtonDiv, .smokeButtonDiv{
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+}
+
+.genderButton {
+    padding: 10px 30px;
+    color: #A0A0A0;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    background-color: rgba(0,0,0,0);
+    border-radius: 30px;
+    border: 2px solid #AEAEAE;
+    cursor: pointer;
+}
+
+.smokeButton{
+    color: #A0A0A0;
+    padding: 10px 20px;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    background-color: rgba(0,0,0,0);
+    border-radius: 30px;
+    border: 2px solid #AEAEAE;
+    cursor: pointer;
+}
+
+.nameInput{
+    width: 200px;
+}
+
+
+.nameInput input {
+    border: none;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 30px;
+    background: #F2F4F5;
+    color: #000;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 17px;
+    font-style: normal;
+    line-height: normal;
+}
+
+.selectedGender {
+    color: white;
+    padding: 10px 30px;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    background-color: #EB604A;
+    border-radius: 30px;
+    border: 2px solid #EB604A;
+    cursor: pointer;
+}
+
+.selectedSmoke {
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    background-color: #EB604A;
+    border-radius: 30px;
+    border: 2px solid #EB604A;
+    cursor: pointer;
+}
