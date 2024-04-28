@@ -66,6 +66,19 @@
     width: 200px;
 }
 
+.heightRange {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    justify-content: center;
+}
+
+.heightRange p{
+    margin-top: 10px;
+    margin-bottom: 0px;
+    text-align: center;
+}
+
 .genderButton {
     padding: 10px 30px;
     color: #A0A0A0;

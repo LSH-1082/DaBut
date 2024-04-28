@@ -13,6 +13,7 @@ export const userSlice = createSlice({
         occupation: "",
         major: "",
         personality: "",
+        frequency: 2,
     },
     reducers: {
         setName: (state, action) => {
@@ -44,10 +45,13 @@ export const userSlice = createSlice({
         },
         setPersonality: (state, action) => {
             state.personality = action.payload;
-        }
+        },
+        setFrequency: (state, action) => {
+            state.frequency = action.payload;
+        },
     },
 });
 
-export const {setName, setGender, setAge, setHeight, setWeight, setMbti, setSmoke, setOccupation, setMajor, setPersonality} = userSlice.actions;
+export const {setName, setGender, setAge, setHeight, setWeight, setMbti, setSmoke, setOccupation, setMajor, setPersonality, setFrequency} = userSlice.actions;
 
 export default userSlice.reducer;

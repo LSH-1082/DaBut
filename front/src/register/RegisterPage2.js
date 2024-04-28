@@ -1,15 +1,23 @@
 import RegisterFooter from "./RegisterFooter";
 import {useSelector, useDispatch} from "react-redux";
 import "./RegisterPage2.css";
-import {setOccupation, setPersonality} from "../store/user";
+import {setFrequency, setOccupation, setPersonality} from "../store/user";
 import {useState} from "react";
 import MajorSelect from "./select/MajorSelect";
+import SelectRange from "./range/SelectRange";
 
 const RegisterPage2 = () => {
-    const [isActive, setIsActive] = useState(false);
     let user = useSelector(state => state.user);
     let dispatch = useDispatch();
     let username = user.name.name.slice(1);
+
+    const [isActive, setIsActive] = useState(false);
+    const [frequency, setFreq] = useState(user.frequency);
+
+    const changeFrequency = (value) => {
+        dispatch(setFrequency({frequency: value[0]}));
+        setFreq(value[0]);
+    }
 
 
     return (
@@ -136,8 +144,12 @@ const RegisterPage2 = () => {
                         <p className="registerPageTitle">SNS 사용빈도는</p>
                         <div className="snsSelectDiv">
                             <div className="snsSelect">
-                                <p className="snsFrequency">“ 맛집가면 스토리는 무조건 “</p>
-                                <input className="snsSelectRange" type="range" min={0} max={5} step={1}/>
+                                {frequency === 4 ? (<p className="snsFrequency">“ 맛집가면 스토리는 무조건 “</p>) : (<></>)}
+                                {frequency === 3 ? (<p className="snsFrequency">“ 3단계 “</p>) : (<></>)}
+                                {frequency === 2 ? (<p className="snsFrequency">“ 2단계 “</p>) : (<></>)}
+                                {frequency === 1 ? (<p className="snsFrequency">“ 1단계 “</p>) : (<></>)}
+                                {frequency === 0 ? (<p className="snsFrequency">“ 인스타 안해! “</p>) : (<></>)}
+                                <SelectRange min={0} max={4} step={1} values={[frequency]} onChange={(value) => {changeFrequency(value)}}/>
                             </div>
                         </div>
                     </div>
