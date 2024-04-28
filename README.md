@@ -14,10 +14,8 @@
 
 [프론트 작업 주의사항]
 
-pull받고 꼭 npm install하고 작업해주세요!
 - pull받고 꼭 npm install하고 작업해주세요!
 
 [백 작업 주의사항]
 
-pull받고 꼭 gradle 돌리고 작업해주세요!
 - pull받고 꼭 gradle 돌리고 작업해주세요!
