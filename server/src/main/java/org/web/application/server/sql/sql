@@ -1,0 +1,35 @@
+set search_path to fullstack;
+
+INSERT INTO gender(gender)
+VALUES ('M'),('F');
+
+INSERT INTO face_shape (face_shape_name)
+VALUES ('dog'),('cat'),('deer'),('rabbit'),('frog'),('hamster'),('fox'),('bear'),('dino');
+
+140-200
+INSERT INTO height(height)
+VALUES (140),(145),(150),(155),(160),(165),(170),(175),(180),(185),(190),(195),(200);
+
+INSERT INTO mbti(mbti_name)
+VALUES('ISTJ'),('ISTP'),('ISFJ'),('ISFP'),('INTJ'),('INTP'),('INFJ'),('INFP'),('ESTJ'),('ESTP'),('ESFJ'),('ESFP'),('ENTJ'),('ENTP'),('ENFJ'),('ENFP'),('NONE');
+
+INSERT INTO occupation(occupation_name)
+VALUES ('stuendent'),('graduate'),('salary'),('free'),('house'),('none');
+
+INSERT INTO personality(personality_name)
+VALUES ('activity'),('enthusiastic'),('positive'),('clean'),('timid'),('lively');
+
+INSERT INTO sns_frequency(sns_frequency_level)
+VALUES (0),(1),(2),(3),(4);
+
+INSERT INTO weight(weight_name)
+VALUES (),(),(),(),(),();
+
+INSERT INTO purpose()
+VALUES (''),(''),(''),(''),(''),(''),(''),(''),(''),(''),(''),(''),(''),(''),(''),('');
+
+INSERT INTO hobby(hobby_name)
+VALUES();
+
+INSERT INTO major(major_name)
+VALUES();
