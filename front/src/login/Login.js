@@ -1,6 +1,19 @@
 import "./Login.css";
+import {useNavigate} from "react-router-dom";
+
+const {Kakao} = window;
+
 
 const Login = () => {
+    const navigate = useNavigate();
+
+    const kakaoLogin = () => {
+        Kakao.Auth.authorize({
+            redirectUri: "http://localhost:8080/api/test"
+        })
+
+    }
+
     return (
         <div className="Login">
             <div className="titleDiv">
@@ -17,7 +30,7 @@ const Login = () => {
                 </svg>
             </div>
             <div className="kakaoLogin">
-                <div className="kakao">
+                <div className="kakao" onClick={kakaoLogin}>
                     <p>카카오톡계정 로그인</p>
                 </div>
             </div>

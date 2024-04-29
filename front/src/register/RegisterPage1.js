@@ -1,24 +1,21 @@
 import RegisterFooter from "./RegisterFooter";
 import "./RegisterPage1.css";
-import {useState} from "react";
 import AgeSelect from "./select/AgeSelect";
+import {useSelector, useDispatch} from "react-redux";
+import {setGender, setHeight, setName, setNickname, setSmoke} from "../store/user";
+import SelectRange from "./range/SelectRange";
+import {useState} from "react";
 
 const RegisterPage1 = () => {
-    const [selectedAge, setSelectedAge] = useState("");
-    const [selectedGender, setSelectedGender] = useState("");
-    const [selectedSmoke, setSelectedSmoke] = useState("");
-    const [height, setHeight] = useState(170);
-    const [name, setName] = useState("");
+    let user = useSelector(state => state.user);
+    let dispatch = useDispatch();
 
-    const changeAge = (e) => {
-        setSelectedAge(e.target.value);
+    const [height, setHei] = useState(user.height);
+
+    const changeHeight = (value) => {
+        dispatch(setHeight({height: value[0]}));
+        setHei(value[0]);
     }
-
-    const changeHeight = (e) => {
-        setHeight(e.target.value);
-    }
-
-
 
     return (
         <div className="RegisterPage1">
@@ -32,24 +29,42 @@ const RegisterPage1 = () => {
                     <div className="gender">
                         <p>성별은</p>
                         <div className="genderButtonDiv">
-                            <button onClick={() => {setSelectedGender("M")}} className={selectedGender === "M" ? "selectedGender" : "genderButton"}>남성</button>
-                            <button onClick={() => {setSelectedGender("F")}} className={selectedGender === "F" ? "selectedGender" : "genderButton"}>여성</button>
+                            <button onClick={() => {
+                                dispatch(setGender({gender: "M"}))
+                            }} className={user.gender.gender === "M" ? "selectedGender" : "genderButton"}>남성
+                            </button>
+                            <button onClick={() => {
+                                dispatch(setGender({gender: "F"}))
+                            }} className={user.gender.gender === "F" ? "selectedGender" : "genderButton"}>여성
+                            </button>
                         </div>
                     </div>
                     <div className="name">
                         <p>이름은</p>
                         <div className="nameInput">
-                            <input type="text" value={name} onChange={(e) => {setName(e.target.value)}}/>
+                            <input type="text" value={user.name.name || ""} onChange={(e) => {
+                                dispatch(setName({name: e.target.value}))
+                            }}/>
+                        </div>
+                    </div>
+                    <div className="name">
+                        <p>별명은</p>
+                        <div className="nameInput">
+                            <input type="text" value={user?.nickname?.nickname || ''} onChange={(e) => {dispatch(setNickname({nickname: e.target.value}))}}/>
                         </div>
                     </div>
                     <div className="age">
                         <p>나이는</p>
-                        <AgeSelect />
+                        <AgeSelect/>
                     </div>
                     <div className="height">
                         <p>키는</p>
-
-                        <input type="range" min="140" max="200" value={height} step="5" onChange={changeHeight}/>
+                        <div className="heightRange">
+                            <SelectRange min={140} max={200} step={5} values={[height]} onChange={(value) => {
+                                changeHeight(value)
+                            }}/>
+                            <p>{height}cm</p>
+                        </div>
                     </div>
                     <div className="name">
                         <p>체형은</p>
@@ -57,17 +72,17 @@ const RegisterPage1 = () => {
                             <input type="text"/>
                         </div>
                     </div>
-                    <div className="name">
-                        <p>MBTI는</p>
-                        <div className="nameInput">
-                            <input type="text"/>
-                        </div>
-                    </div>
                     <div className="smoke">
                         <p>흡연유무</p>
                         <div className="smokeButtonDiv">
-                            <button onClick={() => {setSelectedSmoke("T")}} className={selectedSmoke === "T" ? "selectedSmoke" : "smokeButton"}>안펴!</button>
-                            <button onClick={() => {setSelectedSmoke("F")}} className={selectedSmoke === "F" ? "selectedSmoke" : "smokeButton"}>흡연자야!</button>
+                            <button onClick={() => {
+                                dispatch(setSmoke({smoke: "F"}))
+                            }} className={user.smoke.smoke === "F" ? "selectedSmoke" : "smokeButton"}>안펴!
+                            </button>
+                            <button onClick={() => {
+                                dispatch(setSmoke({smoke: "T"}))
+                            }} className={user.smoke.smoke === "T" ? "selectedSmoke" : "smokeButton"}>흡연자야!
+                            </button>
                         </div>
                     </div>
                 </div>

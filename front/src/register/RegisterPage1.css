@@ -12,7 +12,7 @@
 
 .registerTextDiv {
     margin-left: 33px;
-    margin-top: 102px;
+    margin-top: 30px;
 }
 
 
@@ -28,7 +28,7 @@
 }
 
 .registerSmallText {
-    margin-top: 5px;
+    margin-top: 9px;
     color: #C2C2C2;
     font-family: Pretendard;
     font-size: 14px;
@@ -64,6 +64,19 @@
     display: flex;
     justify-content: space-between;
     width: 200px;
+}
+
+.heightRange {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    justify-content: center;
+}
+
+.heightRange p{
+    margin-top: 10px;
+    margin-bottom: 0px;
+    text-align: center;
 }
 
 .genderButton {

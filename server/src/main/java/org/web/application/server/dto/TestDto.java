@@ -10,7 +10,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class TestDto {
-    private Long idx;
-    private String name;
-    private String email;
+    private String token;
 }
