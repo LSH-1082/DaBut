@@ -8,7 +8,7 @@ const RegisterFooter = () => {
 
 
     return (
-        <nav className="registerNav">
+        <nav className="RegisterNav">
             <div className="RegisterFooter">
                 <button onClick={() => {dispatch(incPage())}}>
                     {page.page === 1 ? ("반가워요 🙌🏻") : ("")}

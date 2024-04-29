@@ -17,7 +17,7 @@
 }
 
 .registerPage3Title {
-    margin-top: 102px;
+    margin-top: 30px;
     margin-left: 33px;
     display: flex;
     flex-direction: row;
@@ -166,28 +166,11 @@
     align-items: center;
 }
 
-.inputNickname {
-    width: 312px;
-    padding-top: 15px;
-    padding-bottom: 15px;
-    padding-left: 15px;
-    border-radius: 15px;
-    background: #F2F4F5;
-    border: none;
-    color: #919191;
-    font-family: Inter;
-    font-size: 13px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    margin-bottom: 14px;
-}
-
 .inputIntro {
     padding: 10px;
     resize: none;
     width: 307px;
-    height: 98px;
+    height: 120px;
     flex-shrink: 0;
     border-radius: 15px;
     border: 1px solid #F2F4F5;

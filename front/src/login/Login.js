@@ -1,6 +1,9 @@
 import "./Login.css";
+import {useNavigate} from "react-router-dom";
+
 
 const Login = () => {
+    const navigate = useNavigate();
     return (
         <div className="Login">
             <div className="titleDiv">
@@ -17,7 +20,7 @@ const Login = () => {
                 </svg>
             </div>
             <div className="kakaoLogin">
-                <div className="kakao">
+                <div className="kakao" onClick={() => navigate("/register")}>
                     <p>카카오톡계정 로그인</p>
                 </div>
             </div>

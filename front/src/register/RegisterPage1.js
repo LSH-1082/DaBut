@@ -2,7 +2,7 @@ import RegisterFooter from "./RegisterFooter";
 import "./RegisterPage1.css";
 import AgeSelect from "./select/AgeSelect";
 import {useSelector, useDispatch} from "react-redux";
-import {setGender, setHeight, setName, setSmoke} from "../store/user";
+import {setGender, setHeight, setName, setNickname, setSmoke} from "../store/user";
 import SelectRange from "./range/SelectRange";
 import {useState} from "react";
 
@@ -47,6 +47,12 @@ const RegisterPage1 = () => {
                             }}/>
                         </div>
                     </div>
+                    <div className="name">
+                        <p>별명은</p>
+                        <div className="nameInput">
+                            <input type="text" value={user?.nickname?.nickname || ''} onChange={(e) => {dispatch(setNickname({nickname: e.target.value}))}}/>
+                        </div>
+                    </div>
                     <div className="age">
                         <p>나이는</p>
                         <AgeSelect/>
@@ -62,12 +68,6 @@ const RegisterPage1 = () => {
                     </div>
                     <div className="name">
                         <p>체형은</p>
-                        <div className="nameInput">
-                            <input type="text"/>
-                        </div>
-                    </div>
-                    <div className="name">
-                        <p>MBTI는</p>
                         <div className="nameInput">
                             <input type="text"/>
                         </div>

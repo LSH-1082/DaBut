@@ -206,7 +206,6 @@ const RegisterPage3 = () => {
                         </div>
                     </div>
                     <div className="textInputDiv">
-                        <input className="inputNickname" placeholder="별명을 입력해주세요." type="text"/>
                         <textarea className="inputIntro" value={user.intro.intro} onChange={(e) => {dispatch(setIntro({intro: e.target.value}))}} placeholder="자기소개를 입력해주세요."></textarea>
                     </div>
                     <div className="inputSmallTextDiv">
