@@ -10,13 +10,19 @@ export const userSlice = createSlice({
         height: 170,
         weight: "",
         mbti: "",
-        smoke: "",
+        smoke: false,
         occupation: "",
         major: "",
         personality: "",
         frequency: 2,
         face: "",
         intro: "",
+        state: "",
+        wantGender: "",
+        wantAge: "",
+        wantHeight: "",
+        wantSmoke: false,
+        wantOccupation: "",
     },
     reducers: {
         setName: (state, action) => {
@@ -53,7 +59,7 @@ export const userSlice = createSlice({
             state.frequency = action.payload;
         },
         setFace: (state, action) => {
-            state.frequency = action.payload;
+            state.face = action.payload;
         },
         setIntro: (state, action) => {
             state.intro = action.payload;
@@ -61,9 +67,27 @@ export const userSlice = createSlice({
         setNickname: (state, action) => {
             state.nickname = action.payload;
         },
+        setState: (state, action) => {
+            state.state = action.payload;
+        },
+        setWantGender: (state, action) => {
+            state.wantGender = action.payload;
+        },
+        setWantAge: (state, action) => {
+            state.wantAge = action.payload;
+        },
+        setWantHeight: (state, action) => {
+            state.wantHeight = action.payload;
+        },
+        setWantSmoke: (state, action) => {
+            state.wantSmoke = action.payload;
+        },
+        setWantOccupation: (state, action) => {
+            state.wantOccupation = action.payload;
+        },
     },
 });
 
-export const {setName, setGender, setAge, setHeight, setWeight, setMbti, setSmoke, setOccupation, setMajor, setPersonality, setFrequency, setFace, setIntro, setNickname} = userSlice.actions;
+export const {setName, setGender, setAge, setHeight, setWeight, setMbti, setSmoke, setOccupation, setMajor, setPersonality, setFrequency, setFace, setIntro, setNickname, setState, setWantAge, setWantGender, setWantHeight, setWantSmoke, setWantOccupation} = userSlice.actions;
 
 export default userSlice.reducer;

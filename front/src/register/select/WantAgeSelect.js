@@ -1,8 +1,10 @@
 import React from 'react';
 import Select from 'react-select';
-import "./AgeSelect.css";
+import "./WantAgeSelect.css";
 import {useDispatch} from "react-redux";
-import {setAge} from "../../store/user";
+import {setState, setWantAge} from "../../store/user";
+
+import "./StateSelect.css";
 
 const customStyles = {
     control: (provided, state) => ({
@@ -17,7 +19,7 @@ const customStyles = {
     }),
     menuList: (provided) => ({
         ...provided,
-        maxHeight: '200px', // 전체 셀렉트 박스의 최대 높이
+        maxHeight: '100px', // 전체 셀렉트 박스의 최대 높이
         overflowY: 'auto', // 메뉴 전체에 스크롤 적용
     }),
     option: (provided, state) => ({
@@ -29,26 +31,21 @@ const customStyles = {
 };
 
 const options = [
-    { value: 20, label: '20' },
-    { value: 21, label: '21' },
-    { value: 22, label: '22' },
-    { value: 23, label: '23' },
-    { value: 24, label: '24' },
-    { value: 25, label: '25' },
-    { value: 26, label: '26' },
-    { value: 27, label: '27' },
-    { value: 28, label: '28' }
+    { value: '20대', label: '20대' },
+    { value: '30대', label: '30대' },
+    { value: '40대', label: '40대' },
+    { value: '50대', label: '50대' },
 ];
 
-const AgeSelect = () => {
+const StateSelect = () => {
     let dispatch = useDispatch();
 
 
     return (
-        <div className="Select">
-            <Select className="Selector" onChange={(e) => {dispatch(setAge(e.value))}} placeholder="" options={options} styles={customStyles} isSearchable={false} components={{IndicatorSeparator: () => null,}}/>
+        <div className="wantAgeSelect">
+            <Select className="wantAgeSelector" onChange={(e) => {dispatch(setWantAge(e.value))}} placeholder="" options={options} styles={customStyles} isSearchable={false} components={{IndicatorSeparator: () => null,}}/>
         </div>
     );
 };
 
-export default AgeSelect;
+export default StateSelect;

@@ -1,17 +1,13 @@
 import "./Login.css";
-import {useNavigate} from "react-router-dom";
 
 const {Kakao} = window;
 
 
 const Login = () => {
-    const navigate = useNavigate();
-
     const kakaoLogin = () => {
         Kakao.Auth.authorize({
-            redirectUri: "http://localhost:8080/api/test"
+            redirectUri: "http://localhost:8080/login/kakao"
         })
-
     }
 
     return (

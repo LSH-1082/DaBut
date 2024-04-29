@@ -1,8 +1,9 @@
 package org.web.application.server.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.*;
-import org.web.application.server.dto.TestDto;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.web.application.server.service.TestService;
 
 import java.util.List;
@@ -14,8 +15,9 @@ public class TestController {
 
     private final TestService testService;
 
-    @PostMapping("/test")
-    public void test(@RequestBody TestDto dto) {
-        System.out.println(dto);
+    @GetMapping("/test")
+    public List<?> getAll()
+    {
+        return testService.getAll();
     }
 }

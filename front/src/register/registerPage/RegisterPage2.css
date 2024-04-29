@@ -1,0 +1,272 @@
+.RegisterPage3 {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.registerPage3Content {
+    width: 100%;
+    overflow-y: auto; /* 세로 스크롤바를 표시합니다. */
+}
+
+.registerPage3TextDiv {
+    display: flex;
+    margin-top: 30px;
+    margin-left: 33px;
+}
+
+.registerPage3UnderTextDiv {
+    margin-left: 33px;
+}
+
+.registerNameText {
+    margin: 0;
+    color: #EB604A;
+    font-family: Inter;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.mbtiQuestionDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 35px;
+}
+
+.mbtiQuestion {
+    display: flex;
+    justify-content: space-between;
+    width: 331px;
+}
+
+.mbtiQuestion p {
+    margin: 0;
+    color: #A4A4A4;
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px; /* 146.667% */
+    letter-spacing: -0.408px;
+}
+
+.mbtiAnswer {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+}
+
+.mbtiNoButton {
+    padding: 10px 30px;
+    border-radius: 30px;
+    border: 2px solid #C2C2C2;
+    background: #FFF;
+    color: #A5A5A5;
+    text-align: center;
+    font-family: Inter;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    cursor: pointer;
+}
+
+.mbtiYesButton{
+    padding: 10px 40px;
+    border-radius: 30px;
+    border: 2px solid #C2C2C2;
+    color: #A5A5A5;
+    text-align: center;
+    font-family: Inter;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    background: #FFF;
+    cursor: pointer;
+}
+
+.mbtiYesButton.active{
+    padding: 10px 42px;
+    border-radius: 30px;
+    border: none;
+    background-color: #EB604A;
+    color: #FFFFFF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    cursor: pointer;
+}
+
+.mbtiNoButton.active{
+    padding: 10px 32px;
+    border-radius: 30px;
+    border: none;
+    background-color: #EB604A;
+    color: #FFFFFF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    cursor: pointer;
+}
+
+.mbtiSelectDiv {
+    margin-top: 35px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.mbtiSelect p{
+    color: rgba(0, 0, 0, 0.10);
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px; /* 146.667% */
+    letter-spacing: -0.408px;
+}
+
+.mbtiSelect {
+    width: 331px;
+}
+
+.mbtiSelectButtonDiv{
+    width: 307px;
+    margin-left: 10px;
+}
+
+.mbtiSelectButton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.mbtiSelectButton p {
+    color: rgba(0, 0, 0, 0.10);
+    text-align: center;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px; /* 110% */
+    letter-spacing: -0.408px;
+}
+
+.mbtiButton {
+    padding: 25px;
+    border-radius: 10px;
+    border: none;
+    background: #fff;
+    color: rgba(0, 0, 0, 0.10);
+    text-align: center;
+    font-family: Inter;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px; /* 88% */
+    letter-spacing: -0.408px;
+}
+
+.mbtiSelect.active p {
+    color: #A5A5A5;
+}
+
+.mbtiSelectButton.active p {
+    color: #A5A5A5;
+    text-align: center;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px; /* 110% */
+    letter-spacing: -0.408px;
+}
+
+.mbtiButton.active{
+    padding: 25px;
+    border-radius: 10px;
+    border: none;
+    background: #FFFFFF;
+    cursor: pointer;
+    color: #A5A5A5;
+    text-align: center;
+    font-family: Inter;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px; /* 88% */
+    letter-spacing: -0.408px;
+}
+
+.mbtiButton {
+    padding: 25px;
+    border-radius: 10px;
+    border: none;
+    background: #fff;
+    color: rgba(0, 0, 0, 0.10);
+    text-align: center;
+    font-family: Inter;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px; /* 88% */
+    letter-spacing: -0.408px;
+}
+
+.selectedMbtiButton {
+    padding: 25px;
+    border-radius: 10px;
+    border: none;
+    background: #EB604A;
+    cursor: pointer;
+    color: #FFFFFF;
+    text-align: center;
+    font-family: Inter;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px; /* 88% */
+    letter-spacing: -0.408px;
+}
+
+.selectStateDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.selectState {
+    margin-top: 30px;
+    width: 331px;
+}
+
+.selectState p {
+    margin: 0;
+    color: #A4A4A4;
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px; /* 146.667% */
+    letter-spacing: -0.408px;
+}
+
+.selectStateInput {
+    width: 307px;
+    margin-top: 13px;
+}
+
