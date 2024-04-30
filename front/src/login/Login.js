@@ -30,7 +30,7 @@ const Login = () => {
                 </svg>
             </div>
             <div className="kakaoLogin">
-                <div className="kakao" onClick={() => navigate("/register")}>
+                <div className="kakao" onClick={kakaoLogin}>
                     <p>카카오톡계정 로그인</p>
                 </div>
             </div>

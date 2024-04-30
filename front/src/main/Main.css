@@ -1,0 +1,158 @@
+.purposeMainPage {
+    width: 100%;
+    height: 100vh;
+}
+
+.matchingText {
+    display: flex;
+}
+
+.matchStrongText {
+    margin: 0;
+    color: #EB604A;
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.matchingStartDiv {
+    margin-left: 34px;
+    padding-top: 50px;
+    display: flex;
+}
+
+.peopleImgDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.matchingButton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.planeMatchText {
+    margin: 0;
+    color: #000;
+    font-family: Pretendard;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.goMatch {
+    margin-top: 20px;
+    padding: 10px 25px;
+    background-color: #FFFFFF;
+    border-radius: 40px;
+    border: 2px solid #EB604A;
+    color: #EB604A;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.purposeDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.purpose {
+    width: 343px;
+    margin-top: 60px;
+}
+
+.purposeText {
+    margin: 0;
+    color: #000;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.purposeUnderText {
+    margin-top: 5px;
+    margin-bottom: 0;
+    color: #C2C2C2;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.purposeButtonDiv {
+    margin-top: 30px;
+}
+
+.purp {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    z-index: 1;
+}
+
+.sports, .pet, .cook, .roommate, .study, .read, .eat, .baby, .single, .diet, .trip, .paint, .music, .ott, .dance, .photo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+}
+
+
+.disable {
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+}
+
+.textPurpose {
+    margin: 0;
+    color: #7B7A7A;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 18px; /* 150% */
+    letter-spacing: -0.408px;
+}
+
+.select {
+    margin: 0;
+    color: #EB604A;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 18px; /* 150% */
+    letter-spacing: -0.408px;
+}
+
+.checked {
+    position: relative;
+    left: 130px;
+    top: 20px;
+    z-index: 10;
+}
