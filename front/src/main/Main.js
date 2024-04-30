@@ -9,8 +9,9 @@ const Main = () => {
     }, [user]);
 
     return (
-        <>
-        </>
+        <div>
+
+        </div>
     );
 }
 
