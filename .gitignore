@@ -150,7 +150,7 @@ logs
 node_modules
 bower_components
 
-build
+.front/build
 
 *.sublime*
 
