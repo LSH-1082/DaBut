@@ -1,15 +1,15 @@
-.RegisterPage2 {
+.RegisterPage3 {
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
-.registerPage2Title p{
+.registerPage3Title p{
     margin: 0;
 }
 
-.registerPage2Title {
+.registerPage3Title {
     margin-top: 30px;
     margin-left: 33px;
     display: flex;
@@ -170,7 +170,7 @@
     transition: opacity 0.5s ease; /* 투명도와 위치 변화에 대한 애니메이션 효과 설정 */
 }
 
-/* RegisterPage2 컴포넌트가 나타날 때 활성화 상태일 때의 스타일 */
+/* RegisterPage3 컴포넌트가 나타날 때 활성화 상태일 때의 스타일 */
 .majorPage.active {
     opacity: 1;
 }

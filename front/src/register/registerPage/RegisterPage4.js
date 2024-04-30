@@ -1,26 +1,26 @@
-import RegisterFooter from "./RegisterFooter";
+import RegisterFooter from "../registerFooter/RegisterFooter";
 import {useDispatch, useSelector} from "react-redux";
 
-import "./RegisterPage3.css";
-import {setFace, setIntro} from "../store/user";
+import "./RegisterPage4.css";
+import {setFace, setIntro} from "../../store/user";
 import {useState} from "react";
 
-const RegisterPage3 = () => {
+const RegisterPage4 = () => {
     let user = useSelector(state => state.user);
-    let username = user.name.name.slice(1);
+    let username = user.name.slice(1);
     const dispatch = useDispatch();
     const [animal, setAnimal] = useState("");
 
     const clickFace = (face) => {
-        dispatch(setFace({face: face}));
+        dispatch(setFace(face));
         setAnimal(face);
     }
 
     return (
-        <div className="RegisterPage3">
-            <div className="registerPage3TitleDiv">
-                <div className="registerPage3Div">
-                    <div className="registerPage3Title">
+        <div className="RegisterPage4">
+            <div className="registerPage4TitleDiv">
+                <div className="registerPage4Div">
+                    <div className="registerPage4Title">
                         <p className="username">{username}</p>
                         <p className="nameTitle">님을 표현해주세요.</p>
                     </div>
@@ -206,7 +206,7 @@ const RegisterPage3 = () => {
                         </div>
                     </div>
                     <div className="textInputDiv">
-                        <textarea className="inputIntro" value={user.intro.intro} onChange={(e) => {dispatch(setIntro({intro: e.target.value}))}} placeholder="자기소개를 입력해주세요."></textarea>
+                        <textarea className="inputIntro" value={user.intro} onChange={(e) => {dispatch(setIntro(e.target.value))}} placeholder="자기소개를 입력해주세요."></textarea>
                     </div>
                     <div className="inputSmallTextDiv">
                         <p className="inputSmallText">본인이 쓴 글은 모두에게 공개됩니다 :)</p>
@@ -218,4 +218,4 @@ const RegisterPage3 = () => {
     );
 }
 
-export default RegisterPage3;
+export default RegisterPage4;

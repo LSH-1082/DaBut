@@ -1,8 +1,8 @@
 import React from 'react';
 import Select from 'react-select';
-import "./AgeSelect.css";
+import "./WeightSelect.css";
 import {useDispatch} from "react-redux";
-import {setAge} from "../../store/user";
+import {setAge, setWeight} from "../../store/user";
 
 const customStyles = {
     control: (provided, state) => ({
@@ -29,15 +29,8 @@ const customStyles = {
 };
 
 const options = [
-    { value: 20, label: '20' },
-    { value: 21, label: '21' },
-    { value: 22, label: '22' },
-    { value: 23, label: '23' },
-    { value: 24, label: '24' },
-    { value: 25, label: '25' },
-    { value: 26, label: '26' },
-    { value: 27, label: '27' },
-    { value: 28, label: '28' }
+    { value: "마른체형", label: "마른체형" },
+    { value: "통통한체형", label: "통통한체형" },
 ];
 
 const AgeSelect = () => {
@@ -45,8 +38,8 @@ const AgeSelect = () => {
 
 
     return (
-        <div className="Select">
-            <Select className="Selector" onChange={(e) => {dispatch(setAge(e.value))}} placeholder="" options={options} styles={customStyles} isSearchable={false} components={{IndicatorSeparator: () => null,}}/>
+        <div className="weightSelect">
+            <Select className="weightSelector" onChange={(e) => {dispatch(setWeight(e.value))}} placeholder="" options={options} styles={customStyles} isSearchable={false} components={{IndicatorSeparator: () => null,}}/>
         </div>
     );
 };

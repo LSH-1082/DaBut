@@ -1,4 +1,4 @@
-.RegisterPage3 {
+.RegisterPage4 {
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -12,11 +12,11 @@
     align-items: center;
 }
 
-.registerPage3Title p{
+.registerPage4Title p{
     margin: 0;
 }
 
-.registerPage3Title {
+.registerPage4Title {
     margin-top: 30px;
     margin-left: 33px;
     display: flex;

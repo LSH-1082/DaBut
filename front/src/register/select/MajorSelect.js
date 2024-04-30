@@ -47,7 +47,7 @@ const MajorSelect = () => {
     return (
         <div className="majorSelect">
             <Select className="majorSelector" onChange={(e) => {
-                dispatch(setMajor({major: e.value}))
+                dispatch(setMajor(e.value))
             }} isSearchable={false} options={options} styles={customStyles} placeholder="" components={{IndicatorSeparator: () => null,}}/>
         </div>
     );
