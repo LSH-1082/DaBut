@@ -36,7 +36,6 @@ public class LoginController {
         // HTTP 헤더 설정
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-        // 다른 헤더 추가
 
         // 요청 엔티티 생성 (헤더와 요청 데이터 설정)
         HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);

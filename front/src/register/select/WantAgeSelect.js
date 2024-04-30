@@ -2,7 +2,7 @@ import React from 'react';
 import Select from 'react-select';
 import "./WantAgeSelect.css";
 import {useDispatch} from "react-redux";
-import {setState, setWantAge} from "../../store/user";
+import {setWantAge} from "../../store/user";
 
 import "./StateSelect.css";
 

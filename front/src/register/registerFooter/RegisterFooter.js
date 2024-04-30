@@ -1,7 +1,6 @@
 import "./RegisterFooter.css";
 import {incPage} from "../../store/page";
 import {useDispatch, useSelector} from "react-redux";
-import {useNavigate} from "react-router-dom";
 
 const RegisterFooter = () => {
     const page = useSelector(state => state.page);

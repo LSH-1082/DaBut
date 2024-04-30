@@ -16,7 +16,7 @@ const Register = () => {
         if(page.page === 6) {
             navigate("/main");
         }
-    }, [page.page]);
+    }, [page.page, navigate]);
 
     return (
             <div className="Register">

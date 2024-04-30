@@ -2,7 +2,7 @@ import React from 'react';
 import Select from 'react-select';
 import "./WeightSelect.css";
 import {useDispatch} from "react-redux";
-import {setAge, setWeight} from "../../store/user";
+import {setWeight} from "../../store/user";
 
 const customStyles = {
     control: (provided, state) => ({

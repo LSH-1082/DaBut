@@ -27,7 +27,7 @@ const RegisterPage2 = () => {
     useEffect(() => {
         let mbti = first + second + third + fourth;
         dispatch(setMbti(mbti));
-    }, [first, second, third, fourth]);
+    }, [first, second, third, fourth, dispatch]);
 
     return (
         <div className="RegisterPage3">
