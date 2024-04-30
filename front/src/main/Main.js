@@ -6,9 +6,11 @@ const Main = () => {
     useEffect(() => {
         console.log(user);
     }, []);
+
     return (
-        <>
-        </>
+        <div>
+
+        </div>
     );
 }
 
