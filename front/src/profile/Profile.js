@@ -1,8 +1,8 @@
 import {useSelector} from "react-redux";
 import {useEffect} from "react";
-import "./Mypage.css";
+import "./Profile.css";
 
-const Mypage = () => {
+const Profile = () => {
     let user = useSelector(state => state.user);
 
     useEffect(() => {
@@ -67,4 +67,4 @@ const Mypage = () => {
     );
 }
 
-export default Mypage;
+export default Profile;
