@@ -3,6 +3,7 @@ package org.web.application.server.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,6 +32,16 @@ public class UserEntity {
     private Boolean smoking;
     //닉네임
     private String nickname;
+    //역할 부여
+    private String role;
+    //신고 횟수
+    private Integer warning;
+    //토큰용 아이디
+    private String account;
+    //카카오 이메일
+    private String kakaoEmail;
+    //가입날짜
+    private LocalDateTime registerDate;
     /*******************************ManyToOne******************************************/
     //성별
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
