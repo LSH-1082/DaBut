@@ -5,5 +5,5 @@ import org.web.application.server.entity.UserEntity;
 
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
-    UserEntity findByUserId(String userId);
+    UserEntity findByAccount(String userId);
 }
