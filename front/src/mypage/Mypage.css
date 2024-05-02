@@ -16,24 +16,26 @@
 }
 
 .mypageContainer {
-    border-bottom: 3px solid #ccc; /* 컨테이너에 테두리 추가 */
+    border-bottom: 3px solid #ccc;
     padding: 10px;
-    height: 230px;
+    height: 235px;
     margin-bottom: 15px;
 }
 
 .profileContainer {
     background-color: #EB604A;
     border-radius: 10px;
-    width: 280px;
+    width: 330px;
     height: 100px;
     margin-top: 10px;
+    padding-top: 3px;
+
 }
 
 .managementContainer {
-    border-bottom: 1px solid #ccc; /* 컨테이너에 테두리 추가 */
+    border-bottom: 1px solid #ccc;
     padding: 10px;
-    height: 140px;
+    height: 170px;
     margin-bottom: 15px;
 }
 
@@ -45,26 +47,57 @@
 
 .title {
     text-align: center;
+    font-weight: 700;
 }
 
-.mypageSmallText {
+.kakaoIdText {
     margin: 0;
     color: #BEC1C6;
     font-family: Pretendard;
-    font-size: 13px;
-    font-weight: 700;
+    font-size: 12px;
+    margin-left: 10px;
+    display: flex;
+    margin: 0;
 }
 
 .profileText {
     color: white;
-    margin-left: 10px;
+    margin-left: 18px;
     font-family: Pretendard;
     font-size: 15px;
 }
 
 .profile {
-    margin-left: 15px;
+    margin-left: 20px;
     font-family: Pretendard;
     font-size: 10px;
     color: #D6D6D6;
+}
+
+.profileNameDiv {
+    display: flex;
+    align-items: center;
+}
+
+.mypageNameText {
+    font-family: Pretendard;
+    margin-left: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    display: flex;
+    margin: 0;
+}
+
+.introduce {
+    font-family: Pretendard;
+    text-align: right;
+    font-size: 13px;
+    margin-top: 15px;
+    color: #929292;
+}
+
+.textWrapper {
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
 }
