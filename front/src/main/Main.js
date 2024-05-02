@@ -1,8 +1,16 @@
 import "./Main.css";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import CheckComponent from "./CheckComponent";
+import {sendUser} from "../api/UserData";
+import {useSelector} from "react-redux";
 
 const Main = () => {
     const [purpose, setPurpose] = useState("");
+    let user = useSelector(state => state.user);
+
+    useEffect(() => {
+        sendUser(user).then(() => console.log("success")).catch((e) => console.log(e));
+    }, []);
 
     const clickPurpose = (value) => {
         if (purpose === value) setPurpose("");
@@ -21,7 +29,7 @@ const Main = () => {
                     <button className="goMatch">매칭하러가기</button>
                 </div>
                 <div className="peopleImgDiv">
-                    <img src="/images/people.png" alt="peopleImg"/>
+                    <img className="peopleImg" src="/images/people.jpeg" alt="peopleImg"/>
                 </div>
             </div>
             <div className="purposeDiv">
@@ -34,8 +42,38 @@ const Main = () => {
                         <div className="purp">
                             <div className={purpose === "sports" ? "sports" : "disable"}
                                  onClick={() => clickPurpose("sports")}>
+                                {purpose === "sports" ? (<CheckComponent purpose={purpose}/>) : (<></>)}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="34" height="36" viewBox="0 0 34 36"
+                                     fill="none">
+                                    <path
+                                        d="M20.7777 10C20.7777 9 21.7221 7 21.7221 5C21.7221 3 21.7221 2 20.7777 1C19.8332 0 18.8888 0 18.8888 0C18.8888 0 17.9444 0 16.9999 1C16.0555 2 16.0555 3 16.0555 5C16.0555 7 16.9999 9 16.9999 10C16.9999 13 13.2222 15 13.2222 19.084C13.2222 22.417 15.111 29 16.0555 31H21.7221C22.6665 29 24.5554 22.417 24.5554 19.084C24.5554 15 20.7777 13 20.7777 10Z"
+                                        fill="#CCD6DD"/>
+                                    <path
+                                        d="M16.9997 10H20.7775C20.7775 9.525 20.9919 8.82 21.2157 8H16.5624C16.7853 8.82 16.9997 9.525 16.9997 10ZM22.5738 14C22.1072 13.319 21.652 12.667 21.3158 12H16.4623C16.1252 12.667 15.67 13.319 15.2043 14H22.5738Z"
+                                        fill="#BE1931"/>
+                                    <path
+                                        d="M30.2222 13C30.2222 12 31.1667 10 31.1667 8C31.1667 6 31.1667 5 30.2222 4C29.2778 3 28.3334 3 28.3334 3C28.3334 3 27.3889 3 26.4445 4C25.5001 5 25.5001 6 25.5001 8C25.5001 10 26.4445 12 26.4445 13C26.4445 16 22.6667 18 22.6667 22.084C22.6667 25.417 24.5556 32 25.5001 34H31.1667C32.1111 32 34 25.417 34 22.084C34 18 30.2222 16 30.2222 13Z"
+                                        fill="#CCD6DD"/>
+                                    <path
+                                        d="M26.4443 13H30.222C30.222 12.525 30.4364 11.82 30.6603 11H26.007C26.2299 11.82 26.4443 12.525 26.4443 13ZM32.0184 17C31.5518 16.319 31.0966 15.667 30.7604 15H25.9069C25.5698 15.667 25.1145 16.319 24.6489 17H32.0184Z"
+                                        fill="#BE1931"/>
+                                    <path
+                                        d="M11.864 36C18.4163 36 23.728 30.3758 23.728 23.438C23.728 16.5002 18.4163 10.876 11.864 10.876C5.3117 10.876 0 16.5002 0 23.438C0 30.3758 5.3117 36 11.864 36Z"
+                                        fill="#3585D6"/>
+                                    <path
+                                        d="M12.1971 21.1061C13.4051 21.1061 14.3844 20.0692 14.3844 18.7901C14.3844 17.511 13.4051 16.4741 12.1971 16.4741C10.9891 16.4741 10.0098 17.511 10.0098 18.7901C10.0098 20.0692 10.9891 21.1061 12.1971 21.1061Z"
+                                        fill="#B1B1B1"/>
+                                    <path
+                                        d="M6.14337 23.2541C7.35139 23.2541 8.33069 22.2172 8.33069 20.9381C8.33069 19.659 7.35139 18.6221 6.14337 18.6221C4.93535 18.6221 3.95605 19.659 3.95605 20.9381C3.95605 22.2172 4.93535 23.2541 6.14337 23.2541Z"
+                                        fill="#B1B1B1"/>
+                                    <path
+                                        d="M10.796 30.3688C12.004 30.3688 12.9833 29.3319 12.9833 28.0528C12.9833 26.7737 12.004 25.7368 10.796 25.7368C9.58794 25.7368 8.60864 26.7737 8.60864 28.0528C8.60864 29.3319 9.58794 30.3688 10.796 30.3688Z"
+                                        fill="#B1B1B1"/>
+                                </svg>
+                                <p className={purpose === "sports" ? "select" : "textPurpose"}>운동/스포츠</p>
                             </div>
                             <div className={purpose === "pet" ? "pet" : "disable"} onClick={() => clickPurpose("pet")}>
+                                {purpose === "pet" ? (<CheckComponent purpose={purpose}/>) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29"
                                      fill="none">
                                     <path
@@ -92,7 +130,9 @@ const Main = () => {
                                 </svg>
                                 <p className={purpose === "pet" ? "select" : "textPurpose"}>반려동물</p>
                             </div>
-                            <div className={purpose === "cook" ? "cook" : "disable"} onClick={() => clickPurpose("cook")}>
+                            <div className={purpose === "cook" ? "cook" : "disable"}
+                                 onClick={() => clickPurpose("cook")}>
+                                {purpose === "cook" ? (<CheckComponent purpose={purpose} />) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="41" height="41" viewBox="0 0 41 41"
                                      fill="none">
                                     <path
@@ -142,13 +182,38 @@ const Main = () => {
                             </div>
                             <div className={purpose === "roommate" ? "roommate" : "disable"}
                                  onClick={() => clickPurpose("roommate")}>
+                                {purpose === "roommate" ? (<CheckComponent purpose={purpose}/>) : (<></>)}
+                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                                     fill="none">
+                                    <path d="M6.39746 15.7207H15.1142V29.2846H6.39746V15.7207Z" fill="#855C52"/>
+                                    <path d="M17.7903 15.0034H26.7775V23.355H17.7903V15.0034Z" fill="white"/>
+                                    <path
+                                        d="M28.8766 11.0596L16.1206 0.386314C15.5046 -0.128771 14.4954 -0.128771 13.8794 0.386314L1.12061 11.0596C0.504553 11.5773 0 12.6254 0 13.3916V27.8934C0 28.6597 0.682959 29.2875 1.51366 29.2875H7.37038V19.7213C7.37038 19.137 7.88887 18.6603 8.52165 18.6603H13.1379C13.7707 18.6603 14.292 19.137 14.292 19.7213V29.2849H28.4836C29.317 29.2849 30 28.6597 30 27.8909V13.389C30 12.6254 29.4954 11.5747 28.8766 11.0596ZM21.5592 22.5555H19.9117C19.1424 22.5555 18.5096 21.9764 18.5096 21.2665V19.9724H21.5592V22.5555ZM21.5592 18.7423H18.5096V17.0074C18.5096 16.3002 19.1424 15.7184 19.9117 15.7184H21.5592V18.7423ZM25.9441 21.2665C25.9441 21.9738 25.3141 22.5555 24.5419 22.5555H22.8944V19.9724H25.9441V21.2665ZM25.9441 18.7423H22.8972V15.721H24.5447C24.9163 15.7217 25.2726 15.8577 25.5354 16.0993C25.7982 16.3409 25.9461 16.6684 25.9468 17.01V18.7423H25.9441Z"
+                                        fill="#FCC21B"/>
+                                    <mask id="mask0_473_415" maskUnits="userSpaceOnUse"
+                                          x="0" y="0" width="30" height="30">
+                                        <path
+                                            d="M28.8766 11.0596L16.1206 0.386314C15.5046 -0.128771 14.4954 -0.128771 13.8794 0.386314L1.12061 11.0596C0.504553 11.5773 0 12.6254 0 13.3916V27.8934C0 28.6597 0.682959 29.2875 1.51366 29.2875H7.37038V19.7213C7.37038 19.137 7.88887 18.6603 8.52165 18.6603H13.1379C13.7707 18.6603 14.292 19.137 14.292 19.7213V29.2849H28.4836C29.317 29.2849 30 28.6597 30 27.8909V13.389C30 12.6254 29.4954 11.5747 28.8766 11.0596ZM21.5592 22.5555H19.9117C19.1424 22.5555 18.5096 21.9764 18.5096 21.2665V19.9724H21.5592V22.5555ZM21.5592 18.7423H18.5096V17.0074C18.5096 16.3002 19.1424 15.7184 19.9117 15.7184H21.5592V18.7423ZM25.9441 21.2665C25.9441 21.9738 25.3141 22.5555 24.5419 22.5555H22.8944V19.9724H25.9441V21.2665ZM25.9441 18.7423H22.8972V15.721H24.5447C24.9163 15.7217 25.2726 15.8577 25.5354 16.0993C25.7982 16.3409 25.9461 16.6684 25.9468 17.01V18.7423H25.9441Z"
+                                            fill="white"/>
+                                    </mask>
+                                    <g mask="url(#mask0_473_415)">
+                                        <path
+                                            d="M15.2005 3.22058L30.2479 16.0311L30.5992 16.0337L30.7581 11.3569L15.2005 -1.88672L-0.722157 11.3569L-0.82251 15.7287L0.153145 15.7364L15.2005 3.22058Z"
+                                            fill="#ED6C30"/>
+                                    </g>
+                                    <path
+                                        d="M9.10705 25.0052C9.66128 25.0052 10.1106 24.5922 10.1106 24.0827C10.1106 23.5732 9.66128 23.1602 9.10705 23.1602C8.55281 23.1602 8.10352 23.5732 8.10352 24.0827C8.10352 24.5922 8.55281 25.0052 9.10705 25.0052Z"
+                                        fill="white"/>
+                                </svg>
 
+                                <p className={purpose === "roommate" ? "select" : "textPurpose"}>룸메이트</p>
                             </div>
 
                         </div>
                         <div className="purp">
                             <div className={purpose === "study" ? "study" : "disable"}
                                  onClick={() => setPurpose("study")}>
+                                {purpose === "study" ? (<CheckComponent purpose={purpose}/>) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="31" height="33" viewBox="0 0 31 33"
                                      fill="none">
                                     <path
@@ -171,9 +236,10 @@ const Main = () => {
                                         fill="#FFB636"/>
                                 </svg>
 
-                                <p className="textPurpose">공부</p>
+                                <p className={purpose === "study" ? "select" : "textPurpose"}>공부</p>
                             </div>
                             <div className={purpose === "read" ? "read" : "disable"} onClick={() => setPurpose("read")}>
+                                {purpose === "read" ? (<CheckComponent purpose={purpose} />) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="43" height="27" viewBox="0 0 43 27"
                                      fill="none">
                                     <path
@@ -193,9 +259,10 @@ const Main = () => {
                                         fill="#F9F9F7"/>
                                 </svg>
 
-                                <p className="textPurpose">독서</p>
+                                <p className={purpose === "read" ? "select" : "textPurpose"}>독서</p>
                             </div>
                             <div className={purpose === "eat" ? "eat" : "disable"} onClick={() => setPurpose("eat")}>
+                                {purpose === "eat" ? (<CheckComponent purpose={purpose} />) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="28" viewBox="0 0 32 28"
                                      fill="none">
                                     <path
@@ -212,9 +279,10 @@ const Main = () => {
                                         fill="#ECEBE9"/>
                                 </svg>
 
-                                <p className="textPurpose">밥친구</p>
+                                <p className={purpose === "eat" ? "select" : "textPurpose"}>밥친구</p>
                             </div>
                             <div className={purpose === "baby" ? "baby" : "disable"} onClick={() => setPurpose("baby")}>
+                                {purpose === "baby" ? (<CheckComponent purpose={purpose} />) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"
                                      fill="none">
                                     <path
@@ -243,12 +311,13 @@ const Main = () => {
                                         fill="#323232"/>
                                 </svg>
 
-                                <p className="textPurpose">육아</p>
+                                <p className={purpose === "baby" ? "select" : "textPurpose"}>육아</p>
                             </div>
                         </div>
                         <div className="purp">
                             <div className={purpose === "single" ? "single" : "disable"}
                                  onClick={() => setPurpose("single")}>
+                                 {purpose === "single" ? (<CheckComponent purpose={purpose} />) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="45" height="41" viewBox="0 0 45 41"
                                      fill="none">
                                     <path
@@ -274,9 +343,10 @@ const Main = () => {
                                         fill="#FFB636"/>
                                 </svg>
 
-                                <p className="textPurpose">돌싱</p>
+                                <p className={purpose === "single" ? "select" : "textPurpose"}>돌싱</p>
                             </div>
                             <div className={purpose === "diet" ? "diet" : "disable"} onClick={() => setPurpose("diet")}>
+                                {purpose === "diet" ? (<CheckComponent purpose={purpose} />) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="29" height="46" viewBox="0 0 29 46"
                                      fill="none">
                                     <path
@@ -320,9 +390,10 @@ const Main = () => {
                                         fill="#68442A"/>
                                 </svg>
 
-                                <p className="textPurpose">다이어트</p>
+                                <p className={purpose === "diet" ? "select" : "textPurpose"}>다이어트</p>
                             </div>
                             <div className={purpose === "trip" ? "trip" : "disable"} onClick={() => setPurpose("trip")}>
+                                {purpose === "trip" ? (<CheckComponent purpose={purpose} />) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 33 33"
                                      fill="none">
                                     <path
@@ -366,10 +437,11 @@ const Main = () => {
                                         fill="#27AAE1"/>
                                 </svg>
 
-                                <p className="textPurpose">여행</p>
+                                <p className={purpose === "trip" ? "select" : "textPurpose"}>여행</p>
                             </div>
                             <div className={purpose === "paint" ? "paint" : "disable"}
                                  onClick={() => setPurpose("paint")}>
+                                 {purpose === "paint" ? (<CheckComponent purpose={purpose} />) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="30" viewBox="0 0 32 30"
                                      fill="none">
                                     <path
@@ -392,12 +464,13 @@ const Main = () => {
                                         fill="#009B51"/>
                                 </svg>
 
-                                <p className="textPurpose">그림</p>
+                                <p className={purpose === "paint" ? "select" : "textPurpose"}>그림</p>
                             </div>
                         </div>
                         <div className="purp">
                             <div className={purpose === "music" ? "music" : "disable"}
                                  onClick={() => setPurpose("music")}>
+                                 {purpose === "music" ? (<CheckComponent purpose={purpose} />) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="41" height="41" viewBox="0 0 41 41"
                                      fill="none">
                                     <path
@@ -423,9 +496,10 @@ const Main = () => {
                                         fill="#176068"/>
                                 </svg>
 
-                                <p className="textPurpose">음악</p>
+                                <p className={purpose === "music" ? "select" : "textPurpose"}>음악</p>
                             </div>
                             <div className={purpose === "ott" ? "ott" : "disable"} onClick={() => setPurpose("ott")}>
+                                {purpose === "ott" ? (<CheckComponent purpose={purpose} />) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="37" height="33" viewBox="0 0 37 33"
                                      fill="none">
                                     <path
@@ -444,10 +518,11 @@ const Main = () => {
                                         d="M23.9087 28.6092H22.298C21.8424 28.6092 21.4731 28.2594 21.4731 27.828V27.6572C21.4731 27.2257 21.8425 26.876 22.298 26.876H23.9087C24.3643 26.876 24.7336 27.2258 24.7336 27.6572V27.828C24.7336 28.2594 24.3643 28.6092 23.9087 28.6092Z"
                                         fill="#2B3B47"/>
                                 </svg>
-                                <p className="textPurpose">OTT</p>
+                                <p className={purpose === "ott" ? "select" : "textPurpose"}>OTT</p>
                             </div>
                             <div className={purpose === "dance" ? "dance" : "disable"}
                                  onClick={() => setPurpose("dance")}>
+                                {purpose === "dance" ? (<CheckComponent purpose={purpose} />) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="46" height="41" viewBox="0 0 46 41"
                                      fill="none">
                                     <path
@@ -485,10 +560,11 @@ const Main = () => {
                                         d="M15.8265 10.5394C15.6982 10.4511 15.55 10.3886 15.3921 10.356C15.1611 10.3111 14.9214 10.3162 14.6931 10.3708C14.1948 10.4813 13.4613 10.6054 12.6844 10.7375C11.6239 10.9175 10.2171 11.2797 9.83628 11.2797C9.4555 11.2797 7.90044 10.8344 6.47061 10.6681C5.99783 10.6134 4.4875 10.4802 4.1655 10.4483C3.7285 10.405 3.1995 10.3572 2.79444 10.2774C2.60789 10.241 1.88339 10.0679 1.5895 10.0212C1.03239 9.93235 0.105999 9.89021 0.0536102 9.98702C-0.171279 10.4061 1.02855 10.2524 2.01883 11.0268C2.59894 11.4801 3.18928 11.4607 3.75022 11.4243C4.19361 11.3958 5.59917 12.0769 6.72233 12.3821C7.53372 12.603 9.34944 12.9891 9.61011 13.0222C9.87078 13.0552 11.2661 12.9629 12.1951 12.8969C13.1342 12.832 13.9469 12.775 14.596 12.8115C15.2157 12.8468 15.6808 12.7215 15.9798 12.4402C16.3529 12.0883 16.3453 11.5951 16.3351 11.4528C16.3044 11.0667 16.1242 10.7421 15.8265 10.5394ZM30.1351 12.0598C29.9204 11.799 29.4131 11.4163 28.3308 11.1487C27.4913 10.9403 23.2274 10.4323 22.3904 10.3435C21.7413 10.274 22.1387 12.4037 22.4671 12.5825C22.6779 12.6976 22.9335 12.7078 23.3194 12.7431C24.8821 12.8866 27.2319 12.775 27.6536 12.7374C27.8363 12.7215 27.9207 12.7807 27.9322 12.8844C27.8517 13.2146 27.5654 13.6463 27.3227 14.1417C26.9163 14.9697 26.4844 16.0937 26.3286 16.2224L26.1867 16.3375C25.8038 16.4074 25.4462 16.5603 25.1453 16.7828C24.9936 16.8889 24.8813 17.0334 24.8233 17.1973C24.7032 17.5025 25.0406 17.5379 25.1223 17.3545C25.1468 17.2938 25.1874 17.2392 25.2405 17.1954C25.2937 17.1516 25.3579 17.1198 25.4277 17.1028C25.4213 17.1381 25.4086 17.1677 25.4073 17.2087C25.4047 17.2748 25.3856 17.3294 25.3728 17.3887C25.0814 17.8385 24.5013 18.0185 24.5409 18.1927C24.5499 18.2303 24.6023 18.2326 24.6432 18.2428C24.4464 18.3613 24.2931 18.4433 24.3058 18.5344C24.3161 18.6084 24.4081 18.6255 24.5333 18.6152C24.4426 18.6756 24.3838 18.7291 24.3914 18.7849C24.4247 19.023 25.1019 18.6528 25.4264 18.5355C25.9797 18.3351 26.303 18.1255 26.6863 17.8112C27.1323 17.4445 27.3482 16.9149 27.5412 16.621C27.683 16.4047 29.3824 14.5631 29.7594 13.9469C30.3152 13.0381 30.3497 12.3206 30.1351 12.0598Z"
                                         fill="#F7DECE"/>
                                 </svg>
-                                <p className="textPurpose">춤</p>
+                                <p className={purpose === "dance" ? "select" : "textPurpose"}>춤</p>
                             </div>
                             <div className={purpose === "photo" ? "photo" : "disable"}
                                  onClick={() => setPurpose("photo")}>
+                                {purpose === "photo" ? (<CheckComponent purpose={purpose} />) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="38" height="28" viewBox="0 0 38 28"
                                      fill="none">
                                     <path
@@ -519,7 +595,7 @@ const Main = () => {
                                         d="M20.8348 12.1826C21.5098 12.1826 22.0577 12.6797 22.0577 13.2921C22.0577 13.9051 21.5098 14.4016 20.8348 14.4016C20.1597 14.4016 19.6118 13.9051 19.6118 13.2921C19.6118 12.6791 20.1597 12.1826 20.8348 12.1826Z"
                                         fill="white"/>
                                 </svg>
-                                <p className="textPurpose">사진</p>
+                                <p className={purpose === "photo" ? "select" : "textPurpose"}>사진</p>
                             </div>
                         </div>
                     </div>
