@@ -109,6 +109,7 @@
 
 .sports, .pet, .cook, .roommate, .study, .read, .eat, .baby, .single, .diet, .trip, .paint, .music, .ott, .dance, .photo {
     display: flex;
+    position: relative;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
@@ -126,6 +127,7 @@
     align-items: center;
     width: 60px;
     height: 60px;
+    cursor: pointer;
 }
 
 .textPurpose {
@@ -150,9 +152,128 @@
     letter-spacing: -0.408px;
 }
 
-.checked {
-    position: relative;
-    left: 130px;
-    top: 20px;
+.checked.pet {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    left: 45px;
+    top: -10px;
+    z-index: 10;
+}
+
+.checked.cook {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    left: 45px;
+    top: -10px;
+    z-index: 10;
+}
+
+.checked.study {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    left: 45px;
+    top: -10px;
+    z-index: 10;
+}
+
+.checked.read {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    left: 45px;
+    top: -10px;
+    z-index: 10;
+}
+
+.checked.eat {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    left: 45px;
+    top: -10px;
+    z-index: 10;
+}
+
+.checked.baby {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    left: 45px;
+    top: -10px;
+    z-index: 10;
+}
+
+.checked.single {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    left: 45px;
+    top: -10px;
+    z-index: 10;
+}
+
+.checked.diet {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    left: 45px;
+    top: -10px;
+    z-index: 10;
+}
+
+.checked.trip {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    left: 45px;
+    top: -10px;
+    z-index: 10;
+}
+
+.checked.paint {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    left: 45px;
+    top: -10px;
+    z-index: 10;
+}
+
+.checked.music {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    left: 45px;
+    top: -10px;
+    z-index: 10;
+}
+
+.checked.ott {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    left: 45px;
+    top: -10px;
+    z-index: 10;
+}
+
+.checked.dance {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    left: 45px;
+    top: -10px;
+    z-index: 10;
+}
+
+.checked.photo {
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    left: 45px;
+    top: -10px;
     z-index: 10;
 }
