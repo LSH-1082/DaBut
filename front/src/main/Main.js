@@ -29,7 +29,7 @@ const Main = () => {
                     <button className="goMatch">매칭하러가기</button>
                 </div>
                 <div className="peopleImgDiv">
-                    <img src="/images/people.png" alt="peopleImg"/>
+                    <img className="peopleImg" src="/images/people.jpeg" alt="peopleImg"/>
                 </div>
             </div>
             <div className="purposeDiv">

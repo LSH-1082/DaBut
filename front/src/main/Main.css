@@ -30,6 +30,11 @@
     margin-bottom: 10px;
 }
 
+.peopleImg {
+    width: 211px;
+    height: 145px;
+}
+
 .matchingButton {
     display: flex;
     flex-direction: column;
