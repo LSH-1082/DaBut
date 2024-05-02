@@ -17,3 +17,25 @@ spring:
   jwt:
     secret: skdmltkachsdlfmadmswjdwlscjfwlrdjqdmsvotuselwkdlsj
 
+  security:
+    oauth2:
+      client:
+        registration:
+          kakao:
+            client-id: f131c2fceabc2389e6bb83d94e7975d2
+            client-secret: ZXqnpTSoUvCbRRKnSR5KQPcpf85773qY
+            redirect-uri: "{baseUrl}/oauth2/callback/{registrationId}"
+            authorization-grant-type: authorization_code
+            client-authentication-method: secret_post
+            scope:
+              - profile_nickname
+              - profile_image
+              - account_email
+        provider:
+          kakao:
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/ve/user/me
+            user-name-attribute: id
+
+
