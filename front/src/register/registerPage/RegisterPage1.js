@@ -2,7 +2,7 @@ import RegisterFooter from "../registerFooter/RegisterFooter";
 import "./RegisterPage1.css";
 import AgeSelect from "../select/AgeSelect";
 import {useSelector, useDispatch} from "react-redux";
-import {setGender, setHeight, setName, setNickname, setSmoke} from "../../store/user";
+import {setGender, setHeight, setKakaoId, setName, setNickname, setSmoke} from "../../store/user";
 import SelectRange from "../range/SelectRange";
 import {useState} from "react";
 import WeightSelect from "../select/WeightSelect";
@@ -49,6 +49,15 @@ const RegisterPage1 = () => {
                             }}/>
                         </div>
                     </div>
+                    <div className="kakaoTitle">
+                        <p className="kakaoText">카카오톡ID</p>
+                        <div className="nameInput">
+                            <input type="text" value={user.kakaoId || ""} onChange={(e) => {
+                                dispatch(setKakaoId(e.target.value))
+                            }}/>
+                            <p className="kakaoUnderText">매칭이 완료되었을 시에만 공개됩니다</p>
+                        </div>
+                    </div>
                     <div className="name">
                         <p>별명은</p>
                         <div className="nameInput">
@@ -77,9 +86,15 @@ const RegisterPage1 = () => {
                     <div className="smoke">
                         <p>흡연유무</p>
                         <div className="smokeButtonDiv">
-                            <button onClick={() => {setSmk("F"); dispatch(setSmoke(false));}} className={smoke === "F" ? "selectedSmoke" : "smokeButton"}>안펴!
+                            <button onClick={() => {
+                                setSmk("F");
+                                dispatch(setSmoke(false));
+                            }} className={smoke === "F" ? "selectedSmoke" : "smokeButton"}>안펴!
                             </button>
-                            <button onClick={() => {setSmk("T"); dispatch(setSmoke(true));}} className={smoke === "T" ? "selectedSmoke" : "smokeButton"}>흡연자야!
+                            <button onClick={() => {
+                                setSmk("T");
+                                dispatch(setSmoke(true));
+                            }} className={smoke === "T" ? "selectedSmoke" : "smokeButton"}>흡연자야!
                             </button>
                         </div>
                     </div>
