@@ -23,4 +23,9 @@ public class OccupationEntity {
     @Builder.Default
     @ToString.Exclude
     private List<UserEntity> userEntity = new ArrayList<>();
+
+    @OneToMany(mappedBy = "occupationEntity", cascade = CascadeType.PERSIST)
+    @Builder.Default
+    @ToString.Exclude
+    private List<MatchingFilterEntity> matchingFilterEntity = new ArrayList<>();
 }
