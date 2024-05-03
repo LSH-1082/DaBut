@@ -33,6 +33,6 @@ public class MatchingFilterEntity {
     private GenderEntity genderEntity;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "major_id")
-    private MajorEntity majorEntity;
+    @JoinColumn(name = "occupation_id")
+    private OccupationEntity occupationEntity;
 }

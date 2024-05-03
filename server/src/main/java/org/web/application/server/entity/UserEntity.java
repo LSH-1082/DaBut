@@ -2,6 +2,7 @@ package org.web.application.server.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.web.application.server.dto.UserDTO;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -90,16 +91,11 @@ public class UserEntity {
 
     /*******************************@OneToMany******************************************/
 
-    //취미,관심사 브릿지
-    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.PERSIST)
-    @Builder.Default
-    @ToString.Exclude
-    private List<HobbyBridgeEntity> hobbyBridgeEntity = new ArrayList<>();
-
     /*******************************@OneToOne******************************************/
 
     //찾고싶은 친구 유형 필터
     @OneToOne(mappedBy = "userEntity")
     private MatchingFilterEntity matchingFilterEntity;
+
 
 }
