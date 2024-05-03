@@ -4,7 +4,7 @@
 }
 
 .matchingText {
-    display: flex;
+    width: 100%;
 }
 
 .matchStrongText {
@@ -78,6 +78,7 @@
 .purpose {
     width: 343px;
     margin-top: 60px;
+    margin-bottom: 73px;
 }
 
 .purposeText {

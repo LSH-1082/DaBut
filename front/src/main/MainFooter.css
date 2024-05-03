@@ -1,0 +1,70 @@
+.MainNav {
+    position: fixed;
+    width: 393px;
+    height: 73px;
+    bottom: 0;
+    z-index: 11;
+    background-color: #FFFFFF;
+}
+
+.footerCircle{
+    position: relative;
+}
+
+.MainFooterDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.MainFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 342px;
+}
+
+.plusInCircle {
+    position: absolute;
+    top: -40px;
+    left: -30px;
+    z-index: 13;
+    cursor: pointer;
+}
+
+.grayCircle {
+    position: absolute;
+    top: -50px;
+    left: -40px;
+    z-index: 11;
+}
+
+.orangeCircle{
+    position: absolute;
+    top: -40px;
+    left: -34px;
+    z-index: 12;
+}
+
+.mainFooterHome {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.mainFooterList {
+    cursor: pointer;
+}
+
+.mainFooterAlarm{
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.mainFooterProfile {
+    width: 23px;
+    height: 23px;
+    margin-right: 10px;
+    cursor: pointer;
+}

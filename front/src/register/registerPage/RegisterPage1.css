@@ -42,7 +42,7 @@
     margin-left: 32px;
 }
 
-.gender, .name, .age, .height {
+.gender, .name, .kakaoTitle, .age, .height {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -58,7 +58,7 @@
 
 
 
-.gender p, .name p, .age p, .height p, .smoke p{
+.gender p, .kakaoText, .name p, .age p, .height p, .smoke p{
     color: #A0A0A0;
     font-family: Pretendard;
     font-size: 16px;
@@ -164,4 +164,15 @@
     border-radius: 30px;
     border: 2px solid #EB604A;
     cursor: pointer;
+}
+
+.kakaoUnderText {
+    margin: 0;
+    color: #C2C2C2;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-left: 10px;
 }

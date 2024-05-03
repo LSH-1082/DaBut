@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import CheckComponent from "./CheckComponent";
 import {sendUser} from "../api/UserData";
 import {useSelector} from "react-redux";
+import MainFooter from "./MainFooter";
 
 const Main = () => {
     const [purpose, setPurpose] = useState("");
@@ -10,7 +11,7 @@ const Main = () => {
 
     useEffect(() => {
         sendUser(user).then(() => console.log("success")).catch((e) => console.log(e));
-    }, []);
+    }, [user]);
 
     const clickPurpose = (value) => {
         if (purpose === value) setPurpose("");
@@ -212,7 +213,7 @@ const Main = () => {
                         </div>
                         <div className="purp">
                             <div className={purpose === "study" ? "study" : "disable"}
-                                 onClick={() => setPurpose("study")}>
+                                 onClick={() => clickPurpose("study")}>
                                 {purpose === "study" ? (<CheckComponent purpose={purpose}/>) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="31" height="33" viewBox="0 0 31 33"
                                      fill="none">
@@ -238,7 +239,7 @@ const Main = () => {
 
                                 <p className={purpose === "study" ? "select" : "textPurpose"}>공부</p>
                             </div>
-                            <div className={purpose === "read" ? "read" : "disable"} onClick={() => setPurpose("read")}>
+                            <div className={purpose === "read" ? "read" : "disable"} onClick={() => clickPurpose("read")}>
                                 {purpose === "read" ? (<CheckComponent purpose={purpose} />) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="43" height="27" viewBox="0 0 43 27"
                                      fill="none">
@@ -261,7 +262,7 @@ const Main = () => {
 
                                 <p className={purpose === "read" ? "select" : "textPurpose"}>독서</p>
                             </div>
-                            <div className={purpose === "eat" ? "eat" : "disable"} onClick={() => setPurpose("eat")}>
+                            <div className={purpose === "eat" ? "eat" : "disable"} onClick={() => clickPurpose("eat")}>
                                 {purpose === "eat" ? (<CheckComponent purpose={purpose} />) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="28" viewBox="0 0 32 28"
                                      fill="none">
@@ -281,7 +282,7 @@ const Main = () => {
 
                                 <p className={purpose === "eat" ? "select" : "textPurpose"}>밥친구</p>
                             </div>
-                            <div className={purpose === "baby" ? "baby" : "disable"} onClick={() => setPurpose("baby")}>
+                            <div className={purpose === "baby" ? "baby" : "disable"} onClick={() => clickPurpose("baby")}>
                                 {purpose === "baby" ? (<CheckComponent purpose={purpose} />) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"
                                      fill="none">
@@ -316,7 +317,7 @@ const Main = () => {
                         </div>
                         <div className="purp">
                             <div className={purpose === "single" ? "single" : "disable"}
-                                 onClick={() => setPurpose("single")}>
+                                 onClick={() => clickPurpose("single")}>
                                  {purpose === "single" ? (<CheckComponent purpose={purpose} />) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="45" height="41" viewBox="0 0 45 41"
                                      fill="none">
@@ -345,7 +346,7 @@ const Main = () => {
 
                                 <p className={purpose === "single" ? "select" : "textPurpose"}>돌싱</p>
                             </div>
-                            <div className={purpose === "diet" ? "diet" : "disable"} onClick={() => setPurpose("diet")}>
+                            <div className={purpose === "diet" ? "diet" : "disable"} onClick={() => clickPurpose("diet")}>
                                 {purpose === "diet" ? (<CheckComponent purpose={purpose} />) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="29" height="46" viewBox="0 0 29 46"
                                      fill="none">
@@ -392,7 +393,7 @@ const Main = () => {
 
                                 <p className={purpose === "diet" ? "select" : "textPurpose"}>다이어트</p>
                             </div>
-                            <div className={purpose === "trip" ? "trip" : "disable"} onClick={() => setPurpose("trip")}>
+                            <div className={purpose === "trip" ? "trip" : "disable"} onClick={() => clickPurpose("trip")}>
                                 {purpose === "trip" ? (<CheckComponent purpose={purpose} />) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 33 33"
                                      fill="none">
@@ -440,7 +441,7 @@ const Main = () => {
                                 <p className={purpose === "trip" ? "select" : "textPurpose"}>여행</p>
                             </div>
                             <div className={purpose === "paint" ? "paint" : "disable"}
-                                 onClick={() => setPurpose("paint")}>
+                                 onClick={() => clickPurpose("paint")}>
                                  {purpose === "paint" ? (<CheckComponent purpose={purpose} />) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="30" viewBox="0 0 32 30"
                                      fill="none">
@@ -469,7 +470,7 @@ const Main = () => {
                         </div>
                         <div className="purp">
                             <div className={purpose === "music" ? "music" : "disable"}
-                                 onClick={() => setPurpose("music")}>
+                                 onClick={() => clickPurpose("music")}>
                                  {purpose === "music" ? (<CheckComponent purpose={purpose} />) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="41" height="41" viewBox="0 0 41 41"
                                      fill="none">
@@ -498,7 +499,7 @@ const Main = () => {
 
                                 <p className={purpose === "music" ? "select" : "textPurpose"}>음악</p>
                             </div>
-                            <div className={purpose === "ott" ? "ott" : "disable"} onClick={() => setPurpose("ott")}>
+                            <div className={purpose === "ott" ? "ott" : "disable"} onClick={() => clickPurpose("ott")}>
                                 {purpose === "ott" ? (<CheckComponent purpose={purpose} />) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="37" height="33" viewBox="0 0 37 33"
                                      fill="none">
@@ -521,7 +522,7 @@ const Main = () => {
                                 <p className={purpose === "ott" ? "select" : "textPurpose"}>OTT</p>
                             </div>
                             <div className={purpose === "dance" ? "dance" : "disable"}
-                                 onClick={() => setPurpose("dance")}>
+                                 onClick={() => clickPurpose("dance")}>
                                 {purpose === "dance" ? (<CheckComponent purpose={purpose} />) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="46" height="41" viewBox="0 0 46 41"
                                      fill="none">
@@ -563,7 +564,7 @@ const Main = () => {
                                 <p className={purpose === "dance" ? "select" : "textPurpose"}>춤</p>
                             </div>
                             <div className={purpose === "photo" ? "photo" : "disable"}
-                                 onClick={() => setPurpose("photo")}>
+                                 onClick={() => clickPurpose("photo")}>
                                 {purpose === "photo" ? (<CheckComponent purpose={purpose} />) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="38" height="28" viewBox="0 0 38 28"
                                      fill="none">
@@ -601,6 +602,7 @@ const Main = () => {
                     </div>
                 </div>
             </div>
+            <MainFooter/>
         </div>
     );
 }
