@@ -167,12 +167,13 @@
 }
 
 .kakaoUnderText {
-    margin: 0;
     color: #C2C2C2;
     font-family: Inter;
     font-size: 12px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    margin-top: 0;
+    margin-bottom: 0;
     margin-left: 10px;
 }

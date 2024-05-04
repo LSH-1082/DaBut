@@ -1,0 +1,90 @@
+.MatchingPeople {
+    padding-bottom: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.matchingPeopleDiv {
+    margin-top: 20px;
+    padding: 20px;
+    width: 305px;
+    height: 146px;
+    border-radius: 10px;
+    border: 1px solid #ECECEC;
+    background: #FFF;
+}
+
+.peopleFaceDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.peopleFace {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #A4A4A4;
+    border-radius: 40px;
+}
+
+.peopleFaceAll {
+    display: flex;
+    align-content: center;
+}
+
+.peopleFaceText {
+    margin: 0;
+    color: #000;
+    font-family: Inter;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 630;
+    line-height: 22px; /* 73.333% */
+    letter-spacing: -0.408px;
+}
+
+.matchingComp {
+    margin: 0;
+    text-align: center;
+    border-radius: 10px;
+    background: #ECECEC;
+    width: 74px;
+    height: 21px;
+    flex-shrink: 0;
+    color: #7B7B7B;
+    font-family: Pretendard;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 22px; /* 183.333% */
+    letter-spacing: -0.408px;
+}
+
+.peopleIntro {
+    padding: 10px;
+    height: 80px;
+    flex-shrink: 0;
+}
+
+.peopleIntroText{
+    background-color: #FFFFFF;
+    width: 100%;
+    height: 100%;
+    border: none;
+    resize: none;
+    margin: 0;
+    color: #717171;
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 510;
+    line-height: 15px; /* 150% */
+    letter-spacing: -0.408px;
+}
