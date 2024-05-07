@@ -1,4 +1,4 @@
-import "./alarm.css";
+import "./alarm.css"
 
 const Alarm = () => {
     return (
@@ -10,49 +10,22 @@ const Alarm = () => {
                         fill="#4E4E4E"/>
                 </svg>
             </div>
-            <div className="alarmTitle">알림</div>
-            <div className="matchingAlarm">매칭 알림</div>
-            <div className="infoAlarm">공지사항</div>
+            <p className="alarmTitle">알림</p>
+            <p className="matchingAlarm">매칭 알림</p>
+            <p className="infoAlarm">공지사항</p>
             <div className="lineAlarm"/>
             <div className="bgAlarm"/>
-
-            <div className="calendar">2023년 10월 8일 일요일</div>
+            <p className="date">2023년 10월 8일 일요일</p>
             <div className="rectangle">
-                <div className="circle">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="43" height="44" viewBox="0 0 43 44" fill="none">
-                        <ellipse cx="21.5" cy="22" rx="21.5" ry="22" fill="#EB604A"/>
-                    </svg>
-                </div>
+                <svg className="circle" xmlns="http://www.w3.org/2000/svg" width="43" height="44" viewBox="0 0 43 44"
+                     fill="none">
+                    <ellipse cx="21" cy="21" rx="21" ry="21" fill="#EB604A"/>
+                </svg>
                 <div className="rectangle-border-radius"/>
-                <div className="text-red">매칭</div>
-                <div className="text-black">이 완료되었습니다 !</div>
-                <div className="content">~~~</div>
-            </div>
-
-            <div className="calendar">2023년 10월 7일 토요일</div>
-            <div className="rectangle">
-                <div className="circle">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="43" height="44" viewBox="0 0 43 44" fill="none">
-                        <ellipse cx="21.5" cy="22" rx="21.5" ry="22" fill="#EB604A"/>
-                    </svg>
-                </div>
-                <div className="rectangle-border-radius"/>
-                <div className="text-red">매칭중</div>
-                <div className="text-black">이에요 !</div>
-                <div className="content">~~~</div>
-            </div>
-
-            <div className="calendar">2023년 10월 6일 금요일</div>
-            <div className="rectangle">
-                <div className="circle">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="43" height="44" viewBox="0 0 43 44" fill="none">
-                        <ellipse cx="21.5" cy="22" rx="21.5" ry="22" fill="#EB604A"/>
-                    </svg>
-                </div>
-                <div className="rectangle-border-radius"/>
-                <div className="text-red">매칭</div>
-                <div className="text-black">이 완료되었습니다 !</div>
-                <div className="content">~~~</div>
+                <p className="text">
+                    <span style={{color: '#EB604A', fontWeight: 700}}>매칭</span>이 완료되었습니다 !
+                </p>
+                <p className="content">~~~</p>
             </div>
         </div>
     );
