@@ -1,4 +1,5 @@
 import "./alarm.css";
+import MainFooter from "../main/MainFooter";
 
 const Alarm = () => {
     return (
@@ -54,6 +55,7 @@ const Alarm = () => {
                 <div className="text-black">이 완료되었습니다 !</div>
                 <div className="content">~~~</div>
             </div>
+            <MainFooter/>
         </div>
     );
 }

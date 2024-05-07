@@ -1,5 +1,6 @@
 .MatchingPeople {
-    padding-bottom: 120px;
+    margin-top: 20px;
+    padding-bottom: 100px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -8,8 +9,12 @@
     overflow-y: auto;
 }
 
+.MatchingPeople::-webkit-scrollbar{
+    display: none;
+}
+
 .matchingPeopleDiv {
-    margin-top: 20px;
+    margin-bottom: 20px;
     padding: 20px;
     width: 305px;
     height: 146px;

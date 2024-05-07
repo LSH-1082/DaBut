@@ -1,15 +1,16 @@
 .MainNav {
+    display: flex;
+    justify-content: center;
+    align-content: center;
     position: fixed;
     width: 393px;
     height: 73px;
     bottom: 0;
     z-index: 11;
     background-color: #FFFFFF;
+    box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1), -5px 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.footerCircle{
-    position: relative;
-}
 
 .MainFooterDiv {
     display: flex;
@@ -24,25 +25,36 @@
     width: 342px;
 }
 
+.footerCircle{
+    position: relative;
+    z-index: 12;
+    top: -30px;
+    height: 80px;
+    width: 80px;
+    border-radius: 40px;
+    box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1), -5px 0 10px rgba(0, 0, 0, 0.1);
+}
+
 .plusInCircle {
+    display: flex;
+    justify-content: center;
+    align-content: center;
     position: absolute;
-    top: -40px;
-    left: -30px;
     z-index: 13;
+    top: 9px;
+    left: 10.5px;
     cursor: pointer;
 }
 
 .grayCircle {
     position: absolute;
-    top: -50px;
-    left: -40px;
     z-index: 11;
 }
 
 .orangeCircle{
     position: absolute;
-    top: -40px;
-    left: -34px;
+    top: 9.5px;
+    left: 6px;
     z-index: 12;
 }
 
