@@ -22,14 +22,40 @@
     margin-bottom: 15px;
 }
 
+.profileContainerDiv {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.calendarIcon {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.createDate {
+    margin-left: 20px;
+    display: flex;
+    align-content: center;
+}
+
+.profileGender {
+    margin-left: 20px;
+    margin-bottom: 5px;
+    display: flex;
+    align-content: center;
+}
+
 .profileContainer {
     background-color: #EB604A;
     border-radius: 10px;
-    width: 330px;
+    width: 346px;
     height: 100px;
-    margin-top: 10px;
     padding-top: 3px;
-
 }
 
 .managementContainer {
@@ -62,15 +88,15 @@
 
 .profileText {
     color: white;
-    margin-left: 18px;
+    margin: 10px 20px;
     font-family: Pretendard;
-    font-size: 15px;
+    font-size: 20px;
 }
 
 .profile {
-    margin-left: 20px;
+    margin: 0px 10px;
     font-family: Pretendard;
-    font-size: 10px;
+    font-size: 15px;
     color: #D6D6D6;
 }
 

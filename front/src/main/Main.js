@@ -1,7 +1,6 @@
 import "./Main.css";
 import {useEffect, useState} from "react";
 import CheckComponent from "../component/CheckComponent";
-import {useSelector} from "react-redux";
 import MainFooter from "./MainFooter";
 import api from "../api/api";
 import Cookies from "js-cookie";

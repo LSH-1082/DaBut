@@ -20,7 +20,7 @@ const Register = () => {
             sendUser(user).then(() => console.log("success")).catch((e) => console.log(e));
             navigate("/main");
         }
-    }, [page.page, navigate]);
+    }, [page.page, user, navigate]);
 
     return (
             <div className="Register">
