@@ -1,17 +1,17 @@
 import "./Main.css";
 import {useEffect, useState} from "react";
-import CheckComponent from "./CheckComponent";
-import {sendUser} from "../api/UserData";
+import CheckComponent from "../component/CheckComponent";
 import {useSelector} from "react-redux";
 import MainFooter from "./MainFooter";
+import api from "../api/api";
+import Cookies from "js-cookie";
 
 const Main = () => {
     const [purpose, setPurpose] = useState("");
-    let user = useSelector(state => state.user);
 
     useEffect(() => {
-        sendUser(user).then(() => console.log("success")).catch((e) => console.log(e));
-    }, [user]);
+        api.defaults.headers.common['Authorization'] = Cookies.get("accessToken");
+    }, []);
 
     const clickPurpose = (value) => {
         if (purpose === value) setPurpose("");

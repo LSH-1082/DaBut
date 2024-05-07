@@ -7,13 +7,17 @@ import RegisterPage2 from "./registerPage/RegisterPage2";
 import RegisterPage5 from "./registerPage/RegisterPage5";
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
+import {sendUser} from "../api/UserData";
 
 const Register = () => {
     const page = useSelector(state => state.page);
+    const user = useSelector(state => state.user);
     const navigate = useNavigate();
+
 
     useEffect(() => {
         if(page.page === 6) {
+            sendUser(user).then(() => console.log("success")).catch((e) => console.log(e));
             navigate("/main");
         }
     }, [page.page, navigate]);

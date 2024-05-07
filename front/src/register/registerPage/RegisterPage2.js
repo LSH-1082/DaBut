@@ -8,10 +8,10 @@ import {setMbti} from "../../store/user";
 
 const RegisterPage2 = () => {
     const [isActive, setIsActive] = useState(false);
-    const [first, setFirst] = useState("");
-    const [second, setSecond] = useState("");
-    const [third, setThird] = useState("");
-    const [fourth, setFourth] = useState("");
+    const [first, setFirst] = useState("n");
+    const [second, setSecond] = useState("o");
+    const [third, setThird] = useState("n");
+    const [fourth, setFourth] = useState("e");
     const dispatch = useDispatch();
     let user = useSelector(state => state.user);
     let username = user.name.slice(1);

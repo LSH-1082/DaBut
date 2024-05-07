@@ -1,7 +1,7 @@
 import "./matchingCheck.css";
 import {useState} from "react";
 import MainFooter from "../main/MainFooter";
-import MatchingPeopleComponent from "./MatchingPeopleComponent";
+import MatchingPeopleComponent from "../component/MatchingPeopleComponent";
 
 const MatchingCheck = () => {
     const [select, setSelect] = useState("");
