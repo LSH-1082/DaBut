@@ -25,7 +25,7 @@ public class UserService {
     private final SnsFrequencyRepository snsFrequencyRepository;
     private final PersonalityRepository personalityRepository;
     private final FaceShapeRepository faceShapeRepository;
-    private final PreferLocationRepository preferLocationRepository;
+    private final LocationRepository LocationRepository;
     private final PreferPlaceRepository preferPlaceRepository;
 
     public void saveUser(UserDTO userDTO) {
@@ -40,14 +40,12 @@ public class UserService {
         UserEntity userEntity = new UserEntity();
         userEntity.setName(userDTO.getName());
 
-//        GenderEntity genderEntity = genderRepository.findByGender(userDTO.getGender()).orElseThrow(() -> new NoSuchElementException("MBTI not found: " + userDTO.getGender()));
-//        userEntity.setGenderEntity(genderEntity);
         var genderEntity = genderRepository.findByGender(userDTO.getGender());
         genderEntity.ifPresent(userEntity::setGenderEntity);
 
         userEntity.setAge(userDTO.getAge());
         userEntity.setProfile(userDTO.getIntro());
-        //userEntity.setKakaoId(userDTO.getKakaoId());
+        userEntity.setKakaoId(userDTO.getKakaoId());
         userEntity.setNickname(userDTO.getNickname());
         userEntity.setSmoking(userDTO.isSmoke());
 
@@ -75,11 +73,11 @@ public class UserService {
         var faceShapeEntity = faceShapeRepository.findByFaceShapeName(userDTO.getFace());
         faceShapeEntity.ifPresent(userEntity::setFaceShapeEntity);
 
-        var preferLocationEntity = preferLocationRepository.findBypreferLocationName(userDTO.getState());
-        preferLocationEntity.ifPresent(userEntity::setPreferLocationEntity);
+        var preferLocationEntity = LocationRepository.findByLocationName(userDTO.getState());
+        preferLocationEntity.ifPresent(userEntity::setLocationEntity);
 
-        var preferPlaceEntity = preferPlaceRepository.findByPreferPlaceName(userDTO.getPreferplace());
-        preferPlaceEntity.ifPresent(userEntity::setPreferPlaceEntity);
+//        var preferPlaceEntity = preferPlaceRepository.findByPreferPlaceName(userDTO.getPreferplace());
+//        preferPlaceEntity.ifPresent(userEntity::setPreferPlaceEntity);
         return userEntity;
     }
 }

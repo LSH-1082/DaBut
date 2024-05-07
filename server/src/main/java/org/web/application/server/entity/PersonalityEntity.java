@@ -15,7 +15,7 @@ import java.util.List;
 public class PersonalityEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long personalityId;
+    private Integer personalityId;
 
     private String personalityName;
 

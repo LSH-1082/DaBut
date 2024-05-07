@@ -17,7 +17,7 @@ public class MatchingFilterEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long matchingFilterId;
 
-    private Integer age;
+    private String age;
 
     private Integer height;
 

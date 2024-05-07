@@ -15,7 +15,7 @@ import java.util.List;
 public class WeightEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long weightId;
+    private Integer weightId;
 
     private String weightName;
 

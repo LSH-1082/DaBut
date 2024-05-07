@@ -15,7 +15,7 @@ import java.util.List;
 public class HeightEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long heightId;
+    private Integer heightId;
 
     private Integer height;
 
