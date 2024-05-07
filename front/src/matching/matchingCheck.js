@@ -4,12 +4,12 @@ import MainFooter from "../main/MainFooter";
 import MatchingPeopleComponent from "../component/MatchingPeopleComponent";
 
 const MatchingCheck = () => {
-    const [select, setSelect] = useState("");
+    const [select, setSelect] = useState("all");
     return (
         <div className="MatchingCheckPage">
             <div className="matchingCheckDiv">
                 <div className="purposeText">
-                    <p className="allPurposeText">전체</p>
+                    <p className={`allPurposeText ${select === "all" ? 'select' : ''}`} onClick={() => setSelect("all")}>전체</p>
                     <div className="allPurposeDiv">
                         <p onClick={() => setSelect("sports")}
                            className={`pText ${select === "sports" ? 'select' : ''}`}>운동/스포츠</p>

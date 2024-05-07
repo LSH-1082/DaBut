@@ -20,7 +20,7 @@
     justify-content: space-between;
 }
 
-.allPurposeText {
+.allPurposeText.select {
     margin-bottom: 0;
     margin-top: 0;
     margin-right: 10px;
@@ -31,6 +31,21 @@
     font-weight: 700;
     line-height: 22px; /* 137.5% */
     letter-spacing: -0.408px;
+    cursor: pointer;
+}
+
+.allPurposeText {
+    color: #939393;
+    margin-bottom: 0;
+    margin-top: 0;
+    margin-right: 10px;
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 22px; /* 146.667% */
+    letter-spacing: -0.408px;
+    cursor: pointer;
 }
 
 .allPurposeDiv {
@@ -40,6 +55,7 @@
     width: 290px;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     overflow-x: auto;
 }
 
