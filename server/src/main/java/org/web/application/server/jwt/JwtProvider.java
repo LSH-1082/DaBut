@@ -24,8 +24,7 @@ public class JwtProvider {
      * @기능: Jwt 생성
      * @작성자: 임재현
      */
-    public String create(String userId)
-    {
+    public String create(String userId) {
         Date expiredDate = Date.from(Instant.now().plus(1, ChronoUnit.HOURS));
         Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
 
@@ -37,17 +36,16 @@ public class JwtProvider {
         return jwt;
     }
 
+
     /**
      * @날짜: 240502
      * @기능: Jwt 검증
      * @작성자: 임재현
      */
-    public String validate(String jwt)
-    {
+    public String validate(String jwt) {
         String subject = null;
         Key key = Keys.hmacShaKeyFor(secretKey.getBytes(StandardCharsets.UTF_8));
-        try
-        {
+        try {
             subject = Jwts.parserBuilder()
                     .setSigningKey(key)
                     .build()
@@ -55,9 +53,7 @@ public class JwtProvider {
                     .getBody()
                     .getSubject();
 
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
