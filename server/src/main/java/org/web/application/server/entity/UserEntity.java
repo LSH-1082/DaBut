@@ -105,10 +105,16 @@ public class UserEntity {
     //찾고싶은 룸메 유형 필터
     @OneToOne(mappedBy = "userEntity")
     private RoommateFilterEntity roommateFilterEntity;
-    //찾고싶은 룸메 유형 필터
+    //카카오 ID 받아오는 값
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "auth_id")
     private AuthEntity authEntity;
 
+    public void addAuthId(AuthEntity build) {
+    }
+
+//    public void addAuthId(AuthEntity authEntity) {
+//        authEntity.add(authEntity);
+//    }
 
 }

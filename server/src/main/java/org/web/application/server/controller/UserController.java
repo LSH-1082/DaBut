@@ -27,10 +27,10 @@ public class UserController {
 //    }
 
     @PostMapping("/info")
-    public ResponseEntity<?> saveUser(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<?> saveUser(@RequestBody UserDTO userDTO, @RequestHeader String token) {
         System.out.println("userDTO = " + userDTO);
-        userService.saveUser(userDTO);
-        matchingFilterService.saveUser(userDTO);
+        userService.saveUser(userDTO, token);
+        matchingFilterService.saveUser(userDTO, token);
         return ResponseEntity.ok().build();
     }
 

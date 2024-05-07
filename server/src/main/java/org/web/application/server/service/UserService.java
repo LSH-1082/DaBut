@@ -28,15 +28,15 @@ public class UserService {
     private final LocationRepository LocationRepository;
     private final PreferPlaceRepository preferPlaceRepository;
 
-    public void saveUser(UserDTO userDTO) {
+    public void saveUser(UserDTO userDTO, String token) {
         //UserDTO를 UserEntity로 변환
-        UserEntity userEntity = toUserEntity(userDTO);
+        UserEntity userEntity = toUserEntity(userDTO, token);
         System.out.println("Saving user: " + userEntity);
         //UserRepository에 UserEntity로 저장
         userRepository.save(userEntity);
     }
 
-    public UserEntity toUserEntity(UserDTO userDTO) {
+    public UserEntity toUserEntity(UserDTO userDTO, String token) {
         UserEntity userEntity = new UserEntity();
         userEntity.setName(userDTO.getName());
 
@@ -76,8 +76,12 @@ public class UserService {
         var preferLocationEntity = LocationRepository.findByLocationName(userDTO.getState());
         preferLocationEntity.ifPresent(userEntity::setLocationEntity);
 
+        //Long authId = userEntity.getAuthEntity().getAuthId();
+
 //        var preferPlaceEntity = preferPlaceRepository.findByPreferPlaceName(userDTO.getPreferplace());
 //        preferPlaceEntity.ifPresent(userEntity::setPreferPlaceEntity);
+
+        userEntity.addAuthId(AuthEntity.builder().build());
         return userEntity;
     }
 }
