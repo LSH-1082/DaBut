@@ -15,7 +15,7 @@ import java.util.List;
 public class HobbyEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long hobbyId;
+    private Integer hobbyId;
 
     private String hobbyName;
 

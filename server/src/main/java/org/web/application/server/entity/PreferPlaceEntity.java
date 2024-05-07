@@ -15,12 +15,12 @@ import java.util.List;
 public class PreferPlaceEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long preferPlaceId;
+    private Integer preferPlaceId;
 
     private String preferPlaceName;
 
     @OneToMany(mappedBy = "preferPlaceEntity", cascade = CascadeType.PERSIST)
     @Builder.Default
     @ToString.Exclude
-    private List<UserEntity> userEntity = new ArrayList<>();
+    private List<PlaceBridgeEntity> placeBridgeEntity = new ArrayList<>();
 }

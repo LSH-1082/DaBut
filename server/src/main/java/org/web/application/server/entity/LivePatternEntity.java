@@ -11,16 +11,16 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "face_shape")
-public class FaceShapeEntity {
+@Table(name = "live_pattern")
+public class LivePatternEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer faceShapeId;
+    private Integer livePatternId;
 
-    private String faceShapeName;
+    private String livePatternName;
 
-    @OneToMany(mappedBy = "faceShapeEntity", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "livePatternEntity", cascade = CascadeType.PERSIST)
     @Builder.Default
     @ToString.Exclude
-    private List<UserEntity> userEntity = new ArrayList<>();
+    private List<RoommateFilterEntity> roommateFilterEntity = new ArrayList<>();
 }
