@@ -1,6 +1,5 @@
 import RegisterFooter from "../registerFooter/RegisterFooter";
 import {useDispatch, useSelector} from "react-redux";
-
 import "./RegisterPage4.css";
 import {setFace, setIntro} from "../../store/user";
 import {useState} from "react";

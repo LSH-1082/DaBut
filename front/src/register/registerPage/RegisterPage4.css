@@ -1,12 +1,16 @@
 .RegisterPage4 {
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
 
+.RegisterPage4TitleDiv {
+}
+
 .selectFaceDiv {
     margin-top: 32px;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
