@@ -1,14 +1,18 @@
 package org.web.application.server.oauth2;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
+import org.web.application.server.entity.AuthEntity;
 import org.web.application.server.jwt.JwtProvider;
+import org.web.application.server.repository.AuthRepository;
 
 import java.io.IOException;
 import java.util.Map;
@@ -18,6 +22,7 @@ import java.util.Map;
 public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     private final JwtProvider jwtProvider;
+    private final AuthRepository authRepository;
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 //        CustomOAuth2User oAuth2User = (CustomOAuth2User) authentication.getPrincipal();
@@ -39,9 +44,15 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         String token = jwtProvider.create(userId);
         System.out.println(userId);
         System.out.println(token);
-//
-        response.sendRedirect("http://localhost:3000/register/" + token);
+
+        if (authRepository.findByKakaoId(Long.valueOf(userId)).isPresent())
+        {
+            response.sendRedirect("http://localhost:3000/main/" + token + "/3600");
+        }
+        else
+        {
+            response.sendRedirect("http://localhost:3000/register/" + token + "/3600");
+        }
 //        response.sendRedirect("http://localhost:3000/auth/oauth-response/3600");
     }
-
 }
