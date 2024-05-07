@@ -15,7 +15,7 @@ import java.util.List;
 public class GenderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long genderId;
+    private Integer genderId;
 
     private String gender;
 

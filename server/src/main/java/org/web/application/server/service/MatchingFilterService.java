@@ -23,7 +23,7 @@ public class MatchingFilterService {
 
     private MatchingFilterEntity toUserEntity(UserDTO userDTO) {
         MatchingFilterEntity matchingFilterEntity = new MatchingFilterEntity();
-        matchingFilterEntity.setAge(userDTO.getAge());
+        matchingFilterEntity.setAge(userDTO.getWantAge());
         matchingFilterEntity.setHeight(userDTO.getWantHeight());
         matchingFilterEntity.setSmoking(userDTO.isWantSmoke());
 

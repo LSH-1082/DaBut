@@ -15,7 +15,7 @@ import java.util.List;
 public class MajorEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long majorId;
+    private Integer majorId;
 
     private String majorName;
 

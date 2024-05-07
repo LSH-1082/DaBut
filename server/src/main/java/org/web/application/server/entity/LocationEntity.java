@@ -11,15 +11,15 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "face_shape")
-public class FaceShapeEntity {
+@Table(name = "location")
+public class LocationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer faceShapeId;
+    private Integer locationId;
 
-    private String faceShapeName;
+    private String locationName;
 
-    @OneToMany(mappedBy = "faceShapeEntity", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "locationEntity", cascade = CascadeType.PERSIST)
     @Builder.Default
     @ToString.Exclude
     private List<UserEntity> userEntity = new ArrayList<>();

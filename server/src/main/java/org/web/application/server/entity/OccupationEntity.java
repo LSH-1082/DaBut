@@ -15,7 +15,7 @@ import java.util.List;
 public class OccupationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long occupationId;
+    private Integer occupationId;
 
     private String occupationName;
 

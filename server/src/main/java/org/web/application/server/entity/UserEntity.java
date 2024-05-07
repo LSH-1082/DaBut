@@ -2,7 +2,6 @@ package org.web.application.server.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.web.application.server.dto.UserDTO;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -22,7 +21,7 @@ public class UserEntity {
     private String name;
     private Integer age;
     //평점
-    private Integer score;
+    private Float score;
     //프로필
     private String profile;
     //룸메 프로필
@@ -37,6 +36,7 @@ public class UserEntity {
     private String role;
     //신고 횟수
     private Integer warning;
+    //240506 임재현 아래 3개 다 지우고 Auth로 옮겨야함
     //토큰용 아이디
     private String account;
     //카카오 이메일
@@ -80,22 +80,35 @@ public class UserEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "face_shape_id")
     private FaceShapeEntity faceShapeEntity;
-    //선호 지역
+    //거주 지역
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "prefer_location")
-    private PreferLocationEntity preferLocationEntity;
-    //선호 장소
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "prefer_place")
-    private PreferPlaceEntity preferPlaceEntity;
+    @JoinColumn(name = "location")
+    private LocationEntity locationEntity;
 
     /*******************************@OneToMany******************************************/
+
+    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.PERSIST)
+    @Builder.Default
+    @ToString.Exclude
+    private List<HobbyBridgeEntity> hobbyBridgeEntity = new ArrayList<>();
+
+    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.PERSIST)
+    @Builder.Default
+    @ToString.Exclude
+    private List<PlaceBridgeEntity> placeBridgeEntity = new ArrayList<>();
 
     /*******************************@OneToOne******************************************/
 
     //찾고싶은 친구 유형 필터
     @OneToOne(mappedBy = "userEntity")
     private MatchingFilterEntity matchingFilterEntity;
+    //찾고싶은 룸메 유형 필터
+    @OneToOne(mappedBy = "userEntity")
+    private RoommateFilterEntity roommateFilterEntity;
+    //찾고싶은 룸메 유형 필터
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "auth_id")
+    private AuthEntity authEntity;
 
 
 }

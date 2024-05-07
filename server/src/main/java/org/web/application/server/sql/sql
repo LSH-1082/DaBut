@@ -6,7 +6,6 @@ VALUES ('M'),('F');
 INSERT INTO face_shape (face_shape_name)
 VALUES ('dog'),('cat'),('deer'),('rabbit'),('frog'),('hamster'),('fox'),('bear'),('dino');
 
-140-200
 INSERT INTO height(height)
 VALUES (140),(145),(150),(155),(160),(165),(170),(175),(180),(185),(190),(195),(200);
 
@@ -14,7 +13,7 @@ INSERT INTO mbti(mbti_name)
 VALUES('ISTJ'),('ISTP'),('ISFJ'),('ISFP'),('INTJ'),('INTP'),('INFJ'),('INFP'),('ESTJ'),('ESTP'),('ESFJ'),('ESFP'),('ENTJ'),('ENTP'),('ENFJ'),('ENFP'),('NONE');
 
 INSERT INTO occupation(occupation_name)
-VALUES ('stuendent'),('graduate'),('salary'),('free'),('house'),('none');
+VALUES ('student'),('graduate'),('salary'),('free'),('house'),('none');
 
 INSERT INTO personality(personality_name)
 VALUES ('activity'),('enthusiastic'),('positive'),('clean'),('timid'),('lively');
@@ -23,13 +22,16 @@ INSERT INTO sns_frequency(sns_frequency_level)
 VALUES (0),(1),(2),(3),(4);
 
 INSERT INTO weight(weight_name)
-VALUES (),(),(),(),(),();
+VALUES ('마른체형'),('통통한체형'),('보통체형');
 
-INSERT INTO purpose()
-VALUES (''),(''),(''),(''),(''),(''),(''),(''),(''),(''),(''),(''),(''),(''),(''),('');
+INSERT INTO location(location_name)
+VALUES ('서울/인천/경기도'),('강원도'),('충청남도/대전'),('충청북도'),('경상북도/대구'),('경상남도/울산/부산'),('전라북도'),('전라남도/광주'),('제주도');
 
 INSERT INTO hobby(hobby_name)
-VALUES();
+VALUES ('운동'),('음식'),('동물'),('공부'),('음악'),('게임'),('애니'),('영화'),('드라마'),('캠핑'),('레저'),('IT'),('독서'),('그림'),('사진'),('춤');
 
 INSERT INTO major(major_name)
-VALUES();
+VALUES ('공대'),('자연대'),('예체능'),('인문대'),('사범대'),('의대');
+
+INSERT INTO prefer_place(prefer_place_name)
+VALUES ('도서관'),('카페'),('영화관'),('노래방'),('헬스장'),('피시방'),('해외'),('공원');

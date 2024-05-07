@@ -15,7 +15,7 @@ import java.util.List;
 public class SnsFrequencyEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long snsFrequencyId;
+    private Integer snsFrequencyId;
 
     private Integer snsFrequencyLevel;
 
