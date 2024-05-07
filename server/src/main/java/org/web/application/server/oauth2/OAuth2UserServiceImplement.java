@@ -50,6 +50,12 @@ public class OAuth2UserServiceImplement extends DefaultOAuth2UserService {
             System.out.println("userId : "+ userId);
             System.out.println("email : " + userEmail);
 
+            if(authRepository.findByKakaoId(userId).isPresent())
+            {
+                System.out.println("이미 존재하는 회원입니다.");
+                return oAuth2User;
+            }
+
             authEntity = AuthEntity.builder()
                     .kakaoId(userId)
                     .userEmail(userEmail)
