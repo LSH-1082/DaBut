@@ -133,6 +133,7 @@
 
 
 .disable {
+    position: relative;
     z-index: 1;
     display: flex;
     flex-direction: column;
@@ -154,6 +155,18 @@
     letter-spacing: -0.408px;
 }
 
+.petTextPurpose {
+    margin: 0;
+    color: #7B7A7A;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 18px; /* 150% */
+    letter-spacing: -0.408px;
+    padding-top: 43px;
+}
+
 .select {
     margin: 0;
     color: #EB604A;
@@ -163,6 +176,18 @@
     font-weight: 600;
     line-height: 18px; /* 150% */
     letter-spacing: -0.408px;
+}
+
+.petSelect {
+    margin: 0;
+    color: #EB604A;
+    font-family: Inter;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 18px; /* 150% */
+    letter-spacing: -0.408px;
+    padding-top: 43px;
 }
 
 .checked.sports {
@@ -307,4 +332,18 @@
     left: 45px;
     top: -10px;
     z-index: 10;
+}
+
+.purposeDog {
+    position: absolute;
+    left: 25px;
+    top: 15px;
+    z-index: 10;
+}
+
+.purposeCat {
+    position: absolute;
+    left: 10px;
+    top: 0;
+    z-index: 9;
 }
