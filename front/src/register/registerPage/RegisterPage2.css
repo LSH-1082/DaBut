@@ -166,7 +166,8 @@
 }
 
 .mbtiButton {
-    padding: 25px;
+    width: 60px;
+    height: 60px;
     border-radius: 10px;
     border: none;
     background: #fff;
@@ -196,7 +197,8 @@
 }
 
 .mbtiButton.active{
-    padding: 25px;
+    width: 60px;
+    height: 60px;
     border-radius: 10px;
     border: none;
     background: #FFFFFF;
@@ -227,7 +229,8 @@
 }
 
 .selectedMbtiButton {
-    padding: 25px;
+    width: 60px;
+    height: 60px;
     border-radius: 10px;
     border: none;
     background: #EB604A;
