@@ -8,10 +8,6 @@ import Cookies from "js-cookie";
 const Main = () => {
     const [purpose, setPurpose] = useState("");
 
-    useEffect(() => {
-        api.defaults.headers.common['Authorization'] = Cookies.get("accessToken");
-    }, []);
-
     const clickPurpose = (value) => {
         if (purpose === value) setPurpose("");
         else setPurpose(value);

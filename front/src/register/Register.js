@@ -8,6 +8,7 @@ import RegisterPage5 from "./registerPage/RegisterPage5";
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import {sendUser} from "../api/UserData";
+import Cookies from "js-cookie";
 
 const Register = () => {
     const page = useSelector(state => state.page);
@@ -17,7 +18,7 @@ const Register = () => {
 
     useEffect(() => {
         if(page.page === 6) {
-            sendUser(user).then(() => console.log("success")).catch((e) => console.log(e));
+            sendUser(user, Cookies.get("accessToken")).then(() => console.log("success")).catch((e) => console.log(e));
             navigate("/main");
         }
     }, [page.page, user, navigate]);

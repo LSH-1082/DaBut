@@ -24,56 +24,20 @@ public class UserService {
     private final PreferPlaceRepository preferPlaceRepository;
     private final MatchingFilterRepository matchingFilterRepository;
     private final LocationRepository locationRepository;
+    private final AuthRepository authRepository;
     private final JwtProvider jwtProvider;
 
-    public void saveUser(UserDTO userDTO) {
+    public void saveUser(UserDTO userDTO, String token) {
         //UserDTO를 UserEntity로 변환
-        UserEntity userEntity = toUserEntity(userDTO);
+        UserEntity userEntity = toUserEntity(userDTO, token);
         System.out.println("Saving user: " + userEntity);
         //UserRepository에 UserEntity로 저장
         userRepository.save(userEntity);
     }
 
-    public UserEntity toUserEntity(UserDTO userDTO) {
-//        UserEntity userEntity = new UserEntity();
-//
-//        userEntity.setName(userDTO.getName());
-//
-//        var genderEntity = genderRepository.findByGender(userDTO.getGender());
-//        genderEntity.ifPresent(userEntity::setGenderEntity);
-//
-//        userEntity.setAge(userDTO.getAge());
-//        userEntity.setProfile(userDTO.getIntro());
-//        userEntity.setKakaoId(userDTO.getKakaoId());
-//        userEntity.setNickname(userDTO.getNickname());
-//        userEntity.setSmoking(userDTO.isSmoke());
-//
-//        var heightEntity = heightRepository.findByHeight(userDTO.getHeight());
-//        heightEntity.ifPresent(userEntity::setHeightEntity);
-//
-//        var occupationEntity = occupationRepository.findByOccupationName(userDTO.getOccupation());
-//        occupationEntity.ifPresent(userEntity::setOccupationEntity);
-//
-//        var majorEntity = majorRepository.findByMajorName(userDTO.getMajor());
-//        majorEntity.ifPresent(userEntity::setMajorEntity);
-//
-//        var weightEntity = weightRepository.findByWeightName(userDTO.getWeight());
-//        weightEntity.ifPresent(userEntity::setWeightEntity);
-//
-//        var mbtiEntity = mbtiRepository.findByMbtiName(userDTO.getMbti());
-//        mbtiEntity.ifPresent(userEntity::setMbtiEntity);
-//
-//        var snsFrequencyEntity = snsFrequencyRepository.findBySnsFrequencyLevel(userDTO.getFrequency());
-//        snsFrequencyEntity.ifPresent(userEntity::setSnsFrequencyEntity);
-//
-//        var personalityEntity = personalityRepository.findByPersonalityName(userDTO.getPersonality());
-//        personalityEntity.ifPresent(userEntity::setPersonalityEntity);
-//
-//        var faceShapeEntity = faceShapeRepository.findByFaceShapeName(userDTO.getFace());
-//        faceShapeEntity.ifPresent(userEntity::setFaceShapeEntity);
-//
-//        var preferLocationEntity = LocationRepository.findByLocationName(userDTO.getState());
-//        preferLocationEntity.ifPresent(userEntity::setLocationEntity);
+    public UserEntity toUserEntity(UserDTO userDTO, String token) {
+
+        var kakaoId = jwtProvider.validate(token);
 
         UserEntity userEntity = UserEntity.builder()
                 .name(userDTO.getName())
@@ -92,9 +56,10 @@ public class UserService {
                 .smoking(userDTO.isSmoke())
                 .locationEntity(locationRepository.findByLocationName(userDTO.getState()).orElse(null))
                 .weightEntity(weightRepository.findByWeightName(userDTO.getWeight()).orElse(null))
+                .authEntity(authRepository.findByKakaoId(Long.valueOf(kakaoId)).get())
                 .build();
 
-        //jwtProvider.validate(token);
+        jwtProvider.validate(token);
 
         userRepository.save(userEntity);
 
@@ -112,9 +77,6 @@ public class UserService {
 
         //matchingFilterRepository에 matchingFilterEntity 저장
         matchingFilterRepository.save(matchingFilterEntity);
-
-        // UserEntity와의 관계를 설정
-        userEntity.addMatchingFilter(matchingFilterEntity, userEntity);
 
         return userEntity;
     }
