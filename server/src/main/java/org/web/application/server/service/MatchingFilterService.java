@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.web.application.server.dto.UserDTO;
 import org.web.application.server.entity.*;
+import org.web.application.server.jwt.JwtProvider;
 import org.web.application.server.repository.*;
 
 @Service
