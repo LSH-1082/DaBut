@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import org.web.application.server.entity.AuthEntity;
 import org.web.application.server.jwt.JwtProvider;
 import org.web.application.server.repository.AuthRepository;
+import org.web.application.server.repository.UserRepository;
 
 import java.io.IOException;
 import java.util.Map;
@@ -22,6 +23,7 @@ import java.util.Map;
 public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     private final JwtProvider jwtProvider;
+    private final UserRepository userRepository;
     private final AuthRepository authRepository;
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
@@ -45,14 +47,37 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         System.out.println(userId);
         System.out.println(token);
 
-        if (authRepository.findByKakaoId(Long.valueOf(userId)).isPresent())
-        {
-            response.sendRedirect("http://localhost:3000/main/" + token + "/3600");
+        Cookie cookie = new Cookie("accessToken", token);
+        cookie.setMaxAge(3600);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+
+
+//        if (userRepository.findByAuthEntity(authRepository.findByKakaoId(Long.valueOf(userId)).get()).isPresent())
+//        {
+//            System.out.println(authRepository.findByKakaoId(Long.valueOf(userId)).get());
+//            System.out.println(userRepository.findByAuthEntity(authRepository.findByKakaoId(Long.valueOf(userId)).get()));
+//            response.sendRedirect("http://localhost:3000/main/");
+//        }
+//        else
+//        {
+//            System.out.println("회원가입 페이지로");
+//            System.out.println("authRepo : " + authRepository.findByKakaoId(Long.valueOf(userId)).get().getUserEntity());
+//            System.out.println("userRepo : " + userRepository.findByAuthEntity(authRepository.findByKakaoId(Long.valueOf(userId)).get()));
+//            response.sendRedirect("http://localhost:3000/register/");
+//        }
+
+        if (authRepository.findByKakaoId(Long.valueOf(userId)).get().getUserEntity() != null) {
+            System.out.println(authRepository.findByKakaoId(Long.valueOf(userId)).get());
+            System.out.println(userRepository.findByAuthEntity(authRepository.findByKakaoId(Long.valueOf(userId)).get()));
+            response.sendRedirect("http://localhost:3000/main/");
+        } else {
+            System.out.println("회원가입 페이지로");
+            System.out.println("authRepo : " + authRepository.findByKakaoId(Long.valueOf(userId)).get().getUserEntity());
+            System.out.println("userRepo : " + userRepository.findByAuthEntity(authRepository.findByKakaoId(Long.valueOf(userId)).get()));
+            response.sendRedirect("http://localhost:3000/register/");
         }
-        else
-        {
-            response.sendRedirect("http://localhost:3000/register/" + token + "/3600");
-        }
+
 //        response.sendRedirect("http://localhost:3000/auth/oauth-response/3600");
     }
 }
