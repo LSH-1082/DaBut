@@ -1,10 +1,7 @@
 package org.web.application.server.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @Table(name = "matching_filter")
@@ -24,6 +21,7 @@ public class MatchingFilterEntity {
     private Boolean smoking;
 
     //referencedColumnName????
+    @ToString.Exclude
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private UserEntity userEntity;
@@ -35,4 +33,5 @@ public class MatchingFilterEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "occupation_id")
     private OccupationEntity occupationEntity;
+
 }

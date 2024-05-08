@@ -100,6 +100,7 @@ public class UserEntity {
     /*******************************@OneToOne******************************************/
 
     //찾고싶은 친구 유형 필터
+    @ToString.Exclude
     @OneToOne(mappedBy = "userEntity")
     private MatchingFilterEntity matchingFilterEntity;
     //찾고싶은 룸메 유형 필터
@@ -110,11 +111,8 @@ public class UserEntity {
     @JoinColumn(name = "auth_id")
     private AuthEntity authEntity;
 
-    public void addAuthId(AuthEntity build) {
+    public void addMatchingFilter(MatchingFilterEntity matchingFilterEntity, UserEntity userEntity)  {
+        matchingFilterEntity.setUserEntity(userEntity);
+        userEntity.setMatchingFilterEntity(matchingFilterEntity);
     }
-
-//    public void addAuthId(AuthEntity authEntity) {
-//        authEntity.add(authEntity);
-//    }
-
 }
