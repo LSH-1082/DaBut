@@ -18,9 +18,10 @@ public class UserController {
 
 
     @PostMapping("/info")
-    public ResponseEntity<?> saveUser(@RequestBody UserDTO userDTO) {
+    public ResponseEntity<?> saveUser(@RequestBody UserDTO userDTO, @RequestHeader(name = "Authorization") String token) {
         System.out.println("userDTO = " + userDTO);
-        userService.saveUser(userDTO);
+        System.out.println("token = " + token);
+        userService.saveUser(userDTO, token);
         return ResponseEntity.ok().build();
     }
 

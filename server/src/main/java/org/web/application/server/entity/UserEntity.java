@@ -111,8 +111,4 @@ public class UserEntity {
     @JoinColumn(name = "auth_id")
     private AuthEntity authEntity;
 
-    public void addMatchingFilter(MatchingFilterEntity matchingFilterEntity, UserEntity userEntity)  {
-        matchingFilterEntity.setUserEntity(userEntity);
-        userEntity.setMatchingFilterEntity(matchingFilterEntity);
-    }
 }
