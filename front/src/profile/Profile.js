@@ -1,16 +1,20 @@
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import "./Profile.css";
 import MainFooter from "../main/MainFooter";
 import {useNavigate} from "react-router-dom";
+import {setMainPage} from "../store/mainPage";
+import Cookies from "js-cookie";
+import {test} from "../api/UserData";
 
 const Profile = () => {
-    let user = useSelector(state => state.user);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log(user);
-    }, [user]);
+        dispatch(setMainPage("profilePage"));
+        test(Cookies.get("accessToken")).then((res) => console.log(res));
+    }, []);
 
     return (
         <div className="MyPage">
@@ -74,7 +78,7 @@ const Profile = () => {
                         <p className="listText">내 정보 수정</p>
                         <p className="listText">친구 정보 수정</p>
                         <p className="listText" onClick={() => navigate("/roommate")}>룸메이트 정보 수정</p>
-                        <p className="listText">매칭 내역 확인하기</p>
+                        <p className="listText" onClick={() => navigate("/matchingCheck")}>매칭 내역 확인하기</p>
                     </div>
                 </div>
             </div>
