@@ -1,0 +1,123 @@
+.RegisterPage6 {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.registerContent {
+    margin-bottom: 100px;
+    width: 100%;
+    overflow-y: auto; /* 세로 스크롤바를 표시합니다. */
+}
+
+.wantGender, .wantAge, .wantHeight, .wantSmoke{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.wantGender p, .wantAge p, .wantHeight p, .wantSmoke p{
+    color: #A0A0A0;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.wantGenderButtonDiv, .wantSmokeDiv {
+    display: flex;
+    justify-content: space-between;
+    width: 200px;
+}
+
+.wantDiv{
+    width: 327px;
+    margin-left: 32px;
+}
+
+.wantGenderButton {
+    padding: 10px 30px;
+    color: #A0A0A0;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    background-color: rgba(0,0,0,0);
+    border-radius: 30px;
+    border: 2px solid #AEAEAE;
+    cursor: pointer;
+}
+
+.wantGenderButtonActive {
+    color: white;
+    padding: 10px 30px;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    background-color: #EB604A;
+    border-radius: 30px;
+    border: 2px solid #EB604A;
+    cursor: pointer;
+}
+
+.wantSmokeButton{
+    color: #A0A0A0;
+    padding: 10px 20px;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    background-color: rgba(0,0,0,0);
+    border-radius: 30px;
+    border: 2px solid #AEAEAE;
+    cursor: pointer;
+}
+
+.wantSmokeButtonActive {
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    background-color: #EB604A;
+    border-radius: 30px;
+    border: 2px solid #EB604A;
+    cursor: pointer;
+}
+
+.wantOccupation {
+    margin-top: 60px;
+    margin-bottom: 18px;
+    color: #A0A0A0;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.wantHeightDiv {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    justify-content: center;
+}
+
+.wantHeightDiv p{
+    margin-top: 10px;
+    margin-bottom: 0px;
+    text-align: center;
+}

@@ -1,120 +1,107 @@
 import RegisterFooter from "../registerFooter/RegisterFooter";
+import {useDispatch, useSelector} from "react-redux";
 import "./RegisterPage5.css";
-import {useSelector, useDispatch} from "react-redux";
+import {setFace, setIntro} from "../../store/user";
 import {useState} from "react";
-import {setWantGender, setWantHeight, setWantOccupation, setWantSmoke} from "../../store/user";
-import WantAgeSelect from "../select/WantAgeSelect";
-import SelectRange from "../range/SelectRange";
+import DogIconComponent from "../../component/DogIconComponent";
+import CatIconComponent from "../../component/CatIconComponent";
+import DeerIconComponent from "../../component/DeerIconComponent";
+import RabbitIconComponent from "../../component/RabbitIconComponent";
+import FrogIconComponent from "../../component/FrogIconComponent";
+import HamsterIconComponent from "../../component/HamsterIconComponent";
+import FoxIconComponent from "../../component/FoxIconComponent";
+import BearIconComponent from "../../component/BearIconComponent";
+import DinoIconComponent from "../../component/DinoIconComponent";
 
 const RegisterPage5 = () => {
     let user = useSelector(state => state.user);
-    let dispatch = useDispatch();
+    let username = user.name.slice(1);
+    const dispatch = useDispatch();
+    const [animal, setAnimal] = useState("");
 
-    const [gender, setGender] = useState("");
-    const [smoke, setSmoke] = useState("");
-    const [height, setHeight] = useState(170);
-
-    const changeHeight = (value) => {
-        setHeight(value[0]);
-        dispatch(setWantHeight(value[0]));
-    }
-
-    const clickGender = (value) => {
-        setGender(value);
-        if(value === "M") dispatch(setWantGender("M"));
-        else dispatch(setWantGender("F"));
+    const clickFace = (face) => {
+        dispatch(setFace(face));
+        setAnimal(face);
     }
 
     return (
         <div className="RegisterPage5">
-            <div className="registerContent">
-                <div className="registerTextDiv">
-                    <p className="registerText">만나고싶은 친구의</p>
-                    <p className="registerText">정보를 입력해주세요.</p>
-                    <p className="registerSmallText">어떤 친구를 만나고 싶으신가요🤔</p>
+            <div className="registerPage5TitleDiv">
+                <div className="registerPage5Div">
+                    <div className="registerPage4Title">
+                        <p className="username">{username}</p>
+                        <p className="nameTitle">님을 표현해주세요.</p>
+                    </div>
+                    <div className="smallTextDiv">
+                        <p className="register3SmallText">이제 거의 다왔어요 😊️</p>
+                    </div>
                 </div>
-                <div className="wantDiv">
-                    <div className="wantGender">
-                        <p>성별은</p>
-                        <div className="wantGenderButtonDiv">
-                            <button className={gender === "M" ? "wantGenderButtonActive" : "wantGenderButton"}
-                                    onClick={() => clickGender("M")}>남성
-                            </button>
-                            <button className={gender === "F" ? "wantGenderButtonActive" : "wantGenderButton"}
-                                    onClick={() => clickGender("F")}>여성
-                            </button>
+                <div className="selectFaceDiv">
+                    <div className="firstFace">
+                        <div className={animal === "dog" ? "selectedFaceDiv" : "animal"} onClick={() => {
+                            clickFace("dog")
+                        }}>
+                            <DogIconComponent width={48} height={48} animal={animal}/>
+                            <p className={animal === "dog" ? "selectedFace" : "animalP"}>강아지</p>
+                        </div>
+                        <div className={animal === "cat" ? "selectedFaceDiv" : "animal"} onClick={() => {
+                            clickFace("cat")
+                        }}>
+                            <CatIconComponent width={48} height={48} animal={animal}/>
+                            <p className={animal === "cat" ? "selectedFace" : "animalP"}>고양이</p>
+                        </div>
+                        <div className={animal === "deer" ? "selectedFaceDiv" : "animal"} onClick={() => {
+                            clickFace("deer")
+                        }}>
+                            <DeerIconComponent width={48} height={48} animal={animal}/>
+                            <p className={animal === "deer" ? "selectedFace" : "animalP"}>사슴</p>
                         </div>
                     </div>
-                    <div className="wantAge">
-                        <p>나이는</p>
-                        <div className="wantAgeSelectDiv">
-                            <WantAgeSelect/>
+                    <div className="secondFace">
+                        <div className={animal === "rabbit" ? "selectedFaceDiv" : "animal"} onClick={() => {
+                            clickFace("rabbit")
+                        }}>
+                            <RabbitIconComponent width={45} height={44} animal={animal}/>
+                            <p className={animal === "rabbit" ? "selectedRabbit" : "rabbitP"}>토끼</p>
+                        </div>
+                        <div className={animal === "frog" ? "selectedFaceDiv" : "animal"} onClick={() => {
+                            clickFace("frog")
+                        }}>
+                            <FrogIconComponent width={44} height={36} animal={animal}/>
+                            <p className={animal === "frog" ? "selectedFrog" : "frogP"}>개구리</p>
+                        </div>
+                        <div className={animal === "hamster" ? "selectedFaceDiv" : "animal"} onClick={() => {
+                            clickFace("hamster")
+                        }}>
+                            <HamsterIconComponent width={36} height={35} animal={animal}/>
+                            <p className={animal === "hamster" ? "selectedFrog" : "hamsterP"}>햄스터</p>
                         </div>
                     </div>
-                    <div className="wantHeight">
-                        <p>키는</p>
-                        <div className="wantHeightDiv">
-                            <SelectRange min={140} max={200} step={5} values={[height]} onChange={(value) => {
-                                changeHeight(value)
-                            }}/>
-                            <p>{height}cm</p>
+                    <div className="thirdFace">
+                        <div className={animal === "fox" ? "selectedFaceDiv" : "animal"} onClick={() => {
+                            clickFace("fox")
+                        }}>
+                            <FoxIconComponent width={38} height={38} animal={animal}/>
+                            <p className={animal === "fox" ? "selectedFox" : "foxP"}>여우</p>
+                        </div>
+                        <div className={animal === "bear" ? "selectedFaceDiv" : "animal"} onClick={() => {
+                            clickFace("bear")
+                        }}>
+                            <BearIconComponent width={44} height={44} animal={animal}/>
+                            <p className={animal === "bear" ? "selectedFace" : "animalP"}>곰</p>
+                        </div>
+                        <div className={animal === "dino" ? "selectedFaceDiv" : "animal"} onClick={() => {
+                            clickFace("dino")
+                        }}>
+                            <DinoIconComponent width={40} height={34} animal={animal}/>
+                            <p className={animal === "dino" ? "selectedDino" : "dinoP"}>공룡</p>
                         </div>
                     </div>
-                    <div className="wantSmoke">
-                        <p>흡연유무</p>
-                        <div className="wantSmokeDiv">
-                            <button className={smoke === "F" ? "wantSmokeButtonActive" : "wantSmokeButton"}
-                                    onClick={() => {setSmoke("F"); dispatch(setWantSmoke(false));}}>안펴!
-                            </button>
-                            <button className={smoke === "T" ? "wantSmokeButtonActive" : "wantSmokeButton"}
-                                    onClick={() => {setSmoke("T"); dispatch(setWantSmoke(true));}}>흡연자야!
-                            </button>
-                        </div>
+                    <div className="textInputDiv">
+                        <textarea className="inputIntro" value={user.intro} onChange={(e) => {dispatch(setIntro(e.target.value))}} placeholder="자기소개를 입력해주세요."></textarea>
                     </div>
-                    <div className="occupationDiv">
-                        <p className="wantOccupation">선호하는 직업은 무엇인가요?</p>
-                        <div className="selectOccupation">
-                            <div className="occupation1">
-                                <button
-                                    className={user.wantOccupation === "student" ? "selectedThreeOccupation" : "three"}
-                                    onClick={() => {
-                                        dispatch(setWantOccupation("student"));
-                                    }}>대학생
-                                </button>
-                                <button
-                                    className={user.wantOccupation === "graduate" ? "selectedFourOccupation" : "four"}
-                                    onClick={() => {
-                                        dispatch(setWantOccupation("graduate"));
-                                    }}>대학원생
-                                </button>
-                                <button
-                                    className={user.wantOccupation.wantOccupation === "salary" ? "selectedThreeOccupation" : "three"}
-                                    onClick={() => {
-                                        dispatch(setWantOccupation({wantOccupation: "salary"}));
-                                    }}>직장인
-                                </button>
-                            </div>
-                            <div className="occupation2">
-                                <button
-                                    className={user.wantOccupation === "free" ? "selectedFourOccupation" : "four"}
-                                    onClick={() => {
-                                        dispatch(setWantOccupation("free"));
-                                    }}>프리랜서
-                                </button>
-                                <button
-                                    className={user.wantOccupation === "house" ? "selectedTwoOccupation" : "two"}
-                                    onClick={() => {
-                                        dispatch(setWantOccupation("house"));
-                                    }}>주부
-                                </button>
-                                <button
-                                    className={user.wantOccupation === "none" ? "selectedTwoOccupation" : "two"}
-                                    onClick={() => {
-                                        dispatch(setWantOccupation("none"));
-                                    }}>무직
-                                </button>
-                            </div>
-                        </div>
+                    <div className="inputSmallTextDiv">
+                        <p className="inputSmallText">본인이 쓴 글은 모두에게 공개됩니다 :)</p>
                     </div>
                 </div>
             </div>
@@ -122,4 +109,5 @@ const RegisterPage5 = () => {
         </div>
     );
 }
+
 export default RegisterPage5;
