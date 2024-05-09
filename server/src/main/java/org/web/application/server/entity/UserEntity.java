@@ -3,7 +3,6 @@ package org.web.application.server.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,28 +20,22 @@ public class UserEntity {
     private String name;
     private Integer age;
     //평점
-    private Float score;
+    @Builder.Default
+    private Float score = 0f;
     //프로필
     private String profile;
     //룸메 프로필
-    private String roomProfile;
+    @Builder.Default
+    private String roomProfile = "default.none";
     //카카오 아이디
     private String kakaoId;
     //흡연여부
     private Boolean smoking;
     //닉네임
     private String nickname;
-    //역할 부여
-    private String role;
     //신고 횟수
-    private Integer warning;
-    //240506 임재현 아래 3개 다 지우고 Auth로 옮겨야함
-    //토큰용 아이디
-    private String account;
-    //카카오 이메일
-    private String kakaoEmail;
-    //가입날짜
-    private LocalDateTime registerDate;
+    @Builder.Default
+    private Integer warning = 0;
     /*******************************ManyToOne******************************************/
     //성별
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

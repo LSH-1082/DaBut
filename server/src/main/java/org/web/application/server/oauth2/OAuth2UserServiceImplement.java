@@ -57,6 +57,7 @@ public class OAuth2UserServiceImplement extends DefaultOAuth2UserService {
             }
 
             authEntity = AuthEntity.builder()
+                    .role("ROLE_USER")
                     .kakaoId(userId)
                     .userEmail(userEmail)
                     .connectedAt(connectedAt).build();

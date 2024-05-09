@@ -12,8 +12,6 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
-    UserEntity findByAccount(String userId);
-
 //    @Query("SELECT u FROM UserEntity u JOIN u.authEntity a WHERE a.kakaoId = :kakaoId ")
 //    @Query("SELECT u FROM UserEntity u WHERE u.authEntity.kakaoId = :kakaoId")
     Optional<UserEntity> findByAuthEntity(AuthEntity auth);

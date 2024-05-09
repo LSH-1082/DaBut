@@ -17,6 +17,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 import org.web.application.server.entity.AuthEntity;
 import org.web.application.server.entity.UserEntity;
+import org.web.application.server.repository.AuthRepository;
 import org.web.application.server.repository.UserRepository;
 
 import java.io.IOException;
@@ -29,6 +30,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtProvider jwtProvider;
     private final UserRepository userRepository;
+    private final AuthRepository authRepository;
 
     /**
      * @날짜: 240502
@@ -54,8 +56,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 return;
             }
 
-            UserEntity userEntity = userRepository.findByAccount(userId);
-            String role = userEntity.getRole(); // role : ROLE_USER, ROLE_ADMIN
+            System.out.println("userEntity 저장");
+            AuthEntity authEntity = authRepository.findByKakaoId(Long.valueOf(userId)).get();
+            System.out.println("@@@ userEntity : " + authEntity);
+            String role = authEntity.getRole(); // role : ROLE_USER, ROLE_ADMIN
 
             //ROLE_DEVELOPER, ROLE_BOSS같은 역할 생성
             List<GrantedAuthority> authorities = new ArrayList<>();

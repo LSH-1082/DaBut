@@ -23,6 +23,8 @@ public class AuthEntity {
 
     private String connectedAt;
 
+    private String role;
+
     @OneToOne(mappedBy = "authEntity")
     private UserEntity userEntity;
 }
