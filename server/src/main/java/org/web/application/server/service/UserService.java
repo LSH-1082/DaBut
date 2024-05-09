@@ -1,5 +1,6 @@
 package org.web.application.server.service;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.web.application.server.dto.UserDTO;

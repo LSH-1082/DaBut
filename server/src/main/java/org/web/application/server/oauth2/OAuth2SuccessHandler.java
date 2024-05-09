@@ -4,6 +4,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
@@ -11,12 +12,15 @@ import org.springframework.security.oauth2.core.user.DefaultOAuth2User;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 import org.web.application.server.entity.AuthEntity;
+import org.web.application.server.entity.UserEntity;
 import org.web.application.server.jwt.JwtProvider;
 import org.web.application.server.repository.AuthRepository;
 import org.web.application.server.repository.UserRepository;
 
 import java.io.IOException;
 import java.util.Map;
+import java.util.Optional;
+import java.util.OptionalInt;
 
 @Component
 @RequiredArgsConstructor
@@ -68,16 +72,14 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 //        }
 
         if (authRepository.findByKakaoId(Long.valueOf(userId)).get().getUserEntity() != null) {
-            System.out.println(authRepository.findByKakaoId(Long.valueOf(userId)).get());
-            System.out.println(userRepository.findByAuthEntity(authRepository.findByKakaoId(Long.valueOf(userId)).get()));
+//            System.out.println(authRepository.findByKakaoId(Long.valueOf(userId)).get());
+//            System.out.println(userRepository.findByAuthEntity(authRepository.findByKakaoId(Long.valueOf(userId)).get()));
             response.sendRedirect("http://localhost:3000/main/");
         } else {
             System.out.println("회원가입 페이지로");
-            System.out.println("authRepo : " + authRepository.findByKakaoId(Long.valueOf(userId)).get().getUserEntity());
-            System.out.println("userRepo : " + userRepository.findByAuthEntity(authRepository.findByKakaoId(Long.valueOf(userId)).get()));
+//            System.out.println("authRepo : " + authRepository.findByKakaoId(Long.valueOf(userId)).get().getUserEntity());
+//            System.out.println("userRepo : " + userRepository.findByAuthEntity(authRepository.findByKakaoId(Long.valueOf(userId)).get()));
             response.sendRedirect("http://localhost:3000/register/");
         }
-
-//        response.sendRedirect("http://localhost:3000/auth/oauth-response/3600");
     }
 }
