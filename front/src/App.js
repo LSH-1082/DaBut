@@ -6,6 +6,7 @@ import Register from "./register/Register";
 import Profile from "./profile/Profile";
 import Alarm from "./alarm/alarm";
 import MatchingCheck from "./matching/matchingCheck";
+import RoommatePage from "./roommate/RoommatePage";
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
                         <Route path="/list" element={<MatchingCheck/>}></Route>
                         <Route path="/alarm" element={<Alarm/>}></Route>
                         <Route path="/profile" element={<Profile/>}></Route>
+                        <Route path="/roommate" element={<RoommatePage/>}></Route>
                         {/* 상단에 위치하는 라우트들의 규칙을 모두 확인, 일치하는 라우트가 없는경우 처리 */}
                     </Routes>
                 </BrowserRouter>

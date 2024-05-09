@@ -3,25 +3,25 @@ import RegisterFooter from "../registerFooter/RegisterFooter";
 import "./RegisterPage2.css";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
-import StateSelect from "../select/StateSelect";
+import StateSelect from "../../component/select/StateSelect";
 import {setMbti} from "../../store/user";
 
 const RegisterPage2 = () => {
     const [isActive, setIsActive] = useState(false);
-    const [first, setFirst] = useState("n");
-    const [second, setSecond] = useState("o");
-    const [third, setThird] = useState("n");
-    const [fourth, setFourth] = useState("e");
+    const [first, setFirst] = useState("N");
+    const [second, setSecond] = useState("O");
+    const [third, setThird] = useState("N");
+    const [fourth, setFourth] = useState("E");
     const dispatch = useDispatch();
     let user = useSelector(state => state.user);
     let username = user.name.slice(1);
 
     const clickNoButton = () => {
         setIsActive(false);
-        setFirst("n");
-        setSecond("o");
-        setThird("n");
-        setFourth("e");
+        setFirst("N");
+        setSecond("O");
+        setThird("N");
+        setFourth("E");
     }
 
     useEffect(() => {

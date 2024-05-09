@@ -2,9 +2,11 @@ import {useSelector} from "react-redux";
 import {useEffect} from "react";
 import "./Profile.css";
 import MainFooter from "../main/MainFooter";
+import {useNavigate} from "react-router-dom";
 
 const Profile = () => {
     let user = useSelector(state => state.user);
+    const navigate = useNavigate();
 
     useEffect(() => {
         console.log(user);
@@ -71,7 +73,7 @@ const Profile = () => {
                         <p className="smallText">내 관리</p>
                         <p className="listText">내 정보 수정</p>
                         <p className="listText">친구 정보 수정</p>
-                        <p className="listText">룸메이트 정보 수정</p>
+                        <p className="listText" onClick={() => navigate("/roommate")}>룸메이트 정보 수정</p>
                         <p className="listText">매칭 내역 확인하기</p>
                     </div>
                 </div>

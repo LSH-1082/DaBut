@@ -1,11 +1,11 @@
 import RegisterFooter from "../registerFooter/RegisterFooter";
 import "./RegisterPage1.css";
-import AgeSelect from "../select/AgeSelect";
+import AgeSelect from "../../component/select/AgeSelect";
 import {useSelector, useDispatch} from "react-redux";
 import {setGender, setHeight, setKakaoId, setName, setNickname, setSmoke} from "../../store/user";
 import SelectRange from "../range/SelectRange";
 import {useState} from "react";
-import WeightSelect from "../select/WeightSelect";
+import WeightSelect from "../../component/select/WeightSelect";
 
 const RegisterPage1 = () => {
     let user = useSelector(state => state.user);

@@ -5,7 +5,6 @@ const {Kakao} = window;
 const Login = () => {
     const kakaoLogin = () => {
         Kakao.Auth.authorize({
-            // redirectUri: "http://localhost:8080/login/kakao"
             redirectUri: "http://localhost:8080/api/v1/auth/oauth2/kakao"
         })
     }

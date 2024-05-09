@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from "react-redux";
 import "./RegisterPage3.css";
 import {setFrequency, setOccupation, setPersonality} from "../../store/user";
 import {useState} from "react";
-import MajorSelect from "../select/MajorSelect";
+import MajorSelect from "../../component/select/MajorSelect";
 import SelectRange from "../range/SelectRange";
 
 const RegisterPage3 = () => {

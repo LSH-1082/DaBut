@@ -3,7 +3,7 @@ import "./RegisterPage6.css";
 import {useSelector, useDispatch} from "react-redux";
 import {useState} from "react";
 import {setWantGender, setWantHeight, setWantOccupation, setWantSmoke} from "../../store/user";
-import WantAgeSelect from "../select/WantAgeSelect";
+import WantAgeSelect from "../../component/select/WantAgeSelect";
 import SelectRange from "../range/SelectRange";
 
 const RegisterPage6 = () => {
