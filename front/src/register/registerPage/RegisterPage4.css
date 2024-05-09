@@ -1,9 +1,19 @@
 .RegisterPage4 {
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
 }
+
+
+.selectFaceDiv {
+    margin-top: 32px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 
 .registerPage4Title p{
     margin: 0;
@@ -16,28 +26,191 @@
     flex-direction: row;
 }
 
-.register4SmallText {
-    margin-top: 28px;
-    margin-left: 22px;
-    margin-bottom: 18px;
-    color: #A0A0A0;
+.animal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid 2px #A4A4A4;
+    border-radius: 47.5px;
+    width: 95px;
+    height: 95px;
+    cursor: pointer;
+}
+
+.selectedFaceDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid 2px #EB604A;
+    border-radius: 47.5px;
+    width: 95px;
+    height: 95px;
+    cursor: pointer;
+}
+
+.animalP {
+    margin: 0;
+    color: #A4A4A4;
     font-family: Pretendard;
-    font-size: 16px;
+    font-size: 13px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 600;
     line-height: normal;
 }
 
-.username {
+.selectedFace {
+    margin: 0;
     color: #EB604A;
     font-family: Pretendard;
-    font-size: 24px;
+    font-size: 13px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 600;
     line-height: normal;
 }
 
-.placeDiv {
-    margin-left: 30px;
-    margin-top: 30px;
+.dogPicture {
+    color: #A4A4A4;
+}
+
+
+.firstFace {
+    display: flex;
+    justify-content: space-between;
+    width: 327px;
+    margin-bottom: 21px;
+}
+
+.secondFace {
+    width: 327px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 21px;
+}
+
+.thirdFace {
+    width: 327px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 34px;
+}
+
+.rabbitP, .foxP {
+    margin-top: 3px;
+    margin-bottom: 0;
+    color: #A4A4A4;
+    font-family: Pretendard;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.selectedRabbit, .selectedFox {
+    margin-top: 3px;
+    margin-bottom: 0;
+    color: #EB604A;
+    font-family: Pretendard;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.frogP, .hamsterP {
+    margin-top: 6px;
+    margin-bottom: 0;
+    color: #A4A4A4;
+    font-family: Pretendard;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.selectedFrog, .selectedHamster {
+    margin-top: 6px;
+    margin-bottom: 0;
+    color: #EB604A;
+    font-family: Pretendard;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.dinoP {
+    margin-top: 4px;
+    margin-bottom: 0;
+    color: #A4A4A4;
+    font-family: Pretendard;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.selectedDino {
+    margin-top: 4px;
+    margin-bottom: 0;
+    color: #EB604A;
+    font-family: Pretendard;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.textInputDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputIntro {
+    padding: 10px;
+    resize: none;
+    width: 307px;
+    height: 120px;
+    flex-shrink: 0;
+    border-radius: 15px;
+    border: 1px solid #F2F4F5;
+    background: #F2F4F5;
+    color: #919191;
+    font-family: Inter;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.inputSmallText {
+    margin-top: 8px;
+    color: #A4A4A4;
+    font-family: Inter;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.register3SmallText {
+    color: #C2C2C2;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.inputSmallTextDiv {
+    width: 307px;
+}
+
+::placeholder {
+    color: #C2C2C2; /* 원하는 색상으로 변경 */
 }

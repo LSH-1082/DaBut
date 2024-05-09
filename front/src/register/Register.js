@@ -4,7 +4,7 @@ import RegisterPage5 from "./registerPage/RegisterPage5";
 import "./Register.css";
 import {useSelector} from "react-redux";
 import RegisterPage2 from "./registerPage/RegisterPage2";
-import RegisterPage6 from "./registerPage/RegisterPage6";
+import RegisterPage6 from "./registerPage/RegisterPage5";
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import {sendUser} from "../api/UserData";
@@ -18,7 +18,7 @@ const Register = () => {
 
 
     useEffect(() => {
-        if(page.page === 7) {
+        if(page.page === 6) {
             sendUser(user, Cookies.get("accessToken")).then(() => console.log("success")).catch((e) => console.log(e));
             navigate("/main");
         }
@@ -31,7 +31,6 @@ const Register = () => {
                 {page.page === 3 ? (<RegisterPage3/>) : (<></>)}
                 {page.page === 4 ? (<RegisterPage4/>) : (<></>)}
                 {page.page === 5 ? (<RegisterPage5/>) : (<></>)}
-                {page.page === 6 ? (<RegisterPage6/>) : (<></>)}
             </div>
     );
 }
