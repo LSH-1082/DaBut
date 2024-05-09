@@ -5,119 +5,213 @@
     justify-content: space-between;
 }
 
-.registerContent {
-    margin-bottom: 100px;
-    width: 100%;
-    overflow-y: auto; /* 세로 스크롤바를 표시합니다. */
+.RegisterPage4TitleDiv {
 }
 
-.wantGender, .wantAge, .wantHeight, .wantSmoke{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 40px;
-}
-
-.wantGender p, .wantAge p, .wantHeight p, .wantSmoke p{
-    color: #A0A0A0;
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-}
-
-.wantGenderButtonDiv, .wantSmokeDiv {
-    display: flex;
-    justify-content: space-between;
-    width: 200px;
-}
-
-.wantDiv{
-    width: 327px;
-    margin-left: 32px;
-}
-
-.wantGenderButton {
-    padding: 10px 30px;
-    color: #A0A0A0;
-    text-align: center;
-    font-family: Pretendard;
-    font-size: 17px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    background-color: rgba(0,0,0,0);
-    border-radius: 30px;
-    border: 2px solid #AEAEAE;
-    cursor: pointer;
-}
-
-.wantGenderButtonActive {
-    color: white;
-    padding: 10px 30px;
-    text-align: center;
-    font-family: Pretendard;
-    font-size: 17px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    background-color: #EB604A;
-    border-radius: 30px;
-    border: 2px solid #EB604A;
-    cursor: pointer;
-}
-
-.wantSmokeButton{
-    color: #A0A0A0;
-    padding: 10px 20px;
-    text-align: center;
-    font-family: Pretendard;
-    font-size: 17px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    background-color: rgba(0,0,0,0);
-    border-radius: 30px;
-    border: 2px solid #AEAEAE;
-    cursor: pointer;
-}
-
-.wantSmokeButtonActive {
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    font-family: Pretendard;
-    font-size: 17px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    background-color: #EB604A;
-    border-radius: 30px;
-    border: 2px solid #EB604A;
-    cursor: pointer;
-}
-
-.wantOccupation {
-    margin-top: 60px;
-    margin-bottom: 18px;
-    color: #A0A0A0;
-    font-family: Pretendard;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-}
-
-.wantHeightDiv {
+.selectFaceDiv {
+    margin-top: 32px;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    width: 200px;
-    justify-content: center;
+    align-items: center;
 }
 
-.wantHeightDiv p{
-    margin-top: 10px;
+.registerPage5Title p{
+    margin: 0;
+}
+
+.registerPage5Title {
+    margin-top: 30px;
+    margin-left: 33px;
+    display: flex;
+    flex-direction: row;
+}
+
+.animal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid 2px #A4A4A4;
+    border-radius: 47.5px;
+    width: 95px;
+    height: 95px;
+    cursor: pointer;
+}
+
+.selectedFaceDiv {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: solid 2px #EB604A;
+    border-radius: 47.5px;
+    width: 95px;
+    height: 95px;
+    cursor: pointer;
+}
+
+.animalP {
+    margin: 0;
+    color: #A4A4A4;
+    font-family: Pretendard;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.selectedFace {
+    margin: 0;
+    color: #EB604A;
+    font-family: Pretendard;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.dogPicture {
+    color: #A4A4A4;
+}
+
+
+.firstFace {
+    display: flex;
+    justify-content: space-between;
+    width: 327px;
+    margin-bottom: 21px;
+}
+
+.secondFace {
+    width: 327px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 21px;
+}
+
+.thirdFace {
+    width: 327px;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 34px;
+}
+
+.rabbitP, .foxP {
+    margin-top: 3px;
+    margin-bottom: 0;
+    color: #A4A4A4;
+    font-family: Pretendard;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.selectedRabbit, .selectedFox {
+    margin-top: 3px;
+    margin-bottom: 0;
+    color: #EB604A;
+    font-family: Pretendard;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.frogP, .hamsterP {
+    margin-top: 6px;
+    margin-bottom: 0;
+    color: #A4A4A4;
+    font-family: Pretendard;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.selectedFrog, .selectedHamster {
+    margin-top: 6px;
+    margin-bottom: 0;
+    color: #EB604A;
+    font-family: Pretendard;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.dinoP {
+    margin-top: 4px;
+    margin-bottom: 0;
+    color: #A4A4A4;
+    font-family: Pretendard;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.selectedDino {
+    margin-top: 4px;
+    margin-bottom: 0;
+    color: #EB604A;
+    font-family: Pretendard;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.textInputDiv{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.inputIntro {
+    padding: 10px;
+    resize: none;
+    width: 307px;
+    height: 120px;
+    flex-shrink: 0;
+    border-radius: 15px;
+    border: 1px solid #F2F4F5;
+    background: #F2F4F5;
+    color: #919191;
+    font-family: Inter;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.inputSmallText {
+    margin-top: 8px;
+    color: #A4A4A4;
+    font-family: Inter;
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.register3SmallText {
+    color: #C2C2C2;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-top: 0px;
     margin-bottom: 0px;
-    text-align: center;
+}
+
+.inputSmallTextDiv {
+    width: 307px;
+}
+
+::placeholder {
+    color: #C2C2C2; /* 원하는 색상으로 변경 */
 }
