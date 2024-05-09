@@ -3,6 +3,7 @@ package org.web.application.server.service;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.web.application.server.dto.MyPageDto;
 import org.web.application.server.dto.UserDTO;
 import org.web.application.server.entity.*;
 import org.web.application.server.jwt.JwtProvider;
@@ -80,5 +81,31 @@ public class UserService {
         matchingFilterRepository.save(matchingFilterEntity);
 
         return userEntity;
+    }
+
+    public MyPageDto getMypage(String token)
+    {
+        System.out.println("token = " + token);
+
+        String kakaoId = jwtProvider.validate(token);
+
+        System.out.println("kakaoId : " + kakaoId);
+
+        var authEntity = authRepository.findByKakaoId(Long.valueOf(kakaoId)).get();
+
+        System.out.println("authEntity : " + authEntity);
+
+        var userEntity = userRepository.findByAuthEntity(authEntity).get();
+
+        System.out.println("userEntity : " + userEntity);
+
+        MyPageDto myPageDto = MyPageDto.builder()
+                .mbti(userEntity.getMbtiEntity().getMbtiName())
+                .name(userEntity.getName())
+                .gender(userEntity.getGenderEntity().getGender())
+                .connectedAt(authEntity.getConnectedAt())
+                .age(userEntity.getAge()).build();
+
+        return myPageDto;
     }
 }

@@ -56,29 +56,10 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         cookie.setPath("/");
         response.addCookie(cookie);
 
-
-//        if (userRepository.findByAuthEntity(authRepository.findByKakaoId(Long.valueOf(userId)).get()).isPresent())
-//        {
-//            System.out.println(authRepository.findByKakaoId(Long.valueOf(userId)).get());
-//            System.out.println(userRepository.findByAuthEntity(authRepository.findByKakaoId(Long.valueOf(userId)).get()));
-//            response.sendRedirect("http://localhost:3000/main/");
-//        }
-//        else
-//        {
-//            System.out.println("회원가입 페이지로");
-//            System.out.println("authRepo : " + authRepository.findByKakaoId(Long.valueOf(userId)).get().getUserEntity());
-//            System.out.println("userRepo : " + userRepository.findByAuthEntity(authRepository.findByKakaoId(Long.valueOf(userId)).get()));
-//            response.sendRedirect("http://localhost:3000/register/");
-//        }
-
         if (authRepository.findByKakaoId(Long.valueOf(userId)).get().getUserEntity() != null) {
-//            System.out.println(authRepository.findByKakaoId(Long.valueOf(userId)).get());
-//            System.out.println(userRepository.findByAuthEntity(authRepository.findByKakaoId(Long.valueOf(userId)).get()));
             response.sendRedirect("http://localhost:3000/main/");
         } else {
             System.out.println("회원가입 페이지로");
-//            System.out.println("authRepo : " + authRepository.findByKakaoId(Long.valueOf(userId)).get().getUserEntity());
-//            System.out.println("userRepo : " + userRepository.findByAuthEntity(authRepository.findByKakaoId(Long.valueOf(userId)).get()));
             response.sendRedirect("http://localhost:3000/register/");
         }
     }
