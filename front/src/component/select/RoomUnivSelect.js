@@ -2,7 +2,7 @@ import React from 'react';
 import Select from 'react-select';
 import "./WeightSelect.css";
 import {useDispatch} from "react-redux";
-import {setWeight} from "../../store/user";
+import {setRoomWantUniv} from "../../store/roommate";
 
 const customStyles = {
     control: (provided, state) => ({
@@ -29,19 +29,21 @@ const customStyles = {
 };
 
 const options = [
-    { value: "마른체형", label: "마른체형" },
-    { value: "통통한체형", label: "통통한체형" },
+    { value: "대가대", label: "대가대" },
+    { value: "경일대", label: "경일대" },
+    { value: "영남대", label: "영남대" },
+    { value: "대구대", label: "대구대" },
 ];
 
-const WeightSelect = () => {
-    let dispatch = useDispatch();
+const RoomUnivSelect = () => {
+    const dispatch = useDispatch();
 
 
     return (
         <div className="weightSelect">
-            <Select className="weightSelector" onChange={(e) => {dispatch(setWeight(e.value))}} placeholder="" options={options} styles={customStyles} isSearchable={false} components={{IndicatorSeparator: () => null,}}/>
+            <Select className="weightSelector" onChange={(e) => {dispatch(setRoomWantUniv(e.value))}} placeholder="" options={options} styles={customStyles} isSearchable={false} components={{IndicatorSeparator: () => null,}}/>
         </div>
     );
 };
 
-export default WeightSelect;
+export default RoomUnivSelect;

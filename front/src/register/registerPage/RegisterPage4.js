@@ -1,191 +1,107 @@
-import "./RegisterPage4.css";
 import RegisterFooter from "../registerFooter/RegisterFooter";
 import {useDispatch, useSelector} from "react-redux";
+import "./RegisterPage4.css";
+import {setFace, setIntro} from "../../store/user";
 import {useState} from "react";
+import DogIconComponent from "../../component/animalIcon/DogIconComponent";
+import CatIconComponent from "../../component/animalIcon/CatIconComponent";
+import DeerIconComponent from "../../component/animalIcon/DeerIconComponent";
+import RabbitIconComponent from "../../component/animalIcon/RabbitIconComponent";
+import FrogIconComponent from "../../component/animalIcon/FrogIconComponent";
+import HamsterIconComponent from "../../component/HamsterIconComponent";
+import FoxIconComponent from "../../component/animalIcon/FoxIconComponent";
+import BearIconComponent from "../../component/animalIcon/BearIconComponent";
+import DinoIconComponent from "../../component/animalIcon/DinoIconComponent";
 
 const RegisterPage4 = () => {
     let user = useSelector(state => state.user);
-    let dispatch = useDispatch();
     let username = user.name.slice(1);
+    const dispatch = useDispatch();
+    const [animal, setAnimal] = useState("");
 
-    let place = [];
-
-    const buttonClick = (value) => {
-        if (place.findIndex(value) !== null) place.push(value)
+    const clickFace = (face) => {
+        dispatch(setFace(face));
+        setAnimal(face);
     }
 
     return (
         <div className="RegisterPage4">
-            <div className="registerContent">
-                <div className="registerPage4Title">
-                    <p className="username">{username}</p>
-                    <p className='nameTitle'>님은 평소에</p>
-                    {/*<p className='nameTitle'>어디를 자주 가시나요?</p>*/}
+            <div className="registerPage5TitleDiv">
+                <div className="registerPage4Div">
+                    <div className="registerPage4Title">
+                        <p className="username">{username}</p>
+                        <p className="nameTitle">님을 표현해주세요.</p>
+                    </div>
+                    <div className="smallTextDiv">
+                        <p className="register3SmallText">이제 거의 다왔어요 😊️</p>
+                    </div>
                 </div>
-                <div className="registerPage4Title">
-                    <p className="register4SmallText">선호하시는 장소를 알려주세요😆</p>
-                </div>
-
-                <div className="placeDiv">
-                    <div className="selectPlace">
-                        <button
-                            className={user.place === "park" ? "selectedThreePlace" : "three"}
-                            onClick={() => {
-                            }}>공원
-                        </button>
-                        <button
-                            className={user.place === "golf" ? "selectedThreePlace" : "three"}
-                            onClick={() => {
-                            }}>골프장
-                        </button>
-                        <button
-                            className={user.place === "stage" ? "selectedThreePlace" : "three"}
-                            onClick={() => {
-                            }}>공연장
-                        </button>
+                <div className="selectFaceDiv">
+                    <div className="firstFace">
+                        <div className={animal === "dog" ? "selectedFaceDiv" : "animal"} onClick={() => {
+                            clickFace("dog")
+                        }}>
+                            <DogIconComponent width={48} height={48} animal={animal}/>
+                            <p className={animal === "dog" ? "selectedFace" : "animalP"}>강아지</p>
+                        </div>
+                        <div className={animal === "cat" ? "selectedFaceDiv" : "animal"} onClick={() => {
+                            clickFace("cat")
+                        }}>
+                            <CatIconComponent width={48} height={48} animal={animal}/>
+                            <p className={animal === "cat" ? "selectedFace" : "animalP"}>고양이</p>
+                        </div>
+                        <div className={animal === "deer" ? "selectedFaceDiv" : "animal"} onClick={() => {
+                            clickFace("deer")
+                        }}>
+                            <DeerIconComponent width={48} height={48} animal={animal}/>
+                            <p className={animal === "deer" ? "selectedFace" : "animalP"}>사슴</p>
+                        </div>
                     </div>
-                    <div className="selectPlace">
-                        <button
-                            className={user.place === "sing" ? "selectedThreePlace" : "three"}
-                            onClick={() => {
-                            }}>노래방
-                        </button>
-                        <button
-                            className={user.place === "amusement" ? "selectedThreePlace" : "three"}
-                            onClick={() => {
-                            }}>놀이공원
-                        </button>
-                        <button
-                            className={user.place === "playground" ? "selectedThreePlace" : "three"}
-                            onClick={() => {
-                            }}>놀이터
-                        </button>
+                    <div className="secondFace">
+                        <div className={animal === "rabbit" ? "selectedFaceDiv" : "animal"} onClick={() => {
+                            clickFace("rabbit")
+                        }}>
+                            <RabbitIconComponent width={45} height={44} animal={animal}/>
+                            <p className={animal === "rabbit" ? "selectedRabbit" : "rabbitP"}>토끼</p>
+                        </div>
+                        <div className={animal === "frog" ? "selectedFaceDiv" : "animal"} onClick={() => {
+                            clickFace("frog")
+                        }}>
+                            <FrogIconComponent width={44} height={36} animal={animal}/>
+                            <p className={animal === "frog" ? "selectedFrog" : "frogP"}>개구리</p>
+                        </div>
+                        <div className={animal === "hamster" ? "selectedFaceDiv" : "animal"} onClick={() => {
+                            clickFace("hamster")
+                        }}>
+                            <HamsterIconComponent width={36} height={35} animal={animal}/>
+                            <p className={animal === "hamster" ? "selectedFrog" : "hamsterP"}>햄스터</p>
+                        </div>
                     </div>
-                    <div className="selectPlace">
-                        <button
-                            className={user.place === "billiards" ? "selectedThreePlace" : "three"}
-                            onClick={() => {
-                            }}>당구장
-                        </button>
-                        <button
-                            className={user.place === "library" ? "selectedThreePlace" : "three"}
-                            onClick={() => {
-                            }}>도서관
-                        </button>
-                        <button
-                            className={user.place === "sea" ? "selectedThreePlace" : "three"}
-                            onClick={() => {
-                            }}>바다
-                        </button>
+                    <div className="thirdFace">
+                        <div className={animal === "fox" ? "selectedFaceDiv" : "animal"} onClick={() => {
+                            clickFace("fox")
+                        }}>
+                            <FoxIconComponent width={38} height={38} animal={animal}/>
+                            <p className={animal === "fox" ? "selectedFox" : "foxP"}>여우</p>
+                        </div>
+                        <div className={animal === "bear" ? "selectedFaceDiv" : "animal"} onClick={() => {
+                            clickFace("bear")
+                        }}>
+                            <BearIconComponent width={44} height={44} animal={animal}/>
+                            <p className={animal === "bear" ? "selectedFace" : "animalP"}>곰</p>
+                        </div>
+                        <div className={animal === "dino" ? "selectedFaceDiv" : "animal"} onClick={() => {
+                            clickFace("dino")
+                        }}>
+                            <DinoIconComponent width={40} height={34} animal={animal}/>
+                            <p className={animal === "dino" ? "selectedDino" : "dinoP"}>공룡</p>
+                        </div>
                     </div>
-                    <div className="selectPlace">
-                        <button
-                            className={user.place === "bowling" ? "selectedThreePlace" : "three"}
-                            onClick={() => {
-                            }}>볼링장
-                        </button>
-                        <button
-                            className={user.place === "boardgame" ? "selectedThreePlace" : "three"}
-                            onClick={() => {
-                            }}>보드게임 카페
-                        </button>
+                    <div className="textInputDiv">
+                        <textarea className="inputIntro" value={user.intro} onChange={(e) => {dispatch(setIntro(e.target.value))}} placeholder="자기소개를 입력해주세요."></textarea>
                     </div>
-                    <div className="selectPlace">
-                        <button
-                            className={user.place === "mountain" ? "selectedThreePlace" : "three"}
-                            onClick={() => {
-                            }}>산
-                        </button>
-                        <button
-                            className={user.place === "pool" ? "selectedThreePlace" : "three"}
-                            onClick={() => {
-                            }}>수영장
-                        </button>
-                        <button
-                            className={user.place === "restaurant" ? "selectedThreePlace" : "three"}
-                            onClick={() => {
-                            }}>식당
-                        </button>
-                    </div>
-                    <div className="selectPlace">
-                        <button
-                            className={user.place === "" ? "selectedThreePlace" : "three"}
-                            onClick={() => {
-                            }}>술집
-                        </button>
-                        <button
-                            className={user.place === "" ? "selectedThreePlace" : "three"}
-                            onClick={() => {
-                            }}>스키장
-                        </button>
-                        <button
-                            className={user.place === "" ? "selectedThreePlace" : "three"}
-                            onClick={() => {
-                            }}>스크린 골프
-                        </button>
-                    </div>
-                    <div className="selectPlace">
-                        <button
-                            className={user.place === "" ? "selectedThreePlace" : "three"}
-                            onClick={() => {
-                            }}>스크린 야구
-                        </button>
-                        <button
-                            className={user.place === "" ? "selectedThreePlace" : "three"}
-                            onClick={() => {
-                            }}>스터디 카페
-                        </button>
-                    </div>
-                    <div className="selectPlace">
-                        <button
-                            className={user.place === "" ? "selectedThreePlace" : "three"}
-                            onClick={() => {
-                            }}>야구장
-                        </button>
-                        <button
-                            className={user.place === "" ? "selectedThreePlace" : "three"}
-                            onClick={() => {
-                            }}>영화관
-                        </button>
-                        <button
-                            className={user.place === "" ? "selectedThreePlace" : "three"}
-                            onClick={() => {
-                            }}>전시회
-                        </button>
-                    </div>
-                    <div className="selectPlace">
-                        <button
-                            className={user.place === "" ? "selectedThreePlace" : "three"}
-                            onClick={() => {
-                            }}>축제
-                        </button>
-                        <button
-                            className={user.place === "" ? "selectedThreePlace" : "three"}
-                            onClick={() => {
-                            }}>카페
-                        </button>
-                        <button
-                            className={user.place === "" ? "selectedThreePlace" : "three"}
-                            onClick={() => {
-                            }}>클럽
-                        </button>
-                    </div>
-                    <div className="selectPlace">
-                        <button
-                            className={user.place === "" ? "selectedThreePlace" : "three"}
-                            onClick={() => {
-                            }}>탁구장
-                        </button>
-                        <button
-                            className={user.place === "" ? "selectedThreePlace" : "three"}
-                            onClick={() => {
-                            }}>피시방
-                        </button>
-                        <button
-                            className={user.place === "" ? "selectedThreePlace" : "three"}
-                            onClick={() => {
-                            }}>헬스장
-                        </button>
+                    <div className="inputSmallTextDiv">
+                        <p className="inputSmallText">본인이 쓴 글은 모두에게 공개됩니다 :)</p>
                     </div>
                 </div>
             </div>

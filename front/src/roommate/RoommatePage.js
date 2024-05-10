@@ -1,14 +1,21 @@
 import "./RoommatePage.css";
 import {useState} from "react";
 import RoommatePageFooter from "./RoommatePageFooter";
+import RoomAgeSelect from "../component/select/RoomAgeSelect";
+import RoomUnivSelect from "../component/select/RoomUnivSelect";
+import {useDispatch, useSelector} from "react-redux";
+import {setRoomClean, setRoomIntro, setRoomPattern} from "../store/roommate";
 
 const RoommatePage = () => {
     const [select, setSelect] = useState("");
     const [pattern, setPattern] = useState("");
+    const dispatch = useDispatch();
+    let roommate = useSelector(state => state.roommate);
 
     const clickCleanButton = (value) => {
         if (select === value) setSelect("");
         else {
+            dispatch(setRoomClean(value));
             setSelect(value);
         }
     }
@@ -16,10 +23,10 @@ const RoommatePage = () => {
     const clickPatternButton = (value) => {
         if (pattern === value) setPattern("");
         else {
+            dispatch(setRoomPattern(value));
             setPattern(value);
         }
     }
-
 
     return (
         <div className="RoommatePage">
@@ -33,10 +40,11 @@ const RoommatePage = () => {
                 <div className="roommateDropDiv">
                     <div className="firstDropDiv">
                         <p className="dropText">선호 나이는?</p>
+                        <RoomAgeSelect/>
                     </div>
                     <div className="secondDropDiv">
                         <p className="dropText">구하는 학교는?</p>
-
+                        <RoomUnivSelect/>
                     </div>
                 </div>
 
@@ -72,7 +80,7 @@ const RoommatePage = () => {
 
                 <div className="roomTextareaDiv">
                     <p className="roomTextareaText">기타사항</p>
-                    <textarea className="roomIntro" placeholder="ex) 저는 애인이 있습니다."></textarea>
+                    <textarea className="roomIntro" placeholder="ex) 저는 애인이 있습니다." value={roommate.roomIntro} onChange={(e) => {dispatch(setRoomIntro(e.target.value))}}></textarea>
                     <p className="roomTextareaUnderText">룸메이트 프로필은 매칭된 상대에게만 공개됩니다</p>
                 </div>
             </div>
