@@ -23,7 +23,6 @@ public class UserService {
     private final SnsFrequencyRepository snsFrequencyRepository;
     private final PersonalityRepository personalityRepository;
     private final FaceShapeRepository faceShapeRepository;
-    private final PreferPlaceRepository preferPlaceRepository;
     private final MatchingFilterRepository matchingFilterRepository;
     private final LocationRepository locationRepository;
     private final AuthRepository authRepository;
@@ -106,7 +105,9 @@ public class UserService {
                 .name(userEntity.getName())
                 .gender(userEntity.getGenderEntity().getGender())
                 .connectedAt(authEntity.getConnectedAt())
-                .age(userEntity.getAge()).build();
+                .age(userEntity.getAge())
+                .kakaoId(userEntity.getKakaoId())
+                .location(userEntity.getLocationEntity().getLocationName()).build();
 
         return myPageDto;
     }
