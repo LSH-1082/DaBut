@@ -1,9 +1,17 @@
 import "./matchingCheck.css";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import MainFooter from "../main/MainFooter";
 import MatchingPeopleComponent from "../component/MatchingPeopleComponent";
+import {setMainPage} from "../store/mainPage";
+import {useDispatch} from "react-redux";
 
 const MatchingCheck = () => {
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch(setMainPage("listPage"));
+    }, []);
+
     const [select, setSelect] = useState("all");
     return (
         <div className="MatchingCheckPage">
