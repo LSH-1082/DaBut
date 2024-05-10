@@ -120,7 +120,7 @@
     z-index: 1;
 }
 
-.sports, .pet, .cook, .roommate, .study, .read, .eat, .baby, .single, .diet, .trip, .paint, .music, .ott, .dance, .photo {
+.sports, .pet, .cook, .roommate, .study, .read, .eat, .baby, .single, .game, .trip, .paint, .music, .ott, .dance, .photo {
     display: flex;
     position: relative;
     flex-direction: column;
@@ -271,7 +271,7 @@
     z-index: 10;
 }
 
-.checked.diet {
+.checked.game {
     width: 24px;
     height: 24px;
     position: absolute;
