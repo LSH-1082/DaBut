@@ -95,7 +95,6 @@ const Profile = () => {
                         <p className="listText">내 정보 수정</p>
                         <p className="listText">친구 정보 수정</p>
                         <p className="listText" onClick={() => navigate("/roommate")}>룸메이트 정보 수정</p>
-                        <p className="listText" onClick={() => navigate("/matchingCheck")}>매칭 내역 확인하기</p>
                     </div>
                 </div>
             </div>
