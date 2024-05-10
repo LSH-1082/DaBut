@@ -8,11 +8,11 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "hobby_bridge")
+@Table(name = "place_bridge")
 public class PlaceBridgeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long hobbyBridgeId;
+    private Long placeBridgeId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id")
