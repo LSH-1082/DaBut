@@ -15,5 +15,7 @@ public class MyPageDto {
     private Integer age;
     private String gender;
     private String mbti;
+    private String kakaoId;
+    private String location;
     //이름 생성날짜 나이 성별 mbti
 }

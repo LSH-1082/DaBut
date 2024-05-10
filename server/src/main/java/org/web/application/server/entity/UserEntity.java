@@ -80,11 +80,9 @@ public class UserEntity {
     private LocationEntity locationEntity;
 
     /*******************************@OneToMany******************************************/
-    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.PERSIST)
-    @Builder.Default
-    @ToString.Exclude
-    private List<PlaceBridgeEntity> placeBridgeEntity = new ArrayList<>();
+
     /*******************************@OneToOne******************************************/
+    //userEntity
 
     //찾고싶은 친구 유형 필터
     @ToString.Exclude
