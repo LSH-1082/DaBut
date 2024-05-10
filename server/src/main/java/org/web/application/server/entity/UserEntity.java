@@ -6,12 +6,13 @@ import lombok.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Data
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Table(name = "users")
+@Getter
+@Setter
 public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -79,17 +80,10 @@ public class UserEntity {
     private LocationEntity locationEntity;
 
     /*******************************@OneToMany******************************************/
-
-    @OneToMany(mappedBy = "userEntity", cascade = CascadeType.PERSIST)
-    @Builder.Default
-    @ToString.Exclude
-    private List<HobbyBridgeEntity> hobbyBridgeEntity = new ArrayList<>();
-
     @OneToMany(mappedBy = "userEntity", cascade = CascadeType.PERSIST)
     @Builder.Default
     @ToString.Exclude
     private List<PlaceBridgeEntity> placeBridgeEntity = new ArrayList<>();
-
     /*******************************@OneToOne******************************************/
 
     //찾고싶은 친구 유형 필터
@@ -100,7 +94,7 @@ public class UserEntity {
     @OneToOne(mappedBy = "userEntity")
     private RoommateFilterEntity roommateFilterEntity;
     //카카오 ID 받아오는 값
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne
     @JoinColumn(name = "auth_id")
     private AuthEntity authEntity;
 
