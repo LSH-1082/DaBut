@@ -3,7 +3,7 @@ package org.web.application.server.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.web.application.server.dto.MyPageDto;
+import org.web.application.server.dto.MyPageDTO;
 import org.web.application.server.dto.UserDTO;
 import org.web.application.server.entity.*;
 import org.web.application.server.jwt.JwtProvider;
@@ -83,7 +83,7 @@ public class UserService {
     }
 
     @Transactional
-    public MyPageDto getMypage(String token)
+    public MyPageDTO getMypage(String token)
     {
         System.out.println("=========getMypage()==============");
         System.out.println("token = " + token);
@@ -100,7 +100,7 @@ public class UserService {
 
         System.out.println("userEntity : " + userEntity);
 
-        MyPageDto myPageDto = MyPageDto.builder()
+        MyPageDTO myPageDto = MyPageDTO.builder()
                 .mbti(userEntity.getMbtiEntity().getMbtiName())
                 .name(userEntity.getName())
                 .gender(userEntity.getGenderEntity().getGender())

@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.web.application.server.dto.MyPageDto;
+import org.web.application.server.dto.MyPageDTO;
 import org.web.application.server.dto.UserDTO;
 import org.web.application.server.service.UserService;
 
@@ -17,7 +17,6 @@ public class UserController {
     
     private final UserService userService;
 
-
     @PostMapping("/info")
     public ResponseEntity<?> saveUser(@RequestBody UserDTO userDTO, @RequestHeader(name = "Authorization") String token) {
         System.out.println("userDTO = " + userDTO);
@@ -27,8 +26,9 @@ public class UserController {
     }
 
     @GetMapping("/mypage")
-    public MyPageDto getMypage(@RequestHeader(name = "Authorization") String token)
+    public MyPageDTO getMypage(@RequestHeader(name = "Authorization") String token)
     {
         return userService.getMypage(token);
     }
+
 }
