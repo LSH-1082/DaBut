@@ -1,8 +1,8 @@
 package org.web.application.server.service;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.web.application.server.dto.MyPageDto;
 import org.web.application.server.dto.UserDTO;
 import org.web.application.server.entity.*;
@@ -83,19 +83,21 @@ public class UserService {
         return userEntity;
     }
 
+    @Transactional
     public MyPageDto getMypage(String token)
     {
+        System.out.println("=========getMypage()==============");
         System.out.println("token = " + token);
 
         String kakaoId = jwtProvider.validate(token);
 
         System.out.println("kakaoId : " + kakaoId);
 
-        var authEntity = authRepository.findByKakaoId(Long.valueOf(kakaoId)).get();
+        var authEntity = authRepository.findByKakaoId(Long.valueOf(kakaoId)).orElse(null);
 
         System.out.println("authEntity : " + authEntity);
 
-        var userEntity = userRepository.findByAuthEntity(authEntity).get();
+        var userEntity = userRepository.findByAuthEntity(authEntity).orElse(null);
 
         System.out.println("userEntity : " + userEntity);
 
