@@ -2,9 +2,6 @@ package org.web.application.server.dto;
 
 import lombok.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
@@ -12,7 +9,7 @@ import java.util.List;
 @ToString
 @Data
 @Builder
-public class UserDTO {
+public class EditUserDTO {
     private String name;
     private String gender;
     private int age;
@@ -28,11 +25,5 @@ public class UserDTO {
     private String personality;
     private boolean smoke;
     private String state;
-    private String wantAge;
-    private String wantGender;
-    private int wantHeight;
-    private String wantOccupation;
-    private boolean wantSmoke;
     private String weight;
-
 }

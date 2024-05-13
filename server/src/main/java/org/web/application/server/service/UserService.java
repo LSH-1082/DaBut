@@ -3,6 +3,8 @@ package org.web.application.server.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.web.application.server.dto.EditFriendDTO;
+import org.web.application.server.dto.EditUserDTO;
 import org.web.application.server.dto.MyPageDto;
 import org.web.application.server.dto.UserDTO;
 import org.web.application.server.entity.*;
@@ -105,10 +107,136 @@ public class UserService {
                 .name(userEntity.getName())
                 .gender(userEntity.getGenderEntity().getGender())
                 .connectedAt(authEntity.getConnectedAt())
-                .age(userEntity.getAge())
-                .kakaoId(userEntity.getKakaoId())
-                .location(userEntity.getLocationEntity().getLocationName()).build();
+                .age(userEntity.getAge()).build();
 
         return myPageDto;
+    }
+
+
+    public void editUser(EditUserDTO editUserDTO, String token) {
+
+        String kakaoId = jwtProvider.validate(token);
+
+        System.out.println("kakaoId : " + kakaoId);
+
+        var authEntity = authRepository.findByKakaoId(Long.valueOf(kakaoId)).orElse(null);
+
+        System.out.println("authEntity : " + authEntity);
+
+        var userEntity = userRepository.findByAuthEntity(authEntity).orElse(null);
+
+        System.out.println("userEntity : " + userEntity);
+
+        userEntity = UserEntity.builder()
+                .name("수정")
+                .genderEntity(genderRepository.findByGender(editUserDTO.getGender()).orElse(null))
+                .age(editUserDTO.getAge())
+                .kakaoId(editUserDTO.getKakaoId())
+                .nickname(editUserDTO.getNickname())
+                .heightEntity(heightRepository.findByHeight(editUserDTO.getHeight()).orElse(null))
+                .faceShapeEntity(faceShapeRepository.findByFaceShapeName(editUserDTO.getFace()).orElse(null))
+                .snsFrequencyEntity(snsFrequencyRepository.findBySnsFrequencyLevel(editUserDTO.getFrequency()).orElse(null))
+                .profile(editUserDTO.getIntro())
+                .majorEntity(majorRepository.findByMajorName(editUserDTO.getMajor()).orElse(null))
+                .mbtiEntity(mbtiRepository.findByMbtiName(editUserDTO.getMbti()).orElse(null))
+                .occupationEntity(occupationRepository.findByOccupationName(editUserDTO.getOccupation()).orElse(null))
+                .personalityEntity(personalityRepository.findByPersonalityName(editUserDTO.getPersonality()).orElse(null))
+                .smoking(editUserDTO.isSmoke())
+                .locationEntity(locationRepository.findByLocationName(editUserDTO.getState()).orElse(null))
+                .weightEntity(weightRepository.findByWeightName(editUserDTO.getWeight()).orElse(null))
+                .build();
+
+        userRepository.save(userEntity);
+    }
+
+    public void editFriend(EditFriendDTO editFriendDTO, String token) {
+
+        String kakaoId = jwtProvider.validate(token);
+
+        System.out.println("kakaoId : " + kakaoId);
+
+        var authEntity = authRepository.findByKakaoId(Long.valueOf(kakaoId)).orElse(null);
+
+        System.out.println("authEntity : " + authEntity);
+
+        var userEntity = userRepository.findByAuthEntity(authEntity).orElse(null);
+
+        System.out.println("userEntity : " + userEntity);
+
+        userEntity = UserEntity.builder()
+                .age(Integer.valueOf(editFriendDTO.getWantAge()))
+                .genderEntity(genderRepository.findByGender(editFriendDTO.getWantGender()).orElse(null))
+                .heightEntity(heightRepository.findByHeight(editFriendDTO.getWantHeight()).orElse(null))
+                .occupationEntity(occupationRepository.findByOccupationName(editFriendDTO.getWantOccupation()).orElse(null))
+                .smoking(editFriendDTO.isWantSmoke()).build();
+
+        userRepository.save(userEntity);
+    }
+
+    public UserDTO getUser(String token) {
+        System.out.println("=========getUser()==============");
+        System.out.println("token = " + token);
+
+        String kakaoId = jwtProvider.validate(token);
+
+        System.out.println("kakaoId : " + kakaoId);
+
+        var authEntity = authRepository.findByKakaoId(Long.valueOf(kakaoId)).orElse(null);
+
+        System.out.println("authEntity : " + authEntity);
+
+        var userEntity = userRepository.findByAuthEntity(authEntity).orElse(null);
+
+        System.out.println("userEntity : " + userEntity);
+
+        UserDTO userDTO = UserDTO.builder()
+                .name(userEntity.getName())
+                .age(userEntity.getAge())
+                .intro(userEntity.getProfile())
+                .kakaoId(userEntity.getKakaoId())
+                .smoke(userEntity.getSmoking())
+                .nickname(userEntity.getNickname())
+                .gender(userEntity.getGenderEntity().getGender())
+                .occupation(userEntity.getOccupationEntity().getOccupationName())
+                .major(userEntity.getMajorEntity().getMajorName())
+                .weight(userEntity.getWeightEntity().getWeightName())
+                .height(userEntity.getHeightEntity().getHeight())
+                .mbti(userEntity.getMbtiEntity().getMbtiName())
+                .frequency(userEntity.getSnsFrequencyEntity().getSnsFrequencyLevel())
+                .personality(userEntity.getPersonalityEntity().getPersonalityName())
+                .face(userEntity.getFaceShapeEntity().getFaceShapeName())
+                .state(userEntity.getLocationEntity().getLocationName()).build();
+
+        return userDTO;
+
+    }
+
+    public UserDTO getFriend(String token) {
+        System.out.println("=========getFriend()==============");
+        System.out.println("token = " + token);
+
+        String kakaoId = jwtProvider.validate(token);
+
+        System.out.println("kakaoId : " + kakaoId);
+
+        var authEntity = authRepository.findByKakaoId(Long.valueOf(kakaoId)).orElse(null);
+
+        System.out.println("authEntity : " + authEntity);
+
+        var userEntity = userRepository.findByAuthEntity(authEntity).orElse(null);
+
+        System.out.println("userEntity : " + userEntity);
+
+        var matchingFilterEntity = matchingFilterRepository.findByUserEntity(userEntity).orElse(null);
+
+        UserDTO userDTO = UserDTO.builder()
+                .wantAge(matchingFilterEntity.getAge())
+                .wantHeight(matchingFilterEntity.getHeight())
+                .wantSmoke(matchingFilterEntity.getSmoking())
+                .wantGender(matchingFilterEntity.getGenderEntity().getGender())
+                .wantOccupation(matchingFilterEntity.getOccupationEntity().getOccupationName())
+                .build();
+
+        return userDTO;
     }
 }
