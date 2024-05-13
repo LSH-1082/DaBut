@@ -33,13 +33,14 @@ const options = [
     { value: "통통한체형", label: "통통한체형" },
 ];
 
-const WeightSelect = () => {
+const WeightSelect = (props) => {
     let dispatch = useDispatch();
+    const defaultOption = options.find(option => option.value === props.weight) || "";
 
 
     return (
         <div className="weightSelect">
-            <Select className="weightSelector" onChange={(e) => {dispatch(setWeight(e.value))}} placeholder="" options={options} styles={customStyles} isSearchable={false} components={{IndicatorSeparator: () => null,}}/>
+            <Select className="weightSelector" onChange={(e) => {dispatch(setWeight(e.value))}} placeholder="" value={defaultOption} options={options} styles={customStyles} isSearchable={false} components={{IndicatorSeparator: () => null,}}/>
         </div>
     );
 };

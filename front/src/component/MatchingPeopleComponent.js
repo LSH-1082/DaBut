@@ -7,9 +7,6 @@ const MatchingPeopleComponent = () => {
     //TODO peopleFaceText에 들어가는 닉네임도 값 받아서 랜더링
 
     return (
-        <div className="MatchingPeople">
-
-
             <div className="matchingPeopleDiv">
                 <div className="peopleFaceDiv">
                     <div className="peopleFace">
@@ -22,8 +19,6 @@ const MatchingPeopleComponent = () => {
                     <textarea readOnly={true} disabled={true} className="peopleIntroText"></textarea>
                 </div>
             </div>
-
-        </div>
     );
 }
 

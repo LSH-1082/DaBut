@@ -66,7 +66,9 @@ const MatchingCheck = () => {
                     </div>
                 </div>
             </div>
-            <MatchingPeopleComponent/>
+            <div className="MatchingPeople">
+                <MatchingPeopleComponent/>
+            </div>
             <MainFooter/>
         </div>
     );

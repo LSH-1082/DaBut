@@ -9,9 +9,12 @@ export const pageSlice = createSlice({
         incPage: (state, action) => {
             state.page += 1;
         },
+        setPage: (state, action) => {
+            state.page = action.payload;
+        },
     },
 });
 
-export const {incPage} = pageSlice.actions;
+export const {incPage, setPage} = pageSlice.actions;
 
 export default pageSlice.reducer;

@@ -81,19 +81,19 @@ const RegisterPage3 = () => {
                     </div>
                 </div>
 
-                <div className={`majorPage ${isActive ? 'active' : ''}`}>
+                <div className={`majorPage ${user.occupation === "student" ? 'active' : ''}`}>
                     {user.occupation === "student" ? (
                         <div className="majorDiv">
                             <p className="majorTitle">대학생이시네요?</p>
                             <p className="registerMajorTitle">전공 분야를 알려주세요 !</p>
                             <div className="mSelect">
-                                <MajorSelect/>
+                                <MajorSelect major={user.major}/>
                             </div>
                         </div>
 
                     ) : (<></>)}
                 </div>
-                <div className={`underDiv ${isActive ? 'active' : ''}`}>
+                <div className={`underDiv ${user.occupation === "student" ? 'active' : ''}`}>
                     <div className="personalityDiv">
                         <p className={`personalityTitle ${isActive ? 'active' : ''}`}>성격은요?</p>
                         <div className="selectOccupation">

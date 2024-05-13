@@ -37,13 +37,13 @@ const options = [
     { value: '50대', label: '50대' },
 ];
 
-const StateSelect = () => {
+const StateSelect = (props) => {
     let dispatch = useDispatch();
-
+    const defaultOption = options.find(option => option.value === props.wantAge) || "";
 
     return (
         <div className="wantAgeSelect">
-            <Select className="wantAgeSelector" onChange={(e) => {dispatch(setWantAge(e.value))}} placeholder="" options={options} styles={customStyles} isSearchable={false} components={{IndicatorSeparator: () => null,}}/>
+            <Select className="wantAgeSelector" onChange={(e) => {dispatch(setWantAge(e.value))}} value={defaultOption} placeholder="" options={options} styles={customStyles} isSearchable={false} components={{IndicatorSeparator: () => null,}}/>
         </div>
     );
 };

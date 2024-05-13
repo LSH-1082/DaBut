@@ -7,14 +7,14 @@ import StateSelect from "../../component/select/StateSelect";
 import {setMbti} from "../../store/user";
 
 const RegisterPage2 = () => {
-    const [isActive, setIsActive] = useState(false);
-    const [first, setFirst] = useState("N");
-    const [second, setSecond] = useState("O");
-    const [third, setThird] = useState("N");
-    const [fourth, setFourth] = useState("E");
-    const dispatch = useDispatch();
     let user = useSelector(state => state.user);
     let username = user.name.slice(1);
+    const [isActive, setIsActive] = useState(user?.mbti);
+    const [first, setFirst] = useState(user?.mbti ? user.mbti.slice(0, 1) : "N");
+    const [second, setSecond] = useState(user?.mbti ? user.mbti.slice(1, 2) : "O");
+    const [third, setThird] = useState(user?.mbti ? user.mbti.slice(2, 3) : "N");
+    const [fourth, setFourth] = useState(user?.mbti ? user.mbti.slice(3, 4) : "E");
+    const dispatch = useDispatch();
 
     const clickNoButton = () => {
         setIsActive(false);
@@ -117,7 +117,7 @@ const RegisterPage2 = () => {
                         <p>살고 있는 지역을 알려주세요.</p>
                     </div>
                     <div className="selectStateInput">
-                        <StateSelect/>
+                        <StateSelect state={user.state}/>
                     </div>
                 </div>
             </div>

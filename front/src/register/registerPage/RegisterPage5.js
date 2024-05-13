@@ -10,8 +10,8 @@ const RegisterPage5 = () => {
     let user = useSelector(state => state.user);
     let dispatch = useDispatch();
 
-    const [gender, setGender] = useState("");
-    const [smoke, setSmoke] = useState("");
+    const [gender, setGender] = useState(user.gender ? user.gender : "");
+    const [smoke, setSmoke] = useState(user.smoke ? "T" : "F");
     const [height, setHeight] = useState(170);
 
     const changeHeight = (value) => {
@@ -48,7 +48,7 @@ const RegisterPage5 = () => {
                     <div className="wantAge">
                         <p>나이는</p>
                         <div className="wantAgeSelectDiv">
-                            <WantAgeSelect/>
+                            <WantAgeSelect wantAge={user.wantAge}/>
                         </div>
                     </div>
                     <div className="wantHeight">

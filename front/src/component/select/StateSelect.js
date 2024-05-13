@@ -42,13 +42,14 @@ const options = [
     { value: '제주도', label: '제주도' },
 ];
 
-const StateSelect = () => {
+const StateSelect = (props) => {
     let dispatch = useDispatch();
+    const defaultOption = options.find(option => option.value === props.state) || "";
 
 
     return (
         <div className="StateSelect">
-            <Select className="StateSelector" onChange={(e) => {dispatch(setState(e.value))}} placeholder="" options={options} styles={customStyles} isSearchable={false} components={{IndicatorSeparator: () => null,}}/>
+            <Select className="StateSelector" onChange={(e) => {dispatch(setState(e.value))}} value={defaultOption} placeholder="" options={options} styles={customStyles} isSearchable={false} components={{IndicatorSeparator: () => null,}}/>
         </div>
     );
 };

@@ -40,15 +40,15 @@ const options = [
     {value: "의대", label: "의대"},
 ];
 
-const MajorSelect = () => {
+const MajorSelect = (props) => {
     let dispatch = useDispatch();
-
+    const defaultOption = options.find(option => option.value === props.major) || "";
 
     return (
         <div className="majorSelect">
             <Select className="majorSelector" onChange={(e) => {
                 dispatch(setMajor(e.value))
-            }} isSearchable={false} options={options} styles={customStyles} placeholder="" components={{IndicatorSeparator: () => null,}}/>
+            }} isSearchable={false} options={options} value={defaultOption} styles={customStyles} placeholder="" components={{IndicatorSeparator: () => null,}}/>
         </div>
     );
 };

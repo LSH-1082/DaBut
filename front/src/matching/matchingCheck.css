@@ -5,6 +5,17 @@
     align-items: center;
 }
 
+.MatchingPeople {
+    margin-top: 20px;
+    padding-bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    height: 70%;
+    overflow-y: auto;
+}
+
 .matchingCheck {
     display: flex;
     justify-content: center;

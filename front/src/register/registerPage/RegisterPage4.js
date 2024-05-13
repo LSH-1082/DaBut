@@ -17,7 +17,7 @@ const RegisterPage4 = () => {
     let user = useSelector(state => state.user);
     let username = user.name.slice(1);
     const dispatch = useDispatch();
-    const [animal, setAnimal] = useState("");
+    const [animal, setAnimal] = useState(user.face);
 
     const clickFace = (face) => {
         dispatch(setFace(face));

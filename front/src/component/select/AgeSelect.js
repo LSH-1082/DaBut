@@ -1,4 +1,3 @@
-import React from 'react';
 import Select from 'react-select';
 import "./AgeSelect.css";
 import {useDispatch} from "react-redux";
@@ -40,13 +39,13 @@ const options = [
     { value: 28, label: '28' }
 ];
 
-const AgeSelect = () => {
+const AgeSelect = (props) => {
     let dispatch = useDispatch();
-
+    const defaultOption = options.find(option => option.value === props.age) || "";
 
     return (
         <div className="Select">
-            <Select className="Selector" onChange={(e) => {dispatch(setAge(e.value))}} placeholder="" options={options} styles={customStyles} isSearchable={false} components={{IndicatorSeparator: () => null,}}/>
+            <Select className="Selector" onChange={(e) => {dispatch(setAge(e.value))}} value={defaultOption} placeholder="" options={options} styles={customStyles} isSearchable={false} components={{IndicatorSeparator: () => null,}}/>
         </div>
     );
 };

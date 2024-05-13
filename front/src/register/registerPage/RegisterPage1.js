@@ -2,7 +2,13 @@ import RegisterFooter from "../registerFooter/RegisterFooter";
 import "./RegisterPage1.css";
 import AgeSelect from "../../component/select/AgeSelect";
 import {useSelector, useDispatch} from "react-redux";
-import {setGender, setHeight, setKakaoId, setName, setNickname, setSmoke} from "../../store/user";
+import {setGender,
+    setHeight,
+    setKakaoId,
+    setName,
+    setNickname,
+    setSmoke,
+} from "../../store/user";
 import SelectRange from "../range/SelectRange";
 import {useState} from "react";
 import WeightSelect from "../../component/select/WeightSelect";
@@ -12,7 +18,7 @@ const RegisterPage1 = () => {
     let dispatch = useDispatch();
 
     const [height, setHei] = useState(user.height);
-    const [smoke, setSmk] = useState("");
+    const [smoke, setSmk] = useState(user.smoke ? "T" : "F");
 
     const changeHeight = (value) => {
         dispatch(setHeight(value[0]));
@@ -68,7 +74,7 @@ const RegisterPage1 = () => {
                     </div>
                     <div className="age">
                         <p>나이는</p>
-                        <AgeSelect/>
+                        <AgeSelect age={user.age}/>
                     </div>
                     <div className="height">
                         <p>키는</p>
@@ -81,7 +87,7 @@ const RegisterPage1 = () => {
                     </div>
                     <div className="name">
                         <p>체형은</p>
-                        <WeightSelect/>
+                        <WeightSelect weight={user.weight}/>
                     </div>
                     <div className="smoke">
                         <p>흡연유무</p>

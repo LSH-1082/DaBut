@@ -5,7 +5,19 @@ import MainFooter from "../main/MainFooter";
 import {useNavigate} from "react-router-dom";
 import {setMainPage} from "../store/mainPage";
 import Cookies from "js-cookie";
-import {getProfile} from "../api/UserData";
+import {getAllProfile, getProfile} from "../api/UserData";
+import {
+    setAge, setFace, setFrequency,
+    setGender,
+    setHeight, setIntro,
+    setKakaoId, setMajor,
+    setMbti,
+    setName,
+    setNickname, setOccupation, setPersonality,
+    setSmoke, setState, setWantAge, setWantGender, setWantHeight, setWantOccupation, setWantSmoke,
+    setWeight
+} from "../store/user";
+import {setPage} from "../store/page";
 
 const Profile = () => {
     const [profile, setProfile] = useState({});
@@ -18,12 +30,35 @@ const Profile = () => {
 
     useEffect(() => {
         dispatch(setMainPage("profilePage"));
-        getProfile((Cookies.get("accessToken"))).then((res) => {
+        getProfile(Cookies.get("accessToken")).then((res) => {
             setProfile(res.data);
-            console.log(res.data);
             setCreateYear(res.data.connectedAt.slice(0, 10).slice(2, 4));
             setCreateMonth(res.data.connectedAt.slice(0, 10).slice(5, 7));
             setCreateDay(res.data.connectedAt.slice(0, 10).slice(8, 10));
+        });
+        getAllProfile(Cookies.get("accessToken")).then((res) => {
+            dispatch(setName(res.data.name));
+            dispatch(setGender(res.data.gender));
+            dispatch(setKakaoId(res.data.kakaoId));
+            dispatch(setAge(res.data.age));
+            dispatch(setNickname(res.data.nickname));
+            dispatch(setHeight(res.data.height));
+            dispatch(setWeight(res.data.weight));
+            dispatch(setMbti(res.data.mbti));
+            dispatch(setSmoke(res.data.smoke));
+            dispatch(setOccupation(res.data.occupation));
+            dispatch(setMajor(res.data.major));
+            dispatch(setPersonality(res.data.personality));
+            dispatch(setFrequency(res.data.frequency));
+            dispatch(setFace(res.data.face));
+            dispatch(setIntro(res.data.intro));
+            dispatch(setState(res.data.state));
+            dispatch(setWantGender(res.data.wantGender));
+            dispatch(setWantAge(res.data.wantAge));
+            dispatch(setWantHeight(res.data.wantHeight));
+            dispatch(setWantSmoke(res.data.wantSmoke));
+            dispatch(setWantOccupation(res.data.wantOccupation));
+            console.log(res.data);
         });
     }, [dispatch]);
 
@@ -92,8 +127,8 @@ const Profile = () => {
                 <div className="managementList">
                     <div className="managementText">
                         <p className="smallText">내 관리</p>
-                        <p className="listText">내 정보 수정</p>
-                        <p className="listText">친구 정보 수정</p>
+                        <p className="listText" onClick={() => {navigate("/editprofile"); dispatch(setPage(1))}}>내 정보 수정</p>
+                        <p className="listText" onClick={() => {navigate("/editfriend"); dispatch(setPage(1))}}>친구 정보 수정</p>
                         <p className="listText" onClick={() => navigate("/roommate")}>룸메이트 정보 수정</p>
                     </div>
                 </div>

@@ -4,6 +4,8 @@ import CheckComponent from "../component/CheckComponent";
 import MainFooter from "./MainFooter";
 import {useDispatch} from "react-redux";
 import {setMainPage} from "../store/mainPage";
+import {getFlask} from "../api/UserData";
+import Cookies from "js-cookie";
 
 const Main = () => {
     const [purpose, setPurpose] = useState("");
@@ -18,6 +20,10 @@ const Main = () => {
         else setPurpose(value);
     }
 
+    const clickMatching = () => {
+        getFlask(Cookies.get("accessToken"));
+    }
+
     return (
         <div className="purposeMainPage">
             <div className="matchingStartDiv">
@@ -27,7 +33,7 @@ const Main = () => {
                         <p className="planeMatchText">을</p>
                     </div>
                     <p className="planeMatchText">시작해볼까요?</p>
-                    <button className="goMatch">매칭하러가기</button>
+                    <button className="goMatch" onClick={clickMatching}>매칭하러가기</button>
                 </div>
                 <div className="peopleImgDiv">
                     <img className="peopleImg" src="/images/people.jpeg" alt="peopleImg"/>

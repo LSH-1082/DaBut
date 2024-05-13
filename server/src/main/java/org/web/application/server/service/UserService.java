@@ -244,6 +244,7 @@ public class UserService {
         return userDTO;
     }
 
+    @Transactional
     public UserDTO getAll(String token) {
 
         System.out.println("=========getAll()==============");

@@ -1,14 +1,3 @@
-.MatchingPeople {
-    margin-top: 20px;
-    padding-bottom: 100px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-    overflow-y: auto;
-}
-
 .MatchingPeople::-webkit-scrollbar{
     display: none;
 }
