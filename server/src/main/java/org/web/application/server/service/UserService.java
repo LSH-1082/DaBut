@@ -5,9 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.web.application.server.dto.EditFriendDTO;
 import org.web.application.server.dto.EditUserDTO;
-import org.web.application.server.dto.MyPageDTO;
 import org.web.application.server.dto.MyPageDto;
-import org.web.application.server.dto.EditUserDTO;
 import org.web.application.server.dto.UserDTO;
 import org.web.application.server.entity.*;
 import org.web.application.server.jwt.JwtProvider;
@@ -87,7 +85,7 @@ public class UserService {
     }
 
     @Transactional
-    public MyPageDTO getMypage(String token)
+    public MyPageDto getMypage(String token)
     {
         System.out.println("=========getMypage()==============");
         System.out.println("token = " + token);
@@ -105,7 +103,7 @@ public class UserService {
         System.out.println("userEntity : " + userEntity);
 
         //240513
-        MyPageDTO myPageDto = MyPageDTO.builder()
+        MyPageDto myPageDto = MyPageDto.builder()
                 .mbti(userEntity.getMbtiEntity().getMbtiName())
                 .name(userEntity.getName())
                 .gender(userEntity.getGenderEntity().getGender())
