@@ -108,7 +108,9 @@ public class UserService {
                 .name(userEntity.getName())
                 .gender(userEntity.getGenderEntity().getGender())
                 .connectedAt(authEntity.getConnectedAt())
-                .age(userEntity.getAge()).build();
+                .age(userEntity.getAge())
+                .kakaoId(userEntity.getKakaoId())
+                .location(userEntity.getLocationEntity().getLocationName()).build();
 
         return myPageDTO;
     }
