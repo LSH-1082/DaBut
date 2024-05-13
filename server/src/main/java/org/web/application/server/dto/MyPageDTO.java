@@ -1,15 +1,13 @@
 package org.web.application.server.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class MyPageDto {
+public class MyPageDTO {
     private String name;
     private String connectedAt;
     private Integer age;
