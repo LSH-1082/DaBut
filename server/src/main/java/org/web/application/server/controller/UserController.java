@@ -57,4 +57,9 @@ public class UserController {
         return  userService.getFriend(token);
     }
 
+    @GetMapping("/all")
+    public UserDTO getAll(@RequestHeader(name = "Authorization") String token) {
+        return userService.getAll(token);
+    }
+
 }

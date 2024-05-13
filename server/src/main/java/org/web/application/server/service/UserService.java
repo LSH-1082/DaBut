@@ -243,4 +243,51 @@ public class UserService {
 
         return userDTO;
     }
+
+    public UserDTO getAll(String token) {
+
+        System.out.println("=========getAll()==============");
+        System.out.println("token = " + token);
+
+        String kakaoId = jwtProvider.validate(token);
+
+        System.out.println("kakaoId : " + kakaoId);
+
+        var authEntity = authRepository.findByKakaoId(Long.valueOf(kakaoId)).orElse(null);
+
+        System.out.println("authEntity : " + authEntity);
+
+        var userEntity = userRepository.findByAuthEntity(authEntity).orElse(null);
+
+        System.out.println("userEntity : " + userEntity);
+
+        var matchingFilterEntity = matchingFilterRepository.findByUserEntity(userEntity).orElse(null);
+
+        System.out.println("matchingFilterEntity = " + matchingFilterEntity);
+
+        UserDTO userDTO = UserDTO.builder()
+                .name(userEntity.getName())
+                .gender(userEntity.getGenderEntity().getGender())
+                .age(userEntity.getAge())
+                .kakaoId(userEntity.getKakaoId())
+                .nickname(userEntity.getNickname())
+                .height(userEntity.getHeightEntity().getHeight())
+                .face(userEntity.getFaceShapeEntity().getFaceShapeName())
+                .frequency(userEntity.getSnsFrequencyEntity().getSnsFrequencyLevel())
+                .intro(userEntity.getProfile())
+                .major(userEntity.getMajorEntity().getMajorName())
+                .mbti(userEntity.getMbtiEntity().getMbtiName())
+                .occupation(userEntity.getOccupationEntity().getOccupationName())
+                .personality(userEntity.getPersonalityEntity().getPersonalityName())
+                .smoke(userEntity.getSmoking())
+                .state(userEntity.getLocationEntity().getLocationName())
+                .weight(userEntity.getWeightEntity().getWeightName())
+                .wantAge(matchingFilterEntity.getAge())
+                .wantGender(matchingFilterEntity.getGenderEntity().getGender())
+                .wantHeight(matchingFilterEntity.getHeight())
+                .wantOccupation(matchingFilterEntity.getOccupationEntity().getOccupationName())
+                .wantSmoke(matchingFilterEntity.getSmoking()).build();
+
+            return userDTO;
+    }
 }
