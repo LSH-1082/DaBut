@@ -100,6 +100,7 @@ public class UserService {
 
         System.out.println("userEntity : " + userEntity);
 
+        //240513
         MyPageDTO myPageDto = MyPageDTO.builder()
                 .mbti(userEntity.getMbtiEntity().getMbtiName())
                 .name(userEntity.getName())
