@@ -3,50 +3,55 @@
     height: 100%;
     color: #E8EE7F;
     background: #EB604A;
+    align-items: center;
+    justify-content: center;
 }
 
 .titleDiv{
-    margin-left: 49px;
-    padding-top: 50px;
+    padding-top: 30px;
+    text-align: center;
 }
+
 
 .loginTitle{
     margin: 0;
     color: #FFF;
     font-family: "Pretendard";
-    font-size: 28px;
+    font-size: 20px;
     font-style: normal;
     font-weight: 300;
     line-height: 38px; /* 135.714% */
     letter-spacing: -0.31px;
+    padding-bottom: 50%;
 }
 
 .appTitle {
     margin-top: 5px;
     margin-bottom: 0;
     font-family: "NanumSquare Neo variable";
-    font-size: 36px;
+    font-size: 25px;
     font-style: normal;
     font-weight: 900;
     line-height: 38px; /* 105.556% */
     letter-spacing: -0.31px;
 }
 
-.appTitleDiv{
-    margin-left: 49px;
-}
-
-.halfCircle {
-    margin-top: -40px;
-    margin-left: 100px;
+.logoDiv{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 50%;
 }
 
 
 .kakaoLogin{
-    margin-top: 10%;
+    position: absolute;
+    bottom: 35px;
+    left: 50%;
+    transform: translateX(-50%);
     display: flex;
     justify-content: center;
-
+    align-items: center;
 }
 
 .kakao{
