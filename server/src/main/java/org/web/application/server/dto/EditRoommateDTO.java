@@ -10,8 +10,9 @@ import lombok.*;
 @Data
 @Builder
 public class EditRoommateDTO {
-    private String cleaing;
-    private String livepattern;
-    private String roomage;
-    private String roomlocation;
+    private String roomClean;
+    private String roomPattern;
+    private String roomWantAge;
+    private String roomWantUniv;
+    private String roomIntro;
 }

@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface LivePatternRepository extends JpaRepository<LivePatternEntity, Long> {
-    Optional<LivePatternEntity> findByLivePatternId(Integer livePatternId);
+    Optional<LivePatternEntity> findByLivePatternName(String livePatternName);
 }

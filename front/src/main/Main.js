@@ -4,7 +4,7 @@ import CheckComponent from "../component/CheckComponent";
 import MainFooter from "./MainFooter";
 import {useDispatch} from "react-redux";
 import {setMainPage} from "../store/mainPage";
-import {getFlask} from "../api/UserData";
+import {getFlask, getRoommate} from "../api/UserData";
 import Cookies from "js-cookie";
 
 const Main = () => {
@@ -21,7 +21,17 @@ const Main = () => {
     }
 
     const clickMatching = () => {
-        getFlask(Cookies.get("accessToken"));
+        // getFlask(Cookies.get("accessToken"));
+        getRoommate(Cookies.get("accessToken")).then((res) => {
+            if(res.data === "") {
+                //todo 여기에 모달 띄우는 창 넣기
+                console.log("null");
+            }
+            else {
+                //todo 여기에 매칭을 잡기위한 플래그를 포스트로 쏴준다
+                console.log(res.data);
+            }
+        });
     }
 
     return (

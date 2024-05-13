@@ -17,13 +17,6 @@ public class RoommateController {
 
     private final RoommateService roommateService;
 
-    @PostMapping("/info")
-    public ResponseEntity<?> saveRoommate(@RequestBody RoommateDTO roommateDTO, @RequestHeader(name = "Authorization") String token) {
-        System.out.println("roommateDTO = " + roommateDTO + ", token = " + token);
-        roommateService.saveRoommate(roommateDTO, token);
-        return ResponseEntity.ok().build();
-    }
-
     @PostMapping("/edit")
     public ResponseEntity<?> editRoommate(@RequestBody EditRoommateDTO editRoommateDTO, @RequestHeader(name = "Authorization") String token) {
         System.out.println("editRoommateDTO = " + editRoommateDTO + ", token = " + token);
@@ -33,6 +26,6 @@ public class RoommateController {
 
     @GetMapping("/edit/view")
     public RoommateDTO getRoommate(@RequestHeader(name = "Authorization") String token) {
-        return  roommateService.getRoommate(token);
+        return roommateService.getRoommate(token);
     }
 }

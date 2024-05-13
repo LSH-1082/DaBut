@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface CleaningRepository extends JpaRepository<CleaningEntity, Long> {
-    Optional<CleaningEntity> findByCleaningId(Integer cleaningId);
+    Optional<CleaningEntity> findByCleaningName(String cleaningName);
 }

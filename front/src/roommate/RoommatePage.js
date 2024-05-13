@@ -4,7 +4,7 @@ import RoommatePageFooter from "./RoommatePageFooter";
 import RoomAgeSelect from "../component/select/RoomAgeSelect";
 import RoomUnivSelect from "../component/select/RoomUnivSelect";
 import {useDispatch, useSelector} from "react-redux";
-import {setRoomClean, setRoomIntro, setRoomPattern} from "../store/roommate";
+import {setRoomClean, setRoomIntro, setRoomPattern, setRoomWantAge, setRoomWantUniv} from "../store/roommate";
 import {getRoommate} from "../api/UserData";
 import Cookies from "js-cookie";
 
@@ -32,11 +32,15 @@ const RoommatePage = () => {
 
     useEffect(() => {
         getRoommate(Cookies.get("accessToken")).then((res) => {
-            if(res.data === null) {
-
+            if(res.data !== null) {
+                dispatch(setRoomClean(res.data.roomClean));
+                dispatch(setRoomPattern(res.data.roomPattern));
+                dispatch(setRoomWantAge(res.data.roomWantAge));
+                dispatch(setRoomWantUniv(res.data.roomWantUniv));
+                dispatch(setRoomIntro(res.data.roomIntro));
             }
         });
-    }, []);
+    }, [dispatch]);
 
     return (
         <div className="RoommatePage">
@@ -90,7 +94,7 @@ const RoommatePage = () => {
 
                 <div className="roomTextareaDiv">
                     <p className="roomTextareaText">기타사항</p>
-                    <textarea className="roomIntro" placeholder="ex) 저는 애인이 있습니다." value={roommate.roomIntro} onChange={(e) => {dispatch(setRoomIntro(e.target.value))}}></textarea>
+                    <textarea className="roomIntro" placeholder="ex) 저는 애인이 있습니다." value={roommate.roomIntro || ""} onChange={(e) => {dispatch(setRoomIntro(e.target.value))}}></textarea>
                     <p className="roomTextareaUnderText">룸메이트 프로필은 매칭된 상대에게만 공개됩니다</p>
                 </div>
             </div>

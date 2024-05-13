@@ -23,40 +23,6 @@ public class RoommateService {
     private final UserRepository userRepository;
     private final JwtProvider jwtProvider;
 
-    public void saveRoommate(RoommateDTO roommateDTO, String token) {
-        RoommateFilterEntity roommateFilterEntity = toRoommateFilterEntity(roommateDTO, token);
-        System.out.println("roommateFilterEntity = " + roommateFilterEntity);
-        roommateFilterRepository.save(roommateFilterEntity);
-    }
-
-    private RoommateFilterEntity toRoommateFilterEntity(RoommateDTO roommateDTO, String token) {
-
-        String kakaoId = jwtProvider.validate(token);
-
-        System.out.println("kakaoId : " + kakaoId);
-
-        var authEntity = authRepository.findByKakaoId(Long.valueOf(kakaoId)).orElse(null);
-
-        System.out.println("authEntity : " + authEntity);
-
-        var userEntity = userRepository.findByAuthEntity(authEntity).orElse(null);
-
-        System.out.println("userEntity : " + userEntity);
-
-        RoommateFilterEntity roommateFilterEntity = RoommateFilterEntity.builder()
-                .userEntity(userEntity)
-                .cleaningEntity(cleaningRepository.findByCleaningId(Integer.valueOf(roommateDTO.getRoomClean())).orElse(null))
-                .livePatternEntity(livePatternRepository.findByLivePatternId(Integer.valueOf(roommateDTO.getRoomPattern())).orElse(null))
-                .roomAgeEntity(roomAgeRepository.findByRoomAgeId(Integer.valueOf(roommateDTO.getRoomWantAge())).orElse(null))
-                .roomLocationEntity(roomLocationRepository.findByRoomLocationId(Integer.valueOf(roommateDTO.getRoomWantUniv())).orElse(null))
-                .Intro(roommateDTO.getRoomIntro()).build();
-
-        roommateFilterRepository.save(roommateFilterEntity);
-
-        return roommateFilterEntity;
-
-    }
-
     public void editRoommate(EditRoommateDTO editRoommateDTO, String token) {
         String kakaoId = jwtProvider.validate(token);
 
@@ -70,14 +36,26 @@ public class RoommateService {
 
         System.out.println("userEntity : " + userEntity);
 
-        RoommateFilterEntity roommateFilterEntity = RoommateFilterEntity.builder()
-                .cleaningEntity(cleaningRepository.findByCleaningId(Integer.valueOf(editRoommateDTO.getCleaing())).orElse(null))
-                .livePatternEntity(livePatternRepository.findByLivePatternId(Integer.valueOf(editRoommateDTO.getLivepattern())).orElse(null))
-                .roomAgeEntity(roomAgeRepository.findByRoomAgeId(Integer.valueOf(editRoommateDTO.getRoomage())).orElse(null))
-                .roomLocationEntity(roomLocationRepository.findByRoomLocationId(Integer.valueOf(editRoommateDTO.getRoomlocation())).orElse(null)).build();
-
-        roommateFilterRepository.save(roommateFilterEntity);
-
+        if (roommateFilterRepository.findByUserEntity(userEntity).isPresent()) {
+            var roommateFilterEntity = roommateFilterRepository.findByUserEntity(userEntity).get();
+            roommateFilterEntity.setCleaningEntity(cleaningRepository.findByCleaningName(editRoommateDTO.getRoomClean()).orElse(null));
+            roommateFilterEntity.setLivePatternEntity(livePatternRepository.findByLivePatternName(editRoommateDTO.getRoomPattern()).orElse(null));
+            roommateFilterEntity.setRoomAgeEntity(roomAgeRepository.findByRoomAgeName(editRoommateDTO.getRoomWantAge()).orElse(null));
+            roommateFilterEntity.setRoomLocationEntity(roomLocationRepository.findByRoomLocationName(editRoommateDTO.getRoomWantUniv()).orElse(null));
+            roommateFilterEntity.setIntro(editRoommateDTO.getRoomIntro());
+            roommateFilterRepository.save(roommateFilterEntity);
+        }
+        else {
+            RoommateFilterEntity roommateFilterEntity = RoommateFilterEntity.builder()
+                    .userEntity(userEntity)
+                    .cleaningEntity(cleaningRepository.findByCleaningName(editRoommateDTO.getRoomClean()).orElse(null))
+                    .livePatternEntity(livePatternRepository.findByLivePatternName(editRoommateDTO.getRoomPattern()).orElse(null))
+                    .roomAgeEntity(roomAgeRepository.findByRoomAgeName(editRoommateDTO.getRoomWantAge()).orElse(null))
+                    .roomLocationEntity(roomLocationRepository.findByRoomLocationName(editRoommateDTO.getRoomWantUniv()).orElse(null))
+                    .Intro(editRoommateDTO.getRoomIntro())
+                    .build();
+            roommateFilterRepository.save(roommateFilterEntity);
+        }
     }
 
     @Transactional
@@ -101,7 +79,7 @@ public class RoommateService {
 
         System.out.println("roommateEntity = " + roommateEntity);
 
-        if(roommateEntity.isPresent()) {
+        if (roommateEntity.isPresent()) {
 
             var roommate = roommateEntity.get();
 
@@ -114,11 +92,8 @@ public class RoommateService {
                     .build();
 
             return roommateDTO;
-        }
-
-        else {
+        } else {
             return null;
         }
-
     }
 }

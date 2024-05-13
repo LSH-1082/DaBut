@@ -1,13 +1,15 @@
 import "../register/registerFooter/RegisterFooter.css";
 import {useNavigate} from "react-router-dom";
 import {useSelector} from "react-redux";
+import {editRoommate} from "../api/UserData";
+import Cookies from "js-cookie";
 
 const RoommatePageFooter = () => {
     const navigate = useNavigate();
     let roommate = useSelector(state => state.roommate);
 
     const clickRoomButton = () => {
-        //todo api만들어서 서버로 룸메정보 보내는 함수 작성 해야함
+        editRoommate(roommate, Cookies.get("accessToken"));
         console.log(roommate);
         navigate("/main");
     }

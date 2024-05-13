@@ -58,7 +58,6 @@ const Profile = () => {
             dispatch(setWantHeight(res.data.wantHeight));
             dispatch(setWantSmoke(res.data.wantSmoke));
             dispatch(setWantOccupation(res.data.wantOccupation));
-            console.log(res.data);
         });
     }, [dispatch]);
 
