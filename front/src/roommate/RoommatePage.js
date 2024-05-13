@@ -1,10 +1,12 @@
 import "./RoommatePage.css";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import RoommatePageFooter from "./RoommatePageFooter";
 import RoomAgeSelect from "../component/select/RoomAgeSelect";
 import RoomUnivSelect from "../component/select/RoomUnivSelect";
 import {useDispatch, useSelector} from "react-redux";
 import {setRoomClean, setRoomIntro, setRoomPattern} from "../store/roommate";
+import {getRoommate} from "../api/UserData";
+import Cookies from "js-cookie";
 
 const RoommatePage = () => {
     const [select, setSelect] = useState("");
@@ -27,6 +29,14 @@ const RoommatePage = () => {
             setPattern(value);
         }
     }
+
+    useEffect(() => {
+        getRoommate(Cookies.get("accessToken")).then((res) => {
+            if(res.data === null) {
+
+            }
+        });
+    }, []);
 
     return (
         <div className="RoommatePage">

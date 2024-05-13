@@ -25,7 +25,7 @@ const Profile = () => {
             setCreateMonth(res.data.connectedAt.slice(0, 10).slice(5, 7));
             setCreateDay(res.data.connectedAt.slice(0, 10).slice(8, 10));
         });
-    }, []);
+    }, [dispatch]);
 
     return (
         <div className="MyPage">
@@ -57,8 +57,8 @@ const Profile = () => {
                     <div className="profileContainerDiv">
                         <div className="profileContainer">
                             <div className="profileTextDiv">
-                                <p className="profileText">{profile.age}</p>
-                                <p className="profileText">{profile.location}</p>
+                                <p className="profileText">{profile.age},</p>
+                                <p className="profileText">{profile.location},</p>
                                 <p className="profileText">{profile.mbti}</p>
                             </div>
                             <div className="createDate">

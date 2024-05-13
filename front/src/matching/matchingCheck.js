@@ -10,7 +10,7 @@ const MatchingCheck = () => {
 
     useEffect(() => {
         dispatch(setMainPage("listPage"));
-    }, []);
+    }, [dispatch]);
 
     const [select, setSelect] = useState("all");
     return (

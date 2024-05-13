@@ -25,10 +25,8 @@ const Login = () => {
                           fill="white"/>
                 </svg>
             </div>
-            <div className="kakaoLogin">
-                <div className="kakao" onClick={kakaoLogin}>
-                    <p>카카오톡계정 로그인</p>
-                </div>
+            <div className="kakaoLogin" onClick={kakaoLogin}>
+                <img src="/images/kakao_login_medium_wide.png" alt=""/>
             </div>
         </div>
     );

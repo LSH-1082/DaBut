@@ -2,7 +2,7 @@ import RegisterPage1 from "./registerPage/RegisterPage1";
 import RegisterPage2 from "./registerPage/RegisterPage2";
 import RegisterPage3 from "./registerPage/RegisterPage3";
 import RegisterPage4 from "./registerPage/RegisterPage4";
-import RegisterPage5 from "./registerPage/RegisterPage4";
+import RegisterPage5 from "./registerPage/RegisterPage5";
 import "./Register.css";
 import {useSelector} from "react-redux";
 import {useEffect} from "react";

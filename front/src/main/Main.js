@@ -2,8 +2,6 @@ import "./Main.css";
 import {useEffect, useState} from "react";
 import CheckComponent from "../component/CheckComponent";
 import MainFooter from "./MainFooter";
-import api from "../api/api";
-import Cookies from "js-cookie";
 import {useDispatch} from "react-redux";
 import {setMainPage} from "../store/mainPage";
 
@@ -13,7 +11,7 @@ const Main = () => {
 
     useEffect(() => {
         dispatch(setMainPage("mainPage"));
-    }, []);
+    }, [dispatch]);
 
     const clickPurpose = (value) => {
         if (purpose === value) setPurpose("");
