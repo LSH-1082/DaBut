@@ -17,6 +17,8 @@ public class RoommateFilterEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long roommateFilterId;
 
+    private String Intro;
+
     //청소 주기
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "cleaning_id")
