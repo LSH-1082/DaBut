@@ -1,9 +1,11 @@
 package org.web.application.server.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -12,6 +14,7 @@ public class MyPageDTO {
     private String connectedAt;
     private Integer age;
     private String gender;
+    private String ninckname;
     private String mbti;
     private String kakaoId;
     private String location;
