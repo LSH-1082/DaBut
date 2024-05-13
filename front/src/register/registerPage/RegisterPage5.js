@@ -10,9 +10,9 @@ const RegisterPage5 = () => {
     let user = useSelector(state => state.user);
     let dispatch = useDispatch();
 
-    const [gender, setGender] = useState(user.gender ? user.gender : "");
-    const [smoke, setSmoke] = useState(user.smoke ? "T" : "F");
-    const [height, setHeight] = useState(170);
+    const [gender, setGender] = useState(user.wantGender ? user.wantGender : "");
+    const [smoke, setSmoke] = useState(user.wantSmoke ? "T" : "F");
+    const [height, setHeight] = useState(user.wantHeight);
 
     const changeHeight = (value) => {
         setHeight(value[0]);

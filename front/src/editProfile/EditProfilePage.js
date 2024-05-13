@@ -7,6 +7,8 @@ import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import {setPage} from "../store/page";
+import {editProfile} from "../api/UserData";
+import Cookies from "js-cookie";
 
 const EditProfilePage = () => {
     const page = useSelector(state => state.page);
@@ -17,7 +19,24 @@ const EditProfilePage = () => {
 
     useEffect(() => {
         if(page.page === 5) {
-            //todo 유저 수정하는 api 만들기
+            editProfile({
+                name: user.name,
+                gender: user.gender,
+                age: user.age,
+                kakaoId: user.kakaoId,
+                nickname: user.nickname,
+                height: user.height,
+                face: user.face,
+                frequency: user.frequency,
+                intro: user.intro,
+                major: user.major,
+                mbti: user.mbti,
+                occupation: user.occupation,
+                personality: user.personality,
+                smoke: user.smoke,
+                state: user.state,
+                weight: user.weight
+            }, Cookies.get("accessToken"));
             navigate("/main");
             dispatch(setPage(1));
         }

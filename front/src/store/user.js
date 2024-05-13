@@ -21,7 +21,7 @@ export const userSlice = createSlice({
         state: "",
         wantGender: "",
         wantAge: "",
-        wantHeight: "",
+        wantHeight: 170,
         wantSmoke: false,
         wantOccupation: "",
     },

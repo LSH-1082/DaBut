@@ -131,30 +131,28 @@ public class UserService {
 
         System.out.println("userEntity : " + userEntity);
 
-        userEntity = UserEntity.builder()
-                .name("수정")
-                .genderEntity(genderRepository.findByGender(editUserDTO.getGender()).orElse(null))
-                .age(editUserDTO.getAge())
-                .kakaoId(editUserDTO.getKakaoId())
-                .nickname(editUserDTO.getNickname())
-                .heightEntity(heightRepository.findByHeight(editUserDTO.getHeight()).orElse(null))
-                .faceShapeEntity(faceShapeRepository.findByFaceShapeName(editUserDTO.getFace()).orElse(null))
-                .snsFrequencyEntity(snsFrequencyRepository.findBySnsFrequencyLevel(editUserDTO.getFrequency()).orElse(null))
-                .profile(editUserDTO.getIntro())
-                .majorEntity(majorRepository.findByMajorName(editUserDTO.getMajor()).orElse(null))
-                .mbtiEntity(mbtiRepository.findByMbtiName(editUserDTO.getMbti()).orElse(null))
-                .occupationEntity(occupationRepository.findByOccupationName(editUserDTO.getOccupation()).orElse(null))
-                .personalityEntity(personalityRepository.findByPersonalityName(editUserDTO.getPersonality()).orElse(null))
-                .smoking(editUserDTO.isSmoke())
-                .locationEntity(locationRepository.findByLocationName(editUserDTO.getState()).orElse(null))
-                .weightEntity(weightRepository.findByWeightName(editUserDTO.getWeight()).orElse(null))
-                .build();
+        userEntity.setName(editUserDTO.getName());
+        userEntity.setGenderEntity(genderRepository.findByGender(editUserDTO.getGender()).orElse(null));
+        userEntity.setAge(editUserDTO.getAge());
+        userEntity.setKakaoId(editUserDTO.getKakaoId());
+        userEntity.setNickname(editUserDTO.getNickname());
+        userEntity.setHeightEntity(heightRepository.findByHeight(editUserDTO.getHeight()).orElse(null));
+        userEntity.setFaceShapeEntity(faceShapeRepository.findByFaceShapeName(editUserDTO.getFace()).orElse(null));
+        userEntity.setSnsFrequencyEntity(snsFrequencyRepository.findBySnsFrequencyLevel(editUserDTO.getFrequency()).orElse(null));
+        userEntity.setProfile(editUserDTO.getIntro());
+        userEntity.setMajorEntity(majorRepository.findByMajorName(editUserDTO.getMajor()).orElse(null));
+        userEntity.setMbtiEntity(mbtiRepository.findByMbtiName(editUserDTO.getMbti()).orElse(null));
+        userEntity.setOccupationEntity(occupationRepository.findByOccupationName(editUserDTO.getOccupation()).orElse(null));
+        userEntity.setPersonalityEntity(personalityRepository.findByPersonalityName(editUserDTO.getPersonality()).orElse(null));
+        userEntity.setSmoking(editUserDTO.isSmoke());
+        userEntity.setLocationEntity(locationRepository.findByLocationName(editUserDTO.getState()).orElse(null));
+        userEntity.setWeightEntity(weightRepository.findByWeightName(editUserDTO.getWeight()).orElse(null));
 
         userRepository.save(userEntity);
     }
 
     public void editFriend(EditFriendDTO editFriendDTO, String token) {
-
+        System.out.println("=========getUser()==============");
         String kakaoId = jwtProvider.validate(token);
 
         System.out.println("kakaoId : " + kakaoId);
@@ -167,14 +165,15 @@ public class UserService {
 
         System.out.println("userEntity : " + userEntity);
 
-        userEntity = UserEntity.builder()
-                .age(Integer.valueOf(editFriendDTO.getWantAge()))
-                .genderEntity(genderRepository.findByGender(editFriendDTO.getWantGender()).orElse(null))
-                .heightEntity(heightRepository.findByHeight(editFriendDTO.getWantHeight()).orElse(null))
-                .occupationEntity(occupationRepository.findByOccupationName(editFriendDTO.getWantOccupation()).orElse(null))
-                .smoking(editFriendDTO.isWantSmoke()).build();
+        var matchingFilterEntity = matchingFilterRepository.findByUserEntity(userEntity).orElse(null);
 
-        userRepository.save(userEntity);
+        matchingFilterEntity.setAge(editFriendDTO.getWantAge());
+        matchingFilterEntity.setHeight(editFriendDTO.getWantHeight());
+        matchingFilterEntity.setGenderEntity(genderRepository.findByGender(editFriendDTO.getWantGender()).orElse(null));
+        matchingFilterEntity.setOccupationEntity(occupationRepository.findByOccupationName(editFriendDTO.getWantOccupation()).orElse(null));
+        matchingFilterEntity.setSmoking(editFriendDTO.isWantSmoke());
+
+        matchingFilterRepository.save(matchingFilterEntity);
     }
 
     public UserDTO getUser(String token) {
