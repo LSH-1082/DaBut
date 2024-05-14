@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 import org.web.application.server.dto.MatchingDTO;
+import org.web.application.server.dto.UserDTO;
 import org.web.application.server.entity.MatchingFilterEntity;
 import org.web.application.server.entity.UserEntity;
 import org.web.application.server.jwt.JwtProvider;
@@ -17,7 +18,10 @@ import org.web.application.server.repository.AuthRepository;
 import org.web.application.server.repository.MatchingFilterRepository;
 import org.web.application.server.repository.UserRepository;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -30,8 +34,7 @@ public class FlaskService {
     private final MatchingFilterRepository matchingFilterRepository;
 
     @Transactional
-    public String sendToFlask(String token) throws JsonProcessingException
-    {
+    public String sendToFlask(String token) throws JsonProcessingException {
         System.out.println("FlaskService.sendToFlask");
 
         String kakaoId = jwtProvider.validate(token);
@@ -53,23 +56,113 @@ public class FlaskService {
          * user가 매칭하러가기를 누르고 프론트로부터 받은 token정보를 바탕으로
          * 해당 user의 매칭필터 내용을 가져와 1차적으로 user테이블에서 데이터를 정제
          */
-        if(authEntity != null && userEntity!= null && matchingFilterEntity !=null)
-        {
-            filteredUserList = userRepository.findByMatchingStateAndGenderEntityGenderAndSmoking(
+        List<MatchingDTO> matchingDTOList;
+        if (authEntity != null && userEntity != null && matchingFilterEntity != null) {
+            int minAge;
+            int maxAge;
+            switch (matchingFilterEntity.getAge()) {
+                case "20대":
+                    minAge = 20;
+                    maxAge = 29;
+                    break;
+                case "30대":
+                    minAge = 30;
+                    maxAge = 39;
+                    break;
+                case "40대":
+                    minAge = 40;
+                    maxAge = 49;
+                    break;
+                default:
+                    minAge = 0;
+                    maxAge = 0;
+                    break;
+            }
+
+            filteredUserList = userRepository.findByMatchingStateAndGenderEntityGenderAndSmokingAndLocationEntityLocationNameAndAgeBetween(
                     userEntity.getMatchingState(),
                     matchingFilterEntity.getGenderEntity().getGender(),
-                    matchingFilterEntity.getSmoking()).orElse(null);
+                    matchingFilterEntity.getSmoking(),
+                    userEntity.getLocationEntity().getLocationName(),
+                    minAge, maxAge).orElse(null);
 
-            System.out.println("filteredUserList : " + filteredUserList);
 
-            //for
-        }
-        else
-        {
+            UserEntity firstUser = filteredUserList.get(0);
+            System.out.println("Filtered User Name: " + firstUser.getName());
+
+
+            List<UserEntity> jiinlist = new ArrayList<>();
+
+            jiinlist.add(userEntity);
+
+            for (int i = 0; i < filteredUserList.size(); i++) {
+                // 거른 후 친구의 Entity
+                var filteredUserEntity = filteredUserList.get(i);
+
+                // 필터를 걸러서 가져온 정보를 바탕으로 내정보를 가져와서 비교하기
+                // 매칭 결과에 맞는 사람들의 Entity
+                // 친구가 원하는 친구의 정보
+                var filteredMatchingFilterEntity = matchingFilterRepository.findByUserEntity(filteredUserEntity).orElse(null);
+                //System.out.println("getGenderEntity: " + filteredMatchingFilterEntity.getGenderEntity());
+
+                if (!filteredMatchingFilterEntity.getSmoking().equals(userEntity.getSmoking())) {
+                    continue;
+                }
+                if (filteredMatchingFilterEntity.getGenderEntity() != userEntity.getGenderEntity()) {
+                    continue;
+                }
+                if (!Objects.equals(filteredMatchingFilterEntity.getHeight(), userEntity.getHeightEntity().getHeight())) {
+                    continue;
+                }
+                int filterminAge = 0;
+                int filtermaxAge = 0;
+                switch (filteredMatchingFilterEntity.getAge()) {
+                    case "20대":
+                        filterminAge = 20;
+                        filtermaxAge = 29;
+                        break;
+                    case "30대":
+                        filterminAge = 30;
+                        filtermaxAge = 39;
+                        break;
+                    case "40대":
+                        filterminAge = 40;
+                        filtermaxAge = 49;
+                        break;
+                    default:
+                        filterminAge = 0;
+                        filtermaxAge = 0;
+                        break;
+                }
+                if (userEntity.getAge() >= filtermaxAge || userEntity.getAge() <= filterminAge) {
+                    continue;
+                }
+
+                jiinlist.add(filteredUserEntity);
+
+            }
+            System.out.println("jiinlist = " + jiinlist.get(0).getName());
+            System.out.println("jiinlist = " + jiinlist.get(1).getName());
+
+
+            matchingDTOList = jiinlist.stream()
+                    .map(user -> MatchingDTO.builder()
+                            .age(user.getAge())
+                            .userId(user.getUserId())
+                            .faceShape(user.getFaceShapeEntity().getFaceShapeName())
+                            .mbti(user.getMbtiEntity().getMbtiName())
+                            .personality(user.getPersonalityEntity().getPersonalityName())
+                            .snsFrequency(user.getSnsFrequencyEntity().getSnsFrequencyLevel())
+                            .major(user.getMajorEntity().getMajorName())
+                            // 필요한 다른 필드 추가
+                            .build())
+                    .toList();
+
+
+            System.out.println("matchingDtoList = " + matchingDTOList.get(0).getUserId());
+        } else {
             return null;
         }
-
-
 
 
         //사용자가 매칭하기를 누름 > DB에 매칭 상태 변환 >
@@ -82,18 +175,13 @@ public class FlaskService {
         //결국은 flask에서 db를 또 연결해줘야?
 
 
-
-        MatchingDTO matchingDto = MatchingDTO.builder().build();
-
-
-
         RestTemplate restTemplate = new RestTemplate();
         //헤더를 JSON으로 설정함
         HttpHeaders headers = new HttpHeaders();
         //파라미터로 들어온 dto를 JSON 객체로 변환
         headers.setContentType(MediaType.APPLICATION_JSON);
 
-        String param = objectMapper.writeValueAsString(matchingDto);
+        String param = objectMapper.writeValueAsString(matchingDTOList);
 
         HttpEntity<String> entity = new HttpEntity<>(param, headers);
         //실제 Flask 서버랑 연결하기 위한 URL

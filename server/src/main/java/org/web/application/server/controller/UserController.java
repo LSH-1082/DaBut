@@ -40,10 +40,6 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/view/info")
-    public UserDTO getUser(@RequestHeader(name = "Authorization") String token) {
-        return userService.getUser(token);
-    }
 
     @PostMapping("/edit/friend")
     public ResponseEntity<?> editFriend(@RequestBody EditFriendDTO editFriendDTO, @RequestHeader(name = "Authorization") String token) {
@@ -52,10 +48,6 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/view/friend")
-    public UserDTO getFriend(@RequestHeader(name = "Authorization") String token) {
-        return  userService.getFriend(token);
-    }
 
     @GetMapping("/all")
     public UserDTO getAll(@RequestHeader(name = "Authorization") String token) {
