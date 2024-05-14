@@ -18,7 +18,7 @@ const EditProfilePage = () => {
 
 
     useEffect(() => {
-        if(page.page === 5) {
+        if(page.page === 11) {
             editProfile({
                 name: user.name,
                 gender: user.gender,
@@ -44,10 +44,10 @@ const EditProfilePage = () => {
 
     return (
         <div className="Register">
-            {page.page === 1 ? (<RegisterPage1/>) : (<></>)}
-            {page.page === 2 ? (<RegisterPage2/>) : (<></>)}
-            {page.page === 3 ? (<RegisterPage3/>) : (<></>)}
-            {page.page === 4 ? (<RegisterPage4/>) : (<></>)}
+            {page.page === 7 ? (<RegisterPage1/>) : (<></>)}
+            {page.page === 8 ? (<RegisterPage2/>) : (<></>)}
+            {page.page === 9 ? (<RegisterPage3/>) : (<></>)}
+            {page.page === 10 ? (<RegisterPage4/>) : (<></>)}
         </div>
     );
 }

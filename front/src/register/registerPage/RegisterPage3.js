@@ -144,10 +144,10 @@ const RegisterPage3 = () => {
                         <p className="registerPageTitle">SNS 사용빈도는</p>
                         <div className="snsSelectDiv">
                             <div className="snsSelect">
-                                {frequency === 4 ? (<p className="snsFrequency">“ 맛집가면 스토리는 무조건 “</p>) : (<></>)}
-                                {frequency === 3 ? (<p className="snsFrequency">“ 3단계 “</p>) : (<></>)}
-                                {frequency === 2 ? (<p className="snsFrequency">“ 2단계 “</p>) : (<></>)}
-                                {frequency === 1 ? (<p className="snsFrequency">“ 1단계 “</p>) : (<></>)}
+                                {frequency === 4 ? (<p className="snsFrequency">“ 맛집가면 스토리는 무조건! “</p>) : (<></>)}
+                                {frequency === 3 ? (<p className="snsFrequency">“ 거의 매일 접속해! “</p>) : (<></>)}
+                                {frequency === 2 ? (<p className="snsFrequency">“ 가끔씩 해! “</p>) : (<></>)}
+                                {frequency === 1 ? (<p className="snsFrequency">“ 계정은 있어! “</p>) : (<></>)}
                                 {frequency === 0 ? (<p className="snsFrequency">“ 인스타 안해! “</p>) : (<></>)}
                                 <SelectRange min={0} max={4} step={1} values={[frequency]} onChange={(value) => {changeFrequency(value)}}/>
                             </div>
