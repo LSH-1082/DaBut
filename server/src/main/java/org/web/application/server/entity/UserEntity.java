@@ -37,6 +37,9 @@ public class UserEntity {
     //신고 횟수
     @Builder.Default
     private Integer warning = 0;
+    //매칭 여부
+    @Builder.Default
+    private String matchingState = "none";
     /*******************************ManyToOne******************************************/
     //성별
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

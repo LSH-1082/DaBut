@@ -102,8 +102,7 @@ public class UserService {
 
         System.out.println("userEntity : " + userEntity);
 
-        //240513
-        MyPageDTO myPageDTO = MyPageDTO.builder()
+        return MyPageDTO.builder()
                 .mbti(userEntity.getMbtiEntity().getMbtiName())
                 .name(userEntity.getName())
                 .gender(userEntity.getGenderEntity().getGender())
@@ -112,8 +111,6 @@ public class UserService {
                 .kakaoId(userEntity.getKakaoId())
                 .location(userEntity.getLocationEntity().getLocationName())
                 .ninckname(userEntity.getNickname()).build();
-
-        return myPageDTO;
     }
 
 
