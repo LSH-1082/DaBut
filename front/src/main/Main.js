@@ -21,7 +21,7 @@ const Main = () => {
     }
 
     const clickMatching = () => {
-        // getFlask(Cookies.get("accessToken"));
+        getFlask(Cookies.get("accessToken"));
         getRoommate(Cookies.get("accessToken")).then((res) => {
             if(res.data === "") {
                 //todo 여기에 모달 띄우는 창 넣기

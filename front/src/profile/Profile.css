@@ -10,11 +10,13 @@
     font-family: Pretendard;
     font-size: 13px;
     font-weight: 700;
+    padding-bottom: 5px;
 }
 
 .listText {
     margin-left: 10px;
     cursor: pointer;
+    padding-bottom: 6px;
 }
 
 .mypageContainer {
@@ -100,7 +102,12 @@
     margin: 0 5px 0 0;
     color: white;
     font-family: Pretendard;
-    font-size: 20px;
+    font-size: 17px;
+}
+
+.profileImg {
+    padding-left: 15px;
+    padding-bottom: 5px;
 }
 
 .profile {
@@ -112,7 +119,7 @@
     justify-content: center;
     text-align: center;
     font-family: Pretendard;
-    font-size: 15px;
+    font-size: 12px;
     color: #D6D6D6;
 }
 
