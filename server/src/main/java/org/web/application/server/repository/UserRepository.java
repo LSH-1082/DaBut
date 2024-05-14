@@ -13,6 +13,12 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     Optional<UserEntity> findByAuthEntity(AuthEntity authEntity);
 
-    Optional<List<UserEntity>> findByMatchingStateAndGenderEntityGenderAndSmoking(String matchingState, String gender, Boolean smoking);
+    Optional<List<UserEntity>> findByMatchingStateAndGenderEntityGenderAndSmokingAndLocationEntityLocationNameAndAgeBetween(
+            String matchingState,
+            String gender,
+            Boolean smoking,
+            String locationName,
+            int minAge,
+            int maxAge);
 
 }
