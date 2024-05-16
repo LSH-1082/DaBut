@@ -141,8 +141,10 @@ public class FlaskService {
                 jiinlist.add(filteredUserEntity);
 
             }
+            System.out.println("jinList Size : " + jiinlist.size());
             System.out.println("jiinlist = " + jiinlist.get(0).getName());
             System.out.println("jiinlist = " + jiinlist.get(1).getName());
+            System.out.println("jiinlist = " + jiinlist.get(2).getName());
 
 
             matchingDTOList = jiinlist.stream()

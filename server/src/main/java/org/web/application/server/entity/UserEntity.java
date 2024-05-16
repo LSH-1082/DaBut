@@ -83,7 +83,15 @@ public class UserEntity {
     private LocationEntity locationEntity;
 
     /*******************************@OneToMany******************************************/
+    @OneToMany(mappedBy = "reqUserEntity", cascade = CascadeType.PERSIST)
+    @Builder.Default
+    @ToString.Exclude
+    private List<MatchingHistoryEntity> reqMatchingHistoryEntity = new ArrayList<>();
 
+    @OneToMany(mappedBy = "resUserEntity", cascade = CascadeType.PERSIST)
+    @Builder.Default
+    @ToString.Exclude
+    private List<MatchingHistoryEntity> resMatchingHistoryEntity = new ArrayList<>();
     /*******************************@OneToOne******************************************/
     //userEntity
 
@@ -98,5 +106,6 @@ public class UserEntity {
     @OneToOne
     @JoinColumn(name = "auth_id")
     private AuthEntity authEntity;
+
 
 }
