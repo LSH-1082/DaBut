@@ -10,13 +10,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 import org.web.application.server.dto.MatchingDTO;
+import org.web.application.server.dto.RoommateMatchingDTO;
 import org.web.application.server.dto.UserDTO;
 import org.web.application.server.entity.MatchingFilterEntity;
+import org.web.application.server.entity.MatchingHistoryEntity;
 import org.web.application.server.entity.UserEntity;
 import org.web.application.server.jwt.JwtProvider;
-import org.web.application.server.repository.AuthRepository;
-import org.web.application.server.repository.MatchingFilterRepository;
-import org.web.application.server.repository.UserRepository;
+import org.web.application.server.repository.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +32,8 @@ public class FlaskService {
     private final AuthRepository authRepository;
     private final UserRepository userRepository;
     private final MatchingFilterRepository matchingFilterRepository;
+    private final MatchingHistoryRepository matchingHistoryRepository;
+    private final RoommateFilterRepository roommateFilterRepository;
 
     @Transactional
     public String sendToFlask(String token) throws JsonProcessingException {
@@ -45,11 +47,36 @@ public class FlaskService {
 
         var matchingFilterEntity = matchingFilterRepository.findByUserEntity(userEntity).orElse(null);
 
+        //var roommateFilterEntity = roommateFilterRepository.findByUserEntity(userEntity);
+
         System.out.println("matchingFilterEntity = " + matchingFilterEntity);
 
         List<UserEntity> filteredUserList = null;
         List<MatchingDTO> matchingDTOs = null;
 
+//        List<RoommateMatchingDTO> roommateMatchingDTO;
+//        if(authEntity != null && userEntity != null && matchingFilterEntity != null && roommateFilterEntity != null) {
+//            int roommateminAge;
+//            int roommatemaxAge;
+//            switch (roommateFilterEntity) {
+//                case "20대":
+//                    roommateminAge = 20;
+//                    roommatemaxAge = 29;
+//                    break;
+//                case "30대":
+//                    roommateminAge = 30;
+//                    roommatemaxAge = 39;
+//                    break;
+//                case "40대":
+//                    roommateminAge = 40;
+//                    roommatemaxAge = 49;
+//                    break;
+//                default:
+//                    roommateminAge = 0;
+//                    roommatemaxAge = 0;
+//                    break;
+//            }
+//        }
 
         /**
          * 240514 임재현
@@ -189,6 +216,16 @@ public class FlaskService {
         //실제 Flask 서버랑 연결하기 위한 URL
         String url = "http://127.0.0.1:5000/receive_string";
         //Flask 서버로 데이터를 전송하고 받은 응답 값을 return
-        return restTemplate.postForObject(url, entity, String.class);
+        //restTemplate.postForObject(url, entity, String.class);
+
+        // 아이디 2개가 왔어, List가 하나가 왔어 size = 2m 0번째가 주(firstUser), 1번째가 가장 유사도가 높은곳에 넣어
+        Long user = Long.valueOf(restTemplate.postForObject(url, entity, String.class));
+
+        MatchingHistoryEntity matchingHistoryEntity = MatchingHistoryEntity.builder()
+                .reqUserEntity(userEntity)
+                .resUserEntity(userRepository.findByUserId(user).orElse(null)).build();
+
+        matchingHistoryRepository.save(matchingHistoryEntity);
+
     }
 }
