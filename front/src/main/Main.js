@@ -14,8 +14,9 @@ const customModalStyles = {
         zIndex: 15,
     },
     content: {
-        width: "319px",
-        height: "219px",
+        display: "flex",
+        width: "320px",
+        height: "220px",
         zIndex: 150,
         top: "50%",
         left: "50%",
@@ -25,13 +26,13 @@ const customModalStyles = {
         boxShadow: "2px 2px 2px rgba(0.25, 0.25, 0.25, 0.25)",
         backgroundColor: "white",
         justifyContent: "center",
+        alignContent: "center",
         overflow: "auto",
     },
 };
 
 const Main = () => {
     const [purpose, setPurpose] = useState("");
-    const [message, setMessage] = useState("");
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const dispatch = useDispatch();
 
@@ -48,13 +49,12 @@ const Main = () => {
         if (purpose === "roommate") {
             getRoommate(Cookies.get("accessToken")).then((res) => {
                 if (res.data === "") {
-                    setModalIsOpen(true);
                 } else {
                     postFlask(purpose, Cookies.get("accessToken"));
+                    setModalIsOpen(true);
                 }
             });
-        }
-        else postFlask(purpose, Cookies.get("accessToken"));
+        } else postFlask(purpose, Cookies.get("accessToken"));
     }
 
 
@@ -80,9 +80,33 @@ const Main = () => {
                             ariaHideApp={false}
                             shouldCloseOnOverlayClick={true}
                         >
-                            <h2>모달 제목</h2>
-                            <p>{message}</p>
-                            <button onClick={clickModalButton}>닫기</button>
+                            <div className="modalDiv">
+                                <div className="modalNoticeDiv">
+                                    <div className="noticeCircle">
+                                        <p className="modalNotice">!</p>
+                                    </div>
+                                </div>
+
+                                <div className="modalContextDiv">
+                                    <div className="modalContext">
+                                        <p className="modalRoommate">룸메이트 정보</p>
+                                        <p className="modalText">가 입력되지 않았습니다.</p>
+                                    </div>
+                                </div>
+                                <div className="modalUnderContextDiv">
+                                    <div className="modalUnderContext">
+                                        <p className="modalUnder">룸메이트 정보를 입력하시겠습니까?</p>
+                                    </div>
+                                </div>
+
+
+                                <div className="modalButton">
+                                    <div className="modalButtonDiv">
+                                        <button className="modalCloseButton" onClick={clickModalButton}>취소</button>
+                                        <button className="modalAcceptButton" onClick={clickModalButton}>확인</button>
+                                    </div>
+                                </div>
+                            </div>
                         </Modal>) : (<></>)
 
                     }

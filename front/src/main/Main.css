@@ -351,3 +351,126 @@
     top: 0;
     z-index: 9;
 }
+
+.modalDiv {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+.modalNoticeDiv {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.noticeCircle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 55px;
+    height: 55px;
+    background-color: #EB604A;
+    border-radius: 30px;
+}
+
+.modalNotice {
+    margin: 0;
+    color: #FFF;
+    font-family: Kavoon;
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.modalButton {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.modalButtonDiv {
+    width: 280px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.modalCloseButton {
+    padding: 0;
+    width: 128px;
+    height: 42px;
+    border: none;
+    border-radius: 10px;
+    background: #FFEDED;
+    color: #000;
+    font-family: K2D;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.modalAcceptButton {
+    padding: 0;
+    width: 128px;
+    height: 42px;
+    border: none;
+    border-radius: 10px;
+    background: #EB604A;
+    color: #FFF;
+    font-family: K2D;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.modalContextDiv{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 5px;
+    margin-top: 20px;
+}
+
+.modalContext {
+    display: flex;
+}
+
+.modalRoommate {
+    margin: 0;
+    color: #EB604A;
+    font-family: K2D;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.modalText {
+    margin: 0;
+    color: #000;
+    font-family: K2D;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.modalUnderContextDiv {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.modalUnder {
+    margin: 0;
+    color: #838383;
+    font-family: K2D;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
