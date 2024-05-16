@@ -25,6 +25,7 @@ const RegisterPage1 = () => {
         setHei(value[0]);
     }
 
+
     return (
         <div className="RegisterPage1">
             <div className="registerContent">
