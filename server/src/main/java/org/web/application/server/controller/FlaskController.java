@@ -14,6 +14,8 @@ public class FlaskController {
     @GetMapping("/matching")
     public String sendToFlask(@RequestHeader(name = "Authorization") String token) throws JsonProcessingException
     {
-        return flaskService.sendToFlask(token);
+        System.out.println("FlaskController.sendToFlask");
+        System.out.println(flaskService.sendToFlask(token));
+        return "dummy data limjaehyeon";
     }
 }
