@@ -1,14 +1,38 @@
 import "./Main.css";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import CheckComponent from "../component/CheckComponent";
 import MainFooter from "./MainFooter";
 import {useDispatch} from "react-redux";
 import {setMainPage} from "../store/mainPage";
-import {getFlask, getRoommate} from "../api/UserData";
+import {getRoommate, postFlask} from "../api/UserData";
 import Cookies from "js-cookie";
+import Modal from "react-modal";
+
+const customModalStyles = {
+    overlay: {
+        backgroundColor: "rgba(0, 0, 0, 0.4)",
+        zIndex: 15,
+    },
+    content: {
+        width: "319px",
+        height: "219px",
+        zIndex: 150,
+        top: "50%",
+        left: "50%",
+        transform: "translate(-50%, -50%)",
+        borderRadius: "25px",
+        border: "none",
+        boxShadow: "2px 2px 2px rgba(0.25, 0.25, 0.25, 0.25)",
+        backgroundColor: "white",
+        justifyContent: "center",
+        overflow: "auto",
+    },
+};
 
 const Main = () => {
     const [purpose, setPurpose] = useState("");
+    const [message, setMessage] = useState("");
+    const [modalIsOpen, setModalIsOpen] = useState(false);
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -21,18 +45,22 @@ const Main = () => {
     }
 
     const clickMatching = () => {
-        getFlask(Cookies.get("accessToken"));
-        getRoommate(Cookies.get("accessToken")).then((res) => {
-            if(res.data === "") {
-                //todo 여기에 모달 띄우는 창 넣기
-                console.log("null");
-            }
-            else {
-                //todo 여기에 매칭을 잡기위한 플래그를 포스트로 쏴준다
-                console.log(res.data);
-            }
-        });
+        if (purpose === "roommate") {
+            getRoommate(Cookies.get("accessToken")).then((res) => {
+                if (res.data === "") {
+                    setModalIsOpen(true);
+                } else {
+                    postFlask(purpose, Cookies.get("accessToken"));
+                }
+            });
+        }
+        else postFlask(purpose, Cookies.get("accessToken"));
     }
+
+
+    const clickModalButton = () => {
+        setModalIsOpen(!modalIsOpen);
+    };
 
     return (
         <div className="purposeMainPage">
@@ -44,6 +72,20 @@ const Main = () => {
                     </div>
                     <p className="planeMatchText">시작해볼까요?</p>
                     <button className="goMatch" onClick={clickMatching}>매칭하러가기</button>
+                    {
+                        modalIsOpen ? (<Modal
+                            isOpen={true}
+                            onRequestClose={clickModalButton}
+                            style={customModalStyles}
+                            ariaHideApp={false}
+                            shouldCloseOnOverlayClick={true}
+                        >
+                            <h2>모달 제목</h2>
+                            <p>{message}</p>
+                            <button onClick={clickModalButton}>닫기</button>
+                        </Modal>) : (<></>)
+
+                    }
                 </div>
                 <div className="peopleImgDiv">
                     <img className="peopleImg" src="/images/people.jpeg" alt="peopleImg"/>
@@ -91,7 +133,8 @@ const Main = () => {
                             </div>
                             <div className={purpose === "pet" ? "pet" : "disable"} onClick={() => clickPurpose("pet")}>
                                 {purpose === "pet" ? (<CheckComponent purpose={purpose}/>) : (<></>)}
-                                <svg className="purposeDog" xmlns="http://www.w3.org/2000/svg" width="29" height="29" viewBox="0 0 29 29"
+                                <svg className="purposeDog" xmlns="http://www.w3.org/2000/svg" width="29" height="29"
+                                     viewBox="0 0 29 29"
                                      fill="none">
                                     <path
                                         d="M11.3281 5.89062V7.70312C11.3281 9.14524 10.7552 10.5283 9.73552 11.548C8.71579 12.5677 7.33274 13.1406 5.89062 13.1406C5.16957 13.1406 4.47804 12.8542 3.96818 12.3443C3.45831 11.8345 3.17188 11.1429 3.17188 10.4219V8.60938C3.17188 7.16726 3.74475 5.78421 4.76448 4.76448C5.78421 3.74475 7.16726 3.17188 8.60938 3.17188C9.26782 3.17273 9.90359 3.41251 10.3986 3.84669C10.8936 4.28087 11.2142 4.87994 11.3009 5.53266C11.3192 5.65111 11.3282 5.77078 11.3281 5.89062ZM25.8281 8.60938V10.4219C25.8281 11.1429 25.5417 11.8345 25.0318 12.3443C24.522 12.8542 23.8304 13.1406 23.1094 13.1406C21.6673 13.1406 20.2842 12.5677 19.2645 11.548C18.2448 10.5283 17.6719 9.14524 17.6719 7.70312V5.89062C17.6718 5.77078 17.6808 5.65111 17.6991 5.53266C17.7858 4.87994 18.1064 4.28087 18.6014 3.84669C19.0964 3.41251 19.7322 3.17273 20.3906 3.17188C21.8327 3.17188 23.2158 3.74475 24.2355 4.76448C25.2552 5.78421 25.8281 7.16726 25.8281 8.60938Z"
@@ -115,7 +158,8 @@ const Main = () => {
                                         d="M15.8593 16.9831C15.8613 17.1058 15.83 17.2267 15.7685 17.3329C15.707 17.4391 15.6178 17.5265 15.5103 17.5858L14.4999 18.125L13.4894 17.5858C13.382 17.5265 13.2927 17.4391 13.2313 17.3329C13.1698 17.2267 13.1384 17.1058 13.1405 16.9831C13.1384 16.9742 13.1384 16.9649 13.1405 16.9559C13.1405 16.7876 13.2064 16.626 13.3241 16.5057C13.4419 16.3854 13.6021 16.3161 13.7703 16.3125H15.2294C15.3977 16.3161 15.5579 16.3854 15.6756 16.5057C15.7934 16.626 15.8593 16.7876 15.8593 16.9559C15.8614 16.9649 15.8614 16.9742 15.8593 16.9831Z"
                                         fill="#3E2C27"/>
                                 </svg>
-                                <svg className="purposeCat" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"
+                                <svg className="purposeCat" xmlns="http://www.w3.org/2000/svg" width="32" height="32"
+                                     viewBox="0 0 32 32"
                                      fill="none">
                                     <path
                                         d="M12.155 6.23001C10.193 7.00209 8.50895 8.34695 7.32198 10.0895C6.13501 11.8321 5.50013 13.8916 5.5 16V3.50001C7.99169 3.49605 10.3839 4.47738 12.155 6.23001ZM26.5 3.50001V16C26.4999 13.8916 25.865 11.8321 24.678 10.0895C23.491 8.34695 21.807 7.00209 19.845 6.23001C21.6161 4.47738 24.0083 3.49605 26.5 3.50001Z"
@@ -149,7 +193,7 @@ const Main = () => {
                             </div>
                             <div className={purpose === "cook" ? "cook" : "disable"}
                                  onClick={() => clickPurpose("cook")}>
-                                {purpose === "cook" ? (<CheckComponent purpose={purpose} />) : (<></>)}
+                                {purpose === "cook" ? (<CheckComponent purpose={purpose}/>) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="41" height="41" viewBox="0 0 41 41"
                                      fill="none">
                                     <path
@@ -200,7 +244,8 @@ const Main = () => {
                             <div className={purpose === "roommate" ? "roommate" : "disable"}
                                  onClick={() => clickPurpose("roommate")}>
                                 {purpose === "roommate" ? (<CheckComponent purpose={purpose}/>) : (<></>)}
-                                <svg className="roommateIcon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                                <svg className="roommateIcon" xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                     viewBox="0 0 30 30"
                                      fill="none">
                                     <path d="M6.39746 15.7207H15.1142V29.2846H6.39746V15.7207Z" fill="#855C52"/>
                                     <path d="M17.7903 15.0034H26.7775V23.355H17.7903V15.0034Z" fill="white"/>
@@ -255,8 +300,9 @@ const Main = () => {
 
                                 <p className={purpose === "study" ? "select" : "textPurpose"}>공부</p>
                             </div>
-                            <div className={purpose === "read" ? "read" : "disable"} onClick={() => clickPurpose("read")}>
-                                {purpose === "read" ? (<CheckComponent purpose={purpose} />) : (<></>)}
+                            <div className={purpose === "read" ? "read" : "disable"}
+                                 onClick={() => clickPurpose("read")}>
+                                {purpose === "read" ? (<CheckComponent purpose={purpose}/>) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="43" height="27" viewBox="0 0 43 27"
                                      fill="none">
                                     <path
@@ -279,7 +325,7 @@ const Main = () => {
                                 <p className={purpose === "read" ? "select" : "textPurpose"}>독서</p>
                             </div>
                             <div className={purpose === "eat" ? "eat" : "disable"} onClick={() => clickPurpose("eat")}>
-                                {purpose === "eat" ? (<CheckComponent purpose={purpose} />) : (<></>)}
+                                {purpose === "eat" ? (<CheckComponent purpose={purpose}/>) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="28" viewBox="0 0 32 28"
                                      fill="none">
                                     <path
@@ -298,8 +344,9 @@ const Main = () => {
 
                                 <p className={purpose === "eat" ? "select" : "textPurpose"}>밥친구</p>
                             </div>
-                            <div className={purpose === "baby" ? "baby" : "disable"} onClick={() => clickPurpose("baby")}>
-                                {purpose === "baby" ? (<CheckComponent purpose={purpose} />) : (<></>)}
+                            <div className={purpose === "baby" ? "baby" : "disable"}
+                                 onClick={() => clickPurpose("baby")}>
+                                {purpose === "baby" ? (<CheckComponent purpose={purpose}/>) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"
                                      fill="none">
                                     <path
@@ -334,7 +381,7 @@ const Main = () => {
                         <div className="purp">
                             <div className={purpose === "single" ? "single" : "disable"}
                                  onClick={() => clickPurpose("single")}>
-                                 {purpose === "single" ? (<CheckComponent purpose={purpose} />) : (<></>)}
+                                {purpose === "single" ? (<CheckComponent purpose={purpose}/>) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="45" height="41" viewBox="0 0 45 41"
                                      fill="none">
                                     <path
@@ -362,8 +409,9 @@ const Main = () => {
 
                                 <p className={purpose === "single" ? "select" : "textPurpose"}>돌싱</p>
                             </div>
-                            <div className={purpose === "game" ? "game" : "disable"} onClick={() => clickPurpose("game")}>
-                                {purpose === "game" ? (<CheckComponent purpose={purpose} />) : (<></>)}
+                            <div className={purpose === "game" ? "game" : "disable"}
+                                 onClick={() => clickPurpose("game")}>
+                                {purpose === "game" ? (<CheckComponent purpose={purpose}/>) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44"
                                      fill="none">
                                     <path
@@ -550,7 +598,7 @@ const Main = () => {
                                 <p className={purpose === "music" ? "select" : "textPurpose"}>음악</p>
                             </div>
                             <div className={purpose === "ott" ? "ott" : "disable"} onClick={() => clickPurpose("ott")}>
-                                {purpose === "ott" ? (<CheckComponent purpose={purpose} />) : (<></>)}
+                                {purpose === "ott" ? (<CheckComponent purpose={purpose}/>) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="37" height="33" viewBox="0 0 37 33"
                                      fill="none">
                                     <path
@@ -573,7 +621,7 @@ const Main = () => {
                             </div>
                             <div className={purpose === "dance" ? "dance" : "disable"}
                                  onClick={() => clickPurpose("dance")}>
-                                {purpose === "dance" ? (<CheckComponent purpose={purpose} />) : (<></>)}
+                                {purpose === "dance" ? (<CheckComponent purpose={purpose}/>) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="46" height="41" viewBox="0 0 46 41"
                                      fill="none">
                                     <path
@@ -615,7 +663,7 @@ const Main = () => {
                             </div>
                             <div className={purpose === "photo" ? "photo" : "disable"}
                                  onClick={() => clickPurpose("photo")}>
-                                {purpose === "photo" ? (<CheckComponent purpose={purpose} />) : (<></>)}
+                                {purpose === "photo" ? (<CheckComponent purpose={purpose}/>) : (<></>)}
                                 <svg xmlns="http://www.w3.org/2000/svg" width="38" height="28" viewBox="0 0 38 28"
                                      fill="none">
                                     <path
