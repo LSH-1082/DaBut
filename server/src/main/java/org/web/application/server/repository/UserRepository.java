@@ -21,4 +21,6 @@ public interface UserRepository extends JpaRepository<UserEntity, Long> {
             int minAge,
             int maxAge);
 
+    Optional<UserEntity> findByUserId(Long userId);
+
 }
