@@ -131,6 +131,10 @@
     cursor: pointer;
 }
 
+.roommateIcon {
+    padding-top: 8px;
+}
+
 
 .disable {
     position: relative;

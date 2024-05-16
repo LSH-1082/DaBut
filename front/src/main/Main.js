@@ -200,7 +200,7 @@ const Main = () => {
                             <div className={purpose === "roommate" ? "roommate" : "disable"}
                                  onClick={() => clickPurpose("roommate")}>
                                 {purpose === "roommate" ? (<CheckComponent purpose={purpose}/>) : (<></>)}
-                                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
+                                <svg className="roommateIcon" xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"
                                      fill="none">
                                     <path d="M6.39746 15.7207H15.1142V29.2846H6.39746V15.7207Z" fill="#855C52"/>
                                     <path d="M17.7903 15.0034H26.7775V23.355H17.7903V15.0034Z" fill="white"/>
