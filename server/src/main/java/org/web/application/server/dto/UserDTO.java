@@ -34,5 +34,5 @@ public class UserDTO {
     private String wantOccupation;
     private boolean wantSmoke;
     private String weight;
-
+    private String matchingState;
 }
