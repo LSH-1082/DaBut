@@ -49,8 +49,6 @@ const Main = () => {
         if (purpose === "roommate") {
             getRoommate(Cookies.get("accessToken")).then((res) => {
                 if (res.data === "") {
-                } else {
-                    postFlask(purpose, Cookies.get("accessToken"));
                     setModalIsOpen(true);
                 }
             });
