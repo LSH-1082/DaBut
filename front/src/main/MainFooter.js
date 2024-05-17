@@ -14,6 +14,7 @@ const MainFooter = () => {
         if(value === "metaPage") navigate("/meta");
         if(value === "listPage") navigate("/list");
         if(value === "profilePage") navigate("/profile");
+        if(value === "matchingPage") navigate("/matching");
     }
 
     return (
@@ -71,7 +72,7 @@ const MainFooter = () => {
                             </defs>
                         </svg>
                         <svg onClick={() => {
-                            clickMainFooterButton("???")
+                            clickMainFooterButton("matchingPage")
                         }} className="plusInCircle" xmlns="http://www.w3.org/2000/svg" width="60" height="60"
                              viewBox="0 0 60 60" fill="none">
                             <path
