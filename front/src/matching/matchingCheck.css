@@ -39,7 +39,7 @@
     margin-top: 0;
     margin-right: 10px;
     color: #000;
-    font-family: Inter;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
@@ -53,7 +53,7 @@
     margin-bottom: 0;
     margin-top: 0;
     margin-right: 10px;
-    font-family: Inter;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
@@ -79,7 +79,7 @@
 
 .pText.select {
     color: #EB604A;
-    font-family: Inter;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 15px;
     font-style: normal;
     font-weight: 700;
@@ -90,7 +90,7 @@
 .pText {
     margin: 0 10px;
     color: #939393;
-    font-family: Inter;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 15px;
     font-style: normal;
     font-weight: 700;

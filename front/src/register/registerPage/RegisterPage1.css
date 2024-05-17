@@ -20,7 +20,7 @@
 .registerText {
     margin: 0;
     color: #000;
-    font-family: Pretendard;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 24px;
     font-style: normal;
     font-weight: 700;
@@ -31,7 +31,7 @@
 .registerSmallText {
     margin-top: 9px;
     color: #C2C2C2;
-    font-family: Pretendard;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -61,7 +61,6 @@
 
 .gender p, .kakaoText, .name p, .age p, .height p, .smoke p{
     color: #A0A0A0;
-    font-family: Pretendard;
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
@@ -82,6 +81,7 @@
 }
 
 .heightRange p{
+    font-size: 15px;
     margin-top: 10px;
     margin-bottom: 0px;
     text-align: center;
@@ -91,7 +91,7 @@
     padding: 10px 30px;
     color: #A0A0A0;
     text-align: center;
-    font-family: Pretendard;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 17px;
     font-style: normal;
     font-weight: 500;
@@ -106,7 +106,7 @@
     color: #A0A0A0;
     padding: 10px 20px;
     text-align: center;
-    font-family: Pretendard;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 17px;
     font-style: normal;
     font-weight: 500;
@@ -131,7 +131,7 @@
     background: #F2F4F5;
     color: #000;
     text-align: center;
-    font-family: Pretendard;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 17px;
     font-style: normal;
     line-height: normal;
@@ -141,7 +141,7 @@
     color: white;
     padding: 10px 30px;
     text-align: center;
-    font-family: Pretendard;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 17px;
     font-style: normal;
     font-weight: 500;
@@ -156,7 +156,7 @@
     color: white;
     padding: 10px 20px;
     text-align: center;
-    font-family: Pretendard;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 17px;
     font-style: normal;
     font-weight: 500;
@@ -169,7 +169,7 @@
 
 .kakaoUnderText {
     color: #C2C2C2;
-    font-family: Inter;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 12px;
     font-style: normal;
     font-weight: 600;

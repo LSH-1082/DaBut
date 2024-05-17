@@ -23,7 +23,7 @@
 .registerNameText {
     margin: 0;
     color: #EB604A;
-    font-family: Inter;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 22px;
     font-style: normal;
     font-weight: 700;
@@ -47,7 +47,6 @@
 .mbtiQuestion p {
     margin: 0;
     color: #A4A4A4;
-    font-family: Inter;
     font-size: 15px;
     font-style: normal;
     font-weight: 600;
@@ -68,7 +67,7 @@
     background: #FFF;
     color: #A5A5A5;
     text-align: center;
-    font-family: Inter;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 13px;
     font-style: normal;
     font-weight: 600;
@@ -82,7 +81,7 @@
     border: 2px solid #C2C2C2;
     color: #A5A5A5;
     text-align: center;
-    font-family: Inter;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 13px;
     font-style: normal;
     font-weight: 600;
@@ -98,7 +97,7 @@
     background-color: #EB604A;
     color: #FFFFFF;
     text-align: center;
-    font-family: Inter;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 13px;
     font-style: normal;
     font-weight: 600;
@@ -130,7 +129,6 @@
 
 .mbtiSelect p{
     color: rgba(0, 0, 0, 0.10);
-    font-family: Inter;
     font-size: 15px;
     font-style: normal;
     font-weight: 600;
@@ -157,7 +155,6 @@
 .mbtiSelectButton p {
     color: rgba(0, 0, 0, 0.10);
     text-align: center;
-    font-family: Inter;
     font-size: 20px;
     font-style: normal;
     font-weight: 600;
@@ -173,7 +170,7 @@
     background: #fff;
     color: rgba(0, 0, 0, 0.10);
     text-align: center;
-    font-family: Inter;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 25px;
     font-style: normal;
     font-weight: 600;
@@ -188,7 +185,6 @@
 .mbtiSelectButton.active p {
     color: #A5A5A5;
     text-align: center;
-    font-family: Inter;
     font-size: 20px;
     font-style: normal;
     font-weight: 600;
@@ -205,7 +201,7 @@
     cursor: pointer;
     color: #A5A5A5;
     text-align: center;
-    font-family: Inter;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 25px;
     font-style: normal;
     font-weight: 600;
@@ -220,7 +216,7 @@
     background: #fff;
     color: rgba(0, 0, 0, 0.10);
     text-align: center;
-    font-family: Inter;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 25px;
     font-style: normal;
     font-weight: 600;
@@ -237,7 +233,7 @@
     cursor: pointer;
     color: #FFFFFF;
     text-align: center;
-    font-family: Inter;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 25px;
     font-style: normal;
     font-weight: 600;
@@ -260,7 +256,6 @@
 .selectState p {
     margin: 0;
     color: #A4A4A4;
-    font-family: Inter;
     font-size: 15px;
     font-style: normal;
     font-weight: 600;
