@@ -238,7 +238,8 @@ public class UserService {
                     .personality(user1.getPersonalityEntity().getPersonalityName())
                     .smoke(user1.getSmoking())
                     .state(user1.getLocationEntity().getLocationName())
-                    .weight(user1.getWeightEntity().getWeightName()).build();
+                    .weight(user1.getWeightEntity().getWeightName())
+                    .matchingState(user1.getMatchingState()).build();
         }
         else
         {
@@ -266,7 +267,8 @@ public class UserService {
                         .personality(user2.getPersonalityEntity().getPersonalityName())
                         .smoke(user2.getSmoking())
                         .state(user2.getLocationEntity().getLocationName())
-                        .weight(user2.getWeightEntity().getWeightName()).build();
+                        .weight(user2.getWeightEntity().getWeightName())
+                        .matchingState(user2.getMatchingState()).build();
             }
             else
             {

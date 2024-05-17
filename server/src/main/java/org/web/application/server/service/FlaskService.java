@@ -45,6 +45,11 @@ public class FlaskService {
 
         var userEntity = userRepository.findByAuthEntity(authEntity).orElse(null);
 
+        userEntity.setMatchingState(purpose);
+        System.out.println("userEntity : " + userEntity.getName());
+        System.out.println("purpose : " + purpose);
+        userRepository.save(userEntity);
+
         var matchingFilterEntity = matchingFilterRepository.findByUserEntity(userEntity).orElse(null);
 
         var roommateFilterEntity = roommateFilterRepository.findByUserEntity(userEntity);
@@ -87,104 +92,108 @@ public class FlaskService {
                         maxAge,
                         userEntity.getUserId()).orElse(null);
 
+                if (!filteredRoommateList.isEmpty())
+                {
+                    RoommateFilterEntity firstRoommateUser = filteredRoommateList.get(0).getRoommateFilterEntity();
+                    System.out.println("firstRoommateUser = " + firstRoommateUser.getRoommateFilterId());
 
-                RoommateFilterEntity firstRoommateUser = filteredRoommateList.get(0).getRoommateFilterEntity();
-                System.out.println("firstRoommateUser = " + firstRoommateUser.getRoommateFilterId());
+                    List<RoommateFilterEntity> yeonjilist = new ArrayList<>();
 
-                List<RoommateFilterEntity> yeonjilist = new ArrayList<>();
-
-                yeonjilist.add(userEntity.getRoommateFilterEntity());
-
-                for(int i = 0; i < filteredRoommateList.size(); i++) {
-                    var filteredRoommateEntity = filteredRoommateList.get(i);
-                    var filteredMatchingFilterRoommateEntity = roommateFilterRepository.findByUserEntity(filteredRoommateEntity).orElse(null);
-
-                    if(!filteredMatchingFilterRoommateEntity.getRoomLocationEntity().getRoomLocationName().equals(userEntity.getRoommateFilterEntity().getRoomLocationEntity().getRoomLocationName())) {
-                        continue;
-                    }
-                    if(!filteredMatchingFilterRoommateEntity.getCleaningEntity().getCleaningName().equals(userEntity.getRoommateFilterEntity().getCleaningEntity().getCleaningName())) {
-                        continue;
-                    }
-                    if(!filteredMatchingFilterRoommateEntity.getUserEntity().getGenderEntity().getGender().equals(userEntity.getGenderEntity().getGender())) {
-                        continue;
-                    }
-                    if(!filteredMatchingFilterRoommateEntity.getUserEntity().getSmoking().equals(userEntity.getSmoking())) {
-                        continue;
-                    }
-                    if(!filteredMatchingFilterRoommateEntity.getLivePatternEntity().getLivePatternName().equals(userEntity.getRoommateFilterEntity().getLivePatternEntity().getLivePatternName())) {
-                        continue;
-                    }
-                    int filterminAge = 0;
-                    int filtermaxAge = 0;
-                    switch (filteredMatchingFilterRoommateEntity.getRoomAgeEntity().getRoomAgeName()) {
-                        case "20대":
-                            filterminAge = 20;
-                            filtermaxAge = 29;
-                            break;
-                        case "30대":
-                            filterminAge = 30;
-                            filtermaxAge = 39;
-                            break;
-                        case "40대":
-                            filterminAge = 40;
-                            filtermaxAge = 49;
-                            break;
-                        default:
-                            filterminAge = 0;
-                            filtermaxAge = 0;
-                            break;
-                    }
-                    if (userEntity.getAge() >= filtermaxAge || userEntity.getAge() <= filterminAge) {
-                        continue;
-                    }
                     yeonjilist.add(userEntity.getRoommateFilterEntity());
+
+                    for(int i = 0; i < filteredRoommateList.size(); i++) {
+                        var filteredRoommateEntity = filteredRoommateList.get(i);
+                        var filteredMatchingFilterRoommateEntity = roommateFilterRepository.findByUserEntity(filteredRoommateEntity).orElse(null);
+
+                        if(!filteredMatchingFilterRoommateEntity.getRoomLocationEntity().getRoomLocationName().equals(userEntity.getRoommateFilterEntity().getRoomLocationEntity().getRoomLocationName())) {
+                            continue;
+                        }
+                        if(!filteredMatchingFilterRoommateEntity.getCleaningEntity().getCleaningName().equals(userEntity.getRoommateFilterEntity().getCleaningEntity().getCleaningName())) {
+                            continue;
+                        }
+                        if(!filteredMatchingFilterRoommateEntity.getUserEntity().getGenderEntity().getGender().equals(userEntity.getGenderEntity().getGender())) {
+                            continue;
+                        }
+                        if(!filteredMatchingFilterRoommateEntity.getUserEntity().getSmoking().equals(userEntity.getSmoking())) {
+                            continue;
+                        }
+                        if(!filteredMatchingFilterRoommateEntity.getLivePatternEntity().getLivePatternName().equals(userEntity.getRoommateFilterEntity().getLivePatternEntity().getLivePatternName())) {
+                            continue;
+                        }
+                        int filterminAge = 0;
+                        int filtermaxAge = 0;
+                        switch (filteredMatchingFilterRoommateEntity.getRoomAgeEntity().getRoomAgeName()) {
+                            case "20대":
+                                filterminAge = 20;
+                                filtermaxAge = 29;
+                                break;
+                            case "30대":
+                                filterminAge = 30;
+                                filtermaxAge = 39;
+                                break;
+                            case "40대":
+                                filterminAge = 40;
+                                filtermaxAge = 49;
+                                break;
+                            default:
+                                filterminAge = 0;
+                                filtermaxAge = 0;
+                                break;
+                        }
+                        if (userEntity.getAge() >= filtermaxAge || userEntity.getAge() <= filterminAge) {
+                            continue;
+                        }
+                        yeonjilist.add(userEntity.getRoommateFilterEntity());
+                    }
+
+                    roommateMatchingDTOList = yeonjilist.stream()
+                            .map(roommate -> RoommateMatchingDTO.builder()
+                                    .userId(roommate.getUserEntity().getUserId())
+                                    .cleaning(roommate.getCleaningEntity().getCleaningName())
+                                    .livePattern(roommate.getLivePatternEntity().getLivePatternName())
+                                    .roomAge(roommate.getRoomAgeEntity().getRoomAgeId())
+                                    .roomLocation(roommate.getRoomLocationEntity().getRoomLocationName()).build()).toList();
+
+                    RestTemplate restTemplate = new RestTemplate();
+                    //헤더를 JSON으로 설정함
+                    HttpHeaders headers = new HttpHeaders();
+                    //파라미터로 들어온 dto를 JSON 객체로 변환
+                    headers.setContentType(MediaType.APPLICATION_JSON);
+
+                    String param = objectMapper.writeValueAsString(roommateMatchingDTOList);
+
+                    HttpEntity<String> entity = new HttpEntity<>(param, headers);
+                    //실제 Flask 서버랑 연결하기 위한 URL
+                    String url = "http://127.0.0.1:5000/receive_string";
+                    //Flask 서버로 데이터를 전송하고 받은 응답 값을 return
+                    //restTemplate.postForObject(url, entity, String.class);
+
+                    // 아이디 2개가 왔어, List가 하나가 왔어 size = 2m 0번째가 주(firstUser), 1번째가 가장 유사도가 높은곳에 넣어
+                    Long user = Long.valueOf(restTemplate.postForObject(url, entity, String.class));
+
+                    MatchingHistoryEntity matchingHistoryEntity = MatchingHistoryEntity.builder()
+                            .reqUserEntity(userEntity)
+                            .resUserEntity(userRepository.findByUserId(user).orElse(null)).purpose(purpose).build();
+
+                    matchingHistoryRepository.save(matchingHistoryEntity);
+
+                    return "";
                 }
-
-                roommateMatchingDTOList = yeonjilist.stream()
-                        .map(roommate -> RoommateMatchingDTO.builder()
-                                .userId(roommate.getUserEntity().getUserId())
-                                .cleaning(roommate.getCleaningEntity().getCleaningName())
-                                .livePattern(roommate.getLivePatternEntity().getLivePatternName())
-                                .roomAge(roommate.getRoomAgeEntity().getRoomAgeId())
-                                .roomLocation(roommate.getRoomLocationEntity().getRoomLocationName()).build()).toList();
-
-                System.out.println("roommateMatchingDTOList = " + roommateMatchingDTOList.get(0).getUserId());
-
-
-                RestTemplate restTemplate = new RestTemplate();
-                //헤더를 JSON으로 설정함
-                HttpHeaders headers = new HttpHeaders();
-                //파라미터로 들어온 dto를 JSON 객체로 변환
-                headers.setContentType(MediaType.APPLICATION_JSON);
-
-                String param = objectMapper.writeValueAsString(roommateMatchingDTOList);
-
-                HttpEntity<String> entity = new HttpEntity<>(param, headers);
-                //실제 Flask 서버랑 연결하기 위한 URL
-                String url = "http://127.0.0.1:5000/receive_string";
-                //Flask 서버로 데이터를 전송하고 받은 응답 값을 return
-                //restTemplate.postForObject(url, entity, String.class);
-
-                // 아이디 2개가 왔어, List가 하나가 왔어 size = 2m 0번째가 주(firstUser), 1번째가 가장 유사도가 높은곳에 넣어
-                Long user = Long.valueOf(restTemplate.postForObject(url, entity, String.class));
-
-                MatchingHistoryEntity matchingHistoryEntity = MatchingHistoryEntity.builder()
-                        .reqUserEntity(userEntity)
-                        .resUserEntity(userRepository.findByUserId(user).orElse(null)).purpose(purpose).build();
-
-                matchingHistoryRepository.save(matchingHistoryEntity);
-
-                return "";
+                else
+                {
+                    System.out.println("Roommate 필터 결과 : 매칭된 사람이 없습니다");
+                }
             }
         }
         else
         {
+            System.out.println("purpose가 roommate가 아닌 경우 동작");
             /**
              * 240514 임재현
              * user가 매칭하러가기를 누르고 프론트로부터 받은 token정보를 바탕으로
              * 해당 user의 매칭필터 내용을 가져와 1차적으로 user테이블에서 데이터를 정제
              */
-            List<MatchingDTO> matchingDTOList;
+            List<MatchingDTO> matchingDTOList = null;
             if (authEntity != null && userEntity != null && matchingFilterEntity != null)
             {
                 int minAge;
@@ -215,111 +224,115 @@ public class FlaskService {
                         userEntity.getLocationEntity().getLocationName(),
                         minAge, maxAge, userEntity.getUserId()).orElse(null);
 
+                System.out.println("@@filteredUserList : " + filteredUserList);
 
-                UserEntity firstUser = filteredUserList.get(0);
-                System.out.println("Filtered User Name: " + firstUser.getName());
+                if (!filteredUserList.isEmpty())
+                {
+                    UserEntity firstUser = filteredUserList.get(0);
+                    System.out.println("Filtered User Name: " + firstUser.getName());
 
+                    List<UserEntity> jiinlist = new ArrayList<>();
 
-                List<UserEntity> jiinlist = new ArrayList<>();
+                    jiinlist.add(userEntity);
 
-                jiinlist.add(userEntity);
+                    for (int i = 0; i < filteredUserList.size(); i++) {
+                        // 거른 후 친구의 Entity
+                        var filteredUserEntity = filteredUserList.get(i);
 
-                for (int i = 0; i < filteredUserList.size(); i++) {
-                    // 거른 후 친구의 Entity
-                    var filteredUserEntity = filteredUserList.get(i);
+                        // 필터를 걸러서 가져온 정보를 바탕으로 내정보를 가져와서 비교하기
+                        // 매칭 결과에 맞는 사람들의 Entity
+                        // 친구가 원하는 친구의 정보
+                        var filteredMatchingFilterEntity = matchingFilterRepository.findByUserEntity(filteredUserEntity).orElse(null);
 
-                    // 필터를 걸러서 가져온 정보를 바탕으로 내정보를 가져와서 비교하기
-                    // 매칭 결과에 맞는 사람들의 Entity
-                    // 친구가 원하는 친구의 정보
-                    var filteredMatchingFilterEntity = matchingFilterRepository.findByUserEntity(filteredUserEntity).orElse(null);
-                    //System.out.println("getGenderEntity: " + filteredMatchingFilterEntity.getGenderEntity());
+                        if (!filteredMatchingFilterEntity.getSmoking().equals(userEntity.getSmoking())) {
+                            continue;
+                        }
+                        if (filteredMatchingFilterEntity.getGenderEntity() != userEntity.getGenderEntity()) {
+                            continue;
+                        }
+                        if (!Objects.equals(filteredMatchingFilterEntity.getHeight(), userEntity.getHeightEntity().getHeight())) {
+                            continue;
+                        }
+                        int filterminAge = 0;
+                        int filtermaxAge = 0;
+                        switch (filteredMatchingFilterEntity.getAge()) {
+                            case "20대":
+                                filterminAge = 20;
+                                filtermaxAge = 29;
+                                break;
+                            case "30대":
+                                filterminAge = 30;
+                                filtermaxAge = 39;
+                                break;
+                            case "40대":
+                                filterminAge = 40;
+                                filtermaxAge = 49;
+                                break;
+                            default:
+                                filterminAge = 0;
+                                filtermaxAge = 0;
+                                break;
+                        }
+                        if (userEntity.getAge() >= filtermaxAge || userEntity.getAge() <= filterminAge)
+                        {
+                            continue;
+                        }
 
-                    if (!filteredMatchingFilterEntity.getSmoking().equals(userEntity.getSmoking())) {
-                        continue;
+                        jiinlist.add(filteredUserEntity);
+
                     }
-                    if (filteredMatchingFilterEntity.getGenderEntity() != userEntity.getGenderEntity()) {
-                        continue;
-                    }
-                    if (!Objects.equals(filteredMatchingFilterEntity.getHeight(), userEntity.getHeightEntity().getHeight())) {
-                        continue;
-                    }
-                    int filterminAge = 0;
-                    int filtermaxAge = 0;
-                    switch (filteredMatchingFilterEntity.getAge()) {
-                        case "20대":
-                            filterminAge = 20;
-                            filtermaxAge = 29;
-                            break;
-                        case "30대":
-                            filterminAge = 30;
-                            filtermaxAge = 39;
-                            break;
-                        case "40대":
-                            filterminAge = 40;
-                            filtermaxAge = 49;
-                            break;
-                        default:
-                            filterminAge = 0;
-                            filtermaxAge = 0;
-                            break;
-                    }
-                    if (userEntity.getAge() >= filtermaxAge || userEntity.getAge() <= filterminAge) {
-                        continue;
-                    }
 
-                    jiinlist.add(filteredUserEntity);
 
+                    matchingDTOList = jiinlist.stream()
+                            .map(user -> MatchingDTO.builder()
+                                    .age(user.getAge())
+                                    .userId(user.getUserId())
+                                    .faceShape(user.getFaceShapeEntity().getFaceShapeName())
+                                    .mbti(user.getMbtiEntity().getMbtiName())
+                                    .personality(user.getPersonalityEntity().getPersonalityName())
+                                    .snsFrequency(user.getSnsFrequencyEntity().getSnsFrequencyLevel())
+                                    .major(user.getMajorEntity().getMajorName())
+                                    // 필요한 다른 필드 추가
+                                    .build())
+                            .toList();
+
+                    RestTemplate restTemplate = new RestTemplate();
+                    //헤더를 JSON으로 설정함
+                    HttpHeaders headers = new HttpHeaders();
+                    //파라미터로 들어온 dto를 JSON 객체로 변환
+                    headers.setContentType(MediaType.APPLICATION_JSON);
+
+                    String param = objectMapper.writeValueAsString(matchingDTOList);
+
+                    HttpEntity<String> entity = new HttpEntity<>(param, headers);
+                    //실제 Flask 서버랑 연결하기 위한 URL
+                    String url = "http://127.0.0.1:5000/receive_string";
+                    //Flask 서버로 데이터를 전송하고 받은 응답 값을 return
+                    //restTemplate.postForObject(url, entity, String.class);
+
+                    // 아이디 2개가 왔어, List가 하나가 왔어 size = 2m 0번째가 주(firstUser), 1번째가 가장 유사도가 높은곳에 넣어
+                    Long user = Long.valueOf(restTemplate.postForObject(url, entity, String.class));
+
+                    MatchingHistoryEntity matchingHistoryEntity = MatchingHistoryEntity.builder()
+                            .reqUserEntity(userEntity)
+                            .resUserEntity(userRepository.findByUserId(user).orElse(null)).purpose(purpose).build();
+
+                    matchingHistoryRepository.save(matchingHistoryEntity);
+
+                    System.out.println("성공");
+                    return "";
                 }
-
-
-                matchingDTOList = jiinlist.stream()
-                        .map(user -> MatchingDTO.builder()
-                                .age(user.getAge())
-                                .userId(user.getUserId())
-                                .faceShape(user.getFaceShapeEntity().getFaceShapeName())
-                                .mbti(user.getMbtiEntity().getMbtiName())
-                                .personality(user.getPersonalityEntity().getPersonalityName())
-                                .snsFrequency(user.getSnsFrequencyEntity().getSnsFrequencyLevel())
-                                .major(user.getMajorEntity().getMajorName())
-                                // 필요한 다른 필드 추가
-                                .build())
-                        .toList();
-
-
-                System.out.println("matchingDtoList = " + matchingDTOList.get(0).getUserId());
+                else
+                {
+                    System.out.println("매칭된 사람이 없습니다");
+                }
             }
             //null이면 바로 리턴
             else
             {
+                System.out.println("@@entity가 null");
                 return null;
             }
-
-
-
-            RestTemplate restTemplate = new RestTemplate();
-            //헤더를 JSON으로 설정함
-            HttpHeaders headers = new HttpHeaders();
-            //파라미터로 들어온 dto를 JSON 객체로 변환
-            headers.setContentType(MediaType.APPLICATION_JSON);
-
-            String param = objectMapper.writeValueAsString(matchingDTOList);
-
-            HttpEntity<String> entity = new HttpEntity<>(param, headers);
-            //실제 Flask 서버랑 연결하기 위한 URL
-            String url = "http://127.0.0.1:5000/receive_string";
-            //Flask 서버로 데이터를 전송하고 받은 응답 값을 return
-            //restTemplate.postForObject(url, entity, String.class);
-
-            // 아이디 2개가 왔어, List가 하나가 왔어 size = 2m 0번째가 주(firstUser), 1번째가 가장 유사도가 높은곳에 넣어
-            Long user = Long.valueOf(restTemplate.postForObject(url, entity, String.class));
-
-            MatchingHistoryEntity matchingHistoryEntity = MatchingHistoryEntity.builder()
-                    .reqUserEntity(userEntity)
-                    .resUserEntity(userRepository.findByUserId(user).orElse(null)).purpose(purpose).build();
-
-            matchingHistoryRepository.save(matchingHistoryEntity);
-
-            return "";
         }
         return "";
     }
