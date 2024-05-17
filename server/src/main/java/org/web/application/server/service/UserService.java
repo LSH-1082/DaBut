@@ -244,9 +244,11 @@ public class UserService {
         {
             var entity2 = matchingHistoryRepository.findByResUserEntityUserIdAndResResult(userId, "standby");
 
+            System.out.println("entity2 : " + entity2);
+
             if (entity2.isPresent())
             {
-                var user2 = userRepository.findByUserId(entity2.get().getResUserEntity().getUserId()).get();
+                var user2 = userRepository.findByUserId(entity2.get().getReqUserEntity().getUserId()).get();
 
                 return UserDTO.builder()
                         .name(user2.getName())
