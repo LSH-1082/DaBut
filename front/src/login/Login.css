@@ -16,7 +16,7 @@
 .loginTitle{
     margin: 0;
     color: #FFF;
-    font-family: "Pretendard";
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 20px;
     font-style: normal;
     font-weight: 300;
@@ -28,7 +28,7 @@
 .appTitle {
     margin-top: 5px;
     margin-bottom: 0;
-    font-family: "NanumSquare Neo variable";
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 25px;
     font-style: normal;
     font-weight: 900;

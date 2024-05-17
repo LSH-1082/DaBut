@@ -14,6 +14,7 @@ const MainFooter = () => {
         if(value === "metaPage") navigate("/meta");
         if(value === "listPage") navigate("/list");
         if(value === "profilePage") navigate("/profile");
+        if(value === "matchingPage") navigate("/matching");
     }
 
     return (
@@ -35,10 +36,10 @@ const MainFooter = () => {
                          viewBox="0 0 26 25" fill="none">
                         <path
                             d="M2 6.66667C2 7.90434 2.51507 9.09133 3.4319 9.9665C4.34874 10.8417 5.59223 11.3333 6.88883 11.3333C8.18543 11.3333 9.42892 10.8417 10.3458 9.9665C11.2626 9.09133 11.7777 7.90434 11.7777 6.66667C11.7777 5.42899 11.2626 4.242 10.3458 3.36683C9.42892 2.49167 8.18543 2 6.88883 2C5.59223 2 4.34874 2.49167 3.4319 3.36683C2.51507 4.242 2 5.42899 2 6.66667Z"
-                            stroke="#9D9D9D" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            stroke={mainPage.mainPage === "metaPage" ? "#EB604A" : "#9D9D9D"} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                         <path
                             d="M6.88916 2V6.66667H11.778M9.33357 18.3333V23M19.1112 14.8333V23M14.2224 13.6667V23M24.0001 12.5V23"
-                            stroke="#9D9D9D" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            stroke={mainPage.mainPage === "metaPage" ? "#EB604A" : "#9D9D9D"} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
 
 
@@ -71,7 +72,7 @@ const MainFooter = () => {
                             </defs>
                         </svg>
                         <svg onClick={() => {
-                            clickMainFooterButton("???")
+                            clickMainFooterButton("matchingPage")
                         }} className="plusInCircle" xmlns="http://www.w3.org/2000/svg" width="60" height="60"
                              viewBox="0 0 60 60" fill="none">
                             <path

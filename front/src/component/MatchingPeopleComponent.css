@@ -53,7 +53,7 @@
     height: 21px;
     flex-shrink: 0;
     color: #7B7B7B;
-    font-family: Pretendard;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 12px;
     font-style: normal;
     font-weight: 600;
@@ -75,7 +75,7 @@
     resize: none;
     margin: 0;
     color: #717171;
-    font-family: Inter;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 15px;
     font-style: normal;
     font-weight: 510;

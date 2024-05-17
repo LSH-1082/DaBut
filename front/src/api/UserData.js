@@ -9,3 +9,4 @@ export const editRoommate = (data, token) => api.post("http://localhost:8080/api
 export const postFlask = (data, token) => api.post("http://localhost:8080/flask/matching", data, {headers: {Authorization: token}});
 export const editProfile = (data, token) => api.post("http://localhost:8080/api/user/edit/info", data, {headers: {Authorization: token}});
 export const editFriend = (data, token) => api.post("http://localhost:8080/api/user/edit/friend", data, {headers: {Authorization: token}});
+export const getMatching = (token) => api.get("http://localhost:8080/api/user/meta", {headers: {Authorization: token}});

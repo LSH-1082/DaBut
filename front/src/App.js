@@ -8,6 +8,8 @@ import MatchingCheck from "./matching/matchingCheck";
 import RoommatePage from "./roommate/RoommatePage";
 import EditProfilePage from "./editProfile/EditProfilePage";
 import EditFriendProfilePage from "./editProfile/EditFriendProfilePage";
+import StatisticsPage from "./statistics/StatisticsPage";
+import MatchingCheckPage from "./matching/MatchingCheckPage";
 
 
 function App() {
@@ -24,6 +26,8 @@ function App() {
                         <Route path="/roommate" element={<RoommatePage/>}></Route>
                         <Route path="/editprofile" element={<EditProfilePage/>}></Route>
                         <Route path="/editfriend" element={<EditFriendProfilePage/>}></Route>
+                        <Route path="/meta" element={<StatisticsPage/>}></Route>
+                        <Route path="/matching" element={<MatchingCheckPage/>}></Route>
                         {/* 상단에 위치하는 라우트들의 규칙을 모두 확인, 일치하는 라우트가 없는경우 처리 */}
                     </Routes>
                 </BrowserRouter>
