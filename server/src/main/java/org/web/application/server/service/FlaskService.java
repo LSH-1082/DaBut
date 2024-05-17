@@ -10,9 +10,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 import org.web.application.server.dto.MatchingDTO;
-import org.web.application.server.dto.RoommateMatchingDTO;
-import org.web.application.server.dto.UserDTO;
-import org.web.application.server.entity.MatchingFilterEntity;
 import org.web.application.server.entity.MatchingHistoryEntity;
 import org.web.application.server.entity.UserEntity;
 import org.web.application.server.jwt.JwtProvider;
@@ -227,5 +224,7 @@ public class FlaskService {
 
         matchingHistoryRepository.save(matchingHistoryEntity);
 
+
+        return "";
     }
 }

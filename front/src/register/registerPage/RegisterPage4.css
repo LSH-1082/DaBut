@@ -54,7 +54,7 @@
 .animalP {
     margin: 0;
     color: #A4A4A4;
-    font-family: Pretendard;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 13px;
     font-style: normal;
     font-weight: 600;
@@ -64,7 +64,7 @@
 .selectedFace {
     margin: 0;
     color: #EB604A;
-    font-family: Pretendard;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 13px;
     font-style: normal;
     font-weight: 600;
@@ -101,7 +101,7 @@
     margin-top: 3px;
     margin-bottom: 0;
     color: #A4A4A4;
-    font-family: Pretendard;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 13px;
     font-style: normal;
     font-weight: 600;
@@ -112,7 +112,7 @@
     margin-top: 3px;
     margin-bottom: 0;
     color: #EB604A;
-    font-family: Pretendard;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 13px;
     font-style: normal;
     font-weight: 600;
@@ -123,7 +123,7 @@
     margin-top: 6px;
     margin-bottom: 0;
     color: #A4A4A4;
-    font-family: Pretendard;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 13px;
     font-style: normal;
     font-weight: 600;
@@ -134,7 +134,7 @@
     margin-top: 6px;
     margin-bottom: 0;
     color: #EB604A;
-    font-family: Pretendard;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 13px;
     font-style: normal;
     font-weight: 600;
@@ -145,7 +145,7 @@
     margin-top: 4px;
     margin-bottom: 0;
     color: #A4A4A4;
-    font-family: Pretendard;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 13px;
     font-style: normal;
     font-weight: 600;
@@ -156,7 +156,7 @@
     margin-top: 4px;
     margin-bottom: 0;
     color: #EB604A;
-    font-family: Pretendard;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 13px;
     font-style: normal;
     font-weight: 600;
@@ -180,7 +180,7 @@
     border: 1px solid #F2F4F5;
     background: #F2F4F5;
     color: #919191;
-    font-family: Inter;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 13px;
     font-style: normal;
     font-weight: 500;
@@ -190,7 +190,7 @@
 .inputSmallText {
     margin-top: 8px;
     color: #A4A4A4;
-    font-family: Inter;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 13px;
     font-style: normal;
     font-weight: 500;
@@ -199,7 +199,7 @@
 
 .register3SmallText {
     color: #C2C2C2;
-    font-family: Inter;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;

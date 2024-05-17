@@ -7,7 +7,6 @@
 .smallText {
     margin: 0;
     color: #929292;
-    font-family: Pretendard;
     font-size: 13px;
     font-weight: 700;
     padding-bottom: 5px;
@@ -61,6 +60,7 @@
     width: 346px;
     height: 100px;
     padding-top: 3px;
+    padding-bottom: 10px;
 }
 
 .managementContainer {
@@ -84,7 +84,6 @@
 .kakaoIdText {
     margin: 0;
     color: #BEC1C6;
-    font-family: Pretendard;
     font-size: 12px;
     margin-left: 10px;
     display: flex;
@@ -94,14 +93,13 @@
 .profileTextDiv {
     display: flex;
     margin-top: 10px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     margin-left: 20px;
 }
 
 .profileText {
     margin: 0 5px 0 0;
     color: white;
-    font-family: Pretendard;
     font-size: 17px;
 }
 
@@ -118,9 +116,8 @@
     align-items: center;
     justify-content: center;
     text-align: center;
-    font-family: Pretendard;
     font-size: 12px;
-    color: #D6D6D6;
+    color: white;
 }
 
 .profileNameDiv {
@@ -129,7 +126,6 @@
 }
 
 .mypageNameText {
-    font-family: Pretendard;
     margin-left: 10px;
     font-size: 15px;
     font-weight: 700;
@@ -138,7 +134,6 @@
 }
 
 .introduce {
-    font-family: Pretendard;
     text-align: right;
     font-size: 13px;
     margin-top: 15px;
