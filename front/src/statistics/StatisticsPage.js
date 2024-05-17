@@ -17,7 +17,9 @@ const StatisticsPage = () => {
         <div className="StatisticsPage">
             <div className="StatisticsPageDiv">
                 <div className="statPageDiv">
-                    <p className="myStatText">최근 매칭된 친구</p>
+                    <div className="myStatTextDiv">
+                        <p className="myStatText">최근 매칭된 친구</p>
+                    </div>
                     <div className="statDoughnutDiv">
                         <DoughnutComponent/>
                     </div>

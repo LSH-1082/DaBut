@@ -1,6 +1,6 @@
 import React from 'react';
-import { Doughnut } from 'react-chartjs-2';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
+import {Doughnut} from 'react-chartjs-2';
+import {Chart as ChartJS, ArcElement, Tooltip, Legend} from 'chart.js';
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
@@ -24,13 +24,17 @@ const DoughnutComponent = () => {
         responsive: true,
         plugins: {
             legend: {
-                position: 'right',
+                position: 'bottom',
                 labels: {
-                    padding: 20,
-                    boxWidth: 8,
-                    boxHeight: 8,
+                    padding: 25,
+                    boxWidth: 10,
+                    boxHeight: 10,
                     usePointStyle: true,
-                    generateLabels: function(chart) {
+                    borderWidth: 0,
+                    font: {
+                        size: 15, // 라벨 폰트 사이즈 설정
+                    },
+                    generateLabels: function (chart) {
                         const data = chart.data;
                         if (data.labels.length && data.datasets.length) {
                             return data.labels.map((label, index) => {
@@ -59,10 +63,17 @@ const DoughnutComponent = () => {
         hover: {
             mode: null, // 호버 효과 비활성화
         },
-        cutout: '50%',
+        layout: {
+            padding: {
+                bottom: 20, // 차트 상단에 패딩 추가
+            },
+        },
+        cutout: '55%',
     };
 
-    return <Doughnut data={data} options={options} />;
+    return (
+            <Doughnut data={data} options={options}/>
+    );
 };
 
 export default DoughnutComponent;
