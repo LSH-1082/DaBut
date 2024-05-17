@@ -51,6 +51,7 @@ const Main = () => {
                 if (res.data === "") {
                     setModalIsOpen(true);
                 }
+                else postFlask(purpose, Cookies.get("accessToken"));
             });
         } else postFlask(purpose, Cookies.get("accessToken"));
     }
