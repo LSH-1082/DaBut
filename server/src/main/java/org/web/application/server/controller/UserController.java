@@ -48,10 +48,14 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-
     @GetMapping("/all")
     public UserDTO getAll(@RequestHeader(name = "Authorization") String token) {
         return userService.getAll(token);
     }
 
+    @GetMapping("/meta")
+    public UserDTO getUser(@RequestHeader(name = "Authorization") String token)
+    {
+        return userService.getUser(token);
+    }
 }
