@@ -2,7 +2,9 @@ package org.web.application.server.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -14,6 +16,7 @@ import org.web.application.server.dto.RoommateMatchingDTO;
 import org.web.application.server.dto.UserDTO;
 import org.web.application.server.entity.MatchingFilterEntity;
 import org.web.application.server.entity.MatchingHistoryEntity;
+import org.web.application.server.entity.RoommateFilterEntity;
 import org.web.application.server.entity.UserEntity;
 import org.web.application.server.jwt.JwtProvider;
 import org.web.application.server.repository.*;
@@ -36,7 +39,7 @@ public class FlaskService {
     private final RoommateFilterRepository roommateFilterRepository;
 
     @Transactional
-    public String sendToFlask(String token) throws JsonProcessingException {
+    public String sendToFlask(String token, String purpose) throws JsonProcessingException {
         System.out.println("FlaskService.sendToFlask");
 
         String kakaoId = jwtProvider.validate(token);
@@ -47,36 +50,108 @@ public class FlaskService {
 
         var matchingFilterEntity = matchingFilterRepository.findByUserEntity(userEntity).orElse(null);
 
-        //var roommateFilterEntity = roommateFilterRepository.findByUserEntity(userEntity);
+        var roommateFilterEntity = roommateFilterRepository.findByUserEntity(userEntity).orElse(null);
 
         System.out.println("matchingFilterEntity = " + matchingFilterEntity);
 
         List<UserEntity> filteredUserList = null;
         List<MatchingDTO> matchingDTOs = null;
 
-//        List<RoommateMatchingDTO> roommateMatchingDTO;
-//        if(authEntity != null && userEntity != null && matchingFilterEntity != null && roommateFilterEntity != null) {
-//            int roommateminAge;
-//            int roommatemaxAge;
-//            switch (roommateFilterEntity) {
-//                case "20대":
-//                    roommateminAge = 20;
-//                    roommatemaxAge = 29;
-//                    break;
-//                case "30대":
-//                    roommateminAge = 30;
-//                    roommatemaxAge = 39;
-//                    break;
-//                case "40대":
-//                    roommateminAge = 40;
-//                    roommatemaxAge = 49;
-//                    break;
-//                default:
-//                    roommateminAge = 0;
-//                    roommatemaxAge = 0;
-//                    break;
-//            }
-//        }
+        List<RoommateFilterEntity> filteredRoommateList = null;
+        List<RoommateMatchingDTO> roommateMatchingDTOList;
+        if (authEntity != null && userEntity != null && matchingFilterEntity != null && roommateFilterEntity != null) {
+            int minAge;
+            int maxAge;
+            switch (roommateFilterEntity.getRoomAgeEntity().getRoomAgeName()) {
+                case "20대":
+                    minAge = 20;
+                    maxAge = 29;
+                    break;
+                case "30대":
+                    minAge = 30;
+                    maxAge = 39;
+                    break;
+                case "40대":
+                    minAge = 40;
+                    maxAge = 49;
+                    break;
+                default:
+                    minAge = 0;
+                    maxAge = 0;
+                    break;
+            }
+
+            filteredRoommateList = roommateFilterRepository.findByRoomLocationEntityRoomLocationNameAndCleaningEntityCleaningNameAndUserEntityGenderEntityGenderAndUserEntitySmokingAndLivePatternEntityLivePatternNameAndAgeBetween(
+                    roommateFilterEntity.getRoomLocationEntity().getRoomLocationName(),
+                    roommateFilterEntity.getCleaningEntity().getCleaningName(),
+                    userEntity.getGenderEntity().getGender(),
+                    userEntity.getSmoking(),
+                    roommateFilterEntity.getLivePatternEntity().getLivePatternName(),
+                    minAge, maxAge
+            ).orElse(null);
+
+            RoommateFilterEntity firstRoomUser = filteredRoommateList.get(0);
+            System.out.println("firstRoomUser = " + firstRoomUser);
+
+            List<RoommateFilterEntity> yeonjilist = new ArrayList<>();
+
+            yeonjilist.add(firstRoomUser);
+
+            for(int i = 0; i < filteredRoommateList.size(); i++) {
+                var filteredRoommateUserEntity = filteredRoommateList.get(i);
+                var filteredRoommateMatchingFilterEntity = roommateFilterRepository.findByUserEntity(filteredRoommateUserEntity.getUserEntity()).orElse(null);
+
+                if (!filteredRoommateMatchingFilterEntity.getRoomLocationEntity().equals(userEntity.getRoommateFilterEntity().getRoomLocationEntity())) {
+                    continue;
+                }
+                if(!filteredRoommateMatchingFilterEntity.getCleaningEntity().equals(userEntity.getRoommateFilterEntity().getCleaningEntity())) {
+                    continue;
+                }
+                if(filteredRoommateMatchingFilterEntity.getUserEntity().getGenderEntity().getGender() != userEntity.getGenderEntity().getGender()) {
+                    continue;
+                }
+                if (!filteredRoommateMatchingFilterEntity.getUserEntity().getSmoking().equals(userEntity.getSmoking())) {
+                    continue;
+                }
+                int filterminAge = 0;
+                int filtermaxAge = 0;
+                switch (filteredRoommateMatchingFilterEntity.getRoomAgeEntity().getRoomAgeName()) {
+                    case "20대":
+                        filterminAge = 20;
+                        filtermaxAge = 29;
+                        break;
+                    case "30대":
+                        filterminAge = 30;
+                        filtermaxAge = 39;
+                        break;
+                    case "40대":
+                        filterminAge = 40;
+                        filtermaxAge = 49;
+                        break;
+                    default:
+                        filterminAge = 0;
+                        filtermaxAge = 0;
+                        break;
+                }
+                if (userEntity.getAge() >= filterminAge || userEntity.getAge() <= filtermaxAge) {
+                    continue;
+                }
+
+                yeonjilist.add(filteredRoommateMatchingFilterEntity);
+            }
+
+            roommateMatchingDTOList = yeonjilist.stream()
+                    .map(roommate -> RoommateMatchingDTO.builder()
+                            .userId(roommate.getRoommateFilterId())
+                            .roomLocation(roommate.getRoomLocationEntity().getRoomLocationName())
+                            .cleaning(roommate.getCleaningEntity().getCleaningName())
+                            .livePattern(roommate.getLivePatternEntity().getLivePatternName())
+                            .roomAge(roommate.getRoomAgeEntity().getRoomAgeId()).build())
+                    .toList();
+
+            System.out.println("roommateMatchingDTOList = " + roommateMatchingDTOList.get(0).getUserId());
+
+        }
 
         /**
          * 240514 임재현
@@ -223,9 +298,10 @@ public class FlaskService {
 
         MatchingHistoryEntity matchingHistoryEntity = MatchingHistoryEntity.builder()
                 .reqUserEntity(userEntity)
-                .resUserEntity(userRepository.findByUserId(user).orElse(null)).build();
+                .resUserEntity(userRepository.findByUserId(user).orElse(null)).purpose(purpose).build();
 
         matchingHistoryRepository.save(matchingHistoryEntity);
 
+        return "success";
     }
 }
