@@ -13,7 +13,7 @@
     margin-top: 0;
     margin-bottom: 0;
     color: #000;
-    font-family: Inter;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 22px;
     font-style: normal;
     font-weight: 700;
@@ -24,7 +24,7 @@
     margin-bottom: 0;
     margin-top: 9px;
     color: #C2C2C2;
-    font-family: Inter;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
@@ -46,7 +46,7 @@
 .dropText {
     margin: 0;
     color: #A4A4A4;
-    font-family: Inter;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 15px;
     font-style: normal;
     font-weight: 600;
@@ -85,7 +85,7 @@
 .roomTextareaText {
     margin-bottom: 0;
     color: #A4A4A4;
-    font-family: K2D;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 13px;
     font-style: normal;
     font-weight: 600;
@@ -95,7 +95,7 @@
 .roomCleanText, .roomPatternText {
     margin: 0;
     color: #A4A4A4;
-    font-family: K2D;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
@@ -118,7 +118,7 @@
     border: 2px solid #AEAEAE;
     color: #AEAEAE;
     text-align: center;
-    font-family: K2D;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 17px;
     font-style: normal;
     font-weight: 600;
@@ -135,7 +135,7 @@
     background: #EB604A;
     color: #FFF;
     text-align: center;
-    font-family: K2D;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 17px;
     font-style: normal;
     font-weight: 600;
@@ -154,7 +154,7 @@
     border: 1px solid #F2F4F5;
     background: #F2F4F5;
     color: #919191;
-    font-family: Inter;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 13px;
     font-style: normal;
     font-weight: 500;
@@ -163,7 +163,7 @@
 
 .roomTextareaUnderText {
     color: #A4A4A4;
-    font-family: Inter;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 13px;
     font-style: normal;
     font-weight: 500;

@@ -20,7 +20,6 @@
 
 .wantGender p, .wantAge p, .wantHeight p, .wantSmoke p{
     color: #A0A0A0;
-    font-family: Pretendard;
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
@@ -42,7 +41,7 @@
     padding: 10px 30px;
     color: #A0A0A0;
     text-align: center;
-    font-family: Pretendard;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 17px;
     font-style: normal;
     font-weight: 500;
@@ -57,7 +56,7 @@
     color: white;
     padding: 10px 30px;
     text-align: center;
-    font-family: Pretendard;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 17px;
     font-style: normal;
     font-weight: 500;
@@ -72,7 +71,7 @@
     color: #A0A0A0;
     padding: 10px 20px;
     text-align: center;
-    font-family: Pretendard;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 17px;
     font-style: normal;
     font-weight: 500;
@@ -87,7 +86,7 @@
     color: white;
     padding: 10px 20px;
     text-align: center;
-    font-family: Pretendard;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 17px;
     font-style: normal;
     font-weight: 500;
@@ -102,7 +101,7 @@
     margin-top: 60px;
     margin-bottom: 18px;
     color: #A0A0A0;
-    font-family: Pretendard;
+    font-family: "Noto Sans KR", sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 700;
