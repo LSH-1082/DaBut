@@ -13,7 +13,7 @@ export const userSlice = createSlice({
         mbti: "",
         smoke: false,
         occupation: "",
-        major: "",
+        major: "해당없음",
         personality: "",
         frequency: 2,
         face: "",
