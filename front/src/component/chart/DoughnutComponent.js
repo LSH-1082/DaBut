@@ -26,7 +26,7 @@ const DoughnutComponent = () => {
             legend: {
                 position: 'bottom',
                 labels: {
-                    padding: 25,
+                    padding: 30,
                     boxWidth: 10,
                     boxHeight: 10,
                     usePointStyle: true,

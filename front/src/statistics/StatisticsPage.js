@@ -28,7 +28,9 @@ const StatisticsPage = () => {
             <hr className="statHorizon"/>
             <div className="StatisticsPageDiv">
                 <div className="statPageDiv">
-                    <p className="myStatText">내가 선호하는 사람들의 유형</p>
+                    <div className="myStatTextDiv">
+                        <p className="myStatText">내가 선호하는 사람들의 유형</p>
+                    </div>
                     <div className="rankDiv">
                         <div className="rank">
                             <div className="statRankFirst">

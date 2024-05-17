@@ -24,8 +24,8 @@
 
 .statDoughnutDiv {
     margin-top: 30px;
-    width: 300px;
-    height: 300px;
+    width: 320px;
+    height: 320px;
 }
 
 .myStatText {
@@ -69,14 +69,14 @@
 }
 
 .statRankFirst, .statRankSecond {
-    width: 150px;
+    width: 180px;
 }
 
 .statRank {
     margin-bottom: 10px;
     color: #A7A7A7;
     text-align: center;
-    font-size: 14px;
+    font-size: 13px;
     font-style: normal;
     font-weight: 555;
     line-height: 22px; /* 220% */

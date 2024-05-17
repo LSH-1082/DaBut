@@ -49,6 +49,8 @@ const BarComponent = () => {
             },
         },
         hover: 'none',
+        categoryPercentage: 0.6, // 카테고리 너비 비율 설정
+        barPercentage: 0.8, // 막대 너비 비율 설정
     };
 
     return (
