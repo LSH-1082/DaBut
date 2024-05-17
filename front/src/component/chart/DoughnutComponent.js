@@ -44,6 +44,7 @@ const DoughnutComponent = () => {
                                 return {
                                     text: `${label} - ${value}`, // 라벨과 값으로 구성된 텍스트
                                     fillStyle: backgroundColor, // 배경색
+                                    strokeStyle: backgroundColor, //테두리 색상과 배경 색상과 동일하게
                                     hidden: isNaN(value), // 값이 없는 경우 항목 숨김
                                 };
                             });
