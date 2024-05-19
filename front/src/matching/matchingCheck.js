@@ -4,12 +4,15 @@ import MainFooter from "../main/MainFooter";
 import MatchingPeopleComponent from "../component/MatchingPeopleComponent";
 import {setMainPage} from "../store/mainPage";
 import {useDispatch} from "react-redux";
+import {getMatching} from "../api/UserData";
+import Cookies from "js-cookie";
 
 const MatchingCheck = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(setMainPage("listPage"));
+        getMatching(Cookies.get("accessToken")).then((res) => {console.log(res)});
     }, [dispatch]);
 
     const [select, setSelect] = useState("all");
