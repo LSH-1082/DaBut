@@ -22,9 +22,6 @@ public class FlaskController {
     @PostMapping("/matching")
     public String sendToFlask(@RequestHeader(name = "Authorization") String token, @RequestBody PurposeDTO purposeDTO) throws JsonProcessingException
     {
-        System.out.println("FlaskController.sendToFlask");
-        System.out.println("purposeDTO: " + purposeDTO.getPurpose());
-        System.out.println(flaskService.sendToFlask(token, purposeDTO.getPurpose()));
-        return "purpose1234";
+        return flaskService.sendToFlask(token, purposeDTO.getPurpose());
     }
 }
