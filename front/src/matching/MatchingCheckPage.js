@@ -1,14 +1,12 @@
 import {useEffect} from "react";
-import {getMeta} from "../api/UserData";
 import Cookies from "js-cookie";
 import MainFooter from "../main/MainFooter";
+import {getMatching} from "../api/UserData";
 
 const MatchingCheckPage =  () => {
 
     useEffect(() => {
-        getMeta(Cookies.get("accessToken")).then((res) => {
-            console.log(res.data);
-        });
+        getMatching(Cookies.get("accessToken")).then((res) => {console.log(res)});
     }, []);
 
     return (<>
