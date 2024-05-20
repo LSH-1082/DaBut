@@ -423,12 +423,12 @@ public class UserService {
             {
                 if (result == false)
                 {
-                    resMatchingEntity.setPurpose("reject");
+                    resMatchingEntity.setResResult("reject");
                     return true;
                 }
                 else
                 {
-                    resMatchingEntity.setPurpose("accept");
+                    resMatchingEntity.setResResult("accept");
                     return true;
                 }
             }
@@ -437,12 +437,12 @@ public class UserService {
         {
             if (result == false)
             {
-                reqMatchingEntity.setPurpose("reject");
+                reqMatchingEntity.setReqResult("reject");
                 return true;
             }
             else
             {
-                reqMatchingEntity.setPurpose("accept");
+                reqMatchingEntity.setReqResult("accept");
                 return true;
             }
         }
