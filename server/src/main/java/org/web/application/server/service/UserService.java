@@ -1,6 +1,7 @@
 package org.web.application.server.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.web.application.server.dto.EditFriendDTO;
@@ -11,8 +12,13 @@ import org.web.application.server.entity.*;
 import org.web.application.server.jwt.JwtProvider;
 import org.web.application.server.repository.*;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class UserService {
 
     private final UserRepository userRepository;
@@ -277,4 +283,111 @@ public class UserService {
 
         }
     }
+
+    @Transactional
+    public List<UserDTO> getHistory(String token)
+    {
+        String kakaoId = jwtProvider.validate(token);
+        AuthEntity authEntity = authRepository.findByKakaoId(Long.valueOf(kakaoId)).orElse(null);
+        UserEntity userEntity = userRepository.findByAuthEntity(authEntity).orElse(null);
+
+        if (userEntity == null)
+        {
+            System.out.println("userEntity 가 null입니다");
+            return Collections.emptyList();
+        }
+
+        Long userId = userEntity.getUserId();
+
+
+        /**
+         * 1차로 Request 컬럼에서 찾고 2차로 Response 컬럼에서 find
+         */
+
+        List<Long> userList = new ArrayList<>();
+        List<String> purposeList = new ArrayList<>();
+
+        List<MatchingHistoryEntity> reqUserList = matchingHistoryRepository.findByReqUserEntityUserId(userId).orElse(null);
+
+        if (reqUserList == null)
+        {
+            System.out.println("req 컬럼에 사용자의 history가 없습니다");
+            System.out.println("res 컬럼에서 탐색 진행");
+        }
+        else
+        {
+            System.out.println("req에서 사용자의 ID에 해당하는 history가 존재하면 resUserId 값을 userList에 담는다");
+            for (MatchingHistoryEntity entity : reqUserList)
+            {
+                userList.add(entity.getResUserEntity().getUserId());
+                purposeList.add(entity.getPurpose());
+            }
+        }
+
+        List<MatchingHistoryEntity> resUserList = matchingHistoryRepository.findByResUserEntityUserId(userId).orElse(null);
+
+        if (resUserList == null)
+        {
+            System.out.println("res 컬럼에 사용자의 history가 없습니다");
+        }
+        else
+        {
+            System.out.println("res에서 사용자ID의 history가 존재하면 reqUserId값을 userList에 담는다");
+            for (MatchingHistoryEntity entity : resUserList)
+            {
+                userList.add(entity.getReqUserEntity().getUserId());
+                purposeList.add(entity.getPurpose());
+            }
+        }
+
+        if (userList.isEmpty())
+        {
+            System.out.println("사용자의 history가 없음");
+            return Collections.emptyList();
+        }
+
+        List<UserDTO> historyList = new ArrayList<>();
+
+        for (int i=0; i<userList.size(); i++)
+        {
+            UserEntity historyUserEntity = userRepository.findByUserId(userList.get(i)).orElse(null);
+
+            if (historyUserEntity == null)
+            {
+                continue;
+            }
+            UserDTO userDTO = UserDTO.builder()
+                    .name(historyUserEntity.getName())
+                    .gender(historyUserEntity.getGenderEntity().getGender())
+                    .age(historyUserEntity.getAge())
+                    .kakaoId(historyUserEntity.getKakaoId())
+                    .nickname(historyUserEntity.getNickname())
+                    .height(historyUserEntity.getHeightEntity().getHeight())
+                    .face(historyUserEntity.getFaceShapeEntity().getFaceShapeName())
+                    .frequency(historyUserEntity.getSnsFrequencyEntity().getSnsFrequencyLevel())
+                    .intro(historyUserEntity.getProfile())
+                    .major(historyUserEntity.getMajorEntity().getMajorName())
+                    .mbti(historyUserEntity.getMbtiEntity().getMbtiName())
+                    .occupation(historyUserEntity.getOccupationEntity().getOccupationName())
+                    .personality(historyUserEntity.getPersonalityEntity().getPersonalityName())
+                    .smoke(historyUserEntity.getSmoking())
+                    .state(historyUserEntity.getLocationEntity().getLocationName())
+                    .weight(historyUserEntity.getWeightEntity().getWeightName())
+                    .matchingState(purposeList.get(i)).build();
+
+            historyList.add(userDTO);
+        }
+
+        System.out.println("나와 매칭된 상대방의 정보 리스트");
+        System.out.println("historyList : " + historyList);
+
+        return historyList;
+    }
+
+    public boolean matchingResult(String token)
+    {
+        return true;
+    }
+
+
 }

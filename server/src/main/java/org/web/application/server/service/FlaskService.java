@@ -40,21 +40,23 @@ public class FlaskService {
     public String sendToFlask(String token, String purpose) throws JsonProcessingException {
 
         String kakaoId = jwtProvider.validate(token);
-
         var authEntity = authRepository.findByKakaoId(Long.valueOf(kakaoId)).orElse(null);
-
         var userEntity = userRepository.findByAuthEntity(authEntity).orElse(null);
 
+        /**
+         * '매칭하러가기' 를 누른 사용자의 matchingState를 변경
+         */
+        if (userEntity == null)
+        {
+            System.out.println("token을 통한 userEntity 조회 실패");
+            return null;
+        }
         userEntity.setMatchingState(purpose);
-        System.out.println("userEntity : " + userEntity.getName());
-        System.out.println("purpose : " + purpose);
         userRepository.save(userEntity);
 
         var matchingFilterEntity = matchingFilterRepository.findByUserEntity(userEntity).orElse(null);
 
         var roommateFilterEntity = roommateFilterRepository.findByUserEntity(userEntity);
-
-        List<UserEntity> filteredUserList = null;
 
         if (purpose.equals("roommate"))
         {
@@ -193,8 +195,9 @@ public class FlaskService {
              * user가 매칭하러가기를 누르고 프론트로부터 받은 token정보를 바탕으로
              * 해당 user의 매칭필터 내용을 가져와 1차적으로 user테이블에서 데이터를 정제
              */
+            List<UserEntity> filteredUserList = null;
             List<MatchingDTO> matchingDTOList = null;
-            if (authEntity != null && userEntity != null && matchingFilterEntity != null)
+            if (authEntity != null && matchingFilterEntity != null)
             {
                 int minAge;
                 int maxAge;

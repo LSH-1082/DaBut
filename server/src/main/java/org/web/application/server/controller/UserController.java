@@ -10,6 +10,8 @@ import org.web.application.server.dto.MyPageDTO;
 import org.web.application.server.dto.UserDTO;
 import org.web.application.server.service.UserService;
 
+import java.util.List;
+
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -58,4 +60,18 @@ public class UserController {
     {
         return userService.getUser(token);
     }
+
+    @GetMapping("/history")
+    public List<UserDTO> getHistory(@RequestHeader(name = "Authorization") String token)
+    {
+        return userService.getHistory(token);
+    }
+
+    @GetMapping("/matched_result")
+    public boolean matchingResult(@RequestHeader(name = "Authorization") String token)
+    {
+        return userService.matchingResult(token);
+    }
+
+
 }
