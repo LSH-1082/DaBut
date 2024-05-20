@@ -1,0 +1,174 @@
+.MatchingCheckPage {
+    display: flex;
+    align-items: center;
+}
+
+.MatchingCheck {
+    width: 333px;
+}
+
+.matchingCheckTitle {
+    margin-top: 30px;
+    margin-bottom: 0;
+    color: #000;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.peopleDiv {
+    margin-top: 20px;
+    height: 49px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.matchingPeopleNickname {
+    margin: 0;
+    color: #000;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.matchingPeopleInfo {
+    margin-bottom: 0;
+    margin-top: 5px;
+    color: #959595;
+    text-align: right;
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.matchingFace {
+    width: 55px;
+    height: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    border: #A4A4A4 1px solid;
+}
+
+.peopleInfo {
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.matchingHorizon {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #E6E6E6;;
+    height: 2px;
+    border: #E6E6E6;
+}
+
+.peopleStat1Div, .peopleStat2Div, .peopleStat3Div {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.peopleStat4Div {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.peopleStatInsta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    border: #A0A0A0 2px solid;
+}
+
+.peopleStatInsta p {
+    margin: 10px 20px;
+    color: #A0A0A0;
+    text-align: center;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.peopleStat{
+    border: #A0A0A0 2px solid;
+    border-radius: 30px;
+    width: 105px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.peopleStat p{
+    margin: 10px 20px;
+    color: #A0A0A0;
+    text-align: center;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.peoplePurpose {
+    margin-left: 3px;
+    border: #A0A0A0 2px solid;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 140px;
+}
+
+.peoplePurpose p {
+    margin: 10px 20px;
+    color: #A0A0A0;
+    text-align: center;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.peopleTextArea textarea{
+    padding: 20px;
+    resize: none;
+    width: 292px;
+    height: 150px;
+    border-radius: 20px;
+    border: 1px solid #F2F4F5;
+    background: #F2F4F5;
+}
+
+.matchingClickButtonDiv {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.matchingClickButton {
+    width: 293px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.matchingClickButton button {
+    padding: 10px 30px;
+    border-radius: 30px;
+    border: 2px solid #AEAEAE;
+    background-color: #FFFFFF;
+    color: #A0A0A0;
+    text-align: center;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}

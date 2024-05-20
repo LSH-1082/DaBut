@@ -4,7 +4,7 @@ import Login from "./login/Login";
 import Main from "./main/Main";
 import Register from "./register/Register";
 import Profile from "./profile/Profile";
-import MatchingCheck from "./matching/matchingCheck";
+import MatchingList from "./matching/matchingList";
 import RoommatePage from "./roommate/RoommatePage";
 import EditProfilePage from "./editProfile/EditProfilePage";
 import EditFriendProfilePage from "./editProfile/EditFriendProfilePage";
@@ -21,7 +21,7 @@ function App() {
                         <Route path="/" element={<Login/>}></Route>
                         <Route path="/register" element={<Register/>}></Route>
                         <Route path="/main" element={<Main/>}></Route>
-                        <Route path="/list" element={<MatchingCheck/>}></Route>
+                        <Route path="/list" element={<MatchingList/>}></Route>
                         <Route path="/profile" element={<Profile/>}></Route>
                         <Route path="/roommate" element={<RoommatePage/>}></Route>
                         <Route path="/editprofile" element={<EditProfilePage/>}></Route>

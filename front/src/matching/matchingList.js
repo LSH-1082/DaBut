@@ -1,4 +1,4 @@
-import "./matchingCheck.css";
+import "./matchingList.css";
 import {useEffect, useState} from "react";
 import MainFooter from "../main/MainFooter";
 import MatchingPeopleComponent from "../component/MatchingPeopleComponent";
@@ -7,7 +7,7 @@ import {useDispatch} from "react-redux";
 import {getHistory} from "../api/UserData";
 import Cookies from "js-cookie";
 
-const MatchingCheck = () => {
+const MatchingList = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -77,4 +77,4 @@ const MatchingCheck = () => {
     );
 }
 
-export default MatchingCheck;
+export default MatchingList;
