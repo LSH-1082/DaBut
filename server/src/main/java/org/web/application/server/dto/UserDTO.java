@@ -36,4 +36,5 @@ public class UserDTO {
     private String weight;
     private String matchingState;
     private int warning;
+    private String connectAt;
 }
