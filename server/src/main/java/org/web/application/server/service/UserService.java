@@ -185,7 +185,7 @@ public class UserService {
         var userEntity = userRepository.findByAuthEntity(authEntity).orElse(null);
         var matchingFilterEntity = matchingFilterRepository.findByUserEntity(userEntity).orElse(null);
 
-        UserDTO userDTO = UserDTO.builder()
+        return UserDTO.builder()
                 .name(userEntity.getName())
                 .gender(userEntity.getGenderEntity().getGender())
                 .age(userEntity.getAge())
@@ -201,14 +201,13 @@ public class UserService {
                 .personality(userEntity.getPersonalityEntity().getPersonalityName())
                 .smoke(userEntity.getSmoking())
                 .state(userEntity.getLocationEntity().getLocationName())
+                .warning(userEntity.getWarning())
                 .weight(userEntity.getWeightEntity().getWeightName())
                 .wantAge(matchingFilterEntity.getAge())
                 .wantGender(matchingFilterEntity.getGenderEntity().getGender())
                 .wantHeight(matchingFilterEntity.getHeight())
                 .wantOccupation(matchingFilterEntity.getOccupationEntity().getOccupationName())
                 .wantSmoke(matchingFilterEntity.getSmoking()).build();
-
-            return userDTO;
     }
 
     @Transactional
@@ -216,14 +215,17 @@ public class UserService {
     {
         UserEntity userEntity = userRepository.findByAuthEntity(authRepository.findByKakaoId(Long.valueOf(jwtProvider.validate(token))).orElse(null)).orElse(null);
 
-        var userId = userEntity.getUserId();
-        System.out.println("userId : " + userId);
+        if (userEntity == null)
+        {
+            return null;
+        }
 
+        var userId = userEntity.getUserId();
         var entity1 = matchingHistoryRepository.findByReqUserEntityUserIdAndReqResult(userId, "standby");
-        System.out.println("entity1 : " + entity1);
 
         if(entity1.isPresent())
         {
+
             var user1 = userRepository.findByUserId(entity1.get().getResUserEntity().getUserId()).get();
 
             System.out.println("user1 Entity : " + user1);
@@ -245,7 +247,8 @@ public class UserService {
                     .smoke(user1.getSmoking())
                     .state(user1.getLocationEntity().getLocationName())
                     .weight(user1.getWeightEntity().getWeightName())
-                    .matchingState(user1.getMatchingState()).build();
+                    .matchingState(user1.getMatchingState())
+                    .warning(user1.getWarning()).build();
         }
         else
         {
@@ -274,6 +277,7 @@ public class UserService {
                         .smoke(user2.getSmoking())
                         .state(user2.getLocationEntity().getLocationName())
                         .weight(user2.getWeightEntity().getWeightName())
+                        .warning(user2.getWarning())
                         .matchingState(user2.getMatchingState()).build();
             }
             else
@@ -373,6 +377,7 @@ public class UserService {
                     .smoke(historyUserEntity.getSmoking())
                     .state(historyUserEntity.getLocationEntity().getLocationName())
                     .weight(historyUserEntity.getWeightEntity().getWeightName())
+                    .warning(historyUserEntity.getWarning())
                     .matchingState(purposeList.get(i)).build();
 
             historyList.add(userDTO);
@@ -384,10 +389,57 @@ public class UserService {
         return historyList;
     }
 
-    public boolean matchingResult(String token)
+    @Transactional
+    public boolean matchingResult(String token, Boolean result)
     {
-        return true;
+        UserEntity userEntity = userRepository.findByAuthEntity(authRepository.findByKakaoId(Long.valueOf(jwtProvider.validate(token))).orElse(null)).orElse(null);
+
+        if (userEntity == null)
+        {
+            System.out.println("userEntity를 찾을수 없음");
+            return false;
+        }
+
+        Long userId = userEntity.getUserId();
+
+        var reqMatchingEntity = matchingHistoryRepository.findByReqUserEntityUserIdAndReqResult(userId, "standby").orElse(null);
+
+        if (reqMatchingEntity == null)
+        {
+            var resMatchingEntity = matchingHistoryRepository.findByResUserEntityUserIdAndResResult(userId, "standby").orElse(null);
+            if (resMatchingEntity == null)
+            {
+                System.out.println("history에서 찾기 실패");
+                return false;
+            }
+            else
+            {
+                if (result == false)
+                {
+                    resMatchingEntity.setPurpose("reject");
+                    return true;
+                }
+                else
+                {
+                    resMatchingEntity.setPurpose("accept");
+                    return true;
+                }
+            }
+        }
+        else
+        {
+            if (result == false)
+            {
+                reqMatchingEntity.setPurpose("reject");
+                return true;
+            }
+            else
+            {
+                reqMatchingEntity.setPurpose("accept");
+                return true;
+            }
+        }
+
+
     }
-
-
 }
