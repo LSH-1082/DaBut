@@ -37,4 +37,5 @@ public class UserDTO {
     private String matchingState;
     private int warning;
     private String connectAt;
+    private String result;
 }
