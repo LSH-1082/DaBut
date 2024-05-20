@@ -34,9 +34,10 @@
 }
 
 .peopleFaceText {
-    margin: 0;
+    margin-bottom: 0;
+    margin-top: 0;
+    margin-left: 10px;
     color: #000;
-    font-family: Inter;
     font-size: 28px;
     font-style: normal;
     font-weight: 630;
@@ -81,4 +82,13 @@
     font-weight: 510;
     line-height: 15px; /* 150% */
     letter-spacing: -0.408px;
+}
+
+.matchingComp p {
+    margin: 0;
+}
+
+.people {
+    display: flex;
+    align-items: center;
 }

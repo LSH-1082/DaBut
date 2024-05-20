@@ -10,6 +10,7 @@ import EditProfilePage from "./editProfile/EditProfilePage";
 import EditFriendProfilePage from "./editProfile/EditFriendProfilePage";
 import StatisticsPage from "./statistics/StatisticsPage";
 import MatchingCheckPage from "./matching/MatchingCheckPage";
+import MatchingHistoryInfoPage from "./matching/MatchingHistoryInfoPage";
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
                         <Route path="/editfriend" element={<EditFriendProfilePage/>}></Route>
                         <Route path="/meta" element={<StatisticsPage/>}></Route>
                         <Route path="/matching" element={<MatchingCheckPage/>}></Route>
+                        <Route path="/matching/info" element={<MatchingHistoryInfoPage/>}></Route>
                         {/* 상단에 위치하는 라우트들의 규칙을 모두 확인, 일치하는 라우트가 없는경우 처리 */}
                     </Routes>
                 </BrowserRouter>

@@ -6,18 +6,28 @@ import {setMainPage} from "../store/mainPage";
 import {useDispatch} from "react-redux";
 import {getHistory} from "../api/UserData";
 import Cookies from "js-cookie";
+import {setUser} from "../store/matching";
 
 const MatchingList = () => {
     const [select, setSelect] = useState("all");
-    const dispatch = useDispatch();
     const [matchingHistory, setMatchingHistory] = useState([]);
+    const dispatch = useDispatch();
 
     useEffect(() => {
         dispatch(setMainPage("listPage"));
-        getHistory(Cookies.get("accessToken")).then((res) => {setMatchingHistory(res.data); console.log(res.data)});
+        getHistory(Cookies.get("accessToken")).then((res) => {
+            setMatchingHistory(res.data);
+            console.log(res.data)
+        });
     }, [dispatch]);
 
-
+    const generateMatchingList = () => {
+        return matchingHistory.map((item, index) => (
+            <div key={index} className="MatchingPeopleDiv">
+                <MatchingPeopleComponent user={item} index={index}/>
+            </div>
+        ));
+    }
 
     return (
         <div className="MatchingCheckPage">
@@ -73,7 +83,7 @@ const MatchingList = () => {
                 </div>
             </div>
             <div className="MatchingPeople">
-                <MatchingPeopleComponent/>
+                {generateMatchingList()}
             </div>
             <MainFooter/>
         </div>

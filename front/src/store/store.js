@@ -3,6 +3,7 @@ import userReducer from "./user";
 import pageReducer from "./page";
 import mainPageReducer from "./mainPage";
 import roommateReducer from "./roommate";
+import matchingReducer from "./matching";
 
 export default configureStore({
     reducer: {
@@ -10,5 +11,6 @@ export default configureStore({
         page: pageReducer,
         mainPage: mainPageReducer,
         roommate : roommateReducer,
+        matching: matchingReducer,
     },
 })

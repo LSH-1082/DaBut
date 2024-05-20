@@ -1,24 +1,34 @@
 import "./MatchingPeopleComponent.css";
-import CatIconComponent from "./animalIcon/CatIconComponent";
+import {renderIcon, renderPurpose} from "./renderComponent";
+import {useNavigate} from "react-router-dom";
 
-const MatchingPeopleComponent = () => {
+const MatchingPeopleComponent = (props) => {
+    const user = props.user;
+    const navigate = useNavigate();
 
-    //TODO matchingPeopleDiv 백엔드에서 데이터 받아서 for문으로 랜더링 해야함
-    //TODO peopleFaceText에 들어가는 닉네임도 값 받아서 랜더링
+
+    const clickPeople = (user) => {
+        navigate("/matching/info", {state: {user: user}});
+    }
 
     return (
-            <div className="matchingPeopleDiv">
-                <div className="peopleFaceDiv">
+        <div className="matchingPeopleDiv" onClick={() => clickPeople(user)}>
+            <div className="peopleFaceDiv">
+                <div className="people">
                     <div className="peopleFace">
-                        <CatIconComponent width={48} height={48}/>
+                        {renderIcon(user.face)}
                     </div>
-                    <p className="peopleFaceText">상큼한 곰돌이</p>
-                    <p className="matchingComp">매칭완료</p>
+                    <p className="peopleFaceText">{user.nickname}</p>
+
                 </div>
-                <div className="peopleIntro">
-                    <textarea readOnly={true} disabled={true} className="peopleIntroText"></textarea>
+                <div className="matchingComp">
+                    {renderPurpose(user.matchingState)}
                 </div>
             </div>
+            <div className="peopleIntro">
+                <textarea readOnly={true} disabled={true} className="peopleIntroText" style={{ pointerEvents: 'none' }} value={user.intro}></textarea>
+            </div>
+        </div>
     );
 }
 

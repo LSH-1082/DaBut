@@ -167,3 +167,30 @@
     font-weight: 500;
     line-height: normal;
 }
+
+.matchingCheckTitleDiv {
+    margin-top: 30px;
+}
+
+.matText {
+    display: flex;
+}
+
+.matTextDiv p {
+    margin: 0;
+    color: #EB604A;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.matchingCheckTitle {
+    margin: 0;
+}
+
+.rejectP {
+    margin-top: 0;
+    margin-bottom: 0;
+
+}
