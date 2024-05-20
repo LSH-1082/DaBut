@@ -311,6 +311,7 @@ public class UserService {
 
         List<Long> userList = new ArrayList<>();
         List<String> purposeList = new ArrayList<>();
+        List<String> result = new ArrayList<>();
 
         List<MatchingHistoryEntity> reqUserList = matchingHistoryRepository.findByReqUserEntityUserId(userId).orElse(null);
 
@@ -326,6 +327,8 @@ public class UserService {
             {
                 userList.add(entity.getResUserEntity().getUserId());
                 purposeList.add(entity.getPurpose());
+                result.add(entity.getResResult());
+
             }
         }
 
@@ -342,6 +345,7 @@ public class UserService {
             {
                 userList.add(entity.getReqUserEntity().getUserId());
                 purposeList.add(entity.getPurpose());
+                result.add(entity.getReqResult());
             }
         }
 
@@ -380,6 +384,7 @@ public class UserService {
                     .weight(historyUserEntity.getWeightEntity().getWeightName())
                     .warning(historyUserEntity.getWarning())
                     .connectAt(historyUserEntity.getAuthEntity().getConnectedAt())
+                    .result(result.get(i))
                     .matchingState(purposeList.get(i)).build();
 
             historyList.add(userDTO);
