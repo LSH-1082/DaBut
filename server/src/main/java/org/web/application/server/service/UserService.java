@@ -207,6 +207,7 @@ public class UserService {
                 .wantGender(matchingFilterEntity.getGenderEntity().getGender())
                 .wantHeight(matchingFilterEntity.getHeight())
                 .wantOccupation(matchingFilterEntity.getOccupationEntity().getOccupationName())
+                .connectAt(authEntity.getConnectedAt())
                 .wantSmoke(matchingFilterEntity.getSmoking()).build();
     }
 
@@ -225,7 +226,6 @@ public class UserService {
 
         if(entity1.isPresent())
         {
-
             var user1 = userRepository.findByUserId(entity1.get().getResUserEntity().getUserId()).get();
 
             System.out.println("user1 Entity : " + user1);
@@ -248,6 +248,7 @@ public class UserService {
                     .state(user1.getLocationEntity().getLocationName())
                     .weight(user1.getWeightEntity().getWeightName())
                     .matchingState(user1.getMatchingState())
+                    .connectAt(user1.getAuthEntity().getConnectedAt())
                     .warning(user1.getWarning()).build();
         }
         else
@@ -278,13 +279,14 @@ public class UserService {
                         .state(user2.getLocationEntity().getLocationName())
                         .weight(user2.getWeightEntity().getWeightName())
                         .warning(user2.getWarning())
+                        .connectAt(user2.getAuthEntity().getConnectedAt())
                         .matchingState(user2.getMatchingState()).build();
             }
             else
             {
-                return null;
+                return UserDTO.builder()
+                        .matchingState(userEntity.getMatchingState()).build();
             }
-
         }
     }
 
@@ -302,7 +304,6 @@ public class UserService {
         }
 
         Long userId = userEntity.getUserId();
-
 
         /**
          * 1차로 Request 컬럼에서 찾고 2차로 Response 컬럼에서 find
@@ -378,6 +379,7 @@ public class UserService {
                     .state(historyUserEntity.getLocationEntity().getLocationName())
                     .weight(historyUserEntity.getWeightEntity().getWeightName())
                     .warning(historyUserEntity.getWarning())
+                    .connectAt(historyUserEntity.getAuthEntity().getConnectedAt())
                     .matchingState(purposeList.get(i)).build();
 
             historyList.add(userDTO);
@@ -439,7 +441,5 @@ public class UserService {
                 return true;
             }
         }
-
-
     }
 }
