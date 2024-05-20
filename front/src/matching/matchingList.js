@@ -8,14 +8,17 @@ import {getHistory} from "../api/UserData";
 import Cookies from "js-cookie";
 
 const MatchingList = () => {
+    const [select, setSelect] = useState("all");
     const dispatch = useDispatch();
+    const [matchingHistory, setMatchingHistory] = useState([]);
 
     useEffect(() => {
         dispatch(setMainPage("listPage"));
-        getHistory(Cookies.get("accessToken")).then((res) => {console.log(res)});
+        getHistory(Cookies.get("accessToken")).then((res) => {setMatchingHistory(res.data); console.log(res.data)});
     }, [dispatch]);
 
-    const [select, setSelect] = useState("all");
+
+
     return (
         <div className="MatchingCheckPage">
             <div className="matchingCheck">

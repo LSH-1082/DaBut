@@ -166,7 +166,7 @@ public class FlaskService {
 
                     HttpEntity<String> entity = new HttpEntity<>(param, headers);
                     //실제 Flask 서버랑 연결하기 위한 URL
-                    String url = "http://127.0.0.1:5000/receive_string";
+                    String url = "http://127.0.0.1:5001/receive_string";
                     //Flask 서버로 데이터를 전송하고 받은 응답 값을 return
                     //restTemplate.postForObject(url, entity, String.class);
 
@@ -309,7 +309,7 @@ public class FlaskService {
 
                     HttpEntity<String> entity = new HttpEntity<>(param, headers);
                     //실제 Flask 서버랑 연결하기 위한 URL
-                    String url = "http://127.0.0.1:5000/receive_string";
+                    String url = "http://127.0.0.1:5001/receive_string";
                     //Flask 서버로 데이터를 전송하고 받은 응답 값을 return
                     //restTemplate.postForObject(url, entity, String.class);
 

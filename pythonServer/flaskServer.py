@@ -44,7 +44,8 @@ def receive_string():
             maxSimilarity = similarity
             maxUserId = dto_json[a]['userId']
     #Spring으로 response 전달
+    print(maxUserId)
     return str(maxUserId)
 
 if __name__ == '__main__':
-    app.run('0.0.0.0',port=5000,debug=True)
+    app.run('0.0.0.0',port=5001,debug=True)

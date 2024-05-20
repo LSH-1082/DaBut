@@ -1,0 +1,7 @@
+﻿personality,activity,enthusiatic,positive,clean,timid,lively
+activity,1,0.5,0.5,0.5,0.5,0.5
+enthusiatic,0.5,1,0.5,0.5,0.5,0.5
+positive,0.5,0.5,1,0.5,0.5,0.5
+clean,0.5,0.5,0.5,1,0.5,0.5
+timid,0.5,0.5,0.5,0.5,1,0.5
+lively,0.5,0.5,0.5,0.5,0.5,1

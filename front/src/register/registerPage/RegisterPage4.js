@@ -8,7 +8,7 @@ import CatIconComponent from "../../component/animalIcon/CatIconComponent";
 import DeerIconComponent from "../../component/animalIcon/DeerIconComponent";
 import RabbitIconComponent from "../../component/animalIcon/RabbitIconComponent";
 import FrogIconComponent from "../../component/animalIcon/FrogIconComponent";
-import HamsterIconComponent from "../../component/HamsterIconComponent";
+import HamsterIconComponent from "../../component/animalIcon/HamsterIconComponent";
 import FoxIconComponent from "../../component/animalIcon/FoxIconComponent";
 import BearIconComponent from "../../component/animalIcon/BearIconComponent";
 import DinoIconComponent from "../../component/animalIcon/DinoIconComponent";
