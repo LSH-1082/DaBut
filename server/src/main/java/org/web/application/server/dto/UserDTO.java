@@ -35,4 +35,5 @@ public class UserDTO {
     private boolean wantSmoke;
     private String weight;
     private String matchingState;
+    private int warning;
 }

@@ -68,9 +68,9 @@ public class UserController {
     }
 
     @GetMapping("/matched_result")
-    public boolean matchingResult(@RequestHeader(name = "Authorization") String token)
+    public boolean matchingResult(@RequestHeader(name = "Authorization") String token, @RequestParam Boolean result)
     {
-        return userService.matchingResult(token);
+        return userService.matchingResult(token, result);
     }
 
 
