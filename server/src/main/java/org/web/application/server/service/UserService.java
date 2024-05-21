@@ -270,10 +270,11 @@ public class UserService {
                     .smoke(matchedUserEntity.getSmoking())
                     .state(matchedUserEntity.getLocationEntity().getLocationName())
                     .weight(matchedUserEntity.getWeightEntity().getWeightName())
-                    .matchingState(reqUserEntity.getPurpose())//상대방의 매칭 분야
+                    .matchingState(matchedUserEntity.getMatchingState())//상대방의 매칭 분야
                     .connectAt(matchedUserEntity.getAuthEntity().getConnectedAt())//상대방의 가입 날짜
                     .myResult(reqUserEntity.getReqResult())//내 수락 여부
                     .otherResult(reqUserEntity.getResResult())//상대방의 수락 여부
+                    .purpose(reqUserEntity.getPurpose())
                     .warning(matchedUserEntity.getWarning()).build();
         }
         else if (reqUserEntity == null && resUserEntity !=null)
@@ -298,10 +299,11 @@ public class UserService {
                     .smoke(matchedUserEntity.getSmoking())
                     .state(matchedUserEntity.getLocationEntity().getLocationName())
                     .weight(matchedUserEntity.getWeightEntity().getWeightName())
-                    .matchingState(resUserEntity.getPurpose())//상대방의 매칭 분야
+                    .matchingState(matchedUserEntity.getMatchingState())//상대방의 매칭 분야
                     .connectAt(matchedUserEntity.getAuthEntity().getConnectedAt())//상대방의 가입 날짜
                     .myResult(resUserEntity.getResResult())//내 수락 여부
                     .otherResult(resUserEntity.getReqResult())//상대방의 수락 여부
+                    .purpose(resUserEntity.getPurpose())
                     .warning(matchedUserEntity.getWarning()).build();
         }
 
@@ -327,10 +329,11 @@ public class UserService {
                     .smoke(matchedUserEntity.getSmoking())
                     .state(matchedUserEntity.getLocationEntity().getLocationName())
                     .weight(matchedUserEntity.getWeightEntity().getWeightName())
-                    .matchingState(reqUserEntity.getPurpose())//상대방의 매칭 분야
+                    .matchingState(matchedUserEntity.getMatchingState())//상대방의 매칭 분야
                     .connectAt(matchedUserEntity.getAuthEntity().getConnectedAt())//상대방의 가입 날짜
                     .myResult(reqUserEntity.getReqResult())//내 수락 여부
                     .otherResult(reqUserEntity.getResResult())//상대방의 수락 여부
+                    .purpose(reqUserEntity.getPurpose())
                     .warning(matchedUserEntity.getWarning()).build();
         }
 
@@ -356,10 +359,11 @@ public class UserService {
                     .smoke(matchedUserEntity.getSmoking())
                     .state(matchedUserEntity.getLocationEntity().getLocationName())
                     .weight(matchedUserEntity.getWeightEntity().getWeightName())
-                    .matchingState(resUserEntity.getPurpose())//상대방의 매칭 분야
+                    .matchingState(matchedUserEntity.getMatchingState())//상대방의 매칭 분야
                     .connectAt(matchedUserEntity.getAuthEntity().getConnectedAt())//상대방의 가입 날짜
                     .myResult(resUserEntity.getResResult())//내 수락 여부
                     .otherResult(resUserEntity.getReqResult())//상대방의 수락 여부
+                    .purpose(resUserEntity.getPurpose())
                     .warning(matchedUserEntity.getWarning()).build();
         }
         else
