@@ -11,5 +11,4 @@ export const editProfile = (data, token) => api.post("http://localhost:8080/api/
 export const editFriend = (data, token) => api.post("http://localhost:8080/api/user/edit/friend", data, {headers: {Authorization: token}});
 export const getMatching = (token) => api.get("http://localhost:8080/api/user/meta", {headers: {Authorization: token}});
 export const getHistory = (token) => api.get("http://localhost:8080/api/user/history", {headers: {Authorization: token}});
-export const getCheck = (token) => api.get("http://localhost:8080/api/user/check_accept", {headers: {Authorization: token}});
 export const getMatched = (data, token) => api.get("http://localhost:8080/api/user/matched_result?result=" + data, {headers: {Authorization: token}});

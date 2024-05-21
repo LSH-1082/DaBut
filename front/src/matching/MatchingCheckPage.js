@@ -3,19 +3,13 @@ import "./MatchingCheckPage.css";
 import {renderIcon, renderInsta, renderPersonality, renderPurpose} from "../component/renderComponent";
 import {useLocation} from "react-router-dom";
 import {useEffect} from "react";
-import {getCheck, getMatched} from "../api/UserData";
+import {getMatched} from "../api/UserData";
 import Cookies from "js-cookie";
 
 const MatchingCheckPage = () => {
     const location = useLocation();
     const matchingPeople = { ...location.state.matchingPeople };
     const date = matchingPeople.connectAt.split('T')[0].split('-');
-
-    useEffect(() => {
-        getCheck(Cookies.get("accessToken")).then((res) => {
-            console.log(res.data);
-        });
-    }, []);
 
     const clickButton = (result) => {
         getMatched(result, Cookies.get("accessToken"));
