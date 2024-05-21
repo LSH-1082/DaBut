@@ -94,7 +94,7 @@ public class FlaskService {
                         maxAge,
                         userEntity.getUserId()).orElse(null);
 
-                if (filteredRoommateList == null)
+                if (filteredRoommateList.isEmpty())
                 {
                     System.out.println("filteredRoommateList 가 null임");
                     return null;
@@ -230,12 +230,11 @@ public class FlaskService {
                         minAge, maxAge, userEntity.getUserId()).orElse(null);
 
                 //사용자와 매칭된 사람이 없을 경우 리턴 시킴
-                if (filteredUserList == null)
+                if (filteredUserList.isEmpty())
                 {
                     System.out.println("filteredUserList 가 null임");
-                    return null;
+                    return "";
                 }
-
 
                 /**
                  * 240520 임재현
@@ -348,11 +347,25 @@ public class FlaskService {
                 // 아이디 2개가 왔어, List가 하나가 왔어 size = 2m 0번째가 주(firstUser), 1번째가 가장 유사도가 높은곳에 넣어
                 Long user = Long.valueOf(restTemplate.postForObject(url, entity, String.class));
 
+                var otherUser = userRepository.findByUserId(user).orElse(null);
+
+                System.out.println("@#@user : " + user);
+
                 MatchingHistoryEntity matchingHistoryEntity = MatchingHistoryEntity.builder()
                         .reqUserEntity(userEntity)
-                        .resUserEntity(userRepository.findByUserId(user).orElse(null)).purpose(purpose).build();
+                        .resUserEntity(otherUser)
+                        .purpose(purpose).build();
 
                 matchingHistoryRepository.save(matchingHistoryEntity);
+                userEntity.setMatchingState("none");
+                if (otherUser != null)
+                {
+                    otherUser.setMatchingState("none");
+                }
+                else
+                {
+                    System.out.println("otherUser null임");
+                }
 
                 System.out.println("성공");
                 return null;
