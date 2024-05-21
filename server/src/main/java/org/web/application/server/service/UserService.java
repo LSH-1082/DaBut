@@ -270,7 +270,7 @@ public class UserService {
                     .smoke(matchedUserEntity.getSmoking())
                     .state(matchedUserEntity.getLocationEntity().getLocationName())
                     .weight(matchedUserEntity.getWeightEntity().getWeightName())
-                    .matchingState(matchedUserEntity.getMatchingState())//상대방의 매칭 분야
+                    .matchingState(reqUserEntity.getPurpose())//상대방의 매칭 분야
                     .connectAt(matchedUserEntity.getAuthEntity().getConnectedAt())//상대방의 가입 날짜
                     .myResult(reqUserEntity.getReqResult())//내 수락 여부
                     .otherResult(reqUserEntity.getResResult())//상대방의 수락 여부
@@ -298,7 +298,7 @@ public class UserService {
                     .smoke(matchedUserEntity.getSmoking())
                     .state(matchedUserEntity.getLocationEntity().getLocationName())
                     .weight(matchedUserEntity.getWeightEntity().getWeightName())
-                    .matchingState(matchedUserEntity.getMatchingState())//상대방의 매칭 분야
+                    .matchingState(resUserEntity.getPurpose())//상대방의 매칭 분야
                     .connectAt(matchedUserEntity.getAuthEntity().getConnectedAt())//상대방의 가입 날짜
                     .myResult(resUserEntity.getReqResult())//내 수락 여부
                     .otherResult(resUserEntity.getResResult())//상대방의 수락 여부
@@ -327,7 +327,7 @@ public class UserService {
                     .smoke(matchedUserEntity.getSmoking())
                     .state(matchedUserEntity.getLocationEntity().getLocationName())
                     .weight(matchedUserEntity.getWeightEntity().getWeightName())
-                    .matchingState(matchedUserEntity.getMatchingState())//상대방의 매칭 분야
+                    .matchingState(reqUserEntity.getPurpose())//상대방의 매칭 분야
                     .connectAt(matchedUserEntity.getAuthEntity().getConnectedAt())//상대방의 가입 날짜
                     .myResult(reqUserEntity.getReqResult())//내 수락 여부
                     .otherResult(reqUserEntity.getResResult())//상대방의 수락 여부
@@ -356,7 +356,7 @@ public class UserService {
                     .smoke(matchedUserEntity.getSmoking())
                     .state(matchedUserEntity.getLocationEntity().getLocationName())
                     .weight(matchedUserEntity.getWeightEntity().getWeightName())
-                    .matchingState(matchedUserEntity.getMatchingState())//상대방의 매칭 분야
+                    .matchingState(resUserEntity.getPurpose())//상대방의 매칭 분야
                     .connectAt(matchedUserEntity.getAuthEntity().getConnectedAt())//상대방의 가입 날짜
                     .myResult(resUserEntity.getResResult())//내 수락 여부
                     .otherResult(resUserEntity.getReqResult())//상대방의 수락 여부
@@ -533,22 +533,20 @@ public class UserService {
         return "none";
     }
 
-    public boolean checkAccept(String token)
+    public UserDTO checkAccept(String token)
     {
         UserEntity userEntity = userRepository.findByAuthEntity(authRepository.findByKakaoId(Long.valueOf(jwtProvider.validate(token))).orElse(null)).orElse(null);
 
         if (userEntity == null)
         {
             System.out.println("userEntity를 찾을수 없음");
-            return false;
+            return null;
         }
 
         List<String> results = Arrays.asList("standby", "accept");
 
         var userId = userEntity.getUserId();
 
-        var reqMatchingEntity = matchingHistoryRepository.findTopByReqUserEntityUserIdAndReqResultInOrderByMatchingHistoryIdDesc(userId, results);
-
-        return true;
+        return null;
     }
 }
