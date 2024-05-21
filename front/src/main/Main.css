@@ -395,6 +395,12 @@
     justify-content: space-between;
 }
 
+.ModalButtonDiv {
+    width: 280px;
+    display: flex;
+    justify-content: center;
+}
+
 .modalCloseButton {
     padding: 0;
     width: 128px;
@@ -403,11 +409,11 @@
     border-radius: 10px;
     background: #FFEDED;
     color: #000;
-    font-family: K2D;
     font-size: 15px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    cursor: pointer;
 }
 
 .modalAcceptButton {
@@ -418,11 +424,11 @@
     border-radius: 10px;
     background: #EB604A;
     color: #FFF;
-    font-family: K2D;
     font-size: 15px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    cursor: pointer;
 }
 
 .modalContextDiv{
@@ -439,7 +445,6 @@
 .modalRoommate {
     margin: 0;
     color: #EB604A;
-    font-family: K2D;
     font-size: 18px;
     font-style: normal;
     font-weight: 700;
@@ -449,7 +454,6 @@
 .modalText {
     margin: 0;
     color: #000;
-    font-family: K2D;
     font-size: 18px;
     font-style: normal;
     font-weight: 700;
@@ -459,7 +463,7 @@
 .modalUnderContextDiv {
     display: flex;
     justify-content: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .modalUnder {
@@ -470,4 +474,8 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+}
+
+.handIcon {
+    padding-right: 1px;
 }

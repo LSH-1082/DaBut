@@ -1,6 +1,4 @@
-import {useEffect, useState} from "react";
-import {getMatching} from "../api/UserData";
-import Cookies from "js-cookie";
+import {useState} from "react";
 import MainFooter from "../main/MainFooter";
 import "./MatchingCheckPage.css";
 import {renderIcon, renderInsta, renderPersonality, renderPurpose} from "../component/renderComponent";
@@ -8,12 +6,7 @@ import {renderIcon, renderInsta, renderPersonality, renderPurpose} from "../comp
 const MatchingCheckPage = () => {
     const [matchingPeople, setMatchingPeople] = useState({});
 
-    useEffect(() => {
-        getMatching(Cookies.get("accessToken")).then((res) => {
-            console.log(res.data);
-            setMatchingPeople(res.data);
-        });
-    }, []);
+
 
     return (
         <div className="MatchingCheckPage">

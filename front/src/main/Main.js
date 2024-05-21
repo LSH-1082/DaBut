@@ -4,37 +4,16 @@ import CheckComponent from "../component/CheckComponent";
 import MainFooter from "./MainFooter";
 import {useDispatch} from "react-redux";
 import {setMainPage} from "../store/mainPage";
-import {getRoommate, postFlask} from "../api/UserData";
-import Cookies from "js-cookie";
-import Modal from "react-modal";
+import {useNavigate} from "react-router-dom";
 
-const customModalStyles = {
-    overlay: {
-        backgroundColor: "rgba(0, 0, 0, 0.4)",
-        zIndex: 15,
-    },
-    content: {
-        display: "flex",
-        width: "320px",
-        height: "220px",
-        zIndex: 150,
-        top: "50%",
-        left: "50%",
-        transform: "translate(-50%, -50%)",
-        borderRadius: "25px",
-        border: "none",
-        boxShadow: "2px 2px 2px rgba(0.25, 0.25, 0.25, 0.25)",
-        backgroundColor: "white",
-        justifyContent: "center",
-        alignContent: "center",
-        overflow: "auto",
-    },
-};
+
 
 const Main = () => {
     const [purpose, setPurpose] = useState("");
+    const [roomModalIsOpen, setRoomModalIsOpen] = useState(false);
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(setMainPage("mainPage"));
@@ -45,22 +24,6 @@ const Main = () => {
         else setPurpose(value);
     }
 
-    const clickMatching = () => {
-        if (purpose === "roommate") {
-            getRoommate(Cookies.get("accessToken")).then((res) => {
-                if (res.data === "") {
-                    setModalIsOpen(true);
-                }
-                else postFlask(purpose, Cookies.get("accessToken"));
-            });
-        } else postFlask(purpose, Cookies.get("accessToken"));
-    }
-
-
-    const clickModalButton = () => {
-        setModalIsOpen(!modalIsOpen);
-    };
-
     return (
         <div className="purposeMainPage">
             <div className="matchingStartDiv">
@@ -70,45 +33,7 @@ const Main = () => {
                         <p className="planeMatchText">을</p>
                     </div>
                     <p className="planeMatchText">시작해볼까요?</p>
-                    <button className="goMatch" onClick={clickMatching}>매칭하러가기</button>
-                    {
-                        modalIsOpen ? (<Modal
-                            isOpen={true}
-                            onRequestClose={clickModalButton}
-                            style={customModalStyles}
-                            ariaHideApp={false}
-                            shouldCloseOnOverlayClick={true}
-                        >
-                            <div className="modalDiv">
-                                <div className="modalNoticeDiv">
-                                    <div className="noticeCircle">
-                                        <p className="modalNotice">!</p>
-                                    </div>
-                                </div>
 
-                                <div className="modalContextDiv">
-                                    <div className="modalContext">
-                                        <p className="modalRoommate">룸메이트 정보</p>
-                                        <p className="modalText">가 입력되지 않았습니다.</p>
-                                    </div>
-                                </div>
-                                <div className="modalUnderContextDiv">
-                                    <div className="modalUnderContext">
-                                        <p className="modalUnder">룸메이트 정보를 입력하시겠습니까?</p>
-                                    </div>
-                                </div>
-
-
-                                <div className="modalButton">
-                                    <div className="modalButtonDiv">
-                                        <button className="modalCloseButton" onClick={clickModalButton}>취소</button>
-                                        <button className="modalAcceptButton" onClick={clickModalButton}>확인</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </Modal>) : (<></>)
-
-                    }
                 </div>
                 <div className="peopleImgDiv">
                     <img className="peopleImg" src="/images/people.jpeg" alt="peopleImg"/>
@@ -723,7 +648,7 @@ const Main = () => {
                     </div>
                 </div>
             </div>
-            <MainFooter/>
+            <MainFooter purpose={purpose}/>
         </div>
     );
 }

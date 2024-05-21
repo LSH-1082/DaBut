@@ -2,10 +2,18 @@ import "./MainFooter.css";
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {setMainPage} from "../store/mainPage";
+import {useEffect, useState} from "react";
+import MainFooterFingerComponent from "../component/mainFooter/MainFooterFingerComponent";
+import MainFooterCloseMailComponent from "../component/mainFooter/MainFooterCloseMailComponent";
+import MainFooterOpenMailComponent from "../component/mainFooter/MainFooterOpenMailComponent";
+import {getMatching} from "../api/UserData";
+import Cookies from "js-cookie";
 
-const MainFooter = () => {
+const MainFooter = (props) => {
     const navigate = useNavigate();
     const mainPage = useSelector(state => state.mainPage);
+    const [state, setState] = useState("");
+    const [matchingPeople, setMatchingPeople] = useState({});
     const dispatch = useDispatch();
 
     const clickMainFooterButton = (value) => {
@@ -14,8 +22,18 @@ const MainFooter = () => {
         if(value === "metaPage") navigate("/meta");
         if(value === "listPage") navigate("/list");
         if(value === "profilePage") navigate("/profile");
-        if(value === "matchingPage") navigate("/matching");
     }
+
+    useEffect(() => {
+        getMatching(Cookies.get("accessToken")).then((res) => {
+            if(res.data.matchingState === "none") setState("none");
+            if(res.data.matchingState === "matching") setState("matching");
+            if(res.data.matchingState === ""){
+                setState("");
+                setMatchingPeople(res.data);
+            }
+        });
+    }, []);
 
     return (
         <nav className="MainNav">
@@ -71,17 +89,10 @@ const MainFooter = () => {
                                 </filter>
                             </defs>
                         </svg>
-                        <svg onClick={() => {
-                            clickMainFooterButton("matchingPage")
-                        }} className="plusInCircle" xmlns="http://www.w3.org/2000/svg" width="60" height="60"
-                             viewBox="0 0 60 60" fill="none">
-                            <path
-                                d="M15.8333 32C15.0819 32 14.3612 31.7893 13.8299 31.4142C13.2985 31.0391 13 30.5304 13 30C13 29.4696 13.2985 28.9609 13.8299 28.5858C14.3612 28.2107 15.0819 28 15.8333 28H44.1667C44.9181 28 45.6388 28.2107 46.1701 28.5858C46.7015 28.9609 47 29.4696 47 30C47 30.5304 46.7015 31.0391 46.1701 31.4142C45.6388 31.7893 44.9181 32 44.1667 32H15.8333Z"
-                                fill="white"/>
-                            <path
-                                d="M28 15.8333C28 15.0819 28.2107 14.3612 28.5858 13.8299C28.9609 13.2985 29.4696 13 30 13C30.5304 13 31.0391 13.2985 31.4142 13.8299C31.7893 14.3612 32 15.0819 32 15.8333V44.1667C32 44.9181 31.7893 45.6388 31.4142 46.1701C31.0391 46.7015 30.5304 47 30 47C29.4696 47 28.9609 46.7015 28.5858 46.1701C28.2107 45.6388 28 44.9181 28 44.1667V15.8333Z"
-                                fill="white"/>
-                        </svg>
+                        {state === "" ? (<MainFooterFingerComponent purpose={props.purpose} mainPage={mainPage.mainPage}/>):(<></>)}
+                        {state === "none" ? (<MainFooterFingerComponent purpose={props.purpose} mainPage={mainPage.mainPage}/>):(<></>)}
+                        {state === "n" ? (<MainFooterCloseMailComponent/>):(<></>)}
+                        {state === "no" ? (<MainFooterOpenMailComponent/>):(<></>)}
                     </div>
 
                     <svg onClick={() => {
