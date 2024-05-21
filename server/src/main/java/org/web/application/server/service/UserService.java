@@ -540,64 +540,110 @@ public class UserService {
 
     public UserDTO checkAccept(String token)
     {
-//        UserEntity userEntity = userRepository.findByAuthEntity(authRepository.findByKakaoId(Long.valueOf(jwtProvider.validate(token))).orElse(null)).orElse(null);
-//
-//        if (userEntity == null)
-//        {
-//            System.out.println("userEntity를 찾을수 없음");
-//            return null;
-//        }
-//
-//        List<String> results = Arrays.asList("standby", "accept");
-//
-//        var userId = userEntity.getUserId();
-//
-//        var reqUserEntity = matchingHistoryRepository.findTopByReqUserEntityUserIdAndReqResultInOrderByMatchingHistoryIdDesc(userId,results).orElse(null);
-//        var resUserEntity = matchingHistoryRepository.findTopByResUserEntityUserIdAndResResultInOrderByMatchingHistoryIdDesc(userId,results).orElse(null);
-//
-//        if (reqUserEntity == null && resUserEntity == null)
-//        {
-//            System.out.println("기록이 없음");
-//            return null;
-//        }
-//        //req에만 기록이 있을 때
-//        else if (reqUserEntity != null && resUserEntity == null)
-//        {
-//            String myResult = reqUserEntity.getReqResult();
-//            String otherResult = reqUserEntity.getResResult();
-//
-//            if (myResult.equals("accept") && otherResult.equals("accept"))
-//            {
-//                return UserDTO.builder()
-//                        .otherResult(reqUserEntity.getResResult())
-//                        .myResult(reqUserEntity.getReqResult())
-//                        .kakaoId(userRepository.findByUserId(reqUserEntity.getReqUserEntity().getUserId()).get().getKakaoId()).build();
-//            }
-//            else
-//            {
-//                return UserDTO.builder()
-//                        .otherResult(reqUserEntity.getResResult())
-//                        .myResult(reqUserEntity.getReqResult()).build();
-//            }
-//            System.out.println("req에만 기록이 있음");
-//        }
-//        else if (reqUserEntity == null)
-//        {
-//            System.out.println("res에만 기록이 있음");
-//            resUserEntity.setResResult(result);
-//        }
-//
-//        else if (reqUserEntity.getMatchingHistoryId() > resUserEntity.getMatchingHistoryId())
-//        {
-//            System.out.println("req컬럼이 나의 마지막 기록");
-//            reqUserEntity.setReqResult(result);
-//        }
-//
-//        else if (reqUserEntity.getMatchingHistoryId() < resUserEntity.getMatchingHistoryId())
-//        {
-//            System.out.println("res 컬럼이 마지막 기록");
-//            resUserEntity.setResResult(result);
-//        }
+        UserEntity userEntity = userRepository.findByAuthEntity(authRepository.findByKakaoId(Long.valueOf(jwtProvider.validate(token))).orElse(null)).orElse(null);
+
+        if (userEntity == null)
+        {
+            System.out.println("userEntity를 찾을수 없음");
+            return null;
+        }
+
+        List<String> results = Arrays.asList("standby", "accept");
+
+        var userId = userEntity.getUserId();
+
+        var reqUserEntity = matchingHistoryRepository.findTopByReqUserEntityUserIdAndReqResultInOrderByMatchingHistoryIdDesc(userId,results).orElse(null);
+        var resUserEntity = matchingHistoryRepository.findTopByResUserEntityUserIdAndResResultInOrderByMatchingHistoryIdDesc(userId,results).orElse(null);
+
+        if (reqUserEntity == null && resUserEntity == null)
+        {
+            System.out.println("기록이 없음");
+            return null;
+        }
+        //req에만 기록이 있을 때
+        else if (reqUserEntity != null && resUserEntity == null)
+        {
+            System.out.println("req에만 기록이 있음");
+
+            String myResult = reqUserEntity.getReqResult();
+            String otherResult = reqUserEntity.getResResult();
+
+            if (myResult.equals("accept") && otherResult.equals("accept"))
+            {
+                return UserDTO.builder()
+                        .otherResult(otherResult)
+                        .myResult(myResult)
+                        .kakaoId(userRepository.findByUserId(reqUserEntity.getResUserEntity().getUserId()).get().getKakaoId()).build();
+            }
+            else
+            {
+                return UserDTO.builder()
+                        .otherResult(otherResult)
+                        .myResult(myResult).build();
+            }
+        }
+        else if (reqUserEntity == null)
+        {
+            System.out.println("res에만 기록이 있음");
+            String myResult = resUserEntity.getResResult();
+            String otherResult = resUserEntity.getReqResult();
+
+            if (myResult.equals("accept") && otherResult.equals("accept"))
+            {
+                return UserDTO.builder()
+                        .otherResult(otherResult)
+                        .myResult(myResult)
+                        .kakaoId(userRepository.findByUserId(resUserEntity.getReqUserEntity().getUserId()).get().getKakaoId()).build();
+            }
+            else
+            {
+                return UserDTO.builder()
+                        .otherResult(otherResult)
+                        .myResult(myResult).build();
+            }
+        }
+
+        else if (reqUserEntity.getMatchingHistoryId() > resUserEntity.getMatchingHistoryId())
+        {
+            System.out.println("req컬럼이 나의 마지막 기록");
+            String myResult = reqUserEntity.getReqResult();
+            String otherResult = reqUserEntity.getResResult();
+
+            if (myResult.equals("accept") && otherResult.equals("accept"))
+            {
+                return UserDTO.builder()
+                        .otherResult(otherResult)
+                        .myResult(myResult)
+                        .kakaoId(userRepository.findByUserId(reqUserEntity.getResUserEntity().getUserId()).get().getKakaoId()).build();
+            }
+            else
+            {
+                return UserDTO.builder()
+                        .otherResult(otherResult)
+                        .myResult(myResult).build();
+            }
+        }
+
+        else if (reqUserEntity.getMatchingHistoryId() < resUserEntity.getMatchingHistoryId())
+        {
+            System.out.println("res 컬럼이 마지막 기록");
+            String myResult = resUserEntity.getResResult();
+            String otherResult = resUserEntity.getReqResult();
+
+            if (myResult.equals("accept") && otherResult.equals("accept"))
+            {
+                return UserDTO.builder()
+                        .otherResult(otherResult)
+                        .myResult(myResult)
+                        .kakaoId(userRepository.findByUserId(resUserEntity.getReqUserEntity().getUserId()).get().getKakaoId()).build();
+            }
+            else
+            {
+                return UserDTO.builder()
+                        .otherResult(otherResult)
+                        .myResult(myResult).build();
+            }
+        }
 
         return null;
     }
