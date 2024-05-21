@@ -1,12 +1,25 @@
-import {useState} from "react";
 import MainFooter from "../main/MainFooter";
 import "./MatchingCheckPage.css";
 import {renderIcon, renderInsta, renderPersonality, renderPurpose} from "../component/renderComponent";
+import {useLocation} from "react-router-dom";
+import {useEffect} from "react";
+import {getCheck, getMatched} from "../api/UserData";
+import Cookies from "js-cookie";
 
 const MatchingCheckPage = () => {
-    const [matchingPeople, setMatchingPeople] = useState({});
+    const location = useLocation();
+    const matchingPeople = { ...location.state.matchingPeople };
+    const date = matchingPeople.connectAt.split('T')[0].split('-');
 
+    useEffect(() => {
+        getCheck(Cookies.get("accessToken")).then((res) => {
+            console.log(res.data);
+        });
+    }, []);
 
+    const clickButton = (result) => {
+        getMatched(result, Cookies.get("accessToken"));
+    }
 
     return (
         <div className="MatchingCheckPage">
@@ -20,7 +33,7 @@ const MatchingCheckPage = () => {
                     </div>
                     <div className="peopleInfo">
                         <p className="matchingPeopleNickname">{matchingPeople.nickname}</p>
-                        <p className="matchingPeopleInfo">가입날짜: 2024.04.15 매칭 완료된 횟수: 6회 신고된 횟수: 0</p>
+                        <p className="matchingPeopleInfo">가입날짜: {date[0]}.{date[1]}.{date[2]} 매칭 완료된 횟수: 6회 신고된 횟수: 0</p>
                     </div>
 
                 </div>
@@ -58,7 +71,7 @@ const MatchingCheckPage = () => {
                             {renderPersonality(matchingPeople.personality)}
                         </div>
                         <div className="peoplePurpose">
-                            {renderPurpose(matchingPeople.matchingState)}
+                            {renderPurpose(matchingPeople.purpose)}
                         </div>
                     </div>
                     <div className="peopleTextArea">
@@ -67,8 +80,25 @@ const MatchingCheckPage = () => {
 
                     <div className="matchingClickButtonDiv">
                         <div className="matchingClickButton">
-                            <button>거절하기</button>
-                            <button>수락하기</button>
+                            { matchingPeople.myResult ==="standby" ? (
+                                <>
+                            <button onClick={() => {clickButton("reject"); console.log("reject")}}>거절하기</button>
+                            <button onClick={() => {clickButton("accept"); console.log("accept")}}>수락하기</button>
+                                </>
+                                ) : (<></>)
+                            }
+                            { matchingPeople.myResult === "accept" ? (
+                                <div>
+                                    <p>accept</p>
+                                </div>
+                                ) : (<></>)
+                            }
+                            { matchingPeople.myResult === "reject" ? (
+                                <div>
+                                    <p>reject</p>
+                                </div>
+                            ) : (<></>)
+                            }
                         </div>
                     </div>
                 </div>

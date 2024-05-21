@@ -12,26 +12,27 @@ import Cookies from "js-cookie";
 const MainFooter = (props) => {
     const navigate = useNavigate();
     const mainPage = useSelector(state => state.mainPage);
-    const [state, setState] = useState("");
+    const [state, setState] = useState("none");
     const [matchingPeople, setMatchingPeople] = useState({});
     const dispatch = useDispatch();
 
     const clickMainFooterButton = (value) => {
         dispatch(setMainPage(value));
-        if(value === "mainPage") navigate("/main");
-        if(value === "metaPage") navigate("/meta");
-        if(value === "listPage") navigate("/list");
-        if(value === "profilePage") navigate("/profile");
+        if (value === "mainPage") navigate("/main");
+        if (value === "metaPage") navigate("/meta");
+        if (value === "listPage") navigate("/list");
+        if (value === "profilePage") navigate("/profile");
     }
 
     useEffect(() => {
         getMatching(Cookies.get("accessToken")).then((res) => {
-            if(res.data.matchingState === "none") setState("none");
-            if(res.data.matchingState === "matching") setState("matching");
-            if(res.data.matchingState === ""){
-                setState("");
+            console.log(res.data);
+            if (res.data.matchingState === "none" && res.data.name !== null) {
+                setState("peopleMatch");
                 setMatchingPeople(res.data);
             }
+            else if(res.data.matchingState !== "none" && res.data.name === null) setState("matching");
+            else setState("none");
         });
     }, []);
 
@@ -54,10 +55,12 @@ const MainFooter = (props) => {
                          viewBox="0 0 26 25" fill="none">
                         <path
                             d="M2 6.66667C2 7.90434 2.51507 9.09133 3.4319 9.9665C4.34874 10.8417 5.59223 11.3333 6.88883 11.3333C8.18543 11.3333 9.42892 10.8417 10.3458 9.9665C11.2626 9.09133 11.7777 7.90434 11.7777 6.66667C11.7777 5.42899 11.2626 4.242 10.3458 3.36683C9.42892 2.49167 8.18543 2 6.88883 2C5.59223 2 4.34874 2.49167 3.4319 3.36683C2.51507 4.242 2 5.42899 2 6.66667Z"
-                            stroke={mainPage.mainPage === "metaPage" ? "#EB604A" : "#9D9D9D"} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            stroke={mainPage.mainPage === "metaPage" ? "#EB604A" : "#9D9D9D"} strokeWidth="2.5"
+                            strokeLinecap="round" strokeLinejoin="round"/>
                         <path
                             d="M6.88916 2V6.66667H11.778M9.33357 18.3333V23M19.1112 14.8333V23M14.2224 13.6667V23M24.0001 12.5V23"
-                            stroke={mainPage.mainPage === "metaPage" ? "#EB604A" : "#9D9D9D"} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            stroke={mainPage.mainPage === "metaPage" ? "#EB604A" : "#9D9D9D"} strokeWidth="2.5"
+                            strokeLinecap="round" strokeLinejoin="round"/>
                     </svg>
 
 
@@ -89,10 +92,12 @@ const MainFooter = (props) => {
                                 </filter>
                             </defs>
                         </svg>
-                        {state === "" ? (<MainFooterFingerComponent purpose={props.purpose} mainPage={mainPage.mainPage}/>):(<></>)}
-                        {state === "none" ? (<MainFooterFingerComponent purpose={props.purpose} mainPage={mainPage.mainPage}/>):(<></>)}
-                        {state === "n" ? (<MainFooterCloseMailComponent/>):(<></>)}
-                        {state === "no" ? (<MainFooterOpenMailComponent/>):(<></>)}
+                        {state === "" ? (<MainFooterFingerComponent purpose={props.purpose}
+                                                                    mainPage={mainPage.mainPage}/>) : (<></>)}
+                        {state === "none" ? (<MainFooterFingerComponent purpose={props.purpose}
+                                                                        mainPage={mainPage.mainPage}/>) : (<></>)}
+                        {state === "matching" ? (<MainFooterCloseMailComponent/>) : (<></>)}
+                        {state === "peopleMatch" ? (<MainFooterOpenMailComponent matchingPeople={matchingPeople}/>) : (<></>)}
                     </div>
 
                     <svg onClick={() => {
