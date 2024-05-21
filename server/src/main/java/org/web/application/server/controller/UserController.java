@@ -73,5 +73,11 @@ public class UserController {
         return userService.matchingResult(token, result);
     }
 
+    @GetMapping("/check_accept")
+    public boolean checkAccept(@RequestHeader(name = "Authorization") String token)
+    {
+        return userService.checkAccept(token);
+    }
+
 
 }
