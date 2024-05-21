@@ -42,4 +42,6 @@ public class UserDTO {
     private String myResult;
     //상대방의 수락 여부
     private String otherResult;
+    //분야, 목적
+    private String purpose;
 }
