@@ -36,6 +36,10 @@ public class UserDTO {
     private String weight;
     private String matchingState;
     private int warning;
+    //가입 날짜
     private String connectAt;
-    private String result;
+    //나의 수락 여부
+    private String myResult;
+    //상대방의 수락 여부
+    private String otherResult;
 }

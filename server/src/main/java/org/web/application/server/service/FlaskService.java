@@ -51,16 +51,6 @@ public class FlaskService {
             System.out.println("token을 통한 userEntity 조회 실패");
             return null;
         }
-
-        /**
-         * 사용자가 standby 인 기록이 남아있으면 바로 리턴시킴
-         */
-        if (matchingHistoryRepository.findByReqUserEntityUserIdAndReqResult(userEntity.getUserId(), "standby").isPresent() || matchingHistoryRepository.findByResUserEntityUserIdAndResResult(userEntity.getUserId(), "standby").isPresent())
-        {
-            System.out.println("standby인 기록이 있습니다. 먼저 수락 or 거절을 해주세요");
-            return null;
-        }
-
         userEntity.setMatchingState(purpose);
         userRepository.save(userEntity);
 
