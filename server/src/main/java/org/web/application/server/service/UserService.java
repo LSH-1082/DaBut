@@ -479,58 +479,58 @@ public class UserService {
         return historyList;
     }
 
+    /**
+     * 240521 임재현
+     * 수락/거절 버튼 상호작용
+     */
     @Transactional
-    public boolean matchingResult(String token, Boolean result)
+    public String matchingResult(String token, String result)
     {
         UserEntity userEntity = userRepository.findByAuthEntity(authRepository.findByKakaoId(Long.valueOf(jwtProvider.validate(token))).orElse(null)).orElse(null);
 
         if (userEntity == null)
         {
             System.out.println("userEntity를 찾을수 없음");
-            return false;
+            return "userEntity null";
         }
 
         Long userId = userEntity.getUserId();
 
         List<String> results = Arrays.asList("standby", "accept");
 
-        var reqMatchingEntity = matchingHistoryRepository.findTopByReqUserEntityUserIdAndReqResultInOrderByMatchingHistoryIdDesc(userId, results).orElse(null);
+        var reqUserEntity = matchingHistoryRepository.findTopByReqUserEntityUserIdAndReqResultInOrderByMatchingHistoryIdDesc(userId,results).orElse(null);
+        var resUserEntity = matchingHistoryRepository.findTopByResUserEntityUserIdAndResResultInOrderByMatchingHistoryIdDesc(userId,results).orElse(null);
 
-        if (reqMatchingEntity == null)
+        if (reqUserEntity == null && resUserEntity == null)
         {
-            var resMatchingEntity = matchingHistoryRepository.findTopByResUserEntityUserIdAndResResultInOrderByMatchingHistoryIdDesc(userId, results).orElse(null);
-            if (resMatchingEntity == null)
-            {
-                System.out.println("history에서 찾기 실패");
-                return false;
-            }
-            else
-            {
-                if (result == false)
-                {
-                    resMatchingEntity.setResResult("reject");
-                    return true;
-                }
-                else
-                {
-                    resMatchingEntity.setResResult("accept");
-                    return true;
-                }
-            }
+            System.out.println("기록이 없음");
+            return "no history";
         }
-        else
+        //req에만 기록이 있을 때
+        else if (reqUserEntity != null && resUserEntity == null)
         {
-            if (result == false)
-            {
-                reqMatchingEntity.setReqResult("reject");
-                return true;
-            }
-            else
-            {
-                reqMatchingEntity.setReqResult("accept");
-                return true;
-            }
+            System.out.println("req에만 기록이 있음");
+            reqUserEntity.setReqResult(result);
+
         }
+        else if (reqUserEntity == null)
+        {
+            System.out.println("res에만 기록이 있음");
+            resUserEntity.setResResult(result);
+        }
+
+        else if (reqUserEntity.getMatchingHistoryId() > resUserEntity.getMatchingHistoryId())
+        {
+            System.out.println("req컬럼이 나의 마지막 기록");
+            reqUserEntity.setReqResult(result);
+        }
+
+        else if (reqUserEntity.getMatchingHistoryId() < resUserEntity.getMatchingHistoryId())
+        {
+            System.out.println("res 컬럼이 마지막 기록");
+            resUserEntity.setResResult(result);
+        }
+        return "none";
     }
 
     public boolean checkAccept(String token)
