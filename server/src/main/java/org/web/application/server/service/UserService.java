@@ -245,7 +245,8 @@ public class UserService {
         if (reqUserEntity == null && resUserEntity == null)
         {
             System.out.println("기록이 없음");
-            return null;
+            return UserDTO.builder()
+                    .matchingState(userEntity.getMatchingState()).build();
         }
         //req에만 기록이 있을 때
         else if (reqUserEntity != null && resUserEntity == null)
