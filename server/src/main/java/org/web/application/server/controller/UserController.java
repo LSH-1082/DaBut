@@ -74,7 +74,7 @@ public class UserController {
     }
 
     @GetMapping("/check_accept")
-    public boolean checkAccept(@RequestHeader(name = "Authorization") String token)
+    public UserDTO checkAccept(@RequestHeader(name = "Authorization") String token)
     {
         return userService.checkAccept(token);
     }
