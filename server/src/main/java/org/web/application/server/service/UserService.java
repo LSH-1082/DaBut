@@ -13,6 +13,7 @@ import org.web.application.server.jwt.JwtProvider;
 import org.web.application.server.repository.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -211,9 +212,16 @@ public class UserService {
                 .wantSmoke(matchingFilterEntity.getSmoking()).build();
     }
 
+
+    /**
+     * 240521 임재현
+     * 1. 먼저 req,res 컬럼에서 나의 마지막 기록을 찾음
+     * 2. 둘다 entity를 받아오고 idx값이 가장 큰 entity가 마지막 기록임
+     */
     @Transactional
     public UserDTO getUser(String token)
     {
+
         UserEntity userEntity = userRepository.findByAuthEntity(authRepository.findByKakaoId(Long.valueOf(jwtProvider.validate(token))).orElse(null)).orElse(null);
 
         if (userEntity == null)
@@ -221,72 +229,143 @@ public class UserService {
             return null;
         }
 
-        var userId = userEntity.getUserId();
-        var entity1 = matchingHistoryRepository.findByReqUserEntityUserIdAndReqResult(userId, "standby");
+        List<String> results = Arrays.asList("standby", "accept");
 
-        if(entity1.isPresent())
+        Long userId = userEntity.getUserId();
+        System.out.println("@@userId : " + userId);
+
+
+        // req와 res 둘다 내 기록이 있는 경우
+        // req에만 있는 경우
+        // res에만 있는 경우
+        // 둘다 없는 경우
+        var reqUserEntity = matchingHistoryRepository.findTopByReqUserEntityUserIdAndReqResultInOrderByMatchingHistoryIdDesc(userId,results).orElse(null);
+        var resUserEntity = matchingHistoryRepository.findTopByResUserEntityUserIdAndResResultInOrderByMatchingHistoryIdDesc(userId,results).orElse(null);
+
+        if (reqUserEntity == null && resUserEntity == null)
         {
-            var user1 = userRepository.findByUserId(entity1.get().getResUserEntity().getUserId()).get();
-
-            System.out.println("user1 Entity : " + user1);
+            System.out.println("기록이 없음");
+            return null;
+        }
+        //req에만 기록이 있을 때
+        else if (reqUserEntity != null && resUserEntity == null)
+        {
+            System.out.println("req에만 기록이 있음");
+            UserEntity matchedUserEntity = reqUserEntity.getResUserEntity();
 
             return UserDTO.builder()
-                    .name(user1.getName())
-                    .gender(user1.getGenderEntity().getGender())
-                    .age(user1.getAge())
-                    .kakaoId(user1.getKakaoId())
-                    .nickname(user1.getNickname())
-                    .height(user1.getHeightEntity().getHeight())
-                    .face(user1.getFaceShapeEntity().getFaceShapeName())
-                    .frequency(user1.getSnsFrequencyEntity().getSnsFrequencyLevel())
-                    .intro(user1.getProfile())
-                    .major(user1.getMajorEntity().getMajorName())
-                    .mbti(user1.getMbtiEntity().getMbtiName())
-                    .occupation(user1.getOccupationEntity().getOccupationName())
-                    .personality(user1.getPersonalityEntity().getPersonalityName())
-                    .smoke(user1.getSmoking())
-                    .state(user1.getLocationEntity().getLocationName())
-                    .weight(user1.getWeightEntity().getWeightName())
-                    .matchingState(user1.getMatchingState())
-                    .connectAt(user1.getAuthEntity().getConnectedAt())
-                    .warning(user1.getWarning()).build();
+                    .name(matchedUserEntity.getName())
+                    .gender(matchedUserEntity.getGenderEntity().getGender())
+                    .age(matchedUserEntity.getAge())
+                    .kakaoId(matchedUserEntity.getKakaoId())
+                    .nickname(matchedUserEntity.getNickname())
+                    .height(matchedUserEntity.getHeightEntity().getHeight())
+                    .face(matchedUserEntity.getFaceShapeEntity().getFaceShapeName())
+                    .frequency(matchedUserEntity.getSnsFrequencyEntity().getSnsFrequencyLevel())
+                    .intro(matchedUserEntity.getProfile())
+                    .major(matchedUserEntity.getMajorEntity().getMajorName())
+                    .mbti(matchedUserEntity.getMbtiEntity().getMbtiName())
+                    .occupation(matchedUserEntity.getOccupationEntity().getOccupationName())
+                    .personality(matchedUserEntity.getPersonalityEntity().getPersonalityName())
+                    .smoke(matchedUserEntity.getSmoking())
+                    .state(matchedUserEntity.getLocationEntity().getLocationName())
+                    .weight(matchedUserEntity.getWeightEntity().getWeightName())
+                    .matchingState(matchedUserEntity.getMatchingState())//상대방의 매칭 분야
+                    .connectAt(matchedUserEntity.getAuthEntity().getConnectedAt())//상대방의 가입 날짜
+                    .myResult(reqUserEntity.getReqResult())//내 수락 여부
+                    .otherResult(reqUserEntity.getResResult())//상대방의 수락 여부
+                    .warning(matchedUserEntity.getWarning()).build();
+        }
+        else if (reqUserEntity == null && resUserEntity !=null)
+        {
+            System.out.println("res에만 기록이 있음");
+            UserEntity matchedUserEntity = resUserEntity.getReqUserEntity();
+
+            return UserDTO.builder()
+                    .name(matchedUserEntity.getName())
+                    .gender(matchedUserEntity.getGenderEntity().getGender())
+                    .age(matchedUserEntity.getAge())
+                    .kakaoId(matchedUserEntity.getKakaoId())
+                    .nickname(matchedUserEntity.getNickname())
+                    .height(matchedUserEntity.getHeightEntity().getHeight())
+                    .face(matchedUserEntity.getFaceShapeEntity().getFaceShapeName())
+                    .frequency(matchedUserEntity.getSnsFrequencyEntity().getSnsFrequencyLevel())
+                    .intro(matchedUserEntity.getProfile())
+                    .major(matchedUserEntity.getMajorEntity().getMajorName())
+                    .mbti(matchedUserEntity.getMbtiEntity().getMbtiName())
+                    .occupation(matchedUserEntity.getOccupationEntity().getOccupationName())
+                    .personality(matchedUserEntity.getPersonalityEntity().getPersonalityName())
+                    .smoke(matchedUserEntity.getSmoking())
+                    .state(matchedUserEntity.getLocationEntity().getLocationName())
+                    .weight(matchedUserEntity.getWeightEntity().getWeightName())
+                    .matchingState(matchedUserEntity.getMatchingState())//상대방의 매칭 분야
+                    .connectAt(matchedUserEntity.getAuthEntity().getConnectedAt())//상대방의 가입 날짜
+                    .myResult(resUserEntity.getReqResult())//내 수락 여부
+                    .otherResult(resUserEntity.getResResult())//상대방의 수락 여부
+                    .warning(matchedUserEntity.getWarning()).build();
+        }
+
+        else if (reqUserEntity.getMatchingHistoryId() > resUserEntity.getMatchingHistoryId())
+        {
+            System.out.println("req컬럼이 나의 마지막 기록");
+            UserEntity matchedUserEntity = reqUserEntity.getResUserEntity();
+
+            return UserDTO.builder()
+                    .name(matchedUserEntity.getName())
+                    .gender(matchedUserEntity.getGenderEntity().getGender())
+                    .age(matchedUserEntity.getAge())
+                    .kakaoId(matchedUserEntity.getKakaoId())
+                    .nickname(matchedUserEntity.getNickname())
+                    .height(matchedUserEntity.getHeightEntity().getHeight())
+                    .face(matchedUserEntity.getFaceShapeEntity().getFaceShapeName())
+                    .frequency(matchedUserEntity.getSnsFrequencyEntity().getSnsFrequencyLevel())
+                    .intro(matchedUserEntity.getProfile())
+                    .major(matchedUserEntity.getMajorEntity().getMajorName())
+                    .mbti(matchedUserEntity.getMbtiEntity().getMbtiName())
+                    .occupation(matchedUserEntity.getOccupationEntity().getOccupationName())
+                    .personality(matchedUserEntity.getPersonalityEntity().getPersonalityName())
+                    .smoke(matchedUserEntity.getSmoking())
+                    .state(matchedUserEntity.getLocationEntity().getLocationName())
+                    .weight(matchedUserEntity.getWeightEntity().getWeightName())
+                    .matchingState(matchedUserEntity.getMatchingState())//상대방의 매칭 분야
+                    .connectAt(matchedUserEntity.getAuthEntity().getConnectedAt())//상대방의 가입 날짜
+                    .myResult(reqUserEntity.getReqResult())//내 수락 여부
+                    .otherResult(reqUserEntity.getResResult())//상대방의 수락 여부
+                    .warning(matchedUserEntity.getWarning()).build();
+        }
+
+        else if (reqUserEntity.getMatchingHistoryId() < resUserEntity.getMatchingHistoryId())
+        {
+            System.out.println("res 컬럼이 마지막 기록");
+            UserEntity matchedUserEntity = resUserEntity.getReqUserEntity();
+
+            return UserDTO.builder()
+                    .name(matchedUserEntity.getName())
+                    .gender(matchedUserEntity.getGenderEntity().getGender())
+                    .age(matchedUserEntity.getAge())
+                    .kakaoId(matchedUserEntity.getKakaoId())
+                    .nickname(matchedUserEntity.getNickname())
+                    .height(matchedUserEntity.getHeightEntity().getHeight())
+                    .face(matchedUserEntity.getFaceShapeEntity().getFaceShapeName())
+                    .frequency(matchedUserEntity.getSnsFrequencyEntity().getSnsFrequencyLevel())
+                    .intro(matchedUserEntity.getProfile())
+                    .major(matchedUserEntity.getMajorEntity().getMajorName())
+                    .mbti(matchedUserEntity.getMbtiEntity().getMbtiName())
+                    .occupation(matchedUserEntity.getOccupationEntity().getOccupationName())
+                    .personality(matchedUserEntity.getPersonalityEntity().getPersonalityName())
+                    .smoke(matchedUserEntity.getSmoking())
+                    .state(matchedUserEntity.getLocationEntity().getLocationName())
+                    .weight(matchedUserEntity.getWeightEntity().getWeightName())
+                    .matchingState(matchedUserEntity.getMatchingState())//상대방의 매칭 분야
+                    .connectAt(matchedUserEntity.getAuthEntity().getConnectedAt())//상대방의 가입 날짜
+                    .myResult(resUserEntity.getResResult())//내 수락 여부
+                    .otherResult(resUserEntity.getReqResult())//상대방의 수락 여부
+                    .warning(matchedUserEntity.getWarning()).build();
         }
         else
         {
-            var entity2 = matchingHistoryRepository.findByResUserEntityUserIdAndResResult(userId, "standby");
-
-            System.out.println("entity2 : " + entity2);
-
-            if (entity2.isPresent())
-            {
-                var user2 = userRepository.findByUserId(entity2.get().getReqUserEntity().getUserId()).get();
-
-                return UserDTO.builder()
-                        .name(user2.getName())
-                        .gender(user2.getGenderEntity().getGender())
-                        .age(user2.getAge())
-                        .kakaoId(user2.getKakaoId())
-                        .nickname(user2.getNickname())
-                        .height(user2.getHeightEntity().getHeight())
-                        .face(user2.getFaceShapeEntity().getFaceShapeName())
-                        .frequency(user2.getSnsFrequencyEntity().getSnsFrequencyLevel())
-                        .intro(user2.getProfile())
-                        .major(user2.getMajorEntity().getMajorName())
-                        .mbti(user2.getMbtiEntity().getMbtiName())
-                        .occupation(user2.getOccupationEntity().getOccupationName())
-                        .personality(user2.getPersonalityEntity().getPersonalityName())
-                        .smoke(user2.getSmoking())
-                        .state(user2.getLocationEntity().getLocationName())
-                        .weight(user2.getWeightEntity().getWeightName())
-                        .warning(user2.getWarning())
-                        .connectAt(user2.getAuthEntity().getConnectedAt())
-                        .matchingState(user2.getMatchingState()).build();
-            }
-            else
-            {
-                return UserDTO.builder()
-                        .matchingState(userEntity.getMatchingState()).build();
-            }
+            System.out.println("에러");
+            return null;
         }
     }
 
@@ -311,7 +390,8 @@ public class UserService {
 
         List<Long> userList = new ArrayList<>();
         List<String> purposeList = new ArrayList<>();
-        List<String> result = new ArrayList<>();
+        List<String> myResult = new ArrayList<>();
+        List<String> otherResult = new ArrayList<>();
 
         List<MatchingHistoryEntity> reqUserList = matchingHistoryRepository.findByReqUserEntityUserId(userId).orElse(null);
 
@@ -327,7 +407,8 @@ public class UserService {
             {
                 userList.add(entity.getResUserEntity().getUserId());
                 purposeList.add(entity.getPurpose());
-                result.add(entity.getResResult());
+                myResult.add(entity.getReqResult());
+                otherResult.add(entity.getResResult());
 
             }
         }
@@ -345,7 +426,8 @@ public class UserService {
             {
                 userList.add(entity.getReqUserEntity().getUserId());
                 purposeList.add(entity.getPurpose());
-                result.add(entity.getReqResult());
+                myResult.add(entity.getResResult());
+                otherResult.add(entity.getReqResult());
             }
         }
 
@@ -384,7 +466,8 @@ public class UserService {
                     .weight(historyUserEntity.getWeightEntity().getWeightName())
                     .warning(historyUserEntity.getWarning())
                     .connectAt(historyUserEntity.getAuthEntity().getConnectedAt())
-                    .result(result.get(i))
+                    .myResult(myResult.get(i))
+                    .otherResult(otherResult.get(i))
                     .matchingState(purposeList.get(i)).build();
 
             historyList.add(userDTO);
@@ -409,11 +492,13 @@ public class UserService {
 
         Long userId = userEntity.getUserId();
 
-        var reqMatchingEntity = matchingHistoryRepository.findByReqUserEntityUserIdAndReqResult(userId, "standby").orElse(null);
+        List<String> results = Arrays.asList("standby", "accept");
+
+        var reqMatchingEntity = matchingHistoryRepository.findTopByReqUserEntityUserIdAndReqResultInOrderByMatchingHistoryIdDesc(userId, results).orElse(null);
 
         if (reqMatchingEntity == null)
         {
-            var resMatchingEntity = matchingHistoryRepository.findByResUserEntityUserIdAndResResult(userId, "standby").orElse(null);
+            var resMatchingEntity = matchingHistoryRepository.findTopByResUserEntityUserIdAndResResultInOrderByMatchingHistoryIdDesc(userId, results).orElse(null);
             if (resMatchingEntity == null)
             {
                 System.out.println("history에서 찾기 실패");
@@ -446,5 +531,24 @@ public class UserService {
                 return true;
             }
         }
+    }
+
+    public boolean checkAccept(String token)
+    {
+        UserEntity userEntity = userRepository.findByAuthEntity(authRepository.findByKakaoId(Long.valueOf(jwtProvider.validate(token))).orElse(null)).orElse(null);
+
+        if (userEntity == null)
+        {
+            System.out.println("userEntity를 찾을수 없음");
+            return false;
+        }
+
+        List<String> results = Arrays.asList("standby", "accept");
+
+        var userId = userEntity.getUserId();
+
+        var reqMatchingEntity = matchingHistoryRepository.findTopByReqUserEntityUserIdAndReqResultInOrderByMatchingHistoryIdDesc(userId, results);
+
+        return true;
     }
 }
