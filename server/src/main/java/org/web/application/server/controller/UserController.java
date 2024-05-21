@@ -68,15 +68,9 @@ public class UserController {
     }
 
     @GetMapping("/matched_result")
-    public String matchingResult(@RequestHeader(name = "Authorization") String token, @RequestParam String result)
+    public UserDTO matchingResult(@RequestHeader(name = "Authorization") String token, @RequestParam String result)
     {
         return userService.matchingResult(token, result);
-    }
-
-    @GetMapping("/check_accept")
-    public UserDTO checkAccept(@RequestHeader(name = "Authorization") String token)
-    {
-        return userService.checkAccept(token);
     }
 
 
