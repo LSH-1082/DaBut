@@ -300,8 +300,8 @@ public class UserService {
                     .weight(matchedUserEntity.getWeightEntity().getWeightName())
                     .matchingState(resUserEntity.getPurpose())//상대방의 매칭 분야
                     .connectAt(matchedUserEntity.getAuthEntity().getConnectedAt())//상대방의 가입 날짜
-                    .myResult(resUserEntity.getReqResult())//내 수락 여부
-                    .otherResult(resUserEntity.getResResult())//상대방의 수락 여부
+                    .myResult(resUserEntity.getResResult())//내 수락 여부
+                    .otherResult(resUserEntity.getReqResult())//상대방의 수락 여부
                     .warning(matchedUserEntity.getWarning()).build();
         }
 
@@ -535,17 +535,64 @@ public class UserService {
 
     public UserDTO checkAccept(String token)
     {
-        UserEntity userEntity = userRepository.findByAuthEntity(authRepository.findByKakaoId(Long.valueOf(jwtProvider.validate(token))).orElse(null)).orElse(null);
-
-        if (userEntity == null)
-        {
-            System.out.println("userEntity를 찾을수 없음");
-            return null;
-        }
-
-        List<String> results = Arrays.asList("standby", "accept");
-
-        var userId = userEntity.getUserId();
+//        UserEntity userEntity = userRepository.findByAuthEntity(authRepository.findByKakaoId(Long.valueOf(jwtProvider.validate(token))).orElse(null)).orElse(null);
+//
+//        if (userEntity == null)
+//        {
+//            System.out.println("userEntity를 찾을수 없음");
+//            return null;
+//        }
+//
+//        List<String> results = Arrays.asList("standby", "accept");
+//
+//        var userId = userEntity.getUserId();
+//
+//        var reqUserEntity = matchingHistoryRepository.findTopByReqUserEntityUserIdAndReqResultInOrderByMatchingHistoryIdDesc(userId,results).orElse(null);
+//        var resUserEntity = matchingHistoryRepository.findTopByResUserEntityUserIdAndResResultInOrderByMatchingHistoryIdDesc(userId,results).orElse(null);
+//
+//        if (reqUserEntity == null && resUserEntity == null)
+//        {
+//            System.out.println("기록이 없음");
+//            return null;
+//        }
+//        //req에만 기록이 있을 때
+//        else if (reqUserEntity != null && resUserEntity == null)
+//        {
+//            String myResult = reqUserEntity.getReqResult();
+//            String otherResult = reqUserEntity.getResResult();
+//
+//            if (myResult.equals("accept") && otherResult.equals("accept"))
+//            {
+//                return UserDTO.builder()
+//                        .otherResult(reqUserEntity.getResResult())
+//                        .myResult(reqUserEntity.getReqResult())
+//                        .kakaoId(userRepository.findByUserId(reqUserEntity.getReqUserEntity().getUserId()).get().getKakaoId()).build();
+//            }
+//            else
+//            {
+//                return UserDTO.builder()
+//                        .otherResult(reqUserEntity.getResResult())
+//                        .myResult(reqUserEntity.getReqResult()).build();
+//            }
+//            System.out.println("req에만 기록이 있음");
+//        }
+//        else if (reqUserEntity == null)
+//        {
+//            System.out.println("res에만 기록이 있음");
+//            resUserEntity.setResResult(result);
+//        }
+//
+//        else if (reqUserEntity.getMatchingHistoryId() > resUserEntity.getMatchingHistoryId())
+//        {
+//            System.out.println("req컬럼이 나의 마지막 기록");
+//            reqUserEntity.setReqResult(result);
+//        }
+//
+//        else if (reqUserEntity.getMatchingHistoryId() < resUserEntity.getMatchingHistoryId())
+//        {
+//            System.out.println("res 컬럼이 마지막 기록");
+//            resUserEntity.setResResult(result);
+//        }
 
         return null;
     }
