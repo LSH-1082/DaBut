@@ -4,15 +4,17 @@ import {renderIcon, renderInsta, renderPersonality, renderPurpose} from "../comp
 import {useLocation, useNavigate} from "react-router-dom";
 import {getMatched} from "../api/UserData";
 import Cookies from "js-cookie";
+import {useState} from "react";
 
 const MatchingCheckPage = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const matchingPeople = { ...location.state.matchingPeople };
+    const [result, setResult] = useState("");
     const date = matchingPeople.connectAt.split('T')[0].split('-');
 
     const clickButton = (result) => {
-        getMatched(result, Cookies.get("accessToken"));
+        getMatched(result, Cookies.get("accessToken")).then((res) => setResult(res.data.myResult));
     }
 
     return (
@@ -81,17 +83,11 @@ const MatchingCheckPage = () => {
                                 </>
                                 ) : (<></>)
                             }
-                            { matchingPeople.myResult === "accept" ? (
+                            { result === "accept" ? (
                                 <div>
                                     <p>accept</p>
                                 </div>
                                 ) : (<></>)
-                            }
-                            { matchingPeople.myResult === "reject" ? (
-                                <div>
-                                    <p>reject</p>
-                                </div>
-                            ) : (<></>)
                             }
                         </div>
                     </div>

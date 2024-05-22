@@ -91,7 +91,7 @@ export const renderPurpose = (data) => {
             return <p>그림</p>;
         case "music":
             return <p>음악</p>;
-        case "OTT":
+        case "ott":
             return <p>OTT</p>;
         case "dance":
             return <p>춤</p>;

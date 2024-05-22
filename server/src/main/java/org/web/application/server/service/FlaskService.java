@@ -154,6 +154,11 @@ public class FlaskService {
 
                 List<RoommateMatchingDTO> roommateMatchingDTOList;
 
+                if (yeonjilist.size() < 2)
+                {
+                    return null;
+                }
+
                 roommateMatchingDTOList = yeonjilist.stream()
                         .map(roommate -> RoommateMatchingDTO.builder()
                                 .userId(roommate.getUserEntity().getUserId())
@@ -313,6 +318,11 @@ public class FlaskService {
 
                     jiinlist.add(filteredUserEntity);
 
+                }
+
+                if (jiinlist.size() < 2)
+                {
+                    return null;
                 }
 
                 List<MatchingDTO> matchingDTOList = null;
