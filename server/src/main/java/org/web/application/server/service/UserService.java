@@ -259,12 +259,18 @@ public class UserService {
                 return UserDTO.builder()
                         .matchingState(userEntity.getMatchingState()).build();
             }
+            if (reqUserEntity.getReqResult().equals("reject") || reqUserEntity.getResResult().equals("reject"))
+            {
+                reqUserEntity.getReqUserEntity().setMatchingState(reqUserEntity.getPurpose());
+                reqUserEntity.getResUserEntity().setMatchingState(reqUserEntity.getPurpose());
+                return UserDTO.builder()
+                        .matchingState(userEntity.getMatchingState()).build();
+            }
 
             return UserDTO.builder()
                     .name(matchedUserEntity.getName())
                     .gender(matchedUserEntity.getGenderEntity().getGender())
                     .age(matchedUserEntity.getAge())
-                    .kakaoId(matchedUserEntity.getKakaoId())
                     .nickname(matchedUserEntity.getNickname())
                     .height(matchedUserEntity.getHeightEntity().getHeight())
                     .face(matchedUserEntity.getFaceShapeEntity().getFaceShapeName())
@@ -294,12 +300,18 @@ public class UserService {
                 return UserDTO.builder()
                         .matchingState(userEntity.getMatchingState()).build();
             }
+            if (resUserEntity.getReqResult().equals("reject") || resUserEntity.getResResult().equals("reject"))
+            {
+                resUserEntity.getReqUserEntity().setMatchingState(resUserEntity.getPurpose());
+                resUserEntity.getResUserEntity().setMatchingState(resUserEntity.getPurpose());
+                return UserDTO.builder()
+                        .matchingState(userEntity.getMatchingState()).build();
+            }
 
             return UserDTO.builder()
                     .name(matchedUserEntity.getName())
                     .gender(matchedUserEntity.getGenderEntity().getGender())
                     .age(matchedUserEntity.getAge())
-                    .kakaoId(matchedUserEntity.getKakaoId())
                     .nickname(matchedUserEntity.getNickname())
                     .height(matchedUserEntity.getHeightEntity().getHeight())
                     .face(matchedUserEntity.getFaceShapeEntity().getFaceShapeName())
@@ -330,12 +342,18 @@ public class UserService {
                 return UserDTO.builder()
                         .matchingState(userEntity.getMatchingState()).build();
             }
+            if (reqUserEntity.getReqResult().equals("reject") || reqUserEntity.getResResult().equals("reject"))
+            {
+                reqUserEntity.getReqUserEntity().setMatchingState(reqUserEntity.getPurpose());
+                reqUserEntity.getResUserEntity().setMatchingState(reqUserEntity.getPurpose());
+                return UserDTO.builder()
+                        .matchingState(userEntity.getMatchingState()).build();
+            }
 
             return UserDTO.builder()
                     .name(matchedUserEntity.getName())
                     .gender(matchedUserEntity.getGenderEntity().getGender())
                     .age(matchedUserEntity.getAge())
-                    .kakaoId(matchedUserEntity.getKakaoId())
                     .nickname(matchedUserEntity.getNickname())
                     .height(matchedUserEntity.getHeightEntity().getHeight())
                     .face(matchedUserEntity.getFaceShapeEntity().getFaceShapeName())
@@ -367,12 +385,18 @@ public class UserService {
                 return UserDTO.builder()
                         .matchingState(userEntity.getMatchingState()).build();
             }
+            if (resUserEntity.getReqResult().equals("reject") || resUserEntity.getResResult().equals("reject"))
+            {
+                resUserEntity.getReqUserEntity().setMatchingState(resUserEntity.getPurpose());
+                resUserEntity.getResUserEntity().setMatchingState(resUserEntity.getPurpose());
+                return UserDTO.builder()
+                        .matchingState(userEntity.getMatchingState()).build();
+            }
 
             return UserDTO.builder()
                     .name(matchedUserEntity.getName())
                     .gender(matchedUserEntity.getGenderEntity().getGender())
                     .age(matchedUserEntity.getAge())
-                    .kakaoId(matchedUserEntity.getKakaoId())
                     .nickname(matchedUserEntity.getNickname())
                     .height(matchedUserEntity.getHeightEntity().getHeight())
                     .face(matchedUserEntity.getFaceShapeEntity().getFaceShapeName())
@@ -477,28 +501,58 @@ public class UserService {
             {
                 continue;
             }
-            UserDTO userDTO = UserDTO.builder()
-                    .name(historyUserEntity.getName())
-                    .gender(historyUserEntity.getGenderEntity().getGender())
-                    .age(historyUserEntity.getAge())
-                    .kakaoId(historyUserEntity.getKakaoId())
-                    .nickname(historyUserEntity.getNickname())
-                    .height(historyUserEntity.getHeightEntity().getHeight())
-                    .face(historyUserEntity.getFaceShapeEntity().getFaceShapeName())
-                    .frequency(historyUserEntity.getSnsFrequencyEntity().getSnsFrequencyLevel())
-                    .intro(historyUserEntity.getProfile())
-                    .major(historyUserEntity.getMajorEntity().getMajorName())
-                    .mbti(historyUserEntity.getMbtiEntity().getMbtiName())
-                    .occupation(historyUserEntity.getOccupationEntity().getOccupationName())
-                    .personality(historyUserEntity.getPersonalityEntity().getPersonalityName())
-                    .smoke(historyUserEntity.getSmoking())
-                    .state(historyUserEntity.getLocationEntity().getLocationName())
-                    .weight(historyUserEntity.getWeightEntity().getWeightName())
-                    .warning(historyUserEntity.getWarning())
-                    .connectAt(historyUserEntity.getAuthEntity().getConnectedAt())
-                    .myResult(myResult.get(i))
-                    .otherResult(otherResult.get(i))
-                    .matchingState(purposeList.get(i)).build();
+
+            UserDTO userDTO;
+
+            if (myResult.get(i).equals("accept") && otherResult.get(i).equals("accept"))
+            {
+                userDTO = UserDTO.builder()
+                        .name(historyUserEntity.getName())
+                        .gender(historyUserEntity.getGenderEntity().getGender())
+                        .age(historyUserEntity.getAge())
+                        .kakaoId(historyUserEntity.getKakaoId())
+                        .nickname(historyUserEntity.getNickname())
+                        .height(historyUserEntity.getHeightEntity().getHeight())
+                        .face(historyUserEntity.getFaceShapeEntity().getFaceShapeName())
+                        .frequency(historyUserEntity.getSnsFrequencyEntity().getSnsFrequencyLevel())
+                        .intro(historyUserEntity.getProfile())
+                        .major(historyUserEntity.getMajorEntity().getMajorName())
+                        .mbti(historyUserEntity.getMbtiEntity().getMbtiName())
+                        .occupation(historyUserEntity.getOccupationEntity().getOccupationName())
+                        .personality(historyUserEntity.getPersonalityEntity().getPersonalityName())
+                        .smoke(historyUserEntity.getSmoking())
+                        .state(historyUserEntity.getLocationEntity().getLocationName())
+                        .weight(historyUserEntity.getWeightEntity().getWeightName())
+                        .warning(historyUserEntity.getWarning())
+                        .connectAt(historyUserEntity.getAuthEntity().getConnectedAt())
+                        .myResult(myResult.get(i))
+                        .otherResult(otherResult.get(i))
+                        .matchingState(purposeList.get(i)).build();
+            }
+            else
+            {
+                userDTO = UserDTO.builder()
+                        .name(historyUserEntity.getName())
+                        .gender(historyUserEntity.getGenderEntity().getGender())
+                        .age(historyUserEntity.getAge())
+                        .nickname(historyUserEntity.getNickname())
+                        .height(historyUserEntity.getHeightEntity().getHeight())
+                        .face(historyUserEntity.getFaceShapeEntity().getFaceShapeName())
+                        .frequency(historyUserEntity.getSnsFrequencyEntity().getSnsFrequencyLevel())
+                        .intro(historyUserEntity.getProfile())
+                        .major(historyUserEntity.getMajorEntity().getMajorName())
+                        .mbti(historyUserEntity.getMbtiEntity().getMbtiName())
+                        .occupation(historyUserEntity.getOccupationEntity().getOccupationName())
+                        .personality(historyUserEntity.getPersonalityEntity().getPersonalityName())
+                        .smoke(historyUserEntity.getSmoking())
+                        .state(historyUserEntity.getLocationEntity().getLocationName())
+                        .weight(historyUserEntity.getWeightEntity().getWeightName())
+                        .warning(historyUserEntity.getWarning())
+                        .connectAt(historyUserEntity.getAuthEntity().getConnectedAt())
+                        .myResult(myResult.get(i))
+                        .otherResult(otherResult.get(i))
+                        .matchingState(purposeList.get(i)).build();
+            }
 
             historyList.add(userDTO);
         }
