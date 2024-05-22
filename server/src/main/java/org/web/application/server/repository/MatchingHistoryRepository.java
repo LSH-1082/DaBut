@@ -12,9 +12,9 @@ import java.util.Optional;
 @Repository
 public interface MatchingHistoryRepository extends JpaRepository<MatchingHistoryEntity, Long> {
 
-    Optional<MatchingHistoryEntity> findTopByReqUserEntityUserIdAndReqResultInOrderByMatchingHistoryIdDesc(Long userId, List<String> reqResults);
+    Optional<MatchingHistoryEntity> findTopByReqUserEntityUserIdAndStateOrderByMatchingHistoryIdDesc(Long userId, Boolean state);
 
-    Optional<MatchingHistoryEntity> findTopByResUserEntityUserIdAndResResultInOrderByMatchingHistoryIdDesc(Long userId, List<String> resResults);
+    Optional<MatchingHistoryEntity> findTopByResUserEntityUserIdAndStateOrderByMatchingHistoryIdDesc(Long userId, Boolean state);
 
     Optional<List<MatchingHistoryEntity>> findByReqUserEntityUserId(Long reqUserId);
 
