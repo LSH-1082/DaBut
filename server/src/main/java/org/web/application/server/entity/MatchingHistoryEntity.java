@@ -30,7 +30,6 @@ public class MatchingHistoryEntity {
     //대기상태 : standby
     //수락상태 : accept
     //거절상태 : reject
-    //수락 이후 거절 당한 상태 : deny
     @Builder.Default
     private String reqResult = "standby";
 
@@ -45,4 +44,8 @@ public class MatchingHistoryEntity {
     //응답자 신고 정보
     @Builder.Default
     private Boolean resReport = false;
+
+    //완료된 매칭인지 구별
+    @Builder.Default
+    private Boolean state = true;
 }

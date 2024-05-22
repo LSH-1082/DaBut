@@ -229,8 +229,6 @@ public class UserService {
             return null;
         }
 
-        List<String> results = Arrays.asList("standby", "accept");
-
         Long userId = userEntity.getUserId();
         System.out.println("@@userId : " + userId);
 
@@ -239,8 +237,8 @@ public class UserService {
         // req에만 있는 경우
         // res에만 있는 경우
         // 둘다 없는 경우
-        var reqUserEntity = matchingHistoryRepository.findTopByReqUserEntityUserIdAndReqResultInOrderByMatchingHistoryIdDesc(userId,results).orElse(null);
-        var resUserEntity = matchingHistoryRepository.findTopByResUserEntityUserIdAndResResultInOrderByMatchingHistoryIdDesc(userId,results).orElse(null);
+        var reqUserEntity = matchingHistoryRepository.findTopByReqUserEntityUserIdAndStateOrderByMatchingHistoryIdDesc(userId, true).orElse(null);
+        var resUserEntity = matchingHistoryRepository.findTopByResUserEntityUserIdAndStateOrderByMatchingHistoryIdDesc(userId, true).orElse(null);
 
         if (reqUserEntity == null && resUserEntity == null)
         {
@@ -254,15 +252,22 @@ public class UserService {
             System.out.println("req에만 기록이 있음");
             UserEntity matchedUserEntity = reqUserEntity.getResUserEntity();
 
+            //둘다 수락 > 둘다 매칭도 끝 > 기록만 만료 건으로 변경
             if (reqUserEntity.getReqResult().equals("accept") && reqUserEntity.getResResult().equals("accept"))
             {
+                //둘중 한명이라도 거절하면 완료된 매칭건으로 표시
+                reqUserEntity.setState(false);
+
                 return UserDTO.builder()
                         .matchingState(userEntity.getMatchingState()).build();
             }
+            //둘중 한명 거절 > 둘다 매칭을 구하는 상태로 변환 및 기록도 만료 건으로 변경
             if (reqUserEntity.getReqResult().equals("reject") || reqUserEntity.getResResult().equals("reject"))
             {
                 reqUserEntity.getReqUserEntity().setMatchingState(reqUserEntity.getPurpose());
                 reqUserEntity.getResUserEntity().setMatchingState(reqUserEntity.getPurpose());
+                //둘중 한명이라도 거절하면 완료된 매칭건으로 표시
+                reqUserEntity.setState(false);
                 return UserDTO.builder()
                         .matchingState(userEntity.getMatchingState()).build();
             }
@@ -290,13 +295,15 @@ public class UserService {
                     .purpose(reqUserEntity.getPurpose())
                     .warning(matchedUserEntity.getWarning()).build();
         }
-        else if (reqUserEntity == null && resUserEntity !=null)
+        else if (reqUserEntity == null)
         {
             System.out.println("res에만 기록이 있음");
             UserEntity matchedUserEntity = resUserEntity.getReqUserEntity();
 
             if (resUserEntity.getReqResult().equals("accept") && resUserEntity.getResResult().equals("accept"))
             {
+                resUserEntity.setState(false);
+
                 return UserDTO.builder()
                         .matchingState(userEntity.getMatchingState()).build();
             }
@@ -304,6 +311,9 @@ public class UserService {
             {
                 resUserEntity.getReqUserEntity().setMatchingState(resUserEntity.getPurpose());
                 resUserEntity.getResUserEntity().setMatchingState(resUserEntity.getPurpose());
+
+                resUserEntity.setState(false);
+
                 return UserDTO.builder()
                         .matchingState(userEntity.getMatchingState()).build();
             }
@@ -339,6 +349,7 @@ public class UserService {
 
             if (reqUserEntity.getReqResult().equals("accept") && reqUserEntity.getResResult().equals("accept"))
             {
+                reqUserEntity.setState(false);
                 return UserDTO.builder()
                         .matchingState(userEntity.getMatchingState()).build();
             }
@@ -346,6 +357,7 @@ public class UserService {
             {
                 reqUserEntity.getReqUserEntity().setMatchingState(reqUserEntity.getPurpose());
                 reqUserEntity.getResUserEntity().setMatchingState(reqUserEntity.getPurpose());
+                reqUserEntity.setState(false);
                 return UserDTO.builder()
                         .matchingState(userEntity.getMatchingState()).build();
             }
@@ -382,6 +394,7 @@ public class UserService {
 
             if (resUserEntity.getReqResult().equals("accept") && resUserEntity.getResResult().equals("accept"))
             {
+                resUserEntity.setState(false);
                 return UserDTO.builder()
                         .matchingState(userEntity.getMatchingState()).build();
             }
@@ -389,6 +402,7 @@ public class UserService {
             {
                 resUserEntity.getReqUserEntity().setMatchingState(resUserEntity.getPurpose());
                 resUserEntity.getResUserEntity().setMatchingState(resUserEntity.getPurpose());
+                resUserEntity.setState(false);
                 return UserDTO.builder()
                         .matchingState(userEntity.getMatchingState()).build();
             }
@@ -580,10 +594,8 @@ public class UserService {
 
         Long userId = userEntity.getUserId();
 
-        List<String> results = Arrays.asList("standby", "accept");
-
-        var reqUserEntity = matchingHistoryRepository.findTopByReqUserEntityUserIdAndReqResultInOrderByMatchingHistoryIdDesc(userId,results).orElse(null);
-        var resUserEntity = matchingHistoryRepository.findTopByResUserEntityUserIdAndResResultInOrderByMatchingHistoryIdDesc(userId,results).orElse(null);
+        var reqUserEntity = matchingHistoryRepository.findTopByReqUserEntityUserIdAndStateOrderByMatchingHistoryIdDesc(userId, true).orElse(null);
+        var resUserEntity = matchingHistoryRepository.findTopByResUserEntityUserIdAndStateOrderByMatchingHistoryIdDesc(userId, true).orElse(null);
 
         if (reqUserEntity == null && resUserEntity == null)
         {
@@ -599,18 +611,9 @@ public class UserService {
 //            String myResult = reqUserEntity.getReqResult();
 //            String otherResult = reqUserEntity.getResResult();
 //
-//            if (myResult.equals("accept") && otherResult.equals("accept"))
+//            if (myResult.equals("reject") || otherResult.equals("reject"))
 //            {
-//                return UserDTO.builder()
-//                        .otherResult(otherResult)
-//                        .myResult(myResult)
-//                        .kakaoId(userRepository.findByUserId(reqUserEntity.getResUserEntity().getUserId()).get().getKakaoId()).build();
-//            }
-//            else
-//            {
-//                return UserDTO.builder()
-//                        .otherResult(otherResult)
-//                        .myResult(myResult).build();
+//                reqUserEntity.setResResult("reject");
 //            }
 
         }
@@ -618,21 +621,13 @@ public class UserService {
         {
             System.out.println("res에만 기록이 있음");
             resUserEntity.setResResult(result);
-//            String myResult = resUserEntity.getResResult();
-//            String otherResult = resUserEntity.getReqResult();
+
+//            String myResult = reqUserEntity.getReqResult();
+//            String otherResult = reqUserEntity.getResResult();
 //
-//            if (myResult.equals("accept") && otherResult.equals("accept"))
+//            if (myResult.equals("reject") || otherResult.equals("reject"))
 //            {
-//                return UserDTO.builder()
-//                        .otherResult(otherResult)
-//                        .myResult(myResult)
-//                        .kakaoId(userRepository.findByUserId(resUserEntity.getReqUserEntity().getUserId()).get().getKakaoId()).build();
-//            }
-//            else
-//            {
-//                return UserDTO.builder()
-//                        .otherResult(otherResult)
-//                        .myResult(myResult).build();
+//                resUserEntity.setReqResult("reject");
 //            }
         }
 
@@ -644,18 +639,9 @@ public class UserService {
 //            String myResult = reqUserEntity.getReqResult();
 //            String otherResult = reqUserEntity.getResResult();
 //
-//            if (myResult.equals("accept") && otherResult.equals("accept"))
+//            if (myResult.equals("reject") || otherResult.equals("reject"))
 //            {
-//                return UserDTO.builder()
-//                        .otherResult(otherResult)
-//                        .myResult(myResult)
-//                        .kakaoId(userRepository.findByUserId(reqUserEntity.getResUserEntity().getUserId()).get().getKakaoId()).build();
-//            }
-//            else
-//            {
-//                return UserDTO.builder()
-//                        .otherResult(otherResult)
-//                        .myResult(myResult).build();
+//                reqUserEntity.setResResult("reject");
 //            }
         }
 
@@ -664,21 +650,12 @@ public class UserService {
             System.out.println("res 컬럼이 마지막 기록");
             resUserEntity.setResResult(result);
 
-//            String myResult = resUserEntity.getResResult();
-//            String otherResult = resUserEntity.getReqResult();
+//            String myResult = reqUserEntity.getReqResult();
+//            String otherResult = reqUserEntity.getResResult();
 //
-//            if (myResult.equals("accept") && otherResult.equals("accept"))
+//            if (myResult.equals("reject") || otherResult.equals("reject"))
 //            {
-//                return UserDTO.builder()
-//                        .otherResult(otherResult)
-//                        .myResult(myResult)
-//                        .kakaoId(userRepository.findByUserId(resUserEntity.getReqUserEntity().getUserId()).get().getKakaoId()).build();
-//            }
-//            else
-//            {
-//                return UserDTO.builder()
-//                        .otherResult(otherResult)
-//                        .myResult(myResult).build();
+//                resUserEntity.setReqResult("reject");
 //            }
         }
         return null;
