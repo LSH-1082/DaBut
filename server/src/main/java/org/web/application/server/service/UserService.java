@@ -460,6 +460,7 @@ public class UserService {
         List<String> purposeList = new ArrayList<>();
         List<String> myResult = new ArrayList<>();
         List<String> otherResult = new ArrayList<>();
+        List<Long> historyIdList = new ArrayList<>();
 
         List<MatchingHistoryEntity> reqUserList = matchingHistoryRepository.findByReqUserEntityUserId(userId).orElse(null);
 
@@ -477,7 +478,7 @@ public class UserService {
                 purposeList.add(entity.getPurpose());
                 myResult.add(entity.getReqResult());
                 otherResult.add(entity.getResResult());
-
+                historyIdList.add(entity.getMatchingHistoryId());
             }
         }
 
@@ -496,6 +497,7 @@ public class UserService {
                 purposeList.add(entity.getPurpose());
                 myResult.add(entity.getResResult());
                 otherResult.add(entity.getReqResult());
+                historyIdList.add(entity.getMatchingHistoryId());
             }
         }
 
@@ -516,7 +518,7 @@ public class UserService {
                 continue;
             }
 
-            UserDTO userDTO;
+            UserDTO userDTO = null;
 
             if (myResult.get(i).equals("accept") && otherResult.get(i).equals("accept"))
             {
@@ -540,6 +542,7 @@ public class UserService {
                         .warning(historyUserEntity.getWarning())
                         .connectAt(historyUserEntity.getAuthEntity().getConnectedAt())
                         .myResult(myResult.get(i))
+                        .historyId(historyIdList.get(i))
                         .otherResult(otherResult.get(i))
                         .matchingState(purposeList.get(i)).build();
             }
@@ -673,6 +676,10 @@ public class UserService {
         {
             System.out.println("매칭 취소 실패");
         }
+    }
+
+    public void warning(String token, Long historyId)
+    {
 
     }
 }

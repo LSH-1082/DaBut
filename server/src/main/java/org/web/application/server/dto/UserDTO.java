@@ -44,4 +44,6 @@ public class UserDTO {
     private String otherResult;
     //분야, 목적
     private String purpose;
+    //매칭 히스토리에 있는 아이디
+    private Long historyId;
 }

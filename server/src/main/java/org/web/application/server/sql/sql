@@ -35,3 +35,6 @@ VALUES ('공대'),('자연대'),('예체능'),('인문대'),('사범대'),('의�
 
 INSERT INTO prefer_place(prefer_place_name)
 VALUES ('공원'),('골프장'),('공연장'),('노래방'),('놀이공원'),('놀이터'),('당구장'),('도서관'),('맛집'),('바다'),('볼링장'),('보드게임 카페'),('산'),('수영장'),('술집'),('스키장'),('스크린 골프'),('스크린 야구'),('스터디 카페'),('야구장'),('영화관'),('전시회'),('축제'),('카페'),('클럽'),('탁구장'),('피시방'),('헬스장');
+
+INSERT INTO matching_history_id(purpose, req_result, req_report, res_report, res_result, res_user_id, res_user_id, state)
+VALUES ('ott', false, 'accept', false, 'accept', 14, 16, false),('ott', false, 'accept', false, 'accept', 14, 17, false),('ott', false, 'accept', false, 'accept', 14, 20, false),('ott', false, 'accept', false, 'accept', 14, 21, false),('ott', false, 'accept', false, 'accept', 14, 25, false),('ott', false, 'accept', false, 'accept', 14, 24, false);
