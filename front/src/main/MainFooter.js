@@ -27,6 +27,7 @@ const MainFooter = (props) => {
 
     useEffect(() => {
         getMatching(Cookies.get("accessToken")).then((res) => {
+            console.log(res.data);
             if (res.data.matchingState === "none" && res.data.name !== null) {
                 dispatch(setFooterState("peopleMatch"));
                 dispatch(setUserDTO(res.data));

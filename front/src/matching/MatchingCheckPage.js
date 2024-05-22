@@ -1,12 +1,12 @@
 import MainFooter from "../main/MainFooter";
 import "./MatchingCheckPage.css";
 import {renderIcon, renderInsta, renderPersonality, renderPurpose} from "../component/renderComponent";
-import {useLocation} from "react-router-dom";
-import {useEffect} from "react";
+import {useLocation, useNavigate} from "react-router-dom";
 import {getMatched} from "../api/UserData";
 import Cookies from "js-cookie";
 
 const MatchingCheckPage = () => {
+    const navigate = useNavigate();
     const location = useLocation();
     const matchingPeople = { ...location.state.matchingPeople };
     const date = matchingPeople.connectAt.split('T')[0].split('-');
@@ -76,7 +76,7 @@ const MatchingCheckPage = () => {
                         <div className="matchingClickButton">
                             { matchingPeople.myResult ==="standby" ? (
                                 <>
-                            <button onClick={() => {clickButton("reject"); console.log("reject")}}>거절하기</button>
+                            <button onClick={() => {clickButton("reject"); navigate("/main")}}>거절하기</button>
                             <button onClick={() => {clickButton("accept"); console.log("accept")}}>수락하기</button>
                                 </>
                                 ) : (<></>)

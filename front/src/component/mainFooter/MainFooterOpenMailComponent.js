@@ -1,6 +1,7 @@
 import {useNavigate} from "react-router-dom";
 
 const MainFooterOpenMailComponent = (props) => {
+
     const navigate = useNavigate();
     const matchingPeople = props.matchingPeople;
 
