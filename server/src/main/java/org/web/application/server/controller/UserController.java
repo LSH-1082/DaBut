@@ -73,5 +73,11 @@ public class UserController {
         return userService.matchingResult(token, result);
     }
 
+    @GetMapping("/matching_cancel")
+    public void matchingCancel(@RequestHeader(name = "Authorization") String token)
+    {
+        userService.matchingCancel(token);
+    }
+
 
 }

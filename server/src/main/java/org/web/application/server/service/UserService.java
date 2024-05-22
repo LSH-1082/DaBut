@@ -629,4 +629,19 @@ public class UserService {
         }
         return null;
     }
+
+    public void matchingCancel(String token)
+    {
+        UserEntity userEntity = userRepository.findByAuthEntity(authRepository.findByKakaoId(Long.valueOf(jwtProvider.validate(token))).orElse(null)).orElse(null);
+
+        if (userEntity !=null)
+        {
+            userEntity.setMatchingState("none");
+        }
+        else
+        {
+            System.out.println("매칭 취소 실패");
+        }
+
+    }
 }
