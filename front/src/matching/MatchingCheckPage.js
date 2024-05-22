@@ -2,7 +2,7 @@ import MainFooter from "../main/MainFooter";
 import "./MatchingCheckPage.css";
 import {renderIcon, renderInsta, renderPersonality, renderPurpose} from "../component/renderComponent";
 import {useLocation, useNavigate} from "react-router-dom";
-import {getMatched} from "../api/UserData";
+import {getMatched, getMatching} from "../api/UserData";
 import Cookies from "js-cookie";
 import {useState} from "react";
 
@@ -78,7 +78,7 @@ const MatchingCheckPage = () => {
                         <div className="matchingClickButton">
                             { matchingPeople.myResult ==="standby" ? (
                                 <>
-                            <button onClick={() => {clickButton("reject"); navigate("/main")}}>거절하기</button>
+                            <button onClick={() => {clickButton("reject"); navigate("/main"); getMatching(Cookies.get("accessToken"))}}>거절하기</button>
                             <button onClick={() => {clickButton("accept"); console.log("accept")}}>수락하기</button>
                                 </>
                                 ) : (<></>)

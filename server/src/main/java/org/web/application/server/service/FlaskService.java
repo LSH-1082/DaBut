@@ -3,6 +3,7 @@ package org.web.application.server.service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -26,6 +27,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class FlaskService {
     //데이터를 JSON 객체로 변환하기 위해서 사용
     private final ObjectMapper objectMapper;
@@ -267,7 +269,7 @@ public class FlaskService {
                 }
 
                 UserEntity firstUser = filteredUserList.get(0);
-                System.out.println("Filtered User Name: " + firstUser.getName());
+                log.info("Filtered User Name: " + firstUser.getName());
 
                 List<UserEntity> jiinlist = new ArrayList<>();
 
@@ -283,14 +285,16 @@ public class FlaskService {
                     var filteredMatchingFilterEntity = matchingFilterRepository.findByUserEntity(filteredUserEntity).orElse(null);
 
                     if (!filteredMatchingFilterEntity.getSmoking().equals(userEntity.getSmoking())) {
+                        log.info("smoking");
                         continue;
                     }
                     if (filteredMatchingFilterEntity.getGenderEntity() != userEntity.getGenderEntity()) {
+                        log.info("gender");
                         continue;
                     }
-                    if (!Objects.equals(filteredMatchingFilterEntity.getHeight(), userEntity.getHeightEntity().getHeight())) {
-                        continue;
-                    }
+//                    if (!Objects.equals(filteredMatchingFilterEntity.getHeight(), userEntity.getHeightEntity().getHeight())) {
+//                        continue;
+//                    }
                     int filterminAge = 0;
                     int filtermaxAge = 0;
                     switch (filteredMatchingFilterEntity.getAge()) {
@@ -313,6 +317,7 @@ public class FlaskService {
                     }
                     if (userEntity.getAge() >= filtermaxAge || userEntity.getAge() <= filterminAge)
                     {
+                        log.info("age");
                         continue;
                     }
 
