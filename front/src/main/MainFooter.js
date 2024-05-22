@@ -8,12 +8,13 @@ import MainFooterCloseMailComponent from "../component/mainFooter/MainFooterClos
 import MainFooterOpenMailComponent from "../component/mainFooter/MainFooterOpenMailComponent";
 import {getMatching} from "../api/UserData";
 import Cookies from "js-cookie";
+import {setFooterState, setUserDTO} from "../store/footerState";
 
 const MainFooter = (props) => {
     const navigate = useNavigate();
     const mainPage = useSelector(state => state.mainPage);
-    const [state, setState] = useState("none");
-    const [matchingPeople, setMatchingPeople] = useState({});
+    const footerState = useSelector(state => state.footerState.footerState);
+    const user = useSelector(state => state.footerState.userDTO);
     const dispatch = useDispatch();
 
     const clickMainFooterButton = (value) => {
@@ -26,13 +27,12 @@ const MainFooter = (props) => {
 
     useEffect(() => {
         getMatching(Cookies.get("accessToken")).then((res) => {
-            console.log(res.data);
             if (res.data.matchingState === "none" && res.data.name !== null) {
-                setState("peopleMatch");
-                setMatchingPeople(res.data);
+                dispatch(setFooterState("peopleMatch"));
+                dispatch(setUserDTO(res.data));
             }
-            else if(res.data.matchingState !== "none" && res.data.name === null) setState("matching");
-            else setState("none");
+            else if(res.data.matchingState !== "none" && res.data.name === null) dispatch(setFooterState("matching"));
+            else dispatch(setFooterState("none"));
         });
     }, []);
 
@@ -92,12 +92,12 @@ const MainFooter = (props) => {
                                 </filter>
                             </defs>
                         </svg>
-                        {state === "" ? (<MainFooterFingerComponent purpose={props.purpose}
+                        {footerState === "" ? (<MainFooterFingerComponent purpose={props.purpose}
                                                                     mainPage={mainPage.mainPage}/>) : (<></>)}
-                        {state === "none" ? (<MainFooterFingerComponent purpose={props.purpose}
+                        {footerState === "none" ? (<MainFooterFingerComponent purpose={props.purpose}
                                                                         mainPage={mainPage.mainPage}/>) : (<></>)}
-                        {state === "matching" ? (<MainFooterCloseMailComponent/>) : (<></>)}
-                        {state === "peopleMatch" ? (<MainFooterOpenMailComponent matchingPeople={matchingPeople}/>) : (<></>)}
+                        {footerState === "matching" ? (<MainFooterCloseMailComponent/>) : (<></>)}
+                        {footerState === "peopleMatch" ? (<MainFooterOpenMailComponent matchingPeople={user}/>) : (<></>)}
                     </div>
 
                     <svg onClick={() => {

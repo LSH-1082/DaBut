@@ -4,6 +4,7 @@ import pageReducer from "./page";
 import mainPageReducer from "./mainPage";
 import roommateReducer from "./roommate";
 import matchingReducer from "./matching";
+import footerStateReducer from "./footerState";
 
 export default configureStore({
     reducer: {
@@ -12,5 +13,6 @@ export default configureStore({
         mainPage: mainPageReducer,
         roommate : roommateReducer,
         matching: matchingReducer,
+        footerState: footerStateReducer,
     },
 })

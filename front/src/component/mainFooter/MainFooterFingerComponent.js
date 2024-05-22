@@ -1,8 +1,10 @@
-import {getRoommate, postFlask} from "../../api/UserData";
+import {getMatching, getRoommate, postFlask} from "../../api/UserData";
 import Cookies from "js-cookie";
 import React, {useState} from "react";
 import Modal from "react-modal";
 import {useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {setFooterState, setUserDTO} from "../../store/footerState";
 
 const customModalStyles = {
     overlay: {
@@ -30,9 +32,20 @@ const customModalStyles = {
 const MainFooterFingerComponent = (props) => {
     const purpose = props.purpose;
     const mainPage = props.mainPage;
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [roomModalIsOpen, setRoomModalIsOpen] = useState(false);
+
+    const getMatch = () => {
+        getMatching(Cookies.get("accessToken")).then((res) => {
+            if (res.data.matchingState === "none" && res.data.name !== null) {
+                dispatch(setFooterState("peopleMatch"));
+                dispatch(setUserDTO(res.data));
+            } else if (res.data.matchingState !== "none" && res.data.name === null) dispatch(setFooterState("matching"));
+            else dispatch(setFooterState("none"));
+        });
+    }
 
     const clickMatching = () => {
         if (mainPage === "mainPage") {
@@ -42,11 +55,14 @@ const MainFooterFingerComponent = (props) => {
                 getRoommate(Cookies.get("accessToken")).then((res) => {
                     if (res.data === "") {
                         setRoomModalIsOpen(!roomModalIsOpen);
-                    } else postFlask(purpose, Cookies.get("accessToken"));
+                    } else postFlask(purpose, Cookies.get("accessToken")).then(() => {
+                        getMatch();
+                    });
                 });
-            } else postFlask(purpose, Cookies.get("accessToken"));
-        }
-        else navigate("/main");
+            } else postFlask(purpose, Cookies.get("accessToken")).then(() => {
+                getMatch();
+            });
+        } else navigate("/main");
     }
 
     const clickRoomModalButton = (data) => {
