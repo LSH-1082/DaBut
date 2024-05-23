@@ -395,12 +395,6 @@
     justify-content: space-between;
 }
 
-.ModalButtonDiv {
-    width: 280px;
-    display: flex;
-    justify-content: center;
-}
-
 .modalCloseButton {
     padding: 0;
     width: 128px;
@@ -469,7 +463,6 @@
 .modalUnder {
     margin: 0;
     color: #838383;
-    font-family: K2D;
     font-size: 14px;
     font-style: normal;
     font-weight: 600;

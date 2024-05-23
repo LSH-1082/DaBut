@@ -1,7 +1,6 @@
 import MainFooter from "../main/MainFooter";
 import "./MatchingCheckPage.css";
 import {
-    renderButton,
     renderIcon,
     renderInsta,
     renderPersonality,
@@ -18,6 +17,10 @@ const MatchingHistoryInfoPage = () => {
     useEffect(() => {
         console.log(user);
     }, []);
+
+    const clickButton = (result) => {
+        getMatched(result, Cookies.get("accessToken"));
+    }
 
     return (
         <div className="MatchingCheckPage">
@@ -89,7 +92,40 @@ const MatchingHistoryInfoPage = () => {
 
                     <div className="matchingClickButtonDiv">
                         <div className="matchingClickButton">
-                            {renderButton(user.result)}
+                            {user.myResult === "standby" ? (
+                                <>
+                                    <button onClick={() => {
+                                        clickButton("reject");
+                                        navigate("/main");
+                                        getMatching(Cookies.get("accessToken"))
+                                    }}>거절하기
+                                    </button>
+                                    <button onClick={() => {
+                                        clickButton("accept");
+                                        console.log("accept")
+                                    }}>수락하기
+                                    </button>
+                                </>
+                            ) : (<></>)
+                            }
+                            {user.myResult === "accept" && user.otherResult === "standby" ? (
+                                <div className="waitPeople">
+                                    <p>상대방의 답변을 기다리는 중 . . .</p>
+                                </div>
+                            ) : (<></>)
+                            }
+                            {user.myResult === "reject" || user.otherResult === "reject" ? (
+                                <div className="waitPeople">
+                                    <p>거절된 매칭입니다</p>
+                                </div>
+                            ) : (<></>)
+                            }
+                            {user.kakaoId ? (
+                                <div className="kakaoPeople">
+                                    <p className="kakaoId">카카오톡 ID: {user.kakaoId}</p>
+                                </div>
+                            ) : (<></>)
+                            }
                         </div>
                     </div>
                 </div>

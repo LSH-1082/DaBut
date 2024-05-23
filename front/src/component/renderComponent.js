@@ -99,22 +99,3 @@ export const renderPurpose = (data) => {
             return <p>사진</p>;
     }
 }
-
-export const renderButton = (data) => {
-    switch (data) {
-        case "reject":
-            return (<>
-                <p className="rejectP">거절당했어요...</p>
-            </>);
-        case "accept":
-            return <p className="acceptP"></p>;
-        case "positive":
-            return <p>긍정적</p>;
-        case "clean":
-            return <p>깔끔한</p>;
-        case "timid":
-            return <p>소심한</p>;
-        case "lively":
-            return <p>발랄한</p>;
-    }
-}

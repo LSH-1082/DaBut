@@ -195,3 +195,41 @@
     margin-bottom: 0;
 }
 
+.waitPeople {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+    border: 2px solid #AEAEAE;
+    width: 300px;
+    height: 40px;
+    flex-shrink: 0;
+}
+
+.waitPeople p {
+    color: #AEAEAE;
+    text-align: center;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.kakaoPeople {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 40px;
+    border-radius: 30px;
+    border: 2px solid #EB604A;
+}
+
+.kakaoId {
+    color: #EB604A;
+    text-align: center;
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

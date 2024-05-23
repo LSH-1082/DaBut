@@ -668,6 +668,7 @@ public class UserService {
         if (userEntity !=null)
         {
             userEntity.setMatchingState("none");
+            userRepository.save(userEntity);
         }
         else
         {

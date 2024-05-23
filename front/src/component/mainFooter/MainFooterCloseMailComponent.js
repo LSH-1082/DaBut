@@ -1,5 +1,9 @@
 import Modal from "react-modal";
 import React, {useState} from "react";
+import {getCancel, getMatching} from "../../api/UserData";
+import Cookies from "js-cookie";
+import {setFooterState, setUserDTO} from "../../store/footerState";
+import {useDispatch} from "react-redux";
 
 const customModalStyles = {
     overlay: {
@@ -9,7 +13,7 @@ const customModalStyles = {
     content: {
         display: "flex",
         width: "320px",
-        height: "220px",
+        height: "230px",
         zIndex: 150,
         top: "50%",
         left: "50%",
@@ -26,9 +30,19 @@ const customModalStyles = {
 
 const MainFooterCloseMailComponent = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const dispatch = useDispatch();
 
     const clickModalButton = () => {
         setModalIsOpen(!modalIsOpen);
+        getCancel(Cookies.get("accessToken")).then(() => {
+            getMatching(Cookies.get("accessToken")).then((res) => {
+                if (res.data.matchingState === "none" && res.data.name !== null) {
+                    dispatch(setFooterState("peopleMatch"));
+                    dispatch(setUserDTO(res.data));
+                } else if (res.data.matchingState !== "none" && res.data.name === null) dispatch(setFooterState("matching"));
+                else dispatch(setFooterState("none"));
+            });
+        });
     }
 
     const clickCloseMail = () => {
@@ -49,7 +63,7 @@ const MainFooterCloseMailComponent = () => {
             {
                 modalIsOpen ? (<Modal
                     isOpen={true}
-                    onRequestClose={clickModalButton}
+                    onRequestClose={clickCloseMail}
                     style={customModalStyles}
                     ariaHideApp={false}
                     shouldCloseOnOverlayClick={true}
@@ -75,15 +89,18 @@ const MainFooterCloseMailComponent = () => {
                         </div>
                         <div className="modalUnderContextDiv">
                             <div className="modalUnderContext">
-                                <p className="modalUnder">조금만 더 기다려주세요 ☺️</p>
+                                <p className="modalUnder">매칭을 취소하시겠습니까?</p>
                             </div>
                         </div>
 
 
                         <div className="modalButton">
-                            <div className="ModalButtonDiv">
+                            <div className="modalButtonDiv">
+                                <button className="modalAcceptButton"
+                                        onClick={() => clickModalButton()}>네
+                                </button>
                                 <button className="modalCloseButton"
-                                        onClick={() => clickModalButton("close")}>확인
+                                        onClick={() => clickCloseMail()}>아니요
                                 </button>
                             </div>
                         </div>

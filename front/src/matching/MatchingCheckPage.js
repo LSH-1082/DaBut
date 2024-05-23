@@ -76,19 +76,28 @@ const MatchingCheckPage = () => {
 
                     <div className="matchingClickButtonDiv">
                         <div className="matchingClickButton">
-                            { matchingPeople.myResult ==="standby" ? (
+                            {matchingPeople.myResult === "standby" ? (
                                 <>
-                            <button onClick={() => {clickButton("reject"); navigate("/main"); getMatching(Cookies.get("accessToken"))}}>거절하기</button>
-                            <button onClick={() => {clickButton("accept"); console.log("accept")}}>수락하기</button>
+                                    <button onClick={() => {
+                                        clickButton("reject");
+                                        navigate("/main");
+                                        getMatching(Cookies.get("accessToken"))
+                                    }}>거절하기
+                                    </button>
+                                    <button onClick={() => {
+                                        clickButton("accept");
+                                    }}>수락하기
+                                    </button>
                                 </>
-                                ) : (<></>)
+                            ) : (<></>)
                             }
-                            { result === "accept" ? (
-                                <div>
-                                    <p>accept</p>
+                            {matchingPeople.myResult === "accept"? (
+                                <div className="waitPeople">
+                                    <p>상대방의 답변을 기다리는 중 . . .</p>
                                 </div>
-                                ) : (<></>)
+                            ) : (<></>)
                             }
+
                         </div>
                     </div>
                 </div>

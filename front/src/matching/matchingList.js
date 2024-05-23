@@ -1,12 +1,11 @@
 import "./matchingList.css";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import MainFooter from "../main/MainFooter";
 import MatchingPeopleComponent from "../component/MatchingPeopleComponent";
 import {setMainPage} from "../store/mainPage";
 import {useDispatch} from "react-redux";
 import {getHistory} from "../api/UserData";
 import Cookies from "js-cookie";
-import {setUser} from "../store/matching";
 
 const MatchingList = () => {
     const [select, setSelect] = useState("all");
@@ -17,7 +16,7 @@ const MatchingList = () => {
         dispatch(setMainPage("listPage"));
         getHistory(Cookies.get("accessToken")).then((res) => {
             setMatchingHistory(res.data);
-            console.log(res.data)
+            console.log(res.data.length);
         });
     }, [dispatch]);
 
@@ -82,9 +81,21 @@ const MatchingList = () => {
                     </div>
                 </div>
             </div>
-            <div className="MatchingPeople">
-                {generateMatchingList()}
-            </div>
+            {
+                matchingHistory.length > 0 ?
+                    (
+                        <div className="MatchingPeople">
+                            {generateMatchingList()}
+                        </div>
+                    ) : (
+                        <div className="emptyDiv">
+                            <img className="emptyImg" src="/images/empty.png" alt="emptyImg"/>
+                            <p className="emptyTitle">앗...</p>
+                            <p className="emptyUnder">아직 아무와도 매칭을 하지 않으셨군요!</p>
+                            <p className="emptyUnder">매칭을 시작하러 가볼까요?</p>
+                        </div>
+                    )
+            }
             <MainFooter/>
         </div>
     );
