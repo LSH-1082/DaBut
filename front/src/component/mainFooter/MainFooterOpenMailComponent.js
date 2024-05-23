@@ -1,12 +1,15 @@
 import {useNavigate} from "react-router-dom";
+import {useDispatch} from "react-redux";
+import {setUser} from "../../store/matching";
 
 const MainFooterOpenMailComponent = (props) => {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const matchingPeople = props.matchingPeople;
 
     return (
-        <svg onClick={() => navigate("/matching", {state: {matchingPeople: matchingPeople}})} className="plusInCircle"
+        <svg onClick={() => {navigate("/matching"); dispatch(setUser(matchingPeople))}} className="plusInCircle"
              xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60" fill="none">
             <path fillRule="evenodd" clipRule="evenodd"
                   d="M15.9375 26.25C16.1861 26.25 16.4246 26.3488 16.6004 26.5246C16.7762 26.7004 16.875 26.9389 16.875 27.1875V43.125H43.125V27.1875C43.125 26.9389 43.2238 26.7004 43.3996 26.5246C43.5754 26.3488 43.8139 26.25 44.0625 26.25C44.3111 26.25 44.5496 26.3488 44.7254 26.5246C44.9012 26.7004 45 26.9389 45 27.1875V44.0625C45 44.3111 44.9012 44.5496 44.7254 44.7254C44.5496 44.9012 44.3111 45 44.0625 45H15.9375C15.6889 45 15.4504 44.9012 15.2746 44.7254C15.0988 44.5496 15 44.3111 15 44.0625V27.1875C15 26.9389 15.0988 26.7004 15.2746 26.5246C15.4504 26.3488 15.6889 26.25 15.9375 26.25Z"

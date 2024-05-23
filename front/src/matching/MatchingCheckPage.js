@@ -12,7 +12,7 @@ const MatchingCheckPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const matchingPeople = useSelector(state => state.matching.user);
-    const date = matchingPeople.connectAt.split('T')[0].split('-');
+    let date = [];
 
     const clickButton = (result) => {
         getMatched(result, Cookies.get("accessToken")).then(() => {
@@ -21,9 +21,10 @@ const MatchingCheckPage = () => {
     }
 
     useEffect(() => {
-        if(matchingPeople === null){
+        if (matchingPeople === null) {
             getMatching(Cookies.get("accessToken")).then((res) => dispatch(setUser(res.data)));
         }
+        date = matchingPeople.connectAt.split('T')[0].split('-');
     }, []);
 
     return (
@@ -38,7 +39,8 @@ const MatchingCheckPage = () => {
                     </div>
                     <div className="peopleInfo">
                         <p className="matchingPeopleNickname">{matchingPeople.nickname}</p>
-                        <p className="matchingPeopleInfo">가입날짜: {date[0]}.{date[1]}.{date[2]} 매칭 완료된 횟수: 6회 신고된 횟수: 0</p>
+                        <p className="matchingPeopleInfo">가입날짜: {matchingPeople.connectAt.split('T')[0].split('-')[0]}.{matchingPeople.connectAt.split('T')[0].split('-')[1]}.{matchingPeople.connectAt.split('T')[0].split('-')[2]} 매칭 완료된 횟수: 6회 신고된 횟수:
+                            0</p>
                     </div>
 
                 </div>
@@ -89,7 +91,7 @@ const MatchingCheckPage = () => {
                                 <>
                                     <button onClick={() => {
                                         clickButton("reject");
-                                       navigate("/main");
+                                        navigate("/main");
                                         getMatching(Cookies.get("accessToken"))
                                     }}>거절하기
                                     </button>
@@ -100,7 +102,7 @@ const MatchingCheckPage = () => {
                                 </>
                             ) : (<></>)
                             }
-                            {matchingPeople.myResult === "accept"? (
+                            {matchingPeople.myResult === "accept" ? (
                                 <div className="waitPeople">
                                     <p>상대방의 답변을 기다리는 중 . . .</p>
                                 </div>
