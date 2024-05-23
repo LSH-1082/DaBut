@@ -9,6 +9,7 @@ import MainFooterOpenMailComponent from "../component/mainFooter/MainFooterOpenM
 import {getMatching} from "../api/UserData";
 import Cookies from "js-cookie";
 import {setFooterState, setUserDTO} from "../store/footerState";
+import {setUser} from "../store/matching";
 
 const MainFooter = (props) => {
     const navigate = useNavigate();
@@ -31,6 +32,7 @@ const MainFooter = (props) => {
             if (res.data.matchingState === "none" && res.data.name !== null) {
                 dispatch(setFooterState("peopleMatch"));
                 dispatch(setUserDTO(res.data));
+                dispatch(setUser(res.data));
             }
             else if(res.data.matchingState !== "none" && res.data.name === null) dispatch(setFooterState("matching"));
             else dispatch(setFooterState("none"));

@@ -4,18 +4,27 @@ import {renderIcon, renderInsta, renderPersonality, renderPurpose} from "../comp
 import {useLocation, useNavigate} from "react-router-dom";
 import {getMatched, getMatching} from "../api/UserData";
 import Cookies from "js-cookie";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {setUser} from "../store/matching";
 
 const MatchingCheckPage = () => {
     const navigate = useNavigate();
-    const location = useLocation();
-    const matchingPeople = { ...location.state.matchingPeople };
-    const [result, setResult] = useState("");
+    const dispatch = useDispatch();
+    const matchingPeople = useSelector(state => state.matching.user);
     const date = matchingPeople.connectAt.split('T')[0].split('-');
 
     const clickButton = (result) => {
-        getMatched(result, Cookies.get("accessToken")).then((res) => setResult(res.data.myResult));
+        getMatched(result, Cookies.get("accessToken")).then(() => {
+            getMatching(Cookies.get("accessToken")).then((res) => dispatch(setUser(res.data)));
+        });
     }
+
+    useEffect(() => {
+        if(matchingPeople === null){
+            getMatching(Cookies.get("accessToken")).then((res) => dispatch(setUser(res.data)));
+        }
+    }, []);
 
     return (
         <div className="MatchingCheckPage">
@@ -80,7 +89,7 @@ const MatchingCheckPage = () => {
                                 <>
                                     <button onClick={() => {
                                         clickButton("reject");
-                                        navigate("/main");
+                                       navigate("/main");
                                         getMatching(Cookies.get("accessToken"))
                                     }}>거절하기
                                     </button>
