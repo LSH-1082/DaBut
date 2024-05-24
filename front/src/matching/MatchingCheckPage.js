@@ -1,7 +1,7 @@
 import MainFooter from "../main/MainFooter";
 import "./MatchingCheckPage.css";
 import {renderIcon, renderInsta, renderPersonality, renderPurpose} from "../component/renderComponent";
-import {useLocation, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import {getMatched, getMatching} from "../api/UserData";
 import Cookies from "js-cookie";
 import {useEffect, useState} from "react";
@@ -12,20 +12,17 @@ const MatchingCheckPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const matchingPeople = useSelector(state => state.matching.user);
-    let date = [];
+    const [date, setDate] = useState([]);
 
     const clickButton = (result) => {
         getMatched(result, Cookies.get("accessToken")).then(() => {
-            getMatching(Cookies.get("accessToken")).then((res) => dispatch(setUser(res.data)));
+            getMatching(Cookies.get("accessToken")).then((res) => {dispatch(setUser(res.data)); navigate("/list")});
         });
     }
 
     useEffect(() => {
-        if (matchingPeople === null) {
-            getMatching(Cookies.get("accessToken")).then((res) => dispatch(setUser(res.data)));
-        }
-        date = matchingPeople.connectAt.split('T')[0].split('-');
-    }, []);
+        getMatching(Cookies.get("accessToken")).then((res) => {dispatch(setUser(res.data)); setDate(res.data.connectAt.split('T')[0].split('-'))});
+    }, [dispatch]);
 
     return (
         <div className="MatchingCheckPage">
@@ -39,7 +36,7 @@ const MatchingCheckPage = () => {
                     </div>
                     <div className="peopleInfo">
                         <p className="matchingPeopleNickname">{matchingPeople.nickname}</p>
-                        <p className="matchingPeopleInfo">가입날짜: {matchingPeople.connectAt.split('T')[0].split('-')[0]}.{matchingPeople.connectAt.split('T')[0].split('-')[1]}.{matchingPeople.connectAt.split('T')[0].split('-')[2]} 매칭 완료된 횟수: 6회 신고된 횟수:
+                        <p className="matchingPeopleInfo">가입날짜: {date[0]}.{date[1]}.{date[2]} 매칭 완료된 횟수: 6회 신고된 횟수:
                             0</p>
                     </div>
 

@@ -20,8 +20,7 @@ const Register = () => {
 
     useEffect(() => {
         if(page.page === 6) {
-            sendUser(user, Cookies.get("accessToken")).then(() => console.log("success")).catch((e) => console.log(e));
-            console.log(user);
+            sendUser(user, Cookies.get("accessToken"));
             navigate("/main");
             dispatch(setPage(1));
         }

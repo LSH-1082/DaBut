@@ -16,7 +16,6 @@ const MatchingList = () => {
         dispatch(setMainPage("listPage"));
         getHistory(Cookies.get("accessToken")).then((res) => {
             setMatchingHistory(res.data);
-            console.log(res.data.length);
         });
     }, [dispatch]);
 

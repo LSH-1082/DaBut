@@ -10,7 +10,6 @@ const RoommatePageFooter = () => {
 
     const clickRoomButton = () => {
         editRoommate(roommate, Cookies.get("accessToken"));
-        console.log(roommate);
         navigate("/main");
     }
 

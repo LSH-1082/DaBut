@@ -2,7 +2,7 @@ import "./MainFooter.css";
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {setMainPage} from "../store/mainPage";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import MainFooterFingerComponent from "../component/mainFooter/MainFooterFingerComponent";
 import MainFooterCloseMailComponent from "../component/mainFooter/MainFooterCloseMailComponent";
 import MainFooterOpenMailComponent from "../component/mainFooter/MainFooterOpenMailComponent";
@@ -28,7 +28,6 @@ const MainFooter = (props) => {
 
     useEffect(() => {
         getMatching(Cookies.get("accessToken")).then((res) => {
-            console.log(res.data);
             if (res.data.matchingState === "none" && res.data.name !== null) {
                 dispatch(setFooterState("peopleMatch"));
                 dispatch(setUserDTO(res.data));
@@ -37,7 +36,7 @@ const MainFooter = (props) => {
             else if(res.data.matchingState !== "none" && res.data.name === null) dispatch(setFooterState("matching"));
             else dispatch(setFooterState("none"));
         });
-    }, []);
+    }, [dispatch]);
 
     return (
         <nav className="MainNav">

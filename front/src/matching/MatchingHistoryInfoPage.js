@@ -6,17 +6,15 @@ import {
     renderPersonality,
     renderPurpose
 } from "../component/renderComponent";
-import {useLocation} from "react-router-dom";
-import {useEffect} from "react";
+import {useLocation, useNavigate} from "react-router-dom";
+import {getMatched, getMatching} from "../api/UserData";
+import Cookies from "js-cookie";
 
 const MatchingHistoryInfoPage = () => {
     const location = useLocation();
+    const navigate = useNavigate();
     const {user} = location.state;
     const date = user.connectAt.split('T')[0].split('-');
-
-    useEffect(() => {
-        console.log(user);
-    }, []);
 
     const clickButton = (result) => {
         getMatched(result, Cookies.get("accessToken"));
@@ -92,7 +90,7 @@ const MatchingHistoryInfoPage = () => {
 
                     <div className="matchingClickButtonDiv">
                         <div className="matchingClickButton">
-                            {user.myResult === "standby" ? (
+                            {user.myResult === "standby" && (user.otherResult === "standby" || user.otherResult === "accept") ? (
                                 <>
                                     <button onClick={() => {
                                         clickButton("reject");
@@ -102,7 +100,6 @@ const MatchingHistoryInfoPage = () => {
                                     </button>
                                     <button onClick={() => {
                                         clickButton("accept");
-                                        console.log("accept")
                                     }}>수락하기
                                     </button>
                                 </>
