@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://db-server.c5skqmuocss0.ap-northeast-2.rds.amazonaws.com:5432/postgres?currentSchema=fullstack
-    username: postgres
-    password: 1q2w3e4r
+    url:
+    username: 
+    password: 
   jpa:
     open-in-view: false
     show-sql: true
@@ -15,16 +15,16 @@ spring:
         format_sql: true
 
   jwt:
-    secret: skdmltkachsdlfmadmswjdwlscjfwlrdjqdmsvotuselwkdlsj
+    secret: 
 
   security:
     oauth2:
       client:
         registration:
           kakao:
-            client-id: f131c2fceabc2389e6bb83d94e7975d2
-            client-secret: ZXqnpTSoUvCbRRKnSR5KQPcpf85773qY
-            redirect-uri: "{baseUrl}/oauth2/callback/{registrationId}"
+            client-id: 
+            client-secret: 
+            redirect-uri: 
             authorization-grant-type: authorization_code
             client-authentication-method: client_secret_post
             scope:
@@ -33,8 +33,8 @@ spring:
               - account_email
         provider:
           kakao:
-            authorization-uri: https://kauth.kakao.com/oauth/authorize
-            token-uri: https://kauth.kakao.com/oauth/token
+            authorization-uri: 
+            token-uri: 
             user-info-uri: https://kapi.kakao.com/v2/user/me
             user-name-attribute: id
 
