@@ -3,6 +3,11 @@
    # 🌟 다벗
    추천 알고리즘을 이용한 친구 매칭 서비스
    
+  <img src="https://img.shields.io/badge/status-active-brightgreen" alt="Project Status">
+  <img src="https://img.shields.io/badge/license-MIT-blue" alt="License">
+  <img src="https://img.shields.io/github/languages/top/starbox7/ai-healthcare" alt="Top Language">
+
+   
 </div>
 
 
